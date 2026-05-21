@@ -1,0 +1,377 @@
+	\chapter{Vector Spaces}
+	\section{Definitions}
+	\begin{definitionenv}
+		A field $\mathcal{K}$ is a set equipped with addition and multiplication, denoted by $(\mathcal{K}, +, \cdot)$, satisfying the following axioms.
+		
+		\begin{enumerate}
+			\item \textbf{Associative Laws:} let $a,b,c \in \mathcal{K}$,
+			\[
+			a + b + c = a + (b + c), \quad a \cdot b \cdot c = a \cdot (b \cdot c).
+			\]
+			
+			\item \textbf{Existence of Identity Elements:} let $a \in \mathcal{K}$,
+			\[
+			a + 0_{\mathcal{K}} = a, \quad a \cdot 1_{\mathcal{K}} = a,
+			\]
+			where $0_{\mathcal{K}}$ and $1_{\mathcal{K}}$ is called the additive identity and multiplicative identity.
+			
+			\item \textbf{Existence of Negatives:} for any $a \in \mathcal{K}$, there exists one element in $\mathcal{K}$ denoted by $(-a)$ such that
+			\[
+			a + (-a) = 0_{\mathcal{K}}.
+			\]
+			
+			\item \textbf{Existence of Reciprocal:} for any $a \in \mathcal{K}$ and $a \neq 0_{\mathcal{K}}$, there exists one element in $\mathcal{K}$ denoted by $a^{-1}$ such that
+			\[
+			a \cdot a^{-1} = 1_{\mathcal{K}}.
+			\]
+			
+			\item \textbf{Commutative Laws:} let $a,b \in \mathcal{K}$,
+			\[
+			a + b = b + a, \quad a \cdot b = b \cdot a.
+			\]
+			
+			\item \textbf{Attributive Law:} let $a,b,c \in \mathcal{K}$,
+			\[
+			a \cdot (b + c) = a \cdot b + a \cdot c.
+			\]
+		\end{enumerate}
+	\end{definitionenv}
+	
+	\begin{remarkenv}
+		Closure is contained in the defined addition and multiplication.
+	\end{remarkenv}
+	\begin{theoremenv}
+		$0_\mathcal{K}$ and $1_\mathcal{K}$ defined above is unique.
+	\end{theoremenv}
+	\begin{exampleenv}
+		Note that $\mathbb{C,R,Q}$ are fields, but $\mathbb{N}$ is not a field because $2 \in \mathbb{N}$ but its reciprocal $\frac{1}{2} \notin \mathbb{N}$.This is the main difference between $\mathbb{Q}$ and $\mathbb{N}$.
+	\end{exampleenv}
+	\begin{definitionenv}
+		Let $\mathcal{F}$ be a field. A subset $\mathcal{K} \subseteq \mathcal{F}$ is called a \textbf{subfield} of $\mathcal{F}$ if $\mathcal{K}$ is itself a field under the same operations of addition and multiplication as $\mathcal{F}$.
+		
+		Equivalently, $\mathcal{K}$ is a subfield of $\mathcal{F}$ if and only if the following conditions hold:
+		\begin{enumerate}
+			\item \textbf{Closure under Addition and Multiplication:}  
+			for all $x, y \in \mathcal{K}$,
+			\[
+			x + y \in \mathcal{K}, \quad x \cdot y \in \mathcal{K}.
+			\]
+			
+			\item \textbf{Existence of Additive and Multiplicative Inverses:}  
+			for all $x \in \mathcal{K}$,
+			\[
+			-x \in \mathcal{K}, 
+			\]
+			and if $x \neq 0_{\mathcal{K}}$, then 
+			\[
+			x^{-1} \in \mathcal{K}.
+			\]
+			
+			\item \textbf{Containment of Identity Elements:}  
+			\[
+			0_{\mathcal{K}},\ 1_{\mathcal{K}} \in \mathcal{K}.
+			\]
+		\end{enumerate}
+	\end{definitionenv}
+	\begin{remarkenv}
+		This provides a simpler way to prove a set is a field. The third rule ensures that $\varnothing$ is not a subfield.
+	\end{remarkenv}
+	\begin{propositionenv}
+		Let $\mathcal{K}$ be a field and $A,B$ are subfields of $\mathcal{K}$, then $A \cap B$ is also a subfield of $\mathcal{K}$.
+	\end{propositionenv}
+	\begin{propositionenv}
+		Let $\mathcal{K}$ be a field and $A,B$ are subfields of $\mathcal{K}$, then $A \cup B$ is also a subfield of $\mathcal{K}$ if and only if $A \subseteq B$ or $B \subseteq A$.
+	\end{propositionenv}
+	\begin{remarkenv}
+		For any elements in a field, we call them \textbf{number}s or \textbf{scalar}s.
+	\end{remarkenv}
+	\begin{definitionenv}
+		A vector space $V$ over a field $\mathcal{K}$ is a set equipped with two operations:
+		vector addition and scalar multiplication, denoted by $(V, +, \cdot)$, satisfying the following axioms:
+		
+		\begin{enumerate}
+			\item \textbf{Associative Laws:} for any $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$,
+			\[
+			\mathbf{u} + (\mathbf{v} + \mathbf{w}) = (\mathbf{u} + \mathbf{v}) + \mathbf{w}.
+			\]
+			
+			\item \textbf{Existence of Identity Elements:} 
+			there exists a zero vector $\mathbf{0} \in V$ such that for any $\mathbf{v} \in V$, 
+			\[
+			\mathbf{v} + \mathbf{0} = \mathbf{v}.
+			\]
+			
+			\item \textbf{Existence of Additive Inverses:} 
+			for any $\mathbf{v} \in V$, there exists an element $-\mathbf{v} \in V$ such that 
+			\[
+			\mathbf{v} + (-\mathbf{v}) = \mathbf{0}.
+			\]
+			
+			\item \textbf{Commutative Law:}
+			for any $\mathbf{u}, \mathbf{v} \in V$,
+			\[
+			\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}. 
+			\]
+			
+			\item \textbf{Distributive Laws:} 
+			for all $a, b \in \mathcal{K}$ and $\mathbf{u}, \mathbf{v} \in V$,
+			\[
+			a \cdot (\mathbf{u} + \mathbf{v}) = a \cdot \mathbf{u} + a \cdot \mathbf{v}, 
+			\quad (a + b) \cdot \mathbf{v} = a \cdot \mathbf{v} + b \cdot \mathbf{v}.
+			\]
+			
+			\item \textbf{Compatibility of Scalar Multiplication:} 
+			for all $a, b \in \mathcal{K}$ and $\mathbf{v} \in V$,
+			\[
+			(a b) \cdot \mathbf{v} = a \cdot (b \cdot \mathbf{v}).
+			\]
+			
+			\item \textbf{Identity of Scalar Multiplication:} 
+			for all $\mathbf{v} \in V$,
+			\[
+			1_{\mathcal{K}} \cdot \mathbf{v} = \mathbf{v}.
+			\]
+		\end{enumerate}
+	\end{definitionenv}
+	\begin{theoremenv}
+		The zero vector $\mathbf{0}$ is unique.
+	\end{theoremenv}
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		A non-empty subset $W \subseteq V$ is called a \textbf{subspace} of $V$ if $W$ is itself a vector space over $\mathcal{K}$ under the same operations of addition and scalar multiplication as $V$.
+		
+		Equivalently, $W$ is a subspace of $V$ if and only if the following conditions hold for all $\mathbf{u}, \mathbf{v} \in W$ and $a \in \mathcal{K}$:
+		\begin{enumerate}
+			\item \textbf{Closure under Addition:} 
+			\[
+			\mathbf{u} + \mathbf{v} \in W.
+			\]
+			\item \textbf{Closure under Scalar Multiplication:} 
+			\[
+			a \cdot \mathbf{u} \in W.
+			\]
+		\end{enumerate}
+		
+	\end{definitionenv}
+	\begin{notationenv}
+		If $W$ is a subspace of $V$, we write $W \leq V$.
+	\end{notationenv}
+	\begin{remarkenv}
+		We state $W$ to be a non-empty set at first so we needn't to say $\mathbf{0}\in W$.
+	\end{remarkenv}
+	\begin{remarkenv}
+		For any elements in a vector space, we call them \textbf{vector}s.
+	\end{remarkenv}
+	\begin{exampleenv}
+		If $\mathcal{F}$ is a field, then $\mathcal{F}^n \text{ is always a vector space over } \mathcal{F}.$ Furthermore, $\mathcal{F}^n \text{ is a vector space over } \mathcal{K} \text{ whenever } \mathcal{K} \subseteq \mathcal{F} \text{ is a subfield.}$
+	\end{exampleenv}
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let vectors
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n \in V$.  
+		Any vector of the form
+		\[
+		\mathbf{v} = a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n,
+		\]
+		where $a_1, a_2, \dots, a_n \in \mathcal{K}$, is called a \textbf{linear combination} of 
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$.
+	\end{definitionenv}
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let 
+		$S = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\} \subseteq V$.  
+		The set of all linear combinations of vectors in $S$ is called the 
+		\textbf{span} of $S$, denoted by
+		\[
+		\mathrm{span}(S) = 
+		\left\{
+		a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n 
+		\ \middle| \ a_1, a_2, \dots, a_n \in \mathcal{K}
+		\right\}.
+		\]
+	\end{definitionenv}
+	\begin{theoremenv}
+		The span of $S$ is the smallest subspace of $V$ containing $S$. Particularly, span$(\varnothing)=\{\mathbf{0}\}=\text{span}\{\mathbf{0}\}$.
+	\end{theoremenv}
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		A subset $S \subseteq V$ is called a \textbf{spanning set} of $V$ or a set of \textbf{generators}
+		if $\mathrm{span}(S) = V$, that is, every vector in $V$ can be expressed 
+		as a linear combination of finitely many vectors from $S$.
+	\end{definitionenv}
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let vectors
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n \in V$.  
+		The set $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is said to be 
+		\textbf{linearly dependent} if there exist scalars 
+		$a_1, a_2, \dots, a_n \in \mathcal{K}$, not all zero, such that
+		\[
+		a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n = \mathbf{0}.
+		\]
+		Otherwise, if this equation holds only when 
+		$a_1 = a_2 = \cdots = a_n = 0$, the set is said to be 
+		\textbf{linearly independent}.
+	\end{definitionenv}
+	\begin{remarkenv}
+		$\{\mathbf{0}\}$ is linearly dependent, but $\varnothing$ is linearly independent.
+	\end{remarkenv}
+	
+	
+	\section{Bases}
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		A subset $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\} \subseteq V$ is called a \textbf{basis} of $V$ if it satisfies the following two conditions:
+		\begin{enumerate}
+			\item $\mathcal{B}$ is linearly independent.
+			\item $\mathcal{B}$ spans $V$, i.e. $\mathrm{span}(\mathcal{B}) = V$.
+		\end{enumerate}
+		
+	\end{definitionenv}
+	\begin{theoremenv}
+		 Every vector in $V$ can be written uniquely as a linear combination of the vectors in $\mathcal{B}$.
+	\end{theoremenv}
+	
+	\begin{remarkenv}
+		Though we use set notation to denote a basis, the order $\emph{does}$ matter. For instance, two bases 
+		\[
+		\mathcal{B}_1=\{(1,0),(0,1)\},\quad \mathcal{B}_2=\{(0,1),(1,0)\}
+		\]
+		are considered to be different. You will know why when we discuss about matrix representation of linear maps.
+	\end{remarkenv}
+	
+	\begin{theoremenv}
+		Let $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ be a set of elements of a vector space $V$ over a field $\mathcal{K}$, and let $r$ be a positive integer with $r \leq n$.  
+		We say that $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r\}$ is a \textbf{maximal subset of linearly independent elements} if 
+		$\mathbf{v}_1, \dots, \mathbf{v}_r$ are linearly independent, and moreover, for any $\mathbf{v}_i$ with $i > r$, the set 
+		$\{\mathbf{v}_1, \dots, \mathbf{v}_r, \mathbf{v}_i\}$ is linearly dependent.
+		
+		If, in addition, $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is a set of generators of $V$,  
+		then the set $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r\}$ is a \textbf{basis} of $V$.
+	\end{theoremenv}
+	
+	
+	\section{Dimension}
+	
+	\begin{theoremenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		Let $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_m\}$ be a basis of $V$ over $\mathcal{K}$.  
+		Let $\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n$ be elements of $V$, and assume that $n > m$.  
+		Then $\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n$ are linearly dependent.
+	\end{theoremenv}
+	
+	\begin{theoremenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and suppose that one basis of $V$ has $n$ elements and another basis has $m$ elements.  
+		Then $m = n$.
+	\end{theoremenv}
+	
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		If $V$ has a finite basis $\mathcal{B}$ consisting of $n$ vectors, then $V$ is said to be \textbf{finite-dimensional}, and the number $n$ is called the \textbf{dimension} of $V$, denoted by $\dim(V) = n$.
+		
+		If no finite basis exists, $V$ is said to be \textbf{infinite-dimensional}.
+	\end{definitionenv}
+	
+	\begin{remarkenv}
+		Since we prove that for a finite-dimensional vector space, the cardinality of every basis is the same, the dimension of a finite-dimensional vector space is well-defined.
+	\end{remarkenv}
+	\begin{exampleenv}
+		Let $\mathcal{K}$ be a field.  
+		Define
+		\[
+		V = \mathcal{K}[x] = 
+		\left\{
+		a_0 + a_1x + a_2x^2 + \cdots + a_nx^n 
+		\ \middle| \ 
+		n \in \mathbb{N},\ a_i \in \mathcal{K}
+		\right\},
+		\]
+		the set of all polynomials with coefficients in $\mathcal{K}$.
+		
+		Then $V$ is a vector space over $\mathcal{K}$ with the usual polynomial addition and scalar multiplication.
+		
+		The set 
+		\[
+		\{\, 1, x, x^2, x^3, \dots \}
+		\]
+		is linearly independent, and no finite subset of it spans $V$.  
+		Hence $\mathcal{K}[x]$ is an \textbf{infinite-dimensional} vector space over $\mathcal{K}$.
+	\end{exampleenv}
+	
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		A subspace of $V$ with dimension $1$ is called a \textbf{line} in $V$.  
+		A subspace of $V$ with dimension $2$ is called a \textbf{plane} in $V$.
+	\end{definitionenv}
+	
+	
+	\begin{definitionenv}
+		Let $V$ be a finite-dimensional vector space over a field $\mathcal{K}$, and let 
+		$\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\}$ be an ordered basis of $V$.  
+		For any vector $\mathbf{v} \in V$, there exist unique scalars 
+		$a_1, a_2, \dots, a_n \in \mathcal{K}$ such that
+		\[
+		\mathbf{v} = a_1 \mathbf{e}_1 + a_2 \mathbf{e}_2 + \cdots + a_n \mathbf{e}_n.
+		\]
+		The scalars $a_1, a_2, \dots, a_n$ are called the \textbf{components} or \textbf{coordinates} of $\mathbf{v}$ 
+		with respect to the basis $\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\}$. And the $n$-tuple $A=(a_1,\dots,a_n)$ is called the \textbf{coordinate vector} of \textbf{v}.
+	\end{definitionenv}
+	
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let 
+		$S \subseteq V$.  
+		A subset $\mathcal{B} \subseteq S$ is called a \textbf{maximal linearly independent subset} of $S$ if
+		\begin{enumerate}
+			\item $\mathcal{B}$ is linearly independent;
+			\item for any vector $\mathbf{v} \in S \setminus \mathcal{B}$, the set 
+			$\mathcal{B} \cup \{\mathbf{v}\}$ is linearly dependent.
+		\end{enumerate}
+	\end{definitionenv}
+	
+	\begin{theoremenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let the set
+		$\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ be a maximal set of linearly independent elements of $V$.  
+		Then $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is a basis of $V$.
+	\end{theoremenv}
+	
+	\begin{remarkenv}
+		You might think, ``Oh! Why does the theorem above look similar to something previous. Is the author mentally unstable?" Actually, they are different because of their starting points.
+	\end{remarkenv}
+	
+	\begin{theoremenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$ of dimension $n$, and let 
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$ be linearly independent elements of $V$.  
+		Then $\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$ constitute a basis of $V$.
+	\end{theoremenv}
+	
+	\begin{propositionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let $W$ be a subspace of $V$.  
+		If $\dim W = \dim V$, then $V = W$.
+	\end{propositionenv}
+	
+	\begin{remarkenv}
+		This proposition gives us a way to prove that two sets (vector space) are the same.
+	\end{remarkenv}
+	
+	\begin{propositionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$ of dimension $n$.  
+		Let $r$ be a positive integer with $r < n$, and let 
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r$ be linearly independent elements of $V$.  
+		Then there exist elements $\mathbf{v}_{r+1}, \mathbf{v}_{r+2}, \dots, \mathbf{v}_n$ in $V$ such that
+		\[
+		\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}
+		\]
+		is a basis of $V$.
+	\end{propositionenv}
+	
+	\begin{remarkenv}
+		All these theorems and propositions are telling one same truth: linearly independent sets might be too small to span a vector space, while spanning sets might be too large to be neat (linearly independent), and basis is exactly the boundary, i.e., the smallest spanning set or the largest linearly independent set. It's quite similar to supremum.
+	\end{remarkenv}
+	
+	\begin{theoremenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$ having a basis consisting of $n$ elements.  
+		Let $W$ be a subspace of $V$ that does not consist of the zero vector alone.  
+		Then $W$ has a basis, and the dimension of $W$ satisfies
+		\[
+		\dim W \leq n.
+		\]
+	\end{theoremenv}
+	
+	\newpage

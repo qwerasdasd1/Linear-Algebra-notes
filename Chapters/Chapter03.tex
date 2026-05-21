@@ -1,0 +1,230 @@
+	\chapter{Linear Mappings}
+	
+	\section{Definitions}
+	\begin{definitionenv}
+		Let $V$ and $W$ be vector spaces over the same field $\mathcal{K}$.  
+		A mapping $T : V \to W$ is called a \textbf{linear mapping} (or \textbf{linear transformation}) if for all 
+		$\mathbf{u}, \mathbf{v} \in V$ and all scalars $\alpha, \beta \in \mathcal{K}$, we have
+		\[
+		T(\alpha \mathbf{u} + \beta \mathbf{v})
+		= \alpha T(\mathbf{u}) + \beta T(\mathbf{v}).
+		\]
+	\end{definitionenv}
+	
+	\begin{exampleenv}
+		Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$.  
+		Define a mapping
+		\[
+		T_A : \mathcal{K}^n \to \mathcal{K}^m, \quad
+		T_A(\mathbf{x}) = A\mathbf{x},
+		\]
+		for all $\mathbf{x} \in \mathcal{K}^n$.  
+		Then $T_A$ is a \textbf{linear mapping}.  
+		
+		Indeed, for any $\mathbf{x}, \mathbf{y} \in \mathcal{K}^n$ and $\alpha, \beta \in \mathcal{K}$,
+		\[
+		T_A(\alpha \mathbf{x} + \beta \mathbf{y})
+		= A(\alpha \mathbf{x} + \beta \mathbf{y})
+		= \alpha A\mathbf{x} + \beta A\mathbf{y}
+		= \alpha T_A(\mathbf{x}) + \beta T_A(\mathbf{y}).
+		\]
+		Hence $T_A$ satisfies the linearity condition,  
+		and matrix left-multiplication defines a linear mapping from $\mathcal{K}^n$ to $\mathcal{K}^m$.
+	\end{exampleenv}
+	
+	\begin{exampleenv}
+		Let $V = \mathcal{K}^n$ and $W = \mathcal{K}^m$.  
+		Denote by $\mathcal{L}(V, W)$ the set of all linear mappings from $V$ to $W$ over the field $\mathcal{K}$.  
+		That is,
+		\[
+		\mathcal{L}(V, W)
+		= \{\, T : V \to W \mid T \text{ is linear} \,\}.
+		\]
+		
+		For $T, F \in \mathcal{L}(V, W)$ and $\alpha \in \mathcal{K}$,  
+		we define their \textbf{sum} and \textbf{scalar multiple} by
+		\[
+		(T + F)(\mathbf{u}) = T(\mathbf{u}) + F(\mathbf{u}), 
+		\qquad
+		(\alpha T)(\mathbf{u}) = \alpha\, T(\mathbf{u}),
+		\quad \forall\, \mathbf{u} \in V.
+		\]
+		
+		With these operations of addition and scalar multiplication,  
+		$\mathcal{L}(V, W)$ forms a vector space over $\mathcal{K}$.
+	\end{exampleenv}
+	
+	
+	\begin{definitionenv}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let $\mathbf{a} \in V$.  
+		The mapping $T_{\mathbf{a}} : V \to V$ defined by
+		\[
+		T_{\mathbf{a}}(\mathbf{x}) = \mathbf{x} + \mathbf{a},
+		\]
+		for all $\mathbf{x} \in V$, is called a \textbf{translation} by the vector $\mathbf{a}$.
+		
+		A translation shifts every vector in $V$ by the same displacement $\mathbf{a}$.  
+		Note that a translation is generally \textbf{not} a linear mapping, since
+		\[
+		T_{\mathbf{a}}(\mathbf{0}) = \mathbf{a} \neq \mathbf{0}.
+		\]
+	\end{definitionenv}
+	
+	\begin{theoremenv}
+		Let $V$ and $W$ be vector spaces over a field $\mathcal{K}$.  
+		Let $\{\mathbf{v}_1, \dots, \mathbf{v}_n\}$ be a basis of $V$,  
+		and let $\mathbf{w}_1, \dots, \mathbf{w}_n$ be arbitrary elements of $W$.  
+		Then there exists a unique linear mapping 
+		\[
+		T : V \to W
+		\]
+		such that
+		\[
+		T(\mathbf{v}_i) = \mathbf{w}_i, \quad i = 1, \dots, n.
+		\]
+		
+		Moreover, if $x_1, \dots, x_n \in \mathcal{K}$, then 
+		\[
+		T(x_1 \mathbf{v}_1 + x_2 \mathbf{v}_2 + \cdots + x_n \mathbf{v}_n) = x_1 \mathbf{w}_1 + x_2 \mathbf{w}_2 + \cdots + x_n \mathbf{w}_n.
+		\]
+	\end{theoremenv}
+	
+	\section{Kernel and Image}
+	\begin{definitionenv}
+		Let $T : V \to W$ be a linear mapping between vector spaces over a field $\mathcal{K}$.  
+		The \textbf{kernel} of $T$, denoted by $\ker(T)$, is the subset of $V$ defined by
+		\[
+		\ker(T) = \{\, \mathbf{v} \in V \mid T(\mathbf{v}) = \mathbf{0} \,\}.
+		\]
+		It consists of all vectors in $V$ that are mapped to the zero vector in $W$.  
+		
+	\end{definitionenv}
+	
+	\begin{remarkenv}
+		The kernel $\ker(T)$ is a subspace of $V$.
+	\end{remarkenv}
+	
+	\begin{theoremenv}
+		Let $F : V \to W$ be a linear map between vector spaces over a field $\mathcal{K}$.
+		The following statements are equivalent:
+		\begin{enumerate}
+			\item $\ker(F) = \{\mathbf{0}\}$;
+			\item For all $\mathbf{v}, \mathbf{w} \in V$, if $F(\mathbf{v}) = F(\mathbf{w})$, then $\mathbf{v} = \mathbf{w}$.
+		\end{enumerate}
+		In other words, $F$ is injective if and only if its kernel is $\{\mathbf{0}\}$.
+	\end{theoremenv}
+	
+	\begin{remarkenv}
+		Note that $F$ is a mapping if and only if $F^{-1}$ is injective and surjective.
+	\end{remarkenv}
+	
+	\begin{theoremenv}
+		Let $F : V \to W$ be a linear map whose kernel is $\{\mathbf{0}\}$.
+		If $\mathbf{v}_1, \dots, \mathbf{v}_n$ are linearly independent elements of $V$,  
+		then $F(\mathbf{v}_1), \dots, F(\mathbf{v}_n)$ are linearly independent in $W$.
+	\end{theoremenv}
+	
+	\begin{definitionenv}
+		Let $T : V \to W$ be a linear map between vector spaces over a field $\mathcal{K}$.  
+		The \textbf{image} of $T$, denoted by $\operatorname{im}(T)$, is the subset of $W$ defined by
+		\[
+		\operatorname{im}(T) = \{\, T(\mathbf{v}) \mid \mathbf{v} \in V \,\}.
+		\]
+		It consists of all vectors in $W$ that can be expressed as the image of some vector in $V$ under $T$.  
+		
+	\end{definitionenv}
+	
+	\begin{remarkenv}
+		The image $\operatorname{im}(T)$ is a subspace of $W$.
+	\end{remarkenv}
+	
+	\begin{theoremenv}[Rank--Nullity Theorem]
+		Let $T : V \to W$ be a linear map between finite-dimensional vector spaces over $\mathcal{K}$.  
+		Then
+		\[
+		\dim(\ker T) + \dim(\operatorname{im} T) = \dim V.
+		\]
+		Here, $\dim(\ker T)$ is called the \textbf{nullity} of $T$,  
+		and $\dim(\operatorname{im} T)$ is called the \textbf{rank} of $T$.
+	\end{theoremenv}
+	
+	\begin{theoremenv}[Rank--Nullity Theorem for Matrices]
+		Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$, and let its column vectors be
+		\[
+		\mathbf{A}_1, \mathbf{A}_2, \dots, \mathbf{A}_n \in \mathcal{K}^m.
+		\]
+		We call
+		\[
+		\operatorname{Col}(A) = \operatorname{span}\{\mathbf{A}_1, \dots, \mathbf{A}_n\}
+		\]
+		the \textbf{column space} of $A$, and
+		\[
+		\operatorname{Null}(A) = \{\mathbf{x} \in \mathcal{K}^n \mid A\mathbf{x} = \mathbf{0}\}
+		\]
+		the \textbf{null space} of $A$.
+		
+		Then $\operatorname{Col}(A)$ is a subspace of $\mathcal{K}^m$,  
+		and $\operatorname{Null}(A)$ is a subspace of $\mathcal{K}^n$.  
+		Moreover,
+		\[
+		\dim(\operatorname{Col}(A)) + \dim(\operatorname{Null}(A)) = n,
+		\]
+		where $n$ is the number of columns of $A$.  
+	\end{theoremenv}
+	
+	
+	\begin{theoremenv}
+		Let $L : V \to W$ be a linear map between finite-dimensional vector spaces over $\mathcal{K}$.  
+		Assume that
+		\[
+		\dim V = \dim W.
+		\]
+		If $\ker L = \{\mathbf{0}\}$, or if $\operatorname{im} L = W$,  
+		then $L$ is \textbf{bijective}.
+	\end{theoremenv}
+	
+	\begin{definitionenv}
+		If $f$ is a mapping, and its inverse correspondence is also a mapping, then we say $f$ is \textbf{invertible}.
+	\end{definitionenv}
+
+	\begin{propositionenv}
+		A mapping $f$ is invertible if and only if it is bijective.
+	\end{propositionenv}
+
+	\begin{theoremenv}
+		Suppose $V$ and $W$ are vector spaces over a field $\mathcal{K}$ and $T: V \to W$ is a linear map that is invertible. Then its inverse $T^{-1}: W \to V$ is also a linear map.
+	\end{theoremenv}
+
+	\begin{theoremenv}
+		Let $V$ and $W$ be vector spaces over a field $\mathcal{K}$ with 
+		\[\dim V = \dim W,\]
+		Suppose a linear map $T:V \to W$, if $\ker T = \{\mathbf{0}\}$, then $T$ is invertible.
+	\end{theoremenv}
+	
+	\section{Isomorphism}
+	\begin{definitionenv}
+		Suppose $V$ and $W$ are vector spaces over a field $\mathcal{K}$. Any invertible linear map $T: V \to W$ is called an \textbf{isomorphism} between $V$ and $W$.
+	\end{definitionenv}
+	\begin{notationenv}
+		We say that $V$ and $W$ are \textbf{isomorphic} if there exists an isomorphism $T : V \to W$. In this case we denote this fact by
+		\[
+		V \cong W .
+		\]
+	\end{notationenv}
+	\begin{theoremenv}
+		Let $V$ and $W$ be finite-dimensional vector spaces over a field $\mathcal{K}$. Then $V \cong W$ if and only if $\dim V = \dim W$.
+	\end{theoremenv}
+
+	\begin{remarkenv}
+		Suppose $V$ and $W$ are vector spaces over a field $\mathcal{K}$ with
+		\[
+		\dim V = m, \quad \dim W = n.
+		\]
+		Then $V \cong \mathcal{K}^m$ and $W \cong \mathcal{K}^n$.
+	\end{remarkenv}
+
+	\begin{theoremenv}
+		Let $U,\, V,\, W$ be vector spaces over a field $\mathcal{K}$, with linear maps $F: U \to V$ and $G: V \to W$. Then the composition map \[G \circ F: U \to W\] is also a linear map.
+	\end{theoremenv}
+
+	\newpage
