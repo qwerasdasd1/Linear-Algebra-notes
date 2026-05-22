@@ -166,20 +166,60 @@
 
 % ===== Wrapped theorem environments (FAA color code) =====
 % Green (lvse) — definitions, notations
-\newenvironment{definitionenv}{\begin{lvse}\begin{mydef}}{\end{mydef}\end{lvse}}
-\newenvironment{notationenv}{\begin{lvse}\begin{mynot}}{\end{mynot}\end{lvse}}
-\newenvironment{propertyenv}{\begin{lvse}\begin{myproperty}}{\end{myproperty}\end{lvse}}
+\NewDocumentEnvironment{definitionenv}{o}{%
+    \begin{lvse}\IfNoValueTF{#1}{\begin{mydef}}{\begin{mydef}[#1]}%
+}{%
+    \end{mydef}\end{lvse}%
+}
+\NewDocumentEnvironment{notationenv}{o}{%
+    \begin{lvse}\IfNoValueTF{#1}{\begin{mynot}}{\begin{mynot}[#1]}%
+}{%
+    \end{mynot}\end{lvse}%
+}
+\NewDocumentEnvironment{propertyenv}{o}{%
+    \begin{lvse}\IfNoValueTF{#1}{\begin{myproperty}}{\begin{myproperty}[#1]}%
+}{%
+    \end{myproperty}\end{lvse}%
+}
 
 % Yellow (huangse) — theorems, propositions, lemmas, corollaries
-\newenvironment{theoremenv}{\begin{huangse}\begin{mythm}}{\end{mythm}\end{huangse}}
-\newenvironment{propositionenv}{\begin{huangse}\begin{mypro}}{\end{mypro}\end{huangse}}
-\newenvironment{lemmaenv}{\begin{huangse}\begin{mylma}}{\end{mylma}\end{huangse}}
-\newenvironment{corollaryenv}{\begin{huangse}\begin{mycor}}{\end{mycor}\end{huangse}}
+\NewDocumentEnvironment{theoremenv}{o}{%
+    \begin{huangse}\IfNoValueTF{#1}{\begin{mythm}}{\begin{mythm}[#1]}%
+}{%
+    \end{mythm}\end{huangse}%
+}
+\NewDocumentEnvironment{propositionenv}{o}{%
+    \begin{huangse}\IfNoValueTF{#1}{\begin{mypro}}{\begin{mypro}[#1]}%
+}{%
+    \end{mypro}\end{huangse}%
+}
+\NewDocumentEnvironment{lemmaenv}{o}{%
+    \begin{huangse}\IfNoValueTF{#1}{\begin{mylma}}{\begin{mylma}[#1]}%
+}{%
+    \end{mylma}\end{huangse}%
+}
+\NewDocumentEnvironment{corollaryenv}{o}{%
+    \begin{huangse}\IfNoValueTF{#1}{\begin{mycor}}{\begin{mycor}[#1]}%
+}{%
+    \end{mycor}\end{huangse}%
+}
 
 % Purple (zise) — examples, axioms, methods
-\newenvironment{exampleenv}{\begin{zise}\begin{myex}}{\end{myex}\end{zise}}
-\newenvironment{axiomenv}{\begin{zise}\begin{myax}}{\end{myax}\end{zise}}
-\newenvironment{methodenv}{\begin{zise}\begin{mymthd}}{\end{mymthd}\end{zise}}
+\NewDocumentEnvironment{exampleenv}{o}{%
+    \begin{zise}\IfNoValueTF{#1}{\begin{myex}}{\begin{myex}[#1]}%
+}{%
+    \end{myex}\end{zise}%
+}
+\NewDocumentEnvironment{axiomenv}{o}{%
+    \begin{zise}\IfNoValueTF{#1}{\begin{myax}}{\begin{myax}[#1]}%
+}{%
+    \end{myax}\end{zise}%
+}
+\NewDocumentEnvironment{methodenv}{o}{%
+    \begin{zise}\IfNoValueTF{#1}{\begin{mymthd}}{\begin{mymthd}[#1]}%
+}{%
+    \end{mymthd}\end{zise}%
+}
 
 % Blue (lanse) — proofs
 \NewDocumentEnvironment{proofenv}{o}{%
@@ -191,7 +231,11 @@
 }
 
 % Pink (pinkenv) — remarks
-\newenvironment{remarkenv}{\begin{pinkenv}\begin{myrmk}}{\end{myrmk}\end{pinkenv}}
+\NewDocumentEnvironment{remarkenv}{o}{%
+    \begin{pinkenv}\IfNoValueTF{#1}{\begin{myrmk}}{\begin{myrmk}[#1]}%
+}{%
+    \end{myrmk}\end{pinkenv}%
+}
 
 % ===== User's blackboard bold shortcuts =====
 \newcommand{\R}{\mathbb{R}}

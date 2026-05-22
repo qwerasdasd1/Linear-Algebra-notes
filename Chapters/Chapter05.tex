@@ -34,7 +34,7 @@
 		And we say $\mathbf{v}\in S^\perp$ is \textbf{orthogonal} or \textbf{perpendicular} to $S$ and write $\mathbf{v} \perp S$.
 	\end{definitionenv}
 	\begin{propositionenv}
-		Suppose $V$ is a vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. If a set $S \le V$, then $S^\perp$ is a subspace of $V$. We often call $S^\perp$ the \textbf{orthogonal complement} of $S$ in $V$.
+		Suppose $V$ is a vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. If a set $S \le V$, then $S^\perp$ is a subspace of $V$. 
 	\end{propositionenv}
 	\begin{exampleenv}
 		Suppose $A\in \mathbf{M}_{m \times n}(\mathcal{K})$, then $\mathbf{x}$ is a solution of the homogeneous linear system
@@ -58,8 +58,10 @@
 		\[
 		\langle \mathbf{v}, \mathbf{v} \rangle 
 		\begin{cases}
-		> 0, & \mathbf{v} \neq \mathbf{0}, \\
-		= 0, & \mathbf{v} = \mathbf{0}.
+		> 0, 
+ \mathbf{v} \neq \mathbf{0}, \\
+		= 0, 
+ \mathbf{v} = \mathbf{0}.
 		\end{cases}
 		\]
 		If the scalar product is positive-definite, we define the \textbf{norm} of a vector $\mathbf{v} \in V$ as
@@ -146,20 +148,20 @@
 		\[
 		\langle \mathbf{v}_i, \mathbf{v}_j \rangle =
 		\begin{cases}
-		1, & i = j, \\
-		0, & i \neq j,
+		1, 
+ i = j, \\
+		0, 
+ i \neq j,
 		\end{cases}
 		\quad \forall i,j \in \{1,2,\ldots,n\}.
 		\]
 	\end{definitionenv}
-	\begin{theoremenv}
+	\begin{theoremenv}[Bessel's Inequality]
 		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$. Let $\{w_1, w_2, \ldots, w_k\}$ be an orthogonal set of vectors in $V$. Then for any $\mathbf{v} \in V$, we have
 		\[
 		\langle \mathbf{v}, \mathbf{v} \rangle \geq \sum_{i=1}^k \frac{|\langle \mathbf{v}, w_i \rangle|^2}{\langle w_i, w_i \rangle}.
 		\]
 		with equality if and only if $\mathbf{v} \in \operatorname{span}\{w_1, w_2, \ldots, w_k\}$.
-
-		This is called \textbf{Bessel's inequality}.
 	\end{theoremenv}
 	\begin{lemmaenv}
 		Suppose $V$ is a finite-dimensional vector space over $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$. Let $W$ be a proper subspace of $V$. If $\{w_1, w_2, \ldots, w_k\}$ is an orthonormal basis of $W$, then there exist vectors $w_{k+1}, w_{k+2}, \ldots, w_n \in V$ such that $\{w_1, w_2, \ldots, w_k, w_{k+1}, w_{k+2}, \ldots, w_n\}$ is an orthonormal basis of $V$.
@@ -217,8 +219,10 @@
 		\[
 		\langle \mathbf{v}, \mathbf{v} \rangle 
 		\begin{cases}
-		> 0, & \mathbf{v} \neq \mathbf{0}, \\
-		= 0, & \mathbf{v} = \mathbf{0}.
+		> 0, 
+ \mathbf{v} \neq \mathbf{0}, \\
+		= 0, 
+ \mathbf{v} = \mathbf{0}.
 		\end{cases}
 		\]
 		Note that
@@ -227,12 +231,8 @@
 		\]
 		the positive-definiteness is well-defined.
 	\end{definitionenv}
-	\begin{remarkenv}
-		Note that the linearity in the second argument does not hold. Instead, we have
-		\[
-		\langle \mathbf{w}, \alpha \mathbf{u} + \beta \mathbf{v} \rangle = \overline{\alpha} \langle \mathbf{w}, \mathbf{u} \rangle + \overline{\beta} \langle \mathbf{w}, \mathbf{v} \rangle.
-		\]
-		This is called the \textbf{conjugate linearity} in the second argument.
+	\begin{remarkenv}[Conjugate Linearity]
+		Note that the linearity in the second argument does not hold. 
 	\end{remarkenv}
 	\begin{remarkenv}
 		For vector space $V$ over $\mathbb{C}$, given a Hermitian product, we say $x,y$ are orthogonal if $\langle x,y \rangle = 0\left( =\langle y,x \rangle \right)$. Concepts like orthogonal complement can be defined accordingly. If additionally the Hermitian product is positive-definite, concepts like norm, distance, orthogonal basis, orthonormal basis, etc. can be defined accordingly.
@@ -284,34 +284,68 @@
     \end{exampleenv}
     
     \section{Determinants}
-    Recall in last semester we defined the determinant of a $2\times 2$ matrix $\displaystyle A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ as $\displaystyle \det(A) = \begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$. And we conclude that $A$ is invertible if and only if $\det(A) \neq 0$. Furthermore, we know $\displaystyle A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$ when $A$ is invertible.
+    Recall in last semester we defined the determinant of a $2\times 2$ matrix $\displaystyle A = \begin{bmatrix} a 
+ b \\ c 
+ d \end{bmatrix}$ as $\displaystyle \det(A) = \begin{vmatrix} a 
+ b \\ c 
+ d \end{vmatrix} = ad - bc$. And we conclude that $A$ is invertible if and only if $\det(A) \neq 0$. Furthermore, we know $\displaystyle A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d 
+ -b \\ -c 
+ a \end{bmatrix}$ when $A$ is invertible.
 
     We recall more properties of determinants of $2\times 2$ matrices:
     \begin{enumerate}
         \item $\det(I_2) = 1$.
         \item Bilinearity: For any $a,b,c,d \in \mathcal{K}$, we have
         \[
-        \begin{vmatrix} a+b & c \\ d & e \end{vmatrix} = \begin{vmatrix} a & c \\ d & e \end{vmatrix} + \begin{vmatrix} b & c \\ d & e \end{vmatrix}, \quad \begin{vmatrix} a & b+c \\ d & e \end{vmatrix} = \begin{vmatrix} a & b \\ d & e \end{vmatrix} + \begin{vmatrix} a & c \\ d & e \end{vmatrix}.
+        \begin{vmatrix} a+b 
+ c \\ d 
+ e \end{vmatrix} = \begin{vmatrix} a 
+ c \\ d 
+ e \end{vmatrix} + \begin{vmatrix} b 
+ c \\ d 
+ e \end{vmatrix}, \quad \begin{vmatrix} a 
+ b+c \\ d 
+ e \end{vmatrix} = \begin{vmatrix} a 
+ b \\ d 
+ e \end{vmatrix} + \begin{vmatrix} a 
+ c \\ d 
+ e \end{vmatrix}.
         \]
         \item Alternating property: For any $a,b,c,d \in \mathcal{K}$, we have
         \(
-        \begin{vmatrix} a & b \\ c & d \end{vmatrix} = -\begin{vmatrix} c & d \\ a & b \end{vmatrix}.
+        \begin{vmatrix} a 
+ b \\ c 
+ d \end{vmatrix} = -\begin{vmatrix} c 
+ d \\ a 
+ b \end{vmatrix}.
         \)
         \item $\det(A)=\det(A^T)$.
     \end{enumerate}
     Now we try to expand the definition of determinant to more general cases.
     \begin{definitionenv}
-        Based on the definition of $2\times 2$ determinant, we define $3\times 3$ determinant as follows: suppose
+        Based on the definition of $2\times 2$ determinant, we define \textbf{$3\times 3$ determinant} as follows: suppose
         \[
         A = \begin{bmatrix}
-        a_{11} & a_{12} & a_{13} \\
-        a_{21} & a_{22} & a_{23} \\
-        a_{31} & a_{32} & a_{33}
+        a_{11} 
+ a_{12} 
+ a_{13} \\
+        a_{21} 
+ a_{22} 
+ a_{23} \\
+        a_{31} 
+ a_{32} 
+ a_{33}
         \end{bmatrix} \in \mathbf{M}_{3 \times 3}(\mathcal{K}),
         \]
         then we define
         \[
-        \det(A) = a_{11} \begin{vmatrix} a_{22} & a_{23} \\ a_{32} & a_{33} \end{vmatrix} - a_{12} \begin{vmatrix} a_{21} & a_{23} \\ a_{31} & a_{33} \end{vmatrix} + a_{13} \begin{vmatrix} a_{21} & a_{22} \\ a_{31} & a_{32} \end{vmatrix}.
+        \det(A) = a_{11} \begin{vmatrix} a_{22} 
+ a_{23} \\ a_{32} 
+ a_{33} \end{vmatrix} - a_{12} \begin{vmatrix} a_{21} 
+ a_{23} \\ a_{31} 
+ a_{33} \end{vmatrix} + a_{13} \begin{vmatrix} a_{21} 
+ a_{22} \\ a_{31} 
+ a_{32} \end{vmatrix}.
         \]
     \end{definitionenv}
     \begin{remarkenv}
@@ -328,11 +362,11 @@
     \begin{definitionenv}
         Suppose function $D: \mathbf{M}_{n \times n}(\mathcal{K}) \to \mathcal{K}$ or alternatively $D: \mathcal{K}^n \times \mathcal{K}^n \times \cdots \times \mathcal{K}^n \to \mathcal{K}$ (with $n$ copies of $\mathcal{K}^n$) with notation $D(A)$ or $D(A_1, A_2, \ldots, A_n)$ where $A_i$ is the $i$-th column of $A$. We say:
         \begin{enumerate}
-            \item $D$ is multilinear: as a function of the columns in $A\in \M_{n \times n}(\mathcal{K})$, $D$ is linear in each column when the other $n-1$ columns are fixed.
-            \item $D$ is alternating: if two adjacent columns of $A$ are equal, then $D(A) = 0$.
+            \item $D$ is \textbf{multilinear}: as a function of the columns in $A\in \M_{n \times n}(\mathcal{K})$, $D$ is linear in each column when the other $n-1$ columns are fixed.
+            \item $D$ is \textbf{alternating}: if two adjacent columns of $A$ are equal, then $D(A) = 0$.
         \end{enumerate}
     \end{definitionenv}
-    \begin{theoremenv}
+    \begin{theoremenv}[Determinant Function]
         There exists a unique multilinear and alternating function $D: \mathbf{M}_{n \times n}(\mathcal{K}) \to \mathcal{K}$ such that $D(I_n) = 1$. We call this unique $D$ the $n\times n$ \textbf{determinant} function and denote it as $\det(\cdot)$.
     \end{theoremenv}
     \begin{proofenv}
@@ -348,11 +382,31 @@
         \textbf{Inductive step}: For
         \[
         A = \begin{bmatrix}
-            a_{11} & \cdots & a_{1j} & \cdots & a_{1n} \\
-            \vdots & \ddots & \vdots & \ddots & \vdots \\
-            a_{i1} & \cdots & a_{ij} & \cdots & a_{in} \\
-            \vdots & \ddots & \vdots & \ddots & \vdots \\
-            a_{n1} & \cdots & a_{nj} & \cdots & a_{nn}
+            a_{11} 
+ \cdots 
+ a_{1j} 
+ \cdots 
+ a_{1n} \\
+            \vdots 
+ \ddots 
+ \vdots 
+ \ddots 
+ \vdots \\
+            a_{i1} 
+ \cdots 
+ a_{ij} 
+ \cdots 
+ a_{in} \\
+            \vdots 
+ \ddots 
+ \vdots 
+ \ddots 
+ \vdots \\
+            a_{n1} 
+ \cdots 
+ a_{nj} 
+ \cdots 
+ a_{nn}
         \end{bmatrix} \in \mathbf{M}_{n \times n}(\mathcal{K}),
         \]
         we define
@@ -393,12 +447,13 @@
             \item $\det(AB) = \det(A)\det(B)$ for any $A,B \in \mathbf{M}_{n \times n}(\mathcal{K})$.
         \end{enumerate}
     \end{theoremenv}
-    \begin{theoremenv}
-        Suppose $A\in\M_{n \times n}(\mathcal{K})$ satisfies $\det(A) \neq 0$ and $b\in \mathcal{K}^n$. If $x\in \mathcal{K}^n$ is a solution to the linear system $Ax=b$, then $x$ satisfies
-        \[
-        x_i = \frac{\det(A_{ib})}{\det(A)}, \quad i=1,2,\ldots,n,
-        \]
-        where $A_{ib}$ is the matrix obtained by replacing the $i$-th column of $A$ with $b$. This is called \textbf{Cramer's rule}.
+    
+\begin{theoremenv}[Cramer's Rule]
+    Suppose $A\in\M_{n \times n}(\mathcal{K})$ satisfies $\det(A) \neq 0$ and $b\in \mathcal{K}^n$. If $x\in \mathcal{K}^n$ is a solution to the linear system $Ax=b$, then $x$ satisfies
+    \[
+    x_i = \frac{\det(A_{ib})}{\det(A)}, \quad i=1,2,\ldots,n,
+    \]
+    where $A_{ib}$ is the matrix obtained by replacing the $i$-th column of $A$ with $b$.
     \end{theoremenv}
     \begin{proofenv}
         Note $b = x_1 A_1 + x_2 A_2 + \cdots + x_n A_n$, where $A_i$ is the $i$-th column of $A$.
@@ -663,7 +718,6 @@
         \[
         \langle T(\mathbf{v}), \mathbf{w} \rangle = \langle \mathbf{v}, T^T (\mathbf{w}) \rangle, \quad \forall \mathbf{v}, \mathbf{w} \in V.
         \]
-        We call $T^T$ the \textbf{transpose} of $T$.
     \end{theoremenv}
     \begin{proofenv}
         Let $L: V \to \mathcal{K}$ be $L(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w} \rangle$ for any $\mathbf{v} \in V$. Note $L$ is a linear map from $V$ to $\mathcal{K}$ and thus a linear functional. Note by the above lemma, we know there exists a unique $\tilde{w} \in V$ such that $L(x)=f_{\tilde{w}}(x) = \langle x, \tilde{w} \rangle$. Let $T^T(\mathbf{w}) = \tilde{w}$.
@@ -680,7 +734,7 @@
         We often just write $\langle T(\mathbf{v}), \mathbf{w} \rangle = \langle \mathbf{v}, T^T (\mathbf{w}) \rangle$, $\langle T\mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{v}, T^T \mathbf{w} \rangle$ or $\langle A\mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{v}, A^T \mathbf{w} \rangle$ where $A$ is a general operator (instead of a matrix) on $V$.
     \end{remarkenv}
     \begin{definitionenv}
-        Suppose $V$ is a finite-dimensional vector space over field $\mathcal{K}$ and $T$ is an operator on $V$. Suppose $\mathcal{B}$ is a basis for $V$ and let $\mathcal{M}$ be the matrix representation of $T$ with respect to basis $\mathcal{B}$, then we define the determinant of operator $T$ to be the determinant of matrix $\mathcal{M}$, i.e., $\det(T) = \det(\mathcal{M})$.
+        Suppose $V$ is a finite-dimensional vector space over field $\mathcal{K}$ and $T$ is an operator on $V$. Suppose $\mathcal{B}$ is a basis for $V$ and let $\mathcal{M}$ be the matrix representation of $T$ with respect to basis $\mathcal{B}$, then we define the \textbf{determinant of operator} $T$ to be the determinant of matrix $\mathcal{M}$, i.e., $\det(T) = \det(\mathcal{M})$.
     \end{definitionenv}
     \begin{remarkenv}
         Note that the determinant of an operator is well-defined since the value of the determinant of the matrix representation of $T$ does not depend on the choice of basis $\mathcal{B}$: suppose that if a different basis $\mathcal{B}'$ is chosen and $\mathcal{M}'$ is the matrix representation of $T$ with respect to $\mathcal{B}'$, then we have $\mathcal{M}' = P^{-1} \mathcal{M} P$ for some invertible matrix $P$ and thus $$\det(\mathcal{M}') = \det(P^{-1} \mathcal{M} P) = \det(P^{-1}) \det(\mathcal{M}) \det(P) = \det(\mathcal{M}).$$
@@ -701,7 +755,7 @@
         Suppose $V$ is a finite-dimensional vector space over $\C$ with a positive definite hermitian product $\langle \cdot, \cdot \rangle$. Given a functional $L$ on $V$, there exists a unique vector $\tilde{w} \in V$ such that $L(x) = \langle x, \tilde{w} \rangle$ for all $x\in V$.
     \end{lemmaenv}
     \begin{theoremenv}
-        Suppose $V, \C, \langle \cdot, \cdot \rangle$ satisfy the condition in Lemma~\ref{unique vector for functional} and $A$ is an operator on $V$. Then there exists a unique operator $A^*$ on $V$ such that $\langle A x, y \rangle = \langle x, A^* y \rangle$ for all $x,y \in V$. We call $A^*$ the \textbf{adjoint} or \textbf{complex transpose}, or the \textbf{conjugate transpose} of $A$.
+        Suppose $V, \C, \langle \cdot, \cdot \rangle$ satisfy the condition in Lemma~\ref{unique vector for functional} and $A$ is an operator on $V$. Then there exists a unique operator $A^*$ on $V$ such that $\langle A x, y \rangle = \langle x, A^* y \rangle$ for all $x,y \in V$.
     \end{theoremenv}
     \begin{exampleenv}
         Let $V = \C^n$ with the standard hermitian product $\langle x, y \rangle = \displaystyle \sum_{i=1}^n x_i \overline{y_i}$. For any $A \in \M_{n \times n}(\C)$, we have $$\langle A x, y \rangle = x^T A^T \overline{y} = x^T \overline{ \left( \overline{A^T} y \right) } = \langle x, \overline{A^T} y \rangle.$$ Thus $A^* = \overline{A^T}$.
@@ -740,7 +794,9 @@
         (b) $\Rightarrow$ (a): for any $x,y \in V$, we have
         \[
         \begin{aligned}
-            \langle A x, A y \rangle &= \frac14 \left( \|A x + A y\|^2 - \|A x - A y\|^2 \right)\\  &= \frac{1}{4} \left( \|x + y\|^2 - \|x - y\|^2 \right) = \langle x, y \rangle.
+            \langle A x, A y \rangle 
+= \frac14 \left( \|A x + A y\|^2 - \|A x - A y\|^2 \right)\\  
+= \frac{1}{4} \left( \|x + y\|^2 - \|x - y\|^2 \right) = \langle x, y \rangle.
         \end{aligned}
         \]
 
@@ -759,8 +815,10 @@
     \begin{exampleenv}
         Let
         $$ R(\theta) = \begin{bmatrix}
-            \cos \theta & -\sin \theta \\
-            \sin \theta & \cos \theta
+            \cos \theta 
+ -\sin \theta \\
+            \sin \theta 
+ \cos \theta
         \end{bmatrix}. $$
         For a vector $x\in \R^2$, $R x$ rotated counterclockwise by $\theta$. We also call such a matrix unitary if the associated operator is unitary.
     \end{exampleenv}
@@ -817,8 +875,10 @@
             \item Suppose $V$ is the vector space over $\R$ consisting of all infinitely differentiable functions defined on $\R$. Let $D:V\to V$ be the differentiation operator, i.e., $D(f) = f'$. Then $e^{\lambda x}$ is an eigenvector/eigenfunction of $D$ corresponding to eigenvalue $\lambda$ for any $\lambda \in \R$.
             \item Let
             $$ R(\theta) = \begin{pmatrix}
-                \cos \theta & -\sin \theta \\
-                \sin \theta & \cos \theta
+                \cos \theta 
+ -\sin \theta \\
+                \sin \theta 
+ \cos \theta
             \end{pmatrix}
             $$
             be an operator on $\R^2$. Then
@@ -847,10 +907,22 @@
     \begin{propositionenv}
         Suppose $V$ with $\dim V=n$ and $A$ is an operator on $V$. If $A$ has $n$ distinct eigenvalues, then the corresponding eigenvectors form a basis $\mathcal B$ for $V$. Moreover, the matrix representation of $A$ with respect to basis $\mathcal B$ is a diagonal matrix with diagonal entries being the eigenvalues of $A$, i.e.,
         $$ \mathcal M_{\mathcal B}(A) = \begin{bmatrix}
-            \lambda_1 & 0 & \cdots & 0 \\
-            0 & \lambda_2 & \cdots & 0 \\
-            \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & \lambda_n
+            \lambda_1 
+ 0 
+ \cdots 
+ 0 \\
+            0 
+ \lambda_2 
+ \cdots 
+ 0 \\
+            \vdots 
+ \vdots 
+ \ddots 
+ \vdots \\
+            0 
+ 0 
+ \cdots 
+ \lambda_n
         \end{bmatrix}. $$
     \end{propositionenv}
     \begin{remarkenv}
@@ -859,8 +931,10 @@
         However,
         $$ \text{A has an eigenbasis} \centernot\implies \text{A has } n \text{ distinct eigenvalues}. $$
         For example, let $A = \begin{bmatrix}
-            0 & 0 \\
-            0 & 0
+            0 
+ 0 \\
+            0 
+ 0
         \end{bmatrix}$ be an operator on $\R^2$. Then $A$ has only one eigenvalue $0$ but the corresponding eigenspace is $\R^2$ and thus any basis of $\R^2$ is an eigenbasis for $A$.
     \end{remarkenv}
     \begin{theoremenv}
@@ -876,11 +950,15 @@
         \begin{itemize}
             \item $A$ has no roots in $\R$, i.e., $A$ has no eigenvalue. We can expand the field $\R$ to $\C$ and then $A$ has eigenvalues in $\C$ since $\C$ is algebraically closed.
             \item $A$ has eigenvalues but does not have enough linearly independent eigenvectors. For example, let $\displaystyle A=\begin{pmatrix}
-            2 & 1\\
-            0 & 2
+            2 
+ 1\\
+            0 
+ 2
             \end{pmatrix}.$ Since the characteristic polynomial $$\det(tI-A)=\det\begin{pmatrix}
-            t-2 & -1\\
-            0 & t-2
+            t-2 
+ -1\\
+            0 
+ t-2
             \end{pmatrix}
             =(t-2)^2.$$ Thus $A$ has only one eigenvalue $2$ with algebraic multiplicity $2$. However, the eigenspace corresponding to eigenvalue $2$ is $\{(x,0): x\in \R\}$ and thus the geometric multiplicity of eigenvalue $2$ is $1$. Thus $A$ does not have an eigenbasis and thus cannot be diagonalized.
         \end{itemize}
@@ -893,8 +971,10 @@
         Suppose $\lambda \in \C$ and $x\in \C ^n$ such that $A x = \lambda x$. With the standard Hermitian product, we have
         \[
         \begin{aligned}
-            \langle A x, x \rangle &= \langle \lambda x, x \rangle = \lambda \langle x, x \rangle,\\
-            \langle A x, x \rangle &= \langle x, A^* x \rangle = \langle x, \overline{A^T} x \rangle = \langle x, \overline{A} x \rangle=  \langle x, \lambda x \rangle = \overline{\lambda} \langle x, x \rangle.
+            \langle A x, x \rangle 
+= \langle \lambda x, x \rangle = \lambda \langle x, x \rangle,\\
+            \langle A x, x \rangle 
+= \langle x, A^* x \rangle = \langle x, \overline{A^T} x \rangle = \langle x, \overline{A} x \rangle=  \langle x, \lambda x \rangle = \overline{\lambda} \langle x, x \rangle.
         \end{aligned}
         \]
         Since $\langle x, x \rangle > 0$, we have $\lambda = \overline{\lambda}$ and thus $\lambda \in \R$.
@@ -928,27 +1008,72 @@
     \begin{remarkenv}
         A real symmetric matrix/operator is always diagonalizable with an orthonormal eigenbasis. Particularly, suppose $A \in \M_{n\times n}(\R)$ is symmetric, let $\{x_1, x_2, \ldots, x_n\}$ be an orthonormal eigenbasis of $A$ and let $\lambda_1, \lambda_2, \ldots, \lambda_n$ be the corresponding eigenvalues. Then we have
         $$ AX = X \Lambda, \quad \text{where } X = \begin{pmatrix}
-            | & | & & | \\
-            x_1 & x_2 & \cdots & x_n \\
-            | & | & & |
+            | 
+ | 
+ 
+ | \\
+            x_1 
+ x_2 
+ \cdots 
+ x_n \\
+            | 
+ | 
+ 
+ |
         \end{pmatrix}, \quad \Lambda = \begin{pmatrix}
-            \lambda_1 & 0 & \cdots & 0 \\
-            0 & \lambda_2 & \cdots & 0 \\
-            \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & \lambda_n
+            \lambda_1 
+ 0 
+ \cdots 
+ 0 \\
+            0 
+ \lambda_2 
+ \cdots 
+ 0 \\
+            \vdots 
+ \vdots 
+ \ddots 
+ \vdots \\
+            0 
+ 0 
+ \cdots 
+ \lambda_n
         \end{pmatrix}. $$
         Note that
         $$ X^T X = \begin{pmatrix}
-            \langle x_1, x_1 \rangle & \langle x_1, x_2 \rangle & \cdots & \langle x_1, x_n \rangle \\
-            \langle x_2, x_1 \rangle & \langle x_2, x_2 \rangle & \cdots & \langle x_2, x_n \rangle \\
-            \vdots & \vdots & \ddots & \vdots \\
-            \langle x_n, x_1 \rangle & \langle x_n, x_2 \rangle & \cdots & \langle x_n, x_n \rangle
+            \langle x_1, x_1 \rangle 
+ \langle x_1, x_2 \rangle 
+ \cdots 
+ \langle x_1, x_n \rangle \\
+            \langle x_2, x_1 \rangle 
+ \langle x_2, x_2 \rangle 
+ \cdots 
+ \langle x_2, x_n \rangle \\
+            \vdots 
+ \vdots 
+ \ddots 
+ \vdots \\
+            \langle x_n, x_1 \rangle 
+ \langle x_n, x_2 \rangle 
+ \cdots 
+ \langle x_n, x_n \rangle
         \end{pmatrix}
         = \begin{pmatrix}
-            1 & 0 & \cdots & 0 \\
-            0 & 1 & \cdots & 0 \\
-            \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & 1
+            1 
+ 0 
+ \cdots 
+ 0 \\
+            0 
+ 1 
+ \cdots 
+ 0 \\
+            \vdots 
+ \vdots 
+ \ddots 
+ \vdots \\
+            0 
+ 0 
+ \cdots 
+ 1
         \end{pmatrix} = I. $$
         Thus $X$ is unitary and we call $A$ \textbf{unitarily/orthogonally diagonalizable}. Since $\Lambda$ is diagonal, we say $A$ is \textbf{unitarily similar to a diagonoal matrix} and $A=X\Lambda X^T = X \Lambda X^{-1}$ is a \textbf{spectral decomposition} of $A$ with $\lambda_1, \lambda_2, \ldots, \lambda_n$ being the \textbf{spectrum} of $A$.
 
@@ -986,19 +1111,27 @@
     \begin{remarkenv}
         A complex-unitary matrix/operator is not necessarily hermitian:
         $$ A = \begin{pmatrix}
-            0 & -1 \\
-            1 & 0
+            0 
+ -1 \\
+            1 
+ 0
         \end{pmatrix}, \quad A^* = \begin{pmatrix}
-            0 & 1 \\
-            -1 & 0
+            0 
+ 1 \\
+            -1 
+ 0
         \end{pmatrix} \ne A. $$
         A hermitian matrix is not necessarily complex-unitary:
         $$ A = \begin{pmatrix}
-            1 & 0 \\
-            0 & 2
+            1 
+ 0 \\
+            0 
+ 2
         \end{pmatrix}, \quad A^* = A, \quad \text{but } A^* A = \begin{pmatrix}
-            1 & 0 \\
-            0 & 4
+            1 
+ 0 \\
+            0 
+ 4
         \end{pmatrix} \ne I. $$
     \end{remarkenv}
     \begin{theoremenv}
@@ -1029,15 +1162,29 @@
     \begin{corollaryenv}
         For the real case, if $A$ is a real-unitary operator on $V$, then there exists a basis $\mathcal{B}$ for $V$ such that 
         $$\mathcal M_{\mathcal{B}}(A) = \begin{pmatrix}
-            M_1 & 0 & \cdots & 0 \\
-            0 & M_2 & \cdots & 0 \\
-            \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & M_r
+            M_1 
+ 0 
+ \cdots 
+ 0 \\
+            0 
+ M_2 
+ \cdots 
+ 0 \\
+            \vdots 
+ \vdots 
+ \ddots 
+ \vdots \\
+            0 
+ 0 
+ \cdots 
+ M_r
         \end{pmatrix}$$
         where each $M_i$ for $i=1,2,\ldots,r$ satisfies one of the following conditions:
         $$ M_i = 1,\qquad M_i = -1, \qquad M_i = \begin{pmatrix}
-            \cos \theta_i & -\sin \theta_i \\
-            \sin \theta_i & \cos \theta_i
+            \cos \theta_i 
+ -\sin \theta_i \\
+            \sin \theta_i 
+ \cos \theta_i
         \end{pmatrix} \text{ with } \theta_i \neq k\pi \text{ for } k\in \Z. $$
     \end{corollaryenv}
     \begin{remarkenv}
@@ -1081,10 +1228,22 @@
     \end{remarkenv}
     \begin{theoremenv}
         Let $\mathcal{B} = \{v_1, \ldots, v_n\}$ be a fan basis for a operator $A$. Then $$\mathcal{M}_\mathcal{B} (A) = \begin{pmatrix}
-            a_{11} & a_{12} & \cdots & a_{1n} \\
-            0 & a_{22} & \cdots & a_{2n} \\
-            \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & a_{nn}
+            a_{11} 
+ a_{12} 
+ \cdots 
+ a_{1n} \\
+            0 
+ a_{22} 
+ \cdots 
+ a_{2n} \\
+            \vdots 
+ \vdots 
+ \ddots 
+ \vdots \\
+            0 
+ 0 
+ \cdots 
+ a_{nn}
         \end{pmatrix}$$ is an upper-triangular matrix.
     \end{theoremenv}
     \begin{proofenv}
