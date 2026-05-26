@@ -1,19 +1,2475 @@
-\documentclass{mybook}
+\documentclass{ctexart}
+\usepackage{amsmath,amsthm,amssymb,graphicx,mathrsfs,tikz-cd,setspace}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{centernot}
+\usepackage[
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm,
+]{geometry}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue,hidelinks]{hyperref}
+\renewcommand{\contentsname}{Contents}
 \title{Linear Algebra}
 \author{Star}
-\date{}
-
+% \pagestyle{headings}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
 \begin{document}
-\maketitle
-\tableofcontents
+	%\onehalfspacing
+	\maketitle
+	\newpage
+	\tableofcontents
+	\renewcommand{\proofname}{Proof}
+	\newpage
+	\theoremstyle{definition}
+	\newtheorem{mydef}{Definition}[subsection]
+	\newtheorem{mypro}[mydef]{Proposition}
+	\newtheorem{mythm}[mydef]{Theorem}
+	\newtheorem{myrmk}[mydef]{Remark}
+	\newtheorem{mynot}[mydef]{Notation}
+	\newtheorem{myex}[mydef]{Example}
+	\newtheorem{myax}[mydef]{Axiom}
+	\newtheorem{mylma}[mydef]{Lemma}
+    \newtheorem{mycor}[mydef]{Corollary}
+	%\newtheorem{proof}[mydef]{Proof}
+	\newtheorem{mymthd}[mydef]{Method}
+	\section{Vector Spaces}
+	\subsection{Definitions}
+	\begin{mydef}
+		A field $\mathcal{K}$ is a set equipped with addition and multiplication, denoted by $(\mathcal{K}, +, \cdot)$, satisfying the following axioms.
+		
+		\begin{enumerate}
+			\item \textbf{Associative Laws:} let $a,b,c \in \mathcal{K}$,
+			\[
+			a + b + c = a + (b + c), \quad a \cdot b \cdot c = a \cdot (b \cdot c).
+			\]
+			
+			\item \textbf{Existence of Identity Elements:} let $a \in \mathcal{K}$,
+			\[
+			a + 0_{\mathcal{K}} = a, \quad a \cdot 1_{\mathcal{K}} = a,
+			\]
+			where $0_{\mathcal{K}}$ and $1_{\mathcal{K}}$ is called the additive identity and multiplicative identity.
+			
+			\item \textbf{Existence of Negatives:} for any $a \in \mathcal{K}$, there exists one element in $\mathcal{K}$ denoted by $(-a)$ such that
+			\[
+			a + (-a) = 0_{\mathcal{K}}.
+			\]
+			
+			\item \textbf{Existence of Reciprocal:} for any $a \in \mathcal{K}$ and $a \neq 0_{\mathcal{K}}$, there exists one element in $\mathcal{K}$ denoted by $a^{-1}$ such that
+			\[
+			a \cdot a^{-1} = 1_{\mathcal{K}}.
+			\]
+			
+			\item \textbf{Commutative Laws:} let $a,b \in \mathcal{K}$,
+			\[
+			a + b = b + a, \quad a \cdot b = b \cdot a.
+			\]
+			
+			\item \textbf{Attributive Law:} let $a,b,c \in \mathcal{K}$,
+			\[
+			a \cdot (b + c) = a \cdot b + a \cdot c.
+			\]
+		\end{enumerate}
+	\end{mydef}
+	
+	\begin{myrmk}
+		Closure is contained in the defined addition and multiplication.
+	\end{myrmk}
+	\begin{mythm}
+		$0_\mathcal{K}$ and $1_\mathcal{K}$ defined above is unique.
+	\end{mythm}
+	\begin{myex}
+		Note that $\mathbb{C,R,Q}$ are fields, but $\mathbb{N}$ is not a field because $2 \in \mathbb{N}$ but its reciprocal $\frac{1}{2} \notin \mathbb{N}$.This is the main difference between $\mathbb{Q}$ and $\mathbb{N}$.
+	\end{myex}
+	\begin{mydef}
+		Let $\mathcal{F}$ be a field. A subset $\mathcal{K} \subseteq \mathcal{F}$ is called a \textbf{subfield} of $\mathcal{F}$ if $\mathcal{K}$ is itself a field under the same operations of addition and multiplication as $\mathcal{F}$.
+		
+		Equivalently, $\mathcal{K}$ is a subfield of $\mathcal{F}$ if and only if the following conditions hold:
+		\begin{enumerate}
+			\item \textbf{Closure under Addition and Multiplication:}  
+			for all $x, y \in \mathcal{K}$,
+			\[
+			x + y \in \mathcal{K}, \quad x \cdot y \in \mathcal{K}.
+			\]
+			
+			\item \textbf{Existence of Additive and Multiplicative Inverses:}  
+			for all $x \in \mathcal{K}$,
+			\[
+			-x \in \mathcal{K}, 
+			\]
+			and if $x \neq 0_{\mathcal{K}}$, then 
+			\[
+			x^{-1} \in \mathcal{K}.
+			\]
+			
+			\item \textbf{Containment of Identity Elements:}  
+			\[
+			0_{\mathcal{K}},\ 1_{\mathcal{K}} \in \mathcal{K}.
+			\]
+		\end{enumerate}
+	\end{mydef}
+	\begin{myrmk}
+		This provides a simpler way to prove a set is a field. The third rule ensures that $\varnothing$ is not a subfield.
+	\end{myrmk}
+	\begin{mypro}
+		Let $\mathcal{K}$ be a field and $A,B$ are subfields of $\mathcal{K}$, then $A \cap B$ is also a subfield of $\mathcal{K}$.
+	\end{mypro}
+	\begin{mypro}
+		Let $\mathcal{K}$ be a field and $A,B$ are subfields of $\mathcal{K}$, then $A \cup B$ is also a subfield of $\mathcal{K}$ if and only if $A \subseteq B$ or $B \subseteq A$.
+	\end{mypro}
+	\begin{myrmk}
+		For any elements in a field, we call them \textbf{number}s or \textbf{scalar}s.
+	\end{myrmk}
+	\begin{mydef}
+		A vector space $V$ over a field $\mathcal{K}$ is a set equipped with two operations:
+		vector addition and scalar multiplication, denoted by $(V, +, \cdot)$, satisfying the following axioms:
+		
+		\begin{enumerate}
+			\item \textbf{Associative Laws:} for any $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$,
+			\[
+			\mathbf{u} + (\mathbf{v} + \mathbf{w}) = (\mathbf{u} + \mathbf{v}) + \mathbf{w}.
+			\]
+			
+			\item \textbf{Existence of Identity Elements:} 
+			there exists a zero vector $\mathbf{0} \in V$ such that for any $\mathbf{v} \in V$, 
+			\[
+			\mathbf{v} + \mathbf{0} = \mathbf{v}.
+			\]
+			
+			\item \textbf{Existence of Additive Inverses:} 
+			for any $\mathbf{v} \in V$, there exists an element $-\mathbf{v} \in V$ such that 
+			\[
+			\mathbf{v} + (-\mathbf{v}) = \mathbf{0}.
+			\]
+			
+			\item \textbf{Commutative Law:}
+			for any $\mathbf{u}, \mathbf{v} \in V$,
+			\[
+			\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}. 
+			\]
+			
+			\item \textbf{Distributive Laws:} 
+			for all $a, b \in \mathcal{K}$ and $\mathbf{u}, \mathbf{v} \in V$,
+			\[
+			a \cdot (\mathbf{u} + \mathbf{v}) = a \cdot \mathbf{u} + a \cdot \mathbf{v}, 
+			\quad (a + b) \cdot \mathbf{v} = a \cdot \mathbf{v} + b \cdot \mathbf{v}.
+			\]
+			
+			\item \textbf{Compatibility of Scalar Multiplication:} 
+			for all $a, b \in \mathcal{K}$ and $\mathbf{v} \in V$,
+			\[
+			(a b) \cdot \mathbf{v} = a \cdot (b \cdot \mathbf{v}).
+			\]
+			
+			\item \textbf{Identity of Scalar Multiplication:} 
+			for all $\mathbf{v} \in V$,
+			\[
+			1_{\mathcal{K}} \cdot \mathbf{v} = \mathbf{v}.
+			\]
+		\end{enumerate}
+	\end{mydef}
+	\begin{mythm}
+		The zero vector $\mathbf{0}$ is unique.
+	\end{mythm}
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		A non-empty subset $W \subseteq V$ is called a \textbf{subspace} of $V$ if $W$ is itself a vector space over $\mathcal{K}$ under the same operations of addition and scalar multiplication as $V$.
+		
+		Equivalently, $W$ is a subspace of $V$ if and only if the following conditions hold for all $\mathbf{u}, \mathbf{v} \in W$ and $a \in \mathcal{K}$:
+		\begin{enumerate}
+			\item \textbf{Closure under Addition:} 
+			\[
+			\mathbf{u} + \mathbf{v} \in W.
+			\]
+			\item \textbf{Closure under Scalar Multiplication:} 
+			\[
+			a \cdot \mathbf{u} \in W.
+			\]
+		\end{enumerate}
+		
+	\end{mydef}
+	\begin{mynot}
+		If $W$ is a subspace of $V$, we write $W \leq V$.
+	\end{mynot}
+	\begin{myrmk}
+		We state $W$ to be a non-empty set at first so we needn't to say $\mathbf{0}\in W$.
+	\end{myrmk}
+	\begin{myrmk}
+		For any elements in a vector space, we call them \textbf{vector}s.
+	\end{myrmk}
+	\begin{myex}
+		If $\mathcal{F}$ is a field, then $\mathcal{F}^n \text{ is always a vector space over } \mathcal{F}.$ Furthermore, $\mathcal{F}^n \text{ is a vector space over } \mathcal{K} \text{ whenever } \mathcal{K} \subseteq \mathcal{F} \text{ is a subfield.}$
+	\end{myex}
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let vectors
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n \in V$.  
+		Any vector of the form
+		\[
+		\mathbf{v} = a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n,
+		\]
+		where $a_1, a_2, \dots, a_n \in \mathcal{K}$, is called a \textbf{linear combination} of 
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$.
+	\end{mydef}
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let 
+		$S = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\} \subseteq V$.  
+		The set of all linear combinations of vectors in $S$ is called the 
+		\textbf{span} of $S$, denoted by
+		\[
+		\mathrm{span}(S) = 
+		\left\{
+		a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n 
+		\ \middle| \ a_1, a_2, \dots, a_n \in \mathcal{K}
+		\right\}.
+		\]
+	\end{mydef}
+	\begin{mythm}
+		The span of $S$ is the smallest subspace of $V$ containing $S$. Particularly, span$(\varnothing)=\{\mathbf{0}\}=\text{span}\{\mathbf{0}\}$.
+	\end{mythm}
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		A subset $S \subseteq V$ is called a \textbf{spanning set} of $V$ or a set of \textbf{generators}
+		if $\mathrm{span}(S) = V$, that is, every vector in $V$ can be expressed 
+		as a linear combination of finitely many vectors from $S$.
+	\end{mydef}
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let vectors
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n \in V$.  
+		The set $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is said to be 
+		\textbf{linearly dependent} if there exist scalars 
+		$a_1, a_2, \dots, a_n \in \mathcal{K}$, not all zero, such that
+		\[
+		a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n = \mathbf{0}.
+		\]
+		Otherwise, if this equation holds only when 
+		$a_1 = a_2 = \cdots = a_n = 0$, the set is said to be 
+		\textbf{linearly independent}.
+	\end{mydef}
+	\begin{myrmk}
+		$\{\mathbf{0}\}$ is linearly dependent, but $\varnothing$ is linearly independent.
+	\end{myrmk}
+	
+	
+	\subsection{Bases}
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		A subset $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\} \subseteq V$ is called a \textbf{basis} of $V$ if it satisfies the following two conditions:
+		\begin{enumerate}
+			\item $\mathcal{B}$ is linearly independent.
+			\item $\mathcal{B}$ spans $V$, i.e. $\mathrm{span}(\mathcal{B}) = V$.
+		\end{enumerate}
+		
+	\end{mydef}
+	\begin{mythm}
+		 Every vector in $V$ can be written uniquely as a linear combination of the vectors in $\mathcal{B}$.
+	\end{mythm}
+	
+	\begin{myrmk}
+		Though we use set notation to denote a basis, the order $\emph{does}$ matter. For instance, two bases 
+		\[
+		\mathcal{B}_1=\{(1,0),(0,1)\},\quad \mathcal{B}_2=\{(0,1),(1,0)\}
+		\]
+		are considered to be different. You will know why when we discuss about matrix representation of linear maps.
+	\end{myrmk}
+	
+	\begin{mythm}
+		Let $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ be a set of elements of a vector space $V$ over a field $\mathcal{K}$, and let $r$ be a positive integer with $r \leq n$.  
+		We say that $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r\}$ is a \textbf{maximal subset of linearly independent elements} if 
+		$\mathbf{v}_1, \dots, \mathbf{v}_r$ are linearly independent, and moreover, for any $\mathbf{v}_i$ with $i > r$, the set 
+		$\{\mathbf{v}_1, \dots, \mathbf{v}_r, \mathbf{v}_i\}$ is linearly dependent.
+		
+		If, in addition, $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is a set of generators of $V$,  
+		then the set $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r\}$ is a \textbf{basis} of $V$.
+	\end{mythm}
+	
+	
+	\subsection{Dimension}
+	
+	\begin{mythm}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		Let $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_m\}$ be a basis of $V$ over $\mathcal{K}$.  
+		Let $\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n$ be elements of $V$, and assume that $n > m$.  
+		Then $\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n$ are linearly dependent.
+	\end{mythm}
+	
+	\begin{mythm}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and suppose that one basis of $V$ has $n$ elements and another basis has $m$ elements.  
+		Then $m = n$.
+	\end{mythm}
+	
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		If $V$ has a finite basis $\mathcal{B}$ consisting of $n$ vectors, then $V$ is said to be \textbf{finite-dimensional}, and the number $n$ is called the \textbf{dimension} of $V$, denoted by $\dim(V) = n$.
+		
+		If no finite basis exists, $V$ is said to be \textbf{infinite-dimensional}.
+	\end{mydef}
+	
+	\begin{myrmk}
+		Since we prove that for a finite-dimensional vector space, the cardinality of every basis is the same, the dimension of a finite-dimensional vector space is well-defined.
+	\end{myrmk}
+	\begin{myex}
+		Let $\mathcal{K}$ be a field.  
+		Define
+		\[
+		V = \mathcal{K}[x] = 
+		\left\{
+		a_0 + a_1x + a_2x^2 + \cdots + a_nx^n 
+		\ \middle| \ 
+		n \in \mathbb{N},\ a_i \in \mathcal{K}
+		\right\},
+		\]
+		the set of all polynomials with coefficients in $\mathcal{K}$.
+		
+		Then $V$ is a vector space over $\mathcal{K}$ with the usual polynomial addition and scalar multiplication.
+		
+		The set 
+		\[
+		\{\, 1, x, x^2, x^3, \dots \}
+		\]
+		is linearly independent, and no finite subset of it spans $V$.  
+		Hence $\mathcal{K}[x]$ is an \textbf{infinite-dimensional} vector space over $\mathcal{K}$.
+	\end{myex}
+	
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$.  
+		A subspace of $V$ with dimension $1$ is called a \textbf{line} in $V$.  
+		A subspace of $V$ with dimension $2$ is called a \textbf{plane} in $V$.
+	\end{mydef}
+	
+	
+	\begin{mydef}
+		Let $V$ be a finite-dimensional vector space over a field $\mathcal{K}$, and let 
+		$\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\}$ be an ordered basis of $V$.  
+		For any vector $\mathbf{v} \in V$, there exist unique scalars 
+		$a_1, a_2, \dots, a_n \in \mathcal{K}$ such that
+		\[
+		\mathbf{v} = a_1 \mathbf{e}_1 + a_2 \mathbf{e}_2 + \cdots + a_n \mathbf{e}_n.
+		\]
+		The scalars $a_1, a_2, \dots, a_n$ are called the \textbf{components} or \textbf{coordinates} of $\mathbf{v}$ 
+		with respect to the basis $\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\}$. And the $n$-tuple $A=(a_1,\dots,a_n)$ is called the \textbf{coordinate vector} of \textbf{v}.
+	\end{mydef}
+	
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let 
+		$S \subseteq V$.  
+		A subset $\mathcal{B} \subseteq S$ is called a \textbf{maximal linearly independent subset} of $S$ if
+		\begin{enumerate}
+			\item $\mathcal{B}$ is linearly independent;
+			\item for any vector $\mathbf{v} \in S \setminus \mathcal{B}$, the set 
+			$\mathcal{B} \cup \{\mathbf{v}\}$ is linearly dependent.
+		\end{enumerate}
+	\end{mydef}
+	
+	\begin{mythm}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let the set
+		$\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ be a maximal set of linearly independent elements of $V$.  
+		Then $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is a basis of $V$.
+	\end{mythm}
+	
+	\begin{myrmk}
+		You might think, ``Oh! Why does the theorem above look similar to something previous. Is the author mentally unstable?" Actually, they are different because of their starting points.
+	\end{myrmk}
+	
+	\begin{mythm}
+		Let $V$ be a vector space over a field $\mathcal{K}$ of dimension $n$, and let 
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$ be linearly independent elements of $V$.  
+		Then $\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$ constitute a basis of $V$.
+	\end{mythm}
+	
+	\begin{mypro}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let $W$ be a subspace of $V$.  
+		If $\dim W = \dim V$, then $V = W$.
+	\end{mypro}
+	
+	\begin{myrmk}
+		This proposition gives us a way to prove that two sets (vector space) are the same.
+	\end{myrmk}
+	
+	\begin{mypro}
+		Let $V$ be a vector space over a field $\mathcal{K}$ of dimension $n$.  
+		Let $r$ be a positive integer with $r < n$, and let 
+		$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r$ be linearly independent elements of $V$.  
+		Then there exist elements $\mathbf{v}_{r+1}, \mathbf{v}_{r+2}, \dots, \mathbf{v}_n$ in $V$ such that
+		\[
+		\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}
+		\]
+		is a basis of $V$.
+	\end{mypro}
+	
+	\begin{myrmk}
+		All these theorems and propositions are telling one same truth: linearly independent sets might be too small to span a vector space, while spanning sets might be too large to be neat (linearly independent), and basis is exactly the boundary, i.e., the smallest spanning set or the largest linearly independent set. It's quite similar to supremum.
+	\end{myrmk}
+	
+	\begin{mythm}
+		Let $V$ be a vector space over a field $\mathcal{K}$ having a basis consisting of $n$ elements.  
+		Let $W$ be a subspace of $V$ that does not consist of the zero vector alone.  
+		Then $W$ has a basis, and the dimension of $W$ satisfies
+		\[
+		\dim W \leq n.
+		\]
+	\end{mythm}
+	
+	\newpage
+	\section{Matrices}
+	
+	These definitions are just for a quick review. Please refer to Artin's Algebra Chapter 1.1-1.3 for more detailed information.
+	
+	\subsection{Definitions}
+	
+	\begin{mydef}
+		Let $\mathcal{K}$ be a field and let $m, n$ be two positive integers.  
+		An array of elements in $\mathcal{K}$ of the form
+		\[
+		A =
+		\begin{pmatrix}
+			a_{11} & a_{12} & \cdots & a_{1n} \\
+			a_{21} & a_{22} & \cdots & a_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{m1} & a_{m2} & \cdots & a_{mn}
+		\end{pmatrix}
+		\]
+		is called a \textbf{matrix} over $\mathcal{K}$ of size $m \times n$, or an $m$-by-$n$ matrix.
+	\end{mydef}
+	
+	\begin{mydef}
+		For convenience, we may write $A = (a_{ij})$ for $1 \leq i \leq m$ and $1 \leq j \leq n$ to denote a matrix in $\mathcal{K}^{m \times n}$.  
+		The element $a_{ij}$ is called the $(i,j)$-entry of $A$.  
+		Each \textbf{column} of $A$ is a vector in $\mathcal{K}^m$, and each \textbf{row} of $A$ is a vector in $\mathcal{K}^n$.
+	\end{mydef}
+	
+	
+	\begin{mydef}
+		If $m = n$, the matrix $A$ is called a \textbf{square matrix}.  
+		If $m \neq n$, $A$ is called a \textbf{non-square matrix}.  
+		The \textbf{zero matrix} is the matrix all of whose entries are zero.
+	\end{mydef}
+	
+	\begin{mydef}
+		Let $A = (a_{ij})$ and $B = (b_{ij})$ be two matrices in $\mathbf{M}_{m \times n}(\mathcal{K})$, and let $\alpha \in \mathcal{K}$.  
+		Matrix addition and scalar multiplication are defined as:
+		\[
+		(A + B) = (a_{ij} + b_{ij}), \quad
+		(\alpha A) = (\alpha a_{ij}), \quad
+		\text{for } 1 \leq i \leq m, \ 1 \leq j \leq n.
+		\]
+	\end{mydef}
+	
+	\begin{myrmk}
+		Let $\mathbf{M}_{m \times n}(\mathcal{K})$ (or $\mathrm{Mat}_{m \times n}(\mathcal{K})$) denote the set of all $m \times n$ matrices over $\mathcal{K}$.  
+		Equipped with the matrix addition and scalar multiplication defined above,  
+		$\mathbf{M}_{m \times n}(\mathcal{K})$ forms a \textbf{vector space} over $\mathcal{K}$.
+		
+		Its dimension is
+		\[
+		\dim \mathbf{M}_{m \times n}(\mathcal{K}) = m n.
+		\]
+	\end{myrmk}
+	
+	\begin{mydef}
+		The \textbf{standard basis} of the vector space $\mathbf{M}_{m \times n}(\mathcal{K})$  
+		is the collection of $m n$ matrices $\{e_{ij}\}$, where each $e_{ij}$ has entry
+		\[
+		(e_{ij})_{pq} =
+		\begin{cases}
+			1, & \text{if } p = i \text{ and } q = j,\\
+			0, & \text{otherwise}.
+		\end{cases}
+		\]
+		Each $e_{ij}$ has a single $1$ in the $(i,j)$-position and zeros elsewhere.  
+		Every matrix $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$ can be expressed uniquely as
+		\[
+		A = \sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij} e_{ij}.
+		\]
+	\end{mydef}
+	
+	\begin{mydef}
+		Let $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$ and 
+		$B = (b_{jk}) \in \mathbf{M}_{n \times p}(\mathcal{K})$.  
+		The \textbf{product} of $A$ and $B$, denoted by $AB$, is defined as the $m \times p$ matrix
+		\[
+		AB = (c_{ik}) \in \mathbf{M}_{m \times p}(\mathcal{K}),
+		\]
+		where each entry $c_{ik}$ is given by
+		\[
+		c_{ik} = \sum_{j=1}^{n} a_{ij} b_{jk},
+		\quad \text{for } 1 \leq i \leq m, \ 1 \leq k \leq p.
+		\]
+	\end{mydef}
+	
+	\begin{mythm}
+		(\textbf{Associative Law})  
+		Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$, 
+		$B \in \mathbf{M}_{n \times p}(\mathcal{K})$, 
+		and $C \in \mathbf{M}_{p \times q}(\mathcal{K})$.  
+		Then matrix multiplication is associative:
+		\[
+		(AB)C = A(BC).
+		\]
+	\end{mythm}
+	
+	\begin{mythm}
+		(\textbf{Distributive Laws})  
+		For matrices $A, A_1, A_2 \in \mathbf{M}_{m \times n}(\mathcal{K})$ 
+		and $B, B_1, B_2 \in \mathbf{M}_{n \times p}(\mathcal{K})$,  
+		matrix multiplication satisfies
+		\[
+		A(B_1 + B_2) = AB_1 + AB_2, 
+		\quad (A_1 + A_2)B = A_1B + A_2B.
+		\]
+	\end{mythm}
+	
+	\begin{mydef}
+		For each positive integer $n$, the \textbf{identity matrix} of order $n$, denoted by $I_n$,  
+		is the $n \times n$ matrix whose entries are defined by
+		\[
+		(I_n)_{ij} =
+		\begin{cases}
+			1, & \text{if } i = j,\\
+			0, & \text{otherwise}.
+		\end{cases}
+		\]
+		The matrix $I_n$ satisfies the property that for any 
+		$A \in \mathbf{M}_{m \times n}(\mathcal{K})$ and 
+		$B \in \mathbf{M}_{n \times p}(\mathcal{K})$,
+		\[
+		AI_n = A, \quad I_nB = B.
+		\]
+	\end{mydef}
+	
+	\begin{mydef}
+		Let $A \in \mathbf{M}_{n \times n}(\mathcal{K})$ be a square matrix.  
+		If there exists a matrix $B \in \mathbf{M}_{n \times n}(\mathcal{K})$ such that
+		\[
+		AB = BA = I_n,
+		\]
+		then $A$ is called an \textbf{invertible matrix} (or \textbf{non-singular matrix}),  
+		and $B$ is called the \textbf{inverse matrix} of $A$, denoted by $A^{-1}$.
+		
+		If no such $B$ exists, $A$ is called a \textbf{singular matrix}.
+	\end{mydef}
+	
+	\begin{myrmk}
+		Such inverse shown above is unique.
+	\end{myrmk}
+	
+	\begin{mydef}
+		Let $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$.  
+		The \textbf{transpose} of $A$, denoted by $A^{T}$, is the $n \times m$ matrix obtained by interchanging the rows and columns of $A$.  
+		Formally,
+		\[
+		A^{T} = (a_{ji}) \in \mathbf{M}_{n \times m}(\mathcal{K}),
+		\]
+		that is, the $(i,j)$-entry of $A^{T}$ equals the $(j,i)$-entry of $A$.
+		
+		If $A^{T} = A$, then $A$ is called a \textbf{symmetric matrix}.
+	\end{mydef}
+	
+	\begin{mythm}
+		(\textbf{Properties of the Transpose})  
+		Let $A, B \in \mathbf{M}_{m \times n}(\mathcal{K})$ and $\alpha \in \mathcal{K}$.  
+		Then the transpose operation satisfies the following properties:
+		\begin{enumerate}
+			\item $(A^{T})^{T} = A$;
+			\item $(A + B)^{T} = A^{T} + B^{T}$;
+			\item $(\alpha A)^{T} = \alpha A^{T}$;
+			\item If $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ and 
+			$B \in \mathbf{M}_{n \times p}(\mathcal{K})$, then
+			\[
+			(AB)^{T} = B^{T}A^{T}.
+			\]
+		\end{enumerate}
+	\end{mythm}
+	
+	
+	\subsection{Linear Equations}
+	\begin{mydef}
+		A \textbf{linear system} over a field $\mathcal{K}$ is a collection of $m$ linear equations in $n$ variables or unknowns 
+		$x_1, x_2, \dots, x_n$ of the form
+		\[
+		\begin{cases}
+			a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1,\\
+			a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2,\\
+			\quad \vdots\\
+			a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m,
+		\end{cases}
+		\]
+		where $a_{ij}, b_i \in \mathcal{K}$ for all $i,j$.  
+		
+		It can be written compactly in matrix form as
+		\[
+		A\mathbf{x} = \mathbf{b},
+		\]
+		where
+		\[
+		A = 
+		\begin{pmatrix}
+			a_{11} & a_{12} & \cdots & a_{1n} \\
+			a_{21} & a_{22} & \cdots & a_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{m1} & a_{m2} & \cdots & a_{mn}
+		\end{pmatrix},
+		\quad
+		\mathbf{x} =
+		\begin{pmatrix}
+			x_1 \\ x_2 \\ \vdots \\ x_n
+		\end{pmatrix},
+		\quad
+		\mathbf{b} =
+		\begin{pmatrix}
+			b_1 \\ b_2 \\ \vdots \\ b_m
+		\end{pmatrix}.
+		\]
+	\end{mydef}
+	
+	
+	\begin{mydef}
+		A linear system $A\mathbf{x} = \mathbf{b}$ is called:
+		\begin{itemize}
+			\item \textbf{homogeneous} if $\mathbf{b} = \mathbf{0}$, i.e. the system is of the form $A\mathbf{x} = \mathbf{0}$;
+			\item \textbf{inhomogeneous} (or nonhomogeneous) if $\mathbf{b} \neq \mathbf{0}$.
+		\end{itemize}
+	\end{mydef}
+	
+	\begin{mydef}
+		A vector $\mathbf{x} \in \mathcal{K}^n$ satisfying the equation $A\mathbf{x} = \mathbf{b}$ is called a \textbf{solution} of the system.
+		
+		In the special case of a homogeneous system $A\mathbf{x} = \mathbf{0}$:
+		\begin{itemize}
+			\item the vector $\mathbf{0}$ is called the \textbf{trivial solution};
+			\item any nonzero vector $\mathbf{x} \neq \mathbf{0}$ satisfying $A\mathbf{x} = \mathbf{0}$ is called a \textbf{nontrivial solution}.
+		\end{itemize}
+	\end{mydef}
+	
+	\begin{mythm}
+		Let
+		\[
+		\begin{cases}
+			a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = 0,\\
+			a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = 0,\\
+			\quad \vdots \\
+			a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = 0,
+		\end{cases}
+		\]
+		be a homogeneous system of $m$ linear equations in $n$ unknowns, with coefficients in a field $\mathcal{K}$.  
+		Assume that $n > m$.  
+		Then the system has a \textbf{nontrivial solution} in $\mathcal{K}$.
+	\end{mythm}
+	
+	\begin{mythm}
+		Assume that $m = n$ in the system above, and that the column vectors 
+		$A^1, A^2, \dots, A^n$ of the coefficient matrix $A$ are linearly independent.  
+		Then the system has a \textbf{unique solution} in $\mathcal{K}$.
+	\end{mythm}
+	
+	\newpage
+	\section{Linear Mappings}
+	
+	\subsection{Definitions}
+	\begin{mydef}
+		Let $V$ and $W$ be vector spaces over the same field $\mathcal{K}$.  
+		A mapping $T : V \to W$ is called a \textbf{linear mapping} (or \textbf{linear transformation}) if for all 
+		$\mathbf{u}, \mathbf{v} \in V$ and all scalars $\alpha, \beta \in \mathcal{K}$, we have
+		\[
+		T(\alpha \mathbf{u} + \beta \mathbf{v})
+		= \alpha T(\mathbf{u}) + \beta T(\mathbf{v}).
+		\]
+	\end{mydef}
+	
+	\begin{myex}
+		Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$.  
+		Define a mapping
+		\[
+		T_A : \mathcal{K}^n \to \mathcal{K}^m, \quad
+		T_A(\mathbf{x}) = A\mathbf{x},
+		\]
+		for all $\mathbf{x} \in \mathcal{K}^n$.  
+		Then $T_A$ is a \textbf{linear mapping}.  
+		
+		Indeed, for any $\mathbf{x}, \mathbf{y} \in \mathcal{K}^n$ and $\alpha, \beta \in \mathcal{K}$,
+		\[
+		T_A(\alpha \mathbf{x} + \beta \mathbf{y})
+		= A(\alpha \mathbf{x} + \beta \mathbf{y})
+		= \alpha A\mathbf{x} + \beta A\mathbf{y}
+		= \alpha T_A(\mathbf{x}) + \beta T_A(\mathbf{y}).
+		\]
+		Hence $T_A$ satisfies the linearity condition,  
+		and matrix left-multiplication defines a linear mapping from $\mathcal{K}^n$ to $\mathcal{K}^m$.
+	\end{myex}
+	
+	\begin{myex}
+		Let $V = \mathcal{K}^n$ and $W = \mathcal{K}^m$.  
+		Denote by $\mathcal{L}(V, W)$ the set of all linear mappings from $V$ to $W$ over the field $\mathcal{K}$.  
+		That is,
+		\[
+		\mathcal{L}(V, W)
+		= \{\, T : V \to W \mid T \text{ is linear} \,\}.
+		\]
+		
+		For $T, F \in \mathcal{L}(V, W)$ and $\alpha \in \mathcal{K}$,  
+		we define their \textbf{sum} and \textbf{scalar multiple} by
+		\[
+		(T + F)(\mathbf{u}) = T(\mathbf{u}) + F(\mathbf{u}), 
+		\qquad
+		(\alpha T)(\mathbf{u}) = \alpha\, T(\mathbf{u}),
+		\quad \forall\, \mathbf{u} \in V.
+		\]
+		
+		With these operations of addition and scalar multiplication,  
+		$\mathcal{L}(V, W)$ forms a vector space over $\mathcal{K}$.
+	\end{myex}
+	
+	
+	\begin{mydef}
+		Let $V$ be a vector space over a field $\mathcal{K}$, and let $\mathbf{a} \in V$.  
+		The mapping $T_{\mathbf{a}} : V \to V$ defined by
+		\[
+		T_{\mathbf{a}}(\mathbf{x}) = \mathbf{x} + \mathbf{a},
+		\]
+		for all $\mathbf{x} \in V$, is called a \textbf{translation} by the vector $\mathbf{a}$.
+		
+		A translation shifts every vector in $V$ by the same displacement $\mathbf{a}$.  
+		Note that a translation is generally \textbf{not} a linear mapping, since
+		\[
+		T_{\mathbf{a}}(\mathbf{0}) = \mathbf{a} \neq \mathbf{0}.
+		\]
+	\end{mydef}
+	
+	\begin{mythm}
+		Let $V$ and $W$ be vector spaces over a field $\mathcal{K}$.  
+		Let $\{\mathbf{v}_1, \dots, \mathbf{v}_n\}$ be a basis of $V$,  
+		and let $\mathbf{w}_1, \dots, \mathbf{w}_n$ be arbitrary elements of $W$.  
+		Then there exists a unique linear mapping 
+		\[
+		T : V \to W
+		\]
+		such that
+		\[
+		T(\mathbf{v}_i) = \mathbf{w}_i, \quad i = 1, \dots, n.
+		\]
+		
+		Moreover, if $x_1, \dots, x_n \in \mathcal{K}$, then 
+		\[
+		T(x_1 \mathbf{v}_1 + x_2 \mathbf{v}_2 + \cdots + x_n \mathbf{v}_n) = x_1 \mathbf{w}_1 + x_2 \mathbf{w}_2 + \cdots + x_n \mathbf{w}_n.
+		\]
+	\end{mythm}
+	
+	\subsection{Kernel and Image}
+	\begin{mydef}
+		Let $T : V \to W$ be a linear mapping between vector spaces over a field $\mathcal{K}$.  
+		The \textbf{kernel} of $T$, denoted by $\ker(T)$, is the subset of $V$ defined by
+		\[
+		\ker(T) = \{\, \mathbf{v} \in V \mid T(\mathbf{v}) = \mathbf{0} \,\}.
+		\]
+		It consists of all vectors in $V$ that are mapped to the zero vector in $W$.  
+		
+	\end{mydef}
+	
+	\begin{myrmk}
+		The kernel $\ker(T)$ is a subspace of $V$.
+	\end{myrmk}
+	
+	\begin{mythm}
+		Let $F : V \to W$ be a linear map between vector spaces over a field $\mathcal{K}$.
+		The following statements are equivalent:
+		\begin{enumerate}
+			\item $\ker(F) = \{\mathbf{0}\}$;
+			\item For all $\mathbf{v}, \mathbf{w} \in V$, if $F(\mathbf{v}) = F(\mathbf{w})$, then $\mathbf{v} = \mathbf{w}$.
+		\end{enumerate}
+		In other words, $F$ is injective if and only if its kernel is $\{\mathbf{0}\}$.
+	\end{mythm}
+	
+	\begin{myrmk}
+		Note that $F$ is a mapping if and only if $F^{-1}$ is injective and surjective.
+	\end{myrmk}
+	
+	\begin{mythm}
+		Let $F : V \to W$ be a linear map whose kernel is $\{\mathbf{0}\}$.
+		If $\mathbf{v}_1, \dots, \mathbf{v}_n$ are linearly independent elements of $V$,  
+		then $F(\mathbf{v}_1), \dots, F(\mathbf{v}_n)$ are linearly independent in $W$.
+	\end{mythm}
+	
+	\begin{mydef}
+		Let $T : V \to W$ be a linear map between vector spaces over a field $\mathcal{K}$.  
+		The \textbf{image} of $T$, denoted by $\operatorname{im}(T)$, is the subset of $W$ defined by
+		\[
+		\operatorname{im}(T) = \{\, T(\mathbf{v}) \mid \mathbf{v} \in V \,\}.
+		\]
+		It consists of all vectors in $W$ that can be expressed as the image of some vector in $V$ under $T$.  
+		
+	\end{mydef}
+	
+	\begin{myrmk}
+		The image $\operatorname{im}(T)$ is a subspace of $W$.
+	\end{myrmk}
+	
+	\begin{mythm}[Rank--Nullity Theorem]
+		Let $T : V \to W$ be a linear map between finite-dimensional vector spaces over $\mathcal{K}$.  
+		Then
+		\[
+		\dim(\ker T) + \dim(\operatorname{im} T) = \dim V.
+		\]
+		Here, $\dim(\ker T)$ is called the \textbf{nullity} of $T$,  
+		and $\dim(\operatorname{im} T)$ is called the \textbf{rank} of $T$.
+	\end{mythm}
+	
+	\begin{mythm}[Rank--Nullity Theorem for Matrices]
+		Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$, and let its column vectors be
+		\[
+		\mathbf{A}_1, \mathbf{A}_2, \dots, \mathbf{A}_n \in \mathcal{K}^m.
+		\]
+		We call
+		\[
+		\operatorname{Col}(A) = \operatorname{span}\{\mathbf{A}_1, \dots, \mathbf{A}_n\}
+		\]
+		the \textbf{column space} of $A$, and
+		\[
+		\operatorname{Null}(A) = \{\mathbf{x} \in \mathcal{K}^n \mid A\mathbf{x} = \mathbf{0}\}
+		\]
+		the \textbf{null space} of $A$.
+		
+		Then $\operatorname{Col}(A)$ is a subspace of $\mathcal{K}^m$,  
+		and $\operatorname{Null}(A)$ is a subspace of $\mathcal{K}^n$.  
+		Moreover,
+		\[
+		\dim(\operatorname{Col}(A)) + \dim(\operatorname{Null}(A)) = n,
+		\]
+		where $n$ is the number of columns of $A$.  
+	\end{mythm}
+	
+	
+	\begin{mythm}
+		Let $L : V \to W$ be a linear map between finite-dimensional vector spaces over $\mathcal{K}$.  
+		Assume that
+		\[
+		\dim V = \dim W.
+		\]
+		If $\ker L = \{\mathbf{0}\}$, or if $\operatorname{im} L = W$,  
+		then $L$ is \textbf{bijective}.
+	\end{mythm}
+	
+	\begin{mydef}
+		If $f$ is a mapping, and its inverse correspondence is also a mapping, then we say $f$ is \textbf{invertible}.
+	\end{mydef}
 
-% \includeonly{Chapters/Chapter01}
+	\begin{mypro}
+		A mapping $f$ is invertible if and only if it is bijective.
+	\end{mypro}
 
-\include{Chapters/Chapter01}
-\include{Chapters/Chapter02}
-\include{Chapters/Chapter03}
-\include{Chapters/Chapter04}
-\include{Chapters/Chapter05}
-\include{Chapters/Chapter06}
+	\begin{mythm}
+		Suppose $V$ and $W$ are vector spaces over a field $\mathcal{K}$ and $T: V \to W$ is a linear map that is invertible. Then its inverse $T^{-1}: W \to V$ is also a linear map.
+	\end{mythm}
+
+	\begin{mythm}
+		Let $V$ and $W$ be vector spaces over a field $\mathcal{K}$ with 
+		\[\dim V = \dim W,\]
+		Suppose a linear map $T:V \to W$, if $\ker T = \{\mathbf{0}\}$, then $T$ is invertible.
+	\end{mythm}
+	
+	\subsection{Isomorphism}
+	\begin{mydef}
+		Suppose $V$ and $W$ are vector spaces over a field $\mathcal{K}$. Any invertible linear map $T: V \to W$ is called an \textbf{isomorphism} between $V$ and $W$.
+	\end{mydef}
+	\begin{mynot}
+		We say that $V$ and $W$ are \textbf{isomorphic} if there exists an isomorphism $T : V \to W$. In this case we denote this fact by
+		\[
+		V \cong W .
+		\]
+	\end{mynot}
+	\begin{mythm}
+		Let $V$ and $W$ be finite-dimensional vector spaces over a field $\mathcal{K}$. Then $V \cong W$ if and only if $\dim V = \dim W$.
+	\end{mythm}
+
+	\begin{myrmk}
+		Suppose $V$ and $W$ are vector spaces over a field $\mathcal{K}$ with
+		\[
+		\dim V = m, \quad \dim W = n.
+		\]
+		Then $V \cong \mathcal{K}^m$ and $W \cong \mathcal{K}^n$.
+	\end{myrmk}
+
+	\begin{mythm}
+		Let $U,\, V,\, W$ be vector spaces over a field $\mathcal{K}$, with linear maps $F: U \to V$ and $G: V \to W$. Then the composition map \[G \circ F: U \to W\] is also a linear map.
+	\end{mythm}
+
+
+	\newpage
+	\section{Linear Maps and Matrices}
+	\subsection{The Linear Map associated with a matrix}
+	\begin{mythm}
+		Suppose $\mathcal{L}:\mathcal{K}^n \to \mathcal{K}^m$ is a linear map. Then there exists a unique matrix $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ such that \[\mathcal{L}(\mathbf{x}) = A\mathbf{x}, \quad \forall \mathbf{x} \in \mathcal{K}^n.\]
+	\end{mythm}
+
+	\begin{myrmk}
+		Suppose $A\in \mathbf{M}_{m \times n}(\mathcal{K})$, we call $\mathcal{L}_A:\mathcal{K}^n \to \mathcal{K}^m$ defined by \[\mathcal{L}_A(\mathbf{x}) = A\mathbf{x}, \quad \forall \mathbf{x} \in \mathcal{K}^n\] the \textbf{linear map associated with matrix A}. From the above theorem, we also know for any linear map from $\mathcal{K}^n$ to $\mathcal{K}^m$, it is uniquely associated to a matrix.
+	\end{myrmk}
+	\begin{mypro}
+		Suppose $A\in \mathbf{M}_{m \times n}(\mathcal{K})$ and $B \in \mathbf{M}_{n \times p}(\mathcal{K})$. Let $\mathcal{L}_A: \mathcal{K}^n \to \mathcal{K}^m$ and $\mathcal{L}_B: \mathcal{K}^p \to \mathcal{K}^n$ be the linear maps associated with matrices $A$ and $B$ respectively. Then the composition map \[\mathcal{L}_A \circ \mathcal{L}_B: \mathcal{K}^p \to \mathcal{K}^m\] is the linear map associated with matrix $AB$. We often omit the symbol $\circ$ and just write 
+		\[\mathcal{L}_A \mathcal{L}_B = \mathcal{L}_{AB},\]
+		since matrix multiplication is associative.
+	\end{mypro}
+	\begin{mypro}
+		Suppose $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ is invertible, then
+		\[
+		\left( \mathcal{L}_A\right)^{-1}(\mathbf{x}) = \mathcal{L}_{A^{-1}}(\mathbf{x}), \quad \forall \mathbf{x} \in \mathcal{K}^n.
+		\]
+	\end{mypro}
+
+	\subsection{The Matrix Representation of a linear map}
+	\begin{mydef}
+		Suppose $V$ and $W$ are vector spaces over a field $\mathcal{K}$ with
+		\[
+		\dim V = m, \quad \dim W = n.
+		\]
+		Let $\mathcal{B}_V = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_m\}$ be a basis of $V$, and $\mathcal{B}_W = \{\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n\}$ be a basis of $W$. We consider the following linear maps:
+		\begin{enumerate}
+			\item A linear map $T: V \to W$.
+			\item The linear map $\phi_V:V\to \mathcal{K}^m$ defined by
+			\[
+			\phi_V(c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_m \mathbf{v}_m) =
+			\begin{pmatrix}
+				c_1 \\ c_2 \\ \vdots \\ c_m
+			\end{pmatrix} \in \mathcal{K}^m,
+			\quad \forall c_1, c_2, \dots, c_m \in \mathcal{K}.
+			\]
+			Note that $\phi_V$ is an isomorphism between $V$ and $\mathcal{K}^m$.
+			\item The linear map $\phi_W:W \to \mathcal{K}^n$ defined by
+			\[
+			\phi_W(d_1 \mathbf{w}_1 + d_2 \mathbf{w}_2 + \cdots + d_n \mathbf{w}_n) =
+			\begin{pmatrix}
+				d_1 \\ d_2 \\ \vdots \\ d_n
+			\end{pmatrix} \in \mathcal{K}^n,
+			\quad \forall d_1, d_2, \dots, d_n \in \mathcal{K}.
+			\]
+			Note that $\phi_W$ is an isomorphism between $W$ and $\mathcal{K}^n$.
+		\end{enumerate}
+		Then the linear map \[ \mathcal{L} = \phi_W \circ T \circ \phi_V^{-1}: \mathcal{K}^m \to \mathcal{K}^n\] has a unique associated matrix $A \in \mathbf{M}_{n \times m}(\mathcal{K})$. This matrix $A$ is called the \textbf{matrix representation} of linear map $T$ with respect to the bases $\mathcal{B}_V$ and $\mathcal{B}_W$, denoted by \[ A=[T]^{\mathcal{B}_W}_{\mathcal{B}_V}\quad \text{or}\quad A=\mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T).\]
+	\end{mydef}
+	\begin{myrmk}
+		This is one of the ugliest notations in linear algebra.
+	\end{myrmk}
+	\begin{myrmk}
+		Here's a graphical illustration for the matrix representation of linear maps:
+		\[
+		\begin{tikzcd}[row sep=large, column sep=large]
+		V
+		\arrow[r, "T"]
+		% 向下的 φ_V，稍微往左挪一点
+		\arrow[d, xshift=-0.6ex, "\phi_V"']
+		& W
+		% 向下的 φ_W，稍微往左挪一点
+		\arrow[d, xshift=-0.6ex, "\phi_W"'] \\
+		\mathcal{K}^m
+		\arrow[r, "\mathcal{L}: \mathcal{L}(x)=A x"']
+		% 向上的 φ_V^{-1}，往右挪一点
+		\arrow[u, xshift=0.6ex, "\phi_V^{-1}" ']
+		& \mathcal{K}^n
+		% 向上的 φ_W^{-1}，往右挪一点
+		\arrow[u, xshift=0.6ex, "\phi_W^{-1}"']
+		\end{tikzcd}
+		\]
+		If you're not familiar with matrix representations of linear maps, remember to draw this diagram when you get confused.
+	\end{myrmk}
+	\begin{mypro}
+		Let $V=W$, $\dim V = n$ and $T = \operatorname{Id}_V$ be the identity map on $V$ with two bases $\mathcal{B}_1=\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ and $\mathcal{B}_2=\{ \mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n\}$. Then
+		\[
+		\mathcal{M}^{\mathcal{B}_2}_{\mathcal{B}_1}(\operatorname{Id}_V) = \operatorname{I}_n\quad \text{if and only if} \quad \mathcal{B}_1 = \mathcal{B}_2.
+		\]
+		
+	\end{mypro}
+	\begin{myex}
+		Let $\mathbf{P}_n(\mathcal{K})$ be the vector space of all polynomials with coefficients in a field $\mathcal{K}$ and of degree at most $n$. That is,
+		\[
+		\mathbf{P}_n(\mathcal{K}) = \left\{ a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n \mid a_0, a_1, \dots, a_n \in \mathcal{K} \right\}.
+		\]
+		Consider a linear map $T: \mathbf{P}_n(\mathcal{K}) \to \mathbf{P}_{n+1}(\mathcal{K})$ defined by
+		\[
+		T(p)=\int_0 ^x p(t) \,\mathrm{d}t\quad \forall p \in \mathbf{P}_n(\mathcal{K}).
+		\]
+		Then the matrix representation of $T$ with respect to the standard basis $\mathcal{B}_{n} = \{1, x, x^2, \dots, x^n\}$ of $\mathbf{P}_n(\mathcal{K})$ and the standard basis $\mathcal{B}_{n+1} = \{1, x, x^2, \dots, x^{n+1}\}$ of $\mathbf{P}_{n+1}(\mathcal{K})$ is
+		\[\mathcal{M}^{\mathcal{B}_{n+1}}_{\mathcal{B}_n}(T) =
+		\begin{pmatrix}
+			0 & 0 & 0 & \cdots & 0 & 0 \\
+			1 & 0 & 0 & \cdots & 0 & 0 \\
+			0 & \frac{1}{2} & 0 & \cdots & 0 & 0 \\
+			0 & 0 & \frac{1}{3} & \cdots & 0 & 0 \\
+			\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+			0 & 0 & 0 & \cdots & \frac{1}{n} & 0 \\
+			0 & 0 & 0 & \cdots & 0 & \frac{1}{n+1}
+		\end{pmatrix}.
+		\]
+	\end{myex}
+	\begin{mydef}
+		Suppose $V$ is a vector space over a field $\mathcal{K}$ with $\dim V = n$ and $T:V\to V$ is a linear map. If for a basis $\mathcal{B}$ of $V$, $\mathcal{M}_\mathcal{B}^\mathcal{B}(T)$ is a diagonal matrix, then we say the basis $\mathcal{B}$ \textbf{diagonalizes} the linear map $T$. If there exists such a basis $\mathcal{B}$, then we say the linear map $T$ is \textbf{diagonalizable}. We call a matrix $A \in \mathbf{M}_{n \times n}(\mathcal{K})$ is \textbf{diagonalizable} if the linear map $\mathcal{L}_A: \mathcal{K}^n \to \mathcal{K}^n$ is diagonalizable.
+%		wu si da is a sleep beauty
+	\end{mydef}
+	\begin{mydef}
+		Suppose $A,B\in \mathbf{M}_{n \times n}(\mathcal{K})$. We say $A$ is \textbf{similar} to $B$ if there exists an invertible matrix $P \in \mathbf{M}_{n \times n}(\mathcal{K})$ such that
+		\[
+		A = P B P^{-1}\quad\text{or equivalently}\quad AP=PB.
+		\]
+	\end{mydef}
+	\begin{myrmk}
+		Note that similarity relationship is a equivalence relationship, i.e., it is reflexive ($A \sim A$), symmetric ($A \sim B \implies B \sim A$), and transitive ($A \sim B \wedge B \sim C \implies A \sim C$). Later we will see similar matrices share lots in common.
+	\end{myrmk}
+	\begin{mypro}
+		Note that $A \in \mathbf{M}_{n\times n}(\mathcal{K})$ is diagonalizable if and only if $A$ is similar to a diagonal matrix. We write $A$ in the form
+		\[
+		AS = SD
+		\ \text{where}\ 
+		D =
+		\begin{pmatrix}
+		\lambda_1 & 0        & \cdots & 0 \\
+		0         & \lambda_2& \cdots & 0 \\
+		\vdots    & \vdots   & \ddots & \vdots \\
+		0         & 0        & \cdots & \lambda_n
+		\end{pmatrix}
+		\ \text{and}\ 
+		S =
+		\begin{pmatrix}
+		\,|      & |      &        & |\, \\
+		\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \\
+		\,|      & |      &        & |\,
+		\end{pmatrix}.
+		\]
+		Hence, we have
+		\[
+		A\mathbf{v}_i = \lambda_i \mathbf{v}_i, \qquad i = 1,2,\ldots,n,
+		\]
+		which motivates the following definition.
+	\end{mypro}
+	\begin{mydef}\label{def:eigenvalue}
+		Suppose $A \in \mathbf{M}_{n\times n}(\mathcal{K})$ and	$\lambda \in \mathcal{K}$ and $V \in \mathcal{K}^n$. We say $\lambda$ is an \textbf{eigenvalue} of $A$ with	corresponding \textbf{eigenvector} $\mathbf{v} \neq \mathbf{0}$ if
+		\[
+		A\mathbf{v} = \lambda \mathbf{v}.
+		\]
+		If there exists a basis of $\mathcal{K}^n$ such that every basis vector is an eigenvector of $A$, we call such a basis an \textbf{eigenbasis} of $A$.
+	\end{mydef}
+	\begin{mythm}
+		Suppose $V$ and $W$ are vector spaces over a field $\mathcal{K}$ with
+		\[
+		\dim V = m, \quad \dim W = n.
+		\]
+		And $T: V \to W$ is a linear map. Let $\mathcal{B}_V = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_m\}$ be a basis of $V$, and $\mathcal{B}_W = \{\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n\}$ be a basis of $W$. Let $\phi_V: V \to \mathcal{K}^m$ and $\phi_W: W \to \mathcal{K}^n$ be the isomorphisms defined as before. Then
+		\[
+		\phi_W (T(\mathbf{v})) = \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T) \, \phi_V(\mathbf{v}), \quad \forall \mathbf{v} \in V.
+		\]
+	\end{mythm}
+	\begin{mythm}
+		With the same set-up as above, suppose additionally $F:V \to W$ is another linear map. Then
+		\[
+		\alpha T + \beta F: V \to W \quad \forall \alpha, \beta \in \mathcal{K}
+		\]
+		is also a linear map and we have
+		\[
+		\mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(\alpha T + \beta F) = \alpha \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T) + \beta \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(F).
+		\]
+		Thus, the mapping $\mathcal{L}(V,W)\to \mathbf{M}_{n \times m}(\mathcal{K})$ where $T \mapsto \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T)$ is a linear map.
+	\end{mythm}
+	\begin{mythm}
+		Still with the same set-up as above, additionally this time suppose $F:W \to U$ is a linear map where $U$ is a vector space over a field $\mathcal{K}$ with $\dim U = l$ and $\mathcal{B}_U = \{\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_l\}$ is a basis of $U$. We define $\phi_U: U \to \mathcal{K}^l$ accordingly. Then
+		\[
+		\mathcal{M}^{\mathcal{B}_U}_{\mathcal{B}_V}(F \circ T) = \mathcal{M}^{\mathcal{B}_U}_{\mathcal{B}_W}(F) \, \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T).
+		\]
+	\end{mythm}
+	\begin{myrmk}
+		Here's a diagram illustration for the above theorem:
+		\[
+		\begin{tikzcd}[row sep=large, column sep=large]
+		V
+		\arrow[r, "T"]
+		% 向下的 φ_V，稍微往左挪一点
+		\arrow[d, xshift=-0.6ex, "\phi_V"']
+		& W
+		\arrow[r, "F"]
+		% 向下的 φ_W，稍微往左挪一点
+		\arrow[d, xshift=-0.6ex, "\phi_W"']
+		& U
+		% 向下的 φ_U，稍微往左挪一点
+		\arrow[d, xshift=-0.6ex, "\phi_U"']
+		\\
+		\mathcal{K}^m
+		\arrow[r, "\mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T)"']
+		% 向上的 φ_V^{-1}，往右挪一点
+		\arrow[u, xshift=0.6ex, "\phi_V^{-1}" ']
+		& \mathcal{K}^n
+		\arrow[r, "\mathcal{M}^{\mathcal{B}_U}_{\mathcal{B}_W}(F)"']
+		% 向上的 φ_W^{-1}，往右挪一点
+		\arrow[u, xshift=0.6ex, "\phi_W^{-1}"']
+		& \mathcal{K}^l
+		% 向上的 φ_U^{-1}，往右挪一点
+		\arrow[u, xshift=0.6ex, "\phi_U^{-1}"']
+		\end{tikzcd}
+		\]
+	\end{myrmk}
+	\begin{mypro}
+		Suppose $V$ and $W$ are isomorphic vector spaces over a field $\mathcal{K}$ with
+		\[
+		\dim V = \dim W = n
+		\]
+		and $T: V \to W$ is an isomorphism. Let $\mathcal{B}_V$ be a basis of $V$, and $\mathcal{B}_W$ be a basis of $W$. Then we have
+		\[
+		\left( \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T) \right)^{-1} =
+		\mathcal{M}^{\mathcal{B}_V}_{\mathcal{B}_W}(T^{-1}).
+		\]
+	\end{mypro}
+	\begin{mypro}
+		Assume $\mathcal{B}_1$ and $\mathcal{B}_2$ are two bases of a vector space $V$ over a field $\mathcal{K}$ with
+		\[
+		\dim V = n.
+		\]
+		
+		\begin{enumerate}
+			\item We know \[
+			\mathcal{M} ^{\mathcal{B}_1}_{\mathcal{B}_2}(\operatorname{Id}_V)
+			 \mathcal{M} ^{\mathcal{B}_2}_{\mathcal{B}_1}(\operatorname{Id}_V)  = I_n = \mathcal{M} ^{\mathcal{B}_2}_{\mathcal{B}_1}(\operatorname{Id}_V) 
+			\mathcal{M} ^{\mathcal{B}_1}_{\mathcal{B}_2}(\operatorname{Id}_V).
+			\]
+			Here these two matrices are called \textbf{change-of-basis matrices}.
+			\item For any linear map $T: V \to V$, we often simplify the notation $\mathcal{M} ^{\mathcal{B}_V}_{\mathcal{B}_V}(T)$ to $\mathcal{M} _{\mathcal{B}_V}(T)$.
+			\item If $T:V\to V$ and we have two bases $\mathcal{B}_1$ and $\mathcal{B}_2$ of $V$, then $ \mathcal{M} _{\mathcal{B}_2}(T)$ and $\mathcal{M} _{\mathcal{B}_1}(T)$ are similar matrices. In fact, we have
+			\[
+			\mathcal{M} _{\mathcal{B}_2}(T) =
+			\mathcal{M} ^{\mathcal{B}_2}_{\mathcal{B}_1}(\operatorname{Id}_V)
+			\mathcal{M} _{\mathcal{B}_1}(T) 
+			\mathcal{M} ^{\mathcal{B}_1}_{\mathcal{B}_2}(\operatorname{Id}_V).
+			\]
+			Using the following diagram might be more intuitive:
+		\end{enumerate}
+		\[
+		\begin{tikzcd}[row sep=large, column sep=large]
+			\mathcal{K}^n
+			\arrow[r, "\mathcal{M} _{\mathcal{B}_2}(T)"']
+			% 向上的 φ_V^{-1}，往右挪一点
+			\arrow[d, xshift=-0.6ex, "\phi_2^{-1}" ']
+			& \mathcal{K}^n
+			% 向上的 φ_W^{-1}，往右挪一点
+			\arrow[d, xshift=-0.6ex, "\phi_2^{-1}"'] \\
+			V
+			\arrow[r, "T"]
+			\arrow[u, xshift=0.6ex, "\phi_2"']
+			% 向下的 φ_V，稍微往左挪一点
+			\arrow[d, xshift=-0.6ex, "\phi_1"']
+			& V
+			\arrow[u, xshift=0.6ex, "\phi_2"']
+			% 向下的 φ_W，稍微往左挪一点
+			\arrow[d, xshift=-0.6ex, "\phi_1"'] \\
+			\mathcal{K}^n
+			\arrow[r, "\mathcal{M} _{\mathcal{B}_1}(T)"']
+			% 向上的 φ_V^{-1}，往右挪一点
+			\arrow[u, xshift=0.6ex, "\phi_1^{-1}" ']
+			& \mathcal{K}^n
+			% 向上的 φ_W^{-1}，往右挪一点
+			\arrow[u, xshift=0.6ex, "\phi_1^{-1}"']
+		\end{tikzcd}
+		\]
+	\end{mypro}
+
+
+
+	\newpage
+	\section{Scalar Products and Orthogonality}
+
+
+	\subsection{Scalar Products}
+	\begin{mydef}
+		Suppose $V$ is a vector space over a field $\mathcal{K}(=\mathbb{R})$. A \textbf{scalar product} on $V$ is a mapping
+		\[
+		\langle \cdot, \cdot \rangle : V \times V \to \mathcal{K}
+		\]
+		such that for all $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ and all $\alpha, \beta \in \mathcal{K}$, the following properties hold:
+		\begin{enumerate}
+			% \item (Conjugate symmetry) $\langle \mathbf{u}, \mathbf{v} \rangle = \overline{\langle \mathbf{v}, \mathbf{u} \rangle}$.
+			\item (Symmetry) $\langle \mathbf{u}, \mathbf{v} \rangle = \langle \mathbf{v}, \mathbf{u} \rangle$.
+			\item (Linearity in the first argument) $\langle \alpha \mathbf{u} + \beta \mathbf{v}, \mathbf{w} \rangle = \alpha \langle \mathbf{u}, \mathbf{w} \rangle + \beta \langle \mathbf{v}, \mathbf{w} \rangle$.
+			% \item (Positive-definiteness) $\langle \mathbf{v}, \mathbf{v} \rangle \geq 0$, with equality if and only if $\mathbf{v} = \mathbf{0}$.
+		\end{enumerate}
+		% Then we call the pair $(V, \langle \cdot, \cdot \rangle)$ a \textbf{scalar product space}. 
+		Additionally, we say the scalar product is \textbf{non-degenerate} if
+		\[
+		\langle \mathbf{v}, \mathbf{u} \rangle = 0, \quad \forall \mathbf{u} \in V \implies \mathbf{v} = \mathbf{0}.
+		\]
+	\end{mydef}
+	\begin{myrmk}
+		The linearilty in the second argument also holds due to the conjugate symmetry.
+	\end{myrmk}
+	\begin{mydef}
+		Suppose $V$ is a vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. We say two vectors $\mathbf{u}, \mathbf{v} \in V$ are \textbf{orthogonal} or \textbf{perpendicular} if
+		\[
+		\langle \mathbf{u}, \mathbf{v} \rangle = 0.
+		\]
+		Moreover, suppose $S \subseteq V$ is nonempty. We define the \textbf{orthogonal set} of $S$, as
+		\[
+		S^\perp = \{ \mathbf{v} \in V \mid \langle \mathbf{v}, \mathbf{s} \rangle = 0, \quad \forall \mathbf{s} \in S \}.
+		\]
+		And we say $\mathbf{v}\in S^\perp$ is \textbf{orthogonal} or \textbf{perpendicular} to $S$ and write $\mathbf{v} \perp S$.
+	\end{mydef}
+	\begin{mypro}
+		Suppose $V$ is a vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. If a set $S \le V$, then $S^\perp$ is a subspace of $V$. We often call $S^\perp$ the \textbf{orthogonal complement} of $S$ in $V$.
+	\end{mypro}
+	\begin{myex}
+		Suppose $A\in \mathbf{M}_{m \times n}(\mathcal{K})$, then $\mathbf{x}$ is a solution of the homogeneous linear system
+		\[
+		A\mathbf{x} = \mathbf{0}
+		\]
+		if and only if $\mathbf{x} \in (\operatorname{Row}(A))^\perp$, where $\operatorname{Row}(A)$ is the row space of matrix $A$. That is,
+		\[
+		\operatorname{Row}(A) \perp \operatorname{Null}(A).
+		\]
+	\end{myex}
+	\begin{mydef}
+		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. Then $V$ has a basis and any basis $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ of $V$ is called an \textbf{orthogonal basis} if
+		\[
+		\langle \mathbf{v}_i, \mathbf{v}_j \rangle = 0, \quad \forall i \neq j\in \{1,2,\ldots,n\}.
+		\]
+
+	\end{mydef}
+	\begin{mydef}
+		Suppose $V$ is a vector space over a field $\mathcal{K\left( =\mathbb{R} \right)}$ with a scalar product $\langle \cdot, \cdot \rangle$. We call this scalar product \textbf{positive-definite} if
+		\[
+		\langle \mathbf{v}, \mathbf{v} \rangle 
+		\begin{cases}
+		> 0, & \mathbf{v} \neq \mathbf{0}, \\
+		= 0, & \mathbf{v} = \mathbf{0}.
+		\end{cases}
+		\]
+		If the scalar product is positive-definite, we define the \textbf{norm} of a vector $\mathbf{v} \in V$ as
+		\[
+		\| \mathbf{v} \| = \sqrt{\langle \mathbf{v}, \mathbf{v} \rangle}.
+		\]
+		Then we can define the \textbf{distance} between two vectors $\mathbf{u}, \mathbf{v} \in V$ as
+		\[
+		dist(\mathbf{u}, \mathbf{v}) = \| \mathbf{u} - \mathbf{v} \|.
+		\]
+		Also, if $\mathbf{v} \in V$ satisfies $\| \mathbf{v} \| = 1$, we say $\mathbf{v}$ is a \textbf{unit vector}. Note that for any nonzero vector $\mathbf{v} \in V$, the vector
+		\[
+		\frac{\mathbf{v}}{\| \mathbf{v} \|}
+		\]
+		is a unit vector called the \textbf{normalization} of $\mathbf{v}$.
+	\end{mydef}
+	\begin{myrmk}
+		Here we write $\mathcal{K} \left(= \mathbb{R}\right)$ because we need ``$>0$'' to define positive-definiteness. Actually $\mathcal{K}$ can be any field homomorphic to $\mathbb{R}$. 
+	\end{myrmk}
+	\begin{myex}
+		Let $f,g$ be real-valued functions integrable on the interval $I$ containing $[0,1]$. We define
+		\[
+		\langle f, g \rangle = \int_0 ^1 f(x) g(x) \,\mathrm{d}x, \quad \left\| f \right\| = \sqrt{\langle f, f \rangle}.
+		\]
+		Then $\langle \cdot, \cdot \rangle$ is a positive-definite scalar product on the vector space of all real-valued functions integrable on the interval $I$.
+	\end{myex}
+	\begin{mypro}
+		Suppose $V$ is a vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$.
+		\begin{enumerate}
+			\item For $c\in \mathcal{K}$ and $\mathbf{v} \in V$, we have $\| c \mathbf{v} \| = |c| \, \| \mathbf{v} \|$.
+			\item For any $\mathbf{u}, \mathbf{v} \in V$,
+			\[
+			\| \mathbf{u}-\mathbf{v} \| = \| \mathbf{u}+\mathbf{v} \| \quad \text{if and only if} \quad \mathbf{u} \perp \mathbf{v}.
+			\]
+			\item (Pythagorean theorem) For any $\mathbf{u}, \mathbf{v} \in V$ with $\mathbf{u} \perp \mathbf{v}$,
+			\[
+			\| \mathbf{u} + \mathbf{v} \|^2 = \| \mathbf{u} \|^2 + \| \mathbf{v} \|^2.
+			\]
+			\item (Parallelogram law) For any $\mathbf{u}, \mathbf{v} \in V$,
+			\[
+			\| \mathbf{u} + \mathbf{v} \|^2 + \| \mathbf{u} - \mathbf{v} \|^2 = 2 \left( \| \mathbf{u} \|^2 + \| \mathbf{v} \|^2 \right).
+			\]
+			\item (Cauchy–Schwarz inequality) For any $\mathbf{u}, \mathbf{v} \in V$,
+			\[
+			|\langle \mathbf{u}, \mathbf{v} \rangle| \leq \| \mathbf{u} \| \, \| \mathbf{v} \|.
+			\]
+			\item (Triangle inequality) For any $\mathbf{u}, \mathbf{v} \in V$,
+			\[
+			\| \mathbf{u} + \mathbf{v} \| \leq \| \mathbf{u} \| + \| \mathbf{v} \|.
+			\]
+			\item Suppose $\mathbf{u}, \mathbf{v} \in V$ and $\mathbf{u} \neq \mathbf{0}$. Then
+			\[
+			c = \frac{\langle \mathbf{v}, \mathbf{u} \rangle}{\langle \mathbf{u}, \mathbf{u} \rangle}
+			\]
+			is called the \textbf{component} of $\mathbf{v}$ in the direction of $\mathbf{u}$ and we call $c \mathbf{u}$ the \textbf{projection} of $\mathbf{v}$ onto $\mathbf{u}$. Note that 
+			\[
+			\left( \mathbf{v} - c \mathbf{u} \right) \perp \mathbf{u}.
+			\]
+			Furthermore,
+			\[
+			\| \mathbf{v} - c \mathbf{u} \| = \min_{\alpha \in \mathcal{K}} \| \mathbf{v} - \alpha \mathbf{u} \|.
+			\]
+			\item More generally, suppose $\mathbf{u_1}, \mathbf{u_2}, \dots, \mathbf{u_k} \in V$ are non-zero vectors that are pairwise orthogonal. For any $\mathbf{v} \in V$, we define the \textbf{component} of $\mathbf{v}$ along $u_i$ to be 
+			\[
+			c_i = \frac{\langle \mathbf{v}, \mathbf{u_i} \rangle}{\langle \mathbf{u_i}, \mathbf{u_i} \rangle}, \quad i=1,2,\ldots,k.
+			\]
+			We call $c_i \mathbf{u_i}$ the \textbf{projection} of $\mathbf{v}$ onto $\mathbf{u_i}$. Note
+			\[
+			\langle \mathbf{v} - \sum_{i=1}^k c_i \mathbf{u_i}, \mathbf{u_j} \rangle = \langle \mathbf{v}, \mathbf{u_j} \rangle - \sum_{i=1}^k c_i \langle \mathbf{u_i}, \mathbf{u_j} \rangle = 0, \quad j=1,2,\ldots,k.
+			\]
+			and we have
+			\[
+			\left( \mathbf{v}- \sum_{i=1}^k c_i \mathbf{u_i} \right) \perp \mathbf{u}, \quad \forall \mathbf{u}\in \operatorname{span}\left\{ \mathbf{u_1}, \mathbf{u_2}, \ldots, \mathbf{u_k} \right\}.
+			\]
+			We also call $\sum\limits_{i=1}^k c_i \mathbf{u_i}$ the \textbf{projection} of $\mathbf{v}$ onto $\operatorname{span}\left\{ \mathbf{u_1}, \mathbf{u_2}, \ldots, \mathbf{u_k} \right\}$.
+			Furthermore,
+			\[
+			\left\| \mathbf{v} - \sum_{i=1}^k c_i \mathbf{u_i} \right\| = \min_{\alpha_1, \alpha_2, \ldots, \alpha_k \in \mathcal{K}} \left\| \mathbf{v} - \sum_{i=1}^k \alpha_i \mathbf{u_i} \right\|.
+			\]
+		\end{enumerate}
+	\end{mypro}
+	\begin{mydef}
+		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a scalar product $\langle \cdot, \cdot \rangle$. A basis $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ of $V$ is called an \textbf{orthonormal basis} if
+		\[
+		\langle \mathbf{v}_i, \mathbf{v}_j \rangle =
+		\begin{cases}
+		1, & i = j, \\
+		0, & i \neq j,
+		\end{cases}
+		\quad \forall i,j \in \{1,2,\ldots,n\}.
+		\]
+	\end{mydef}
+	\begin{mythm}
+		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$. Let $\{w_1, w_2, \ldots, w_k\}$ be an orthogonal set of vectors in $V$. Then for any $\mathbf{v} \in V$, we have
+		\[
+		\langle \mathbf{v}, \mathbf{v} \rangle \geq \sum_{i=1}^k \frac{|\langle \mathbf{v}, w_i \rangle|^2}{\langle w_i, w_i \rangle}.
+		\]
+		with equality if and only if $\mathbf{v} \in \operatorname{span}\{w_1, w_2, \ldots, w_k\}$.
+
+		This is called \textbf{Bessel's inequality}.
+	\end{mythm}
+	\begin{mylma}
+		Suppose $V$ is a finite-dimensional vector space over $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$. Let $W$ be a proper subspace of $V$. If $\{w_1, w_2, \ldots, w_k\}$ is an orthonormal basis of $W$, then there exist vectors $w_{k+1}, w_{k+2}, \ldots, w_n \in V$ such that $\{w_1, w_2, \ldots, w_k, w_{k+1}, w_{k+2}, \ldots, w_n\}$ is an orthonormal basis of $V$.
+	\end{mylma}
+	\begin{proof}
+		This is a constructive proof via the Gram–Schmidt process. 
+
+		Note that we do know there exists $x_{k+1}, x_{k+2}, \ldots, x_n \in V$ such that $\{w_1, w_2, \ldots, w_k, x_{k+1}, x_{k+2}, \ldots, x_n\}$ is a basis of $V$. Next we will convert this basis to an orthonormal basis via projection.
+
+		\textbf{Step 1:} Project $x_{k+1}$ onto $W$ and denote the projection as
+		\[
+		w_{k+1} = x_{k+1} - \sum_{i=1}^k \frac{\langle x_{k+1}, w_i \rangle}{\langle w_i, w_i \rangle} w_i.
+		\]
+		Note that since
+		\[
+		\langle w_{k+1}, w_j \rangle = \langle x_{k+1}, w_j \rangle - \sum_{i=1}^k \frac{\langle x_{k+1}, w_i \rangle}{\langle w_i, w_i \rangle} \langle w_i, w_j \rangle = 0, \quad j=1,2,\ldots,k,
+		\]
+		we have $w_{k+1} \perp W$. Also, $w_{k+1} \neq \mathbf{0}$ since otherwise $x_{k+1} \in W$ which contradicts the fact that $\{w_1, w_2, \ldots, w_k, x_{k+1}, x_{k+2}, \ldots, x_n\}$ is a basis of $V$. Then we normalize $w_{k+1}$.
+
+		\textbf{Inductive Step:} We proceed by induction to construct the following vectors $w_{k+2}, w_{k+3}, \ldots, w_n$.
+
+	\end{proof}
+	\begin{mythm}
+		Suppose $V$ is a finite-dimensional nontrivial vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$. Then $V$ has an orthonormal basis.
+	\end{mythm}
+	\begin{mythm}
+		Suppose $V$ is a vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$ and $\dim V = n$. Define $W$ be a nontrivial subspace of $V$ with $\dim W = r \left( 1\le r \le n-1 \right) $. Define the \textbf{orthogonal complement} of $W$ in $V$, which is a subspace of $V$, as
+		\[
+		W^\perp = \{ \mathbf{v} \in V \mid \langle \mathbf{v}, \mathbf{w} \rangle = 0, \quad \forall \mathbf{w} \in W \}.
+		\]
+		Then we have
+		\[
+		\dim W + \dim W^\perp = \dim V, \quad W \oplus W^\perp = V.
+		\]
+	\end{mythm}
+    \subsection{Hermitian Products}
+	% \begin{myrmk}
+		For vector space $V$ over $\mathbb{C}$, if we want to have a ``scalar product'' that is ``postive-definite'' so that
+		\[
+		\langle \mathbf{v}, \mathbf{v} \rangle \in \mathbb{R} \text{ and } \langle \mathbf{v}, \mathbf{v} \rangle \ge 0,
+		\]
+		we need to modify our definition of ``scalar product''.
+	% \end{myrmk}
+	\begin{mydef}
+		Suppose $V$ is a vector space over $\mathbb{C}$. A \textbf{Hermitian scalar product} on $V$ is a mapping
+		\[
+		\langle \cdot, \cdot \rangle : V \times V \to \mathbb{C}
+		\]
+		satisfying the following properties:
+		\begin{enumerate}
+			\item (Conjugate symmetry) $\langle \mathbf{u}, \mathbf{v} \rangle = \overline{\langle \mathbf{v}, \mathbf{u} \rangle}$.
+			\item (Linearity in the first argument) $\langle \alpha \mathbf{u} + \beta \mathbf{v}, \mathbf{w} \rangle = \alpha \langle \mathbf{u}, \mathbf{w} \rangle + \beta \langle \mathbf{v}, \mathbf{w} \rangle$.
+		\end{enumerate}
+		Additionally, we say the Hermitian scalar product is \textbf{positive-definite} if
+		\[
+		\langle \mathbf{v}, \mathbf{v} \rangle 
+		\begin{cases}
+		> 0, & \mathbf{v} \neq \mathbf{0}, \\
+		= 0, & \mathbf{v} = \mathbf{0}.
+		\end{cases}
+		\]
+		Note that
+		\[
+		\langle \mathbf{v}, \mathbf{v} \rangle = \overline{\langle \mathbf{v}, \mathbf{v} \rangle} \implies \langle \mathbf{v}, \mathbf{v} \rangle \in \mathbb{R}.
+		\]
+		the positive-definiteness is well-defined.
+	\end{mydef}
+	\begin{myrmk}
+		Note that the linearity in the second argument does not hold. Instead, we have
+		\[
+		\langle \mathbf{w}, \alpha \mathbf{u} + \beta \mathbf{v} \rangle = \overline{\alpha} \langle \mathbf{w}, \mathbf{u} \rangle + \overline{\beta} \langle \mathbf{w}, \mathbf{v} \rangle.
+		\]
+		This is called the \textbf{conjugate linearity} in the second argument.
+	\end{myrmk}
+	\begin{myrmk}
+		For vector space $V$ over $\mathbb{C}$, given a Hermitian product, we say $x,y$ are orthogonal if $\langle x,y \rangle = 0\left( =\langle y,x \rangle \right)$. Concepts like orthogonal complement can be defined accordingly. If additionally the Hermitian product is positive-definite, concepts like norm, distance, orthogonal basis, orthonormal basis, etc. can be defined accordingly.
+	\end{myrmk}
+	\begin{mydef}
+		Given $A\in \mathbf{M}_{m \times n}(\mathbb{R})$, we call $\operatorname{Im}(A)$ the \textbf{column space} of $A$ and $\operatorname{Im}(A^T)$ the \textbf{row space} of $A$. We also call $\dim \operatorname{Im}(A)$ the \textbf{column rank} of $A$ and $\dim \operatorname{Im}(A^T)$ the \textbf{row rank} of $A$. Since the column rank and the row rank are equal, we simply call it the \textbf{rank} of $A$ and denote it as $\operatorname{rank}(A)$.
+	\end{mydef}
+	\begin{myrmk}
+		Let $A\in \mathbf{M}_{m \times n}(\mathbb{R})$ and $R=\operatorname{rref}(A)$. Then we know $\ker(A) = \ker(R)$ and thus $\operatorname{rank}(A) = \operatorname{rank}(R)=\text{pivots of } R$.
+	\end{myrmk}
+
+    % \newpage
+    \subsection{Bilinearity and Quadratic Form}
+    \begin{mydef}
+        Suppose $U,V,W$ are vector spaces over a field $\mathcal{K}$ and $g: U \times V \to W$ be a map. We say $g$ is \textbf{bilinear} if for each fixed $u \in U$, the map $v \mapsto g(u,v)$ is linear from $V$ to $W$, and for each fixed $v \in V$, the map $u \mapsto g(u,v)$ is linear from $U$ to $W$.
+    \end{mydef}
+    \begin{myex}
+        Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$. Define $g_A: \mathcal{K}^m \times \mathcal{K}^n \to \mathcal{K}$ as $g_A(x,y) = x^T A y$. Then $g_A$ is a bilinear map.
+    \end{myex}
+    \begin{mythm}
+        Given any bilinear map $g: \mathcal{K}^m \times \mathcal{K}^n \to \mathcal{K}$, there exists a unique matrix $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ such that $g(x,y) = x^T A y \left(=g_A\right)$ for all $x\in \mathcal{K}^m$ and $y\in \mathcal{K}^n$.
+    \end{mythm}
+    \begin{mythm}
+        The set of all bilinear maps from $\mathcal{K}^m \times \mathcal{K}^n$ to $\mathcal{K}$, denoted by $\operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K})$, is a vector space over $\mathcal{K}$. The association $A \mapsto g_A$ is a vector space isomorphism from $\mathbf{M}_{m \times n}(\mathcal{K})$ to $\operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K})$. That is, we have
+        \[
+        \dim \operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K}) = \dim \mathbf{M}_{m \times n}(\mathcal{K}) = mn.
+        \]
+    \end{mythm}
+    \begin{myrmk}
+        Note that a scalar product define on a vector space $V$ is a bilinear map from $V \times V$ to $\mathcal{K}$. 
+        
+        Particularly, if $V = \mathcal{K}^n$, then the unique matrix $A\in \M_{n \times n}(\mathcal{K})$ corresponding to the scalar product is symmetric, i.e., $A^T = A$.
+    \end{myrmk}
+    \begin{myrmk}
+        In some textbook, a scalar product is also called a symmetric bilinear form.
+    \end{myrmk}
+    \begin{mydef}
+        Suppose $V$ is a vector space over a field $\mathcal{K}$ and $\langle \cdot, \cdot \rangle$ is a scalar product on $V$. We call the map $f: V \to \mathcal{K}$ defined by $f(\mathbf{v}) = \langle \mathbf{v}, \mathbf{v} \rangle$ a \textbf{quadratic form} on $V$.
+    \end{mydef}
+    \begin{myex}
+        For the case $V=\mathcal{K}^n$, a quadratic form on $V$ can be uniquely associated with a symmetric matrix $A\in \mathbf{M}_{n \times n}(\mathcal{K})$ such that
+        \[
+        f(x) = x^T A x = \sum_{i=1}^{n}\sum_{j=1}^{n} x_i a_{ij} x_j \quad \forall x \in \mathcal{K}^n.
+        \]
+        Particularly, if $A$ is a diagonal matrix, then we have
+        \[
+        f(x) = \sum_{i=1}^{n} a_{ii} x_i^2.
+        \]
+    \end{myex}
+    
+    \subsection{Determinants}
+    Recall in last semester we defined the determinant of a $2\times 2$ matrix $\displaystyle A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ as $\displaystyle \det(A) = \begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$. And we conclude that $A$ is invertible if and only if $\det(A) \neq 0$. Furthermore, we know $\displaystyle A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$ when $A$ is invertible.
+
+    We recall more properties of determinants of $2\times 2$ matrices:
+    \begin{enumerate}
+        \item $\det(I_2) = 1$.
+        \item Bilinearity: For any $a,b,c,d \in \mathcal{K}$, we have
+        \[
+        \begin{vmatrix} a+b & c \\ d & e \end{vmatrix} = \begin{vmatrix} a & c \\ d & e \end{vmatrix} + \begin{vmatrix} b & c \\ d & e \end{vmatrix}, \quad \begin{vmatrix} a & b+c \\ d & e \end{vmatrix} = \begin{vmatrix} a & b \\ d & e \end{vmatrix} + \begin{vmatrix} a & c \\ d & e \end{vmatrix}.
+        \]
+        \item Alternating property: For any $a,b,c,d \in \mathcal{K}$, we have
+        \(
+        \begin{vmatrix} a & b \\ c & d \end{vmatrix} = -\begin{vmatrix} c & d \\ a & b \end{vmatrix}.
+        \)
+        \item $\det(A)=\det(A^T)$.
+    \end{enumerate}
+    Now we try to expand the definition of determinant to more general cases.
+    \begin{mydef}
+        Based on the definition of $2\times 2$ determinant, we define $3\times 3$ determinant as follows: suppose
+        \[
+        A = \begin{bmatrix}
+        a_{11} & a_{12} & a_{13} \\
+        a_{21} & a_{22} & a_{23} \\
+        a_{31} & a_{32} & a_{33}
+        \end{bmatrix} \in \mathbf{M}_{3 \times 3}(\mathcal{K}),
+        \]
+        then we define
+        \[
+        \det(A) = a_{11} \begin{vmatrix} a_{22} & a_{23} \\ a_{32} & a_{33} \end{vmatrix} - a_{12} \begin{vmatrix} a_{21} & a_{23} \\ a_{31} & a_{33} \end{vmatrix} + a_{13} \begin{vmatrix} a_{21} & a_{22} \\ a_{31} & a_{32} \end{vmatrix}.
+        \]
+    \end{mydef}
+    \begin{myrmk}
+        We call this formula the \textbf{Laplace expansion} or the \textbf{cofactor formula} by the first row.
+    \end{myrmk}
+    \begin{mythm}
+        The $3\times 3$ determinant satisfies the following properties:
+        \begin{enumerate}
+            \item $\det(I_3) = 1$.
+            \item Trilinearity: as a function of the columns in $A\in \M_{3 \times 3}(\mathcal{K})$, the determinant is linear in each column when the other two columns are fixed. For example, $\det(A_1, \alpha x + \beta y, A_3) = \alpha \det(A_1, x, A_3) + \beta \det(A_1, y, A_3)$ for any $A_1, A_3 \in \mathcal{K}^3$, $x,y \in \mathcal{K}^3$ and $\alpha, \beta \in \mathcal{K}$.
+            \item If two adjacent columns of $A$ are equal, then $\det(A) = 0$.
+        \end{enumerate}
+    \end{mythm}
+    \begin{mydef}
+        Suppose function $D: \mathbf{M}_{n \times n}(\mathcal{K}) \to \mathcal{K}$ or alternatively $D: \mathcal{K}^n \times \mathcal{K}^n \times \cdots \times \mathcal{K}^n \to \mathcal{K}$ (with $n$ copies of $\mathcal{K}^n$) with notation $D(A)$ or $D(A_1, A_2, \ldots, A_n)$ where $A_i$ is the $i$-th column of $A$. We say:
+        \begin{enumerate}
+            \item $D$ is multilinear: as a function of the columns in $A\in \M_{n \times n}(\mathcal{K})$, $D$ is linear in each column when the other $n-1$ columns are fixed.
+            \item $D$ is alternating: if two adjacent columns of $A$ are equal, then $D(A) = 0$.
+        \end{enumerate}
+    \end{mydef}
+    \begin{mythm}
+        There exists a unique multilinear and alternating function $D: \mathbf{M}_{n \times n}(\mathcal{K}) \to \mathcal{K}$ such that $D(I_n) = 1$. We call this unique $D$ the $n\times n$ \textbf{determinant} function and denote it as $\det(\cdot)$.
+    \end{mythm}
+    \begin{proof}
+        We prove in a constructive and inductive way.
+
+        \noindent
+        \textbf{Existence:} 
+        
+        \textbf{Initial Cases}: For $n=1$, we define $\det([a]) = a$ for any $a \in \mathcal{K}$. For $n=2$ and $n=3$, we have already defined the determinant.
+
+        \textbf{Inductive assumption}: suppose such $D$ exists as a map from $\mathbf{M}_{k \times k}(\mathcal{K})$ to $\mathcal{K}$ such that the three properties hold for any $ k \le n-1$.
+
+        \textbf{Inductive step}: For
+        \[
+        A = \begin{bmatrix}
+            a_{11} & \cdots & a_{1j} & \cdots & a_{1n} \\
+            \vdots & \ddots & \vdots & \ddots & \vdots \\
+            a_{i1} & \cdots & a_{ij} & \cdots & a_{in} \\
+            \vdots & \ddots & \vdots & \ddots & \vdots \\
+            a_{n1} & \cdots & a_{nj} & \cdots & a_{nn}
+        \end{bmatrix} \in \mathbf{M}_{n \times n}(\mathcal{K}),
+        \]
+        we define
+        \[
+        D(A) = \sum_{j=1}^n (-1)^{i+j} a_{ij} D(\tilde{A}_{ij}),
+        \]
+        where $\tilde{A}_{ij}$ is the $(n-1)\times (n-1)$ matrix obtained by deleting the $i$-th row and the $j$-th column of $A$. By the inductive assumption, $D(\tilde{A}_{ij})$ is well-defined and satisfies the three properties. We will show that such $D$ satisfies the three properties as well.
+
+        For multilinearity, we consider the individual term $(-1)^{i+j} a_{ij} D(\tilde{A}_{ij})$ in the sum and a particular $k\in \{1,2,\ldots,n\}$.
+        \begin{itemize}
+            \item If $j\neq k$, then $(-1)^{i+j} a_{ij} $ is independent of $A_k$ and $D(\tilde{A}_{ij})$ is linear in $A_k$ by the inductive assumption. Thus $(-1)^{i+j} a_{ij} D(\tilde{A}_{ij})$ is linear in $A_k$.
+            \item If $j=k$, then $D(\tilde{A}_{ij})$ is independent of $A_k$, but $(-1)^{i+j} a_{ij}$ is linear in $A_k$. Thus $(-1)^{i+j} a_{ij} D(\tilde{A}_{ij})$ is linear in $A_k$.
+        \end{itemize}
+        Hence $D(A)$ is linear in $A_k$.
+
+        For alternating property, suppose $A_k = A_{k+1}$ for some $k\in \{1,2,\ldots,n-1\}$. Consider:
+        \begin{itemize}
+            \item If $j\neq k$ and $j\neq k+1$, then $D(\tilde{A}_{ij})$ has two adjacent columns equal and thus $D(\tilde{A}_{ij})=0$ by the inductive assumption. Thus $(-1)^{i+j} a_{ij} D(\tilde{A}_{ij}) = 0$.
+            \item In the other cases, we only have
+            \[
+            D(A) = (-1)^{i+k} a_{ik} D(\tilde{A}_{ik}) + (-1)^{i+k+1} a_{i,k+1} D(\tilde{A}_{i,k+1}) = 0.
+            \]
+        \end{itemize}
+
+        For identity, we have
+        \[
+        D(I_n) = (-1)^{i+i} D(I_{n-1}) = 1.
+        \]
+        \textbf{Uniqueness:} This part is finished in Homework. The core idea is to utilize the permutation of columns and the alternating property to show that $D$ is determined by its value on $I_n$.
+    \end{proof}
+    \begin{mythm}
+        Here are some additional properties of the determinant function:
+        \begin{enumerate}
+            \item If the $i$-th and $j$-th $(i\neq j)$ columns of $A$ are swapped, then $\det(A)$ changes its sign.
+            \item If $A$ has two identical columns or rows, then $\det(A) = 0$.
+            \item If one adds a scalar multiple of one column to another column, then $\det(A)$ does not change.
+            \item $\det(A) = \det(A^T)$.
+            \item $\det(AB) = \det(A)\det(B)$ for any $A,B \in \mathbf{M}_{n \times n}(\mathcal{K})$.
+        \end{enumerate}
+    \end{mythm}
+    \begin{mythm}
+        Suppose $A\in\M_{n \times n}(\mathcal{K})$ satisfies $\det(A) \neq 0$ and $b\in \mathcal{K}^n$. If $x\in \mathcal{K}^n$ is a solution to the linear system $Ax=b$, then $x$ satisfies
+        \[
+        x_i = \frac{\det(A_{ib})}{\det(A)}, \quad i=1,2,\ldots,n,
+        \]
+        where $A_{ib}$ is the matrix obtained by replacing the $i$-th column of $A$ with $b$. This is called \textbf{Cramer's rule}.
+    \end{mythm}
+    \begin{proof}
+        Note $b = x_1 A_1 + x_2 A_2 + \cdots + x_n A_n$, where $A_i$ is the $i$-th column of $A$.
+        Then we have
+        \[
+        \det(A_{ib}) = \det(A_1, \ldots, A_{i-1}, \sum_{j=1}^n x_j A_j, A_{i+1}, \ldots, A_n) = x_i \det(A).
+        \]
+    \end{proof}
+    \begin{mythm}
+        Suppose $A\in \mathbf{M}_{n \times n}(\mathcal{K})$. If $\det(A) \neq 0$, then the columns of $A$ are linearly independent and thus $A$ is invertible.
+    \end{mythm}
+    \begin{proof}
+        It's equivalent to show that if the columns of $A$ are linearly dependent, then $\det(A) = 0$. Suppose there exists $k\in \{1,2,\ldots,n\}$ such that 
+        \[
+        A_k = \sum_{j=1, j\neq k}^n \alpha_j A_j,
+        \]
+        where $\alpha_j \in \mathcal{K}$ for $j=1,2,\ldots,n$ and $\alpha_j$ are not all zero. Then we have
+        \[
+        \det(A) = \det(A_1, \ldots, A_{k-1}, \sum_{j=1, j\neq k}^n \alpha_j A_j, A_{k+1}, \ldots, A_n) = 0.
+        \]
+    \end{proof}
+    \begin{mydef}
+        Consider the following two types of column operations:
+        \begin{enumerate}
+            \item Add a scalar multiple of one column to another column.
+            \item Interchange two columns.
+        \end{enumerate}
+        We call two matrices $A,B \in \M_{n \times n}(\mathcal{K})$ are \textbf{column equivalent} if $B$ can be obtained from $A$ by a succession of column operations of the above two types.
+    \end{mydef}
+    \begin{mythm}
+            Let $A,B \in \M_{n \times n}(\mathcal{K})$ be column equivalent. Then:
+            \begin{enumerate}
+                \item $\operatorname{rank} (A) = \operatorname{rank}(B)$.
+                \item $A$ is invertible if and only if $B$ is invertible.
+                \item $\det A = 0$ if and only if $\det B = 0$.
+            \end{enumerate}
+    \end{mythm}
+    \begin{proof}
+        For (1), we only need to show that the column operations of the above two types do not change the rank of a matrix. This is straightforward since these two types of column operations do not change the linear dependence or independence of columns.
+
+        For (2), since $A$ is invertible, we have $\operatorname{rank}(A) = n$. By (1), we have $\operatorname{rank}(B) = n$ and thus $B$ is invertible.
+
+        For (3), since the column operations only changes the sign of the determinant, we have $\det A = 0$ if and only if $\det B = 0$.
+    \end{proof}
+    \begin{mythm}
+        Suppose $A\in \M_{n \times n}(\mathcal{K})$ is column equivalent to a lower-triangular matrix $L$.
+    \end{mythm}
+    \begin{mythm}
+        Suppose $A\in \M_{n \times n}(\mathcal{K})$. The following conditions are equivalent:
+        \begin{enumerate}
+            \item $A$ is invertible.
+            \item The columns of $A$ are linearly independent.
+            \item $\det A \neq 0$.
+        \end{enumerate}
+    \end{mythm}
+    \begin{myrmk}
+        To calculate $\det A$, we can:
+        \begin{enumerate}
+            \item Laplace expansion by a row or a column.
+            \item Permutation definition.
+            \item Convert $A$ to a lower-triangular or upper-triangular matrix $L$ by column operations of the above two types and then calculate $\det L$ as the product of diagonal entries of $L$.
+        \end{enumerate}
+    \end{myrmk}
+
+    \subsection{Symmetric, Hermitian and Unitary Operators}
+    \begin{mydef}
+        Suppose $V$ is a vector space over $\mathcal{K}$. A linear map $T: V \to V$ is called a \textbf{linear operator} on $V$. 
+    \end{mydef}
+    \begin{mydef}
+    Let $V$ be a finite dimensional vector space over field $\mathcal{K}$. The \textbf{dual space} of $V$ is denoted by $V^*$ and is defined as
+    \[
+    V^*=\mathcal{L}(V,\mathcal{K}),
+    \]
+    i.e., the vector space of all linear maps from $V$ to $\mathcal{K}$. An element of $V^*$ is called a \textbf{linear functional} on $V$.
+    \end{mydef}
+
+    \begin{myex}
+    \leavevmode
+    \begin{enumerate}
+        \item Let $V$ be a finite dimensional vector space over field $\mathcal{K}$ with a scalar product. Suppose $v_0\in V$. Define
+        \[
+        f_{v_0}:V\to \mathcal{K},\qquad f_{v_0}(v)=\langle v,v_0\rangle
+        \quad \text{for any } v\in V.
+        \]
+        Then $f_{v_0}$ is a linear functional on $V$.
+
+        \item Let $V$ be a finite dimensional vector space over $\mathbb{C}$ with a hermitian product. Suppose $v_0\in V$. Define
+        \[
+        f_{v_0}:V\to \mathbb{C},\qquad f_{v_0}(v)=\langle v,v_0\rangle
+        \quad \text{for any } v\in V.
+        \]
+        Then $f_{v_0}$ is a linear functional on $V$.
+
+        However, the map
+        \[
+        g_{v_0}:V\to \mathbb{C},\qquad g_{v_0}(v)=\langle v_0,v\rangle
+        \quad \text{for any } v\in V
+        \]
+        is, in general, not a linear functional on $V$ by the conjugate linearity in the second argument of the hermitian product.
+    \end{enumerate}
+    \end{myex}
+
+    \begin{mylma}
+    Let $V$ be a finite dimensional vector space over field $\mathcal{K}$.
+    \begin{enumerate}
+        \item $\dim(V)=n$ if and only if $\dim(V^*)=n$. Thus $V$, $V^*$, and $\mathcal{K}^n$ are all isomorphic to each other as vector spaces over $\mathcal{K}$.
+
+        \item Suppose $\{v_1,\dots,v_n\}$ is a basis of $V$. Then there exists a unique basis $\{f_1,\dots,f_n\}$ of $V^*$ such that
+        \[
+        f_i(v_j)=\delta_{ij}
+        \qquad
+        \text{for any } i,j\in\{1,\dots,n\},
+        \]
+        where $\delta_{ij}$ is the Kronecker delta function.
+
+        \item Suppose in addition that $V$ is equipped with a non-degenerate scalar product. Then the map
+        \[
+        \Phi:V\to V^*,\qquad \Phi(v)=f_v,
+        \]
+        where
+        \[
+        f_v(w)=\langle w,v\rangle
+        \qquad
+        \text{for any } w\in V,
+        \]
+        is an isomorphism of vector spaces over $\mathcal{K}$.
+    \end{enumerate}
+    \end{mylma}
+
+    \begin{proof}
+    \leavevmode
+    \begin{enumerate}
+        \item Assume $\dim(V)=n$, and let $\{v_1,\dots,v_n\}$ be a basis of $V$. For each $i\in\{1,\dots,n\}$, define
+        \[
+        f_i\!\left(\sum_{j=1}^n a_jv_j\right)=a_i.
+        \]
+        This is well-defined because every vector in $V$ has a unique expression in the basis $\{v_1,\dots,v_n\}$, and each $f_i$ is linear.
+
+        We claim that $\{f_1,\dots,f_n\}$ is a basis of $V^*$. First, it is linearly independent: if
+        \[
+        c_1f_1+\cdots+c_nf_n=0,
+        \]
+        then evaluating at $v_j$ gives
+        \[
+        0=(c_1f_1+\cdots+c_nf_n)(v_j)=c_j,
+        \]
+        so all $c_j=0$.
+
+        Next, it spans $V^*$. Let $f\in V^*$. Set
+        \[
+        a_i=f(v_i)\qquad (i=1,\dots,n).
+        \]
+        Then for any $v=\sum_{j=1}^n x_jv_j$,
+        \[
+        f(v)
+        =
+        f\!\left(\sum_{j=1}^n x_jv_j\right)
+        =
+        \sum_{j=1}^n x_jf(v_j)
+        =
+        \sum_{j=1}^n x_ja_j
+        =
+        \sum_{j=1}^n a_jf_j(v).
+        \]
+        Hence
+        \[
+        f=\sum_{j=1}^n a_jf_j.
+        \]
+        Therefore $\{f_1,\dots,f_n\}$ is a basis of $V^*$, so $\dim(V^*)=n$.
+
+        Conversely, if $\dim(V^*)=n$, then applying the same result to the vector space $V^*$ gives
+        \[
+        \dim((V^*)^*)=n.
+        \]
+        Since $V$ is finite dimensional, the canonical map from $V$ to $(V^*)^*$ is an isomorphism, hence
+        \[
+        \dim(V)=\dim((V^*)^*)=n.
+        \]
+        So $\dim(V)=n$ if and only if $\dim(V^*)=n$.
+
+        Since any $n$-dimensional vector space over $\mathcal{K}$ is isomorphic to $\mathcal{K}^n$, it follows that $V\cong V^*\cong \mathcal{K}^n$.
+
+        \item Existence has already been established in part (1): the functionals $f_i$ defined by
+        \[
+        f_i\!\left(\sum_{j=1}^n a_jv_j\right)=a_i
+        \]
+        satisfy
+        \[
+        f_i(v_j)=\delta_{ij}.
+        \]
+
+        We now show uniqueness. Suppose $\{g_1,\dots,g_n\}$ is another basis of $V^*$ such that
+        \[
+        g_i(v_j)=\delta_{ij}
+        \qquad
+        \text{for all } i,j.
+        \]
+        Let $v=\displaystyle \sum_{j=1}^n a_jv_j$. Then
+        \[
+        g_i(v)
+        =
+        g_i\!\left(\sum_{j=1}^n a_jv_j\right)
+        =
+        \sum_{j=1}^n a_jg_i(v_j)
+        =
+        \sum_{j=1}^n a_j\delta_{ij}
+        =
+        a_i
+        =
+        f_i(v).
+        \]
+        Since this holds for every $v\in V$, we have $g_i=f_i$ for all $i$. Hence the basis is unique.
+
+        \item First, $\Phi$ is linear. For any $u,v,w\in V$ and $a,b\in \mathcal{K}$,
+        \[
+        \Phi(au+bv)=f_{au+bv},
+        \]
+        and for every $w\in V$,
+        \[
+        f_{au+bv}(w)
+        =
+        \langle w,au+bv\rangle
+        =
+        a\langle w,u\rangle+b\langle w,v\rangle
+        =
+        af_u(w)+bf_v(w).
+        \]
+        Hence
+        \[
+        \Phi(au+bv)=a\Phi(u)+b\Phi(v).
+        \]
+
+        Next, $\Phi$ is injective. If $\Phi(v)=0$, then $f_v=0$, i.e.
+        \[
+        \langle w,v\rangle=0
+        \qquad
+        \text{for all } w\in V.
+        \]
+        By non-degeneracy of the scalar product, this implies $v=0$.
+
+        Finally, since $\dim(V)=\dim(V^*)$ by part (1), a linear injective map
+        \[
+        \Phi:V\to V^*
+        \]
+        between finite dimensional vector spaces of the same dimension must be surjective. Therefore $\Phi$ is an isomorphism.
+    \end{enumerate}
+    \end{proof}
+    % \begin{mylma}
+    %     Suppose $V$ is a finite-dimensional vector space over $\mathcal{K}$ with a non-degenerate scalar product $\langle \cdot, \cdot \rangle$. Then the map $v\mapsto f_v$ defined by $f_v(w) = \langle v,w \rangle$ is a vector space isomorphism from $V$ to $V^*$.
+    % \end{mylma}
+    % \begin{proof}
+    %     We first show that the map is linear. For any $\alpha, \beta \in \mathcal{K}$ and $v_1, v_2, w \in V$, we need to show $(\alpha v_1 + \beta v_2) \mapsto \alpha f_{v_1}(w) + \beta f_{v_2}(w)$ or namely $f_{\alpha v_1 + \beta v_2}(w) = \alpha f_{v_1}(w) + \beta f_{v_2}(w)$. This is straightforward since
+    %     \[
+    %     f_{\alpha v_1 + \beta v_2}(w) = \langle \alpha v_1 + \beta v_2, w \rangle = \alpha \langle v_1, w \rangle + \beta \langle v_2, w \rangle = \alpha f_{v_1}(w) + \beta f_{v_2}(w).
+    %     \]
+    %     We then show that the map is injective. Suppose $f_v = 0$ for some $v \in V$. Then we have $\langle v, w \rangle = 0$ for all $w \in V$. By the non-degeneracy of the scalar product, we have $v=0$.
+
+    %     Since we know $\dim V = \dim V^*$, the map is also surjective and thus a vector space isomorphism.
+    % \end{proof}
+    \begin{mythm}\label{transpose existence}
+        Suppose $V$ is a finite-dimensional vector space over $\mathcal{K}$ with a non-degenerate scalar product $\langle \cdot, \cdot \rangle$ and $T: V \to V$ is a linear operator. Then there exists a unique linear operator $T^T: V \to V$ such that
+        \[
+        \langle T(\mathbf{v}), \mathbf{w} \rangle = \langle \mathbf{v}, T^T (\mathbf{w}) \rangle, \quad \forall \mathbf{v}, \mathbf{w} \in V.
+        \]
+        We call $T^T$ the \textbf{transpose} of $T$.
+    \end{mythm}
+    \begin{proof}
+        Let $L: V \to \mathcal{K}$ be $L(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w} \rangle$ for any $\mathbf{v} \in V$. Note $L$ is a linear map from $V$ to $\mathcal{K}$ and thus a linear functional. Note by the above lemma, we know there exists a unique $\tilde{w} \in V$ such that $L(x)=f_{\tilde{w}}(x) = \langle x, \tilde{w} \rangle$. Let $T^T(\mathbf{w}) = \tilde{w}$.
+
+        Suppose $L_1(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w}_1 \rangle$ and $\tilde{w}_1 \in V$ is the unique vector in $V$ such that $L_1 = f_{\tilde{w}_1}$. Suppose $L_2(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w}_2 \rangle$ and $\tilde{w}_2 \in V$ is the unique vector in $V$ such that $L_2 = f_{\tilde{w}_2}$.
+
+        Note $L' := \alpha L_1 + \beta L_2$ satisfies
+        \[
+        L'(\mathbf{v}) = \alpha \langle T(\mathbf{v}), \mathbf{w}_1 \rangle + \beta \langle T(\mathbf{v}), \mathbf{w}_2 \rangle = \langle T(\mathbf{v}), \alpha \mathbf{w}_1 + \beta \mathbf{w}_2 \rangle.
+        \]
+        Thus $T^T(\alpha \mathbf{w}_1 + \beta \mathbf{w}_2) = \alpha T^T(\mathbf{w}_1) + \beta T^T(\mathbf{w}_2)$ and thus $T^T$ is linear. We still need to verify $\langle T(\mathbf{v}), \mathbf{w} \rangle = \langle \mathbf{v}, T^T (\mathbf{w}) \rangle$ for all $\mathbf{v}, \mathbf{w} \in V$. This is straightforward since $L(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w} \rangle = f_{\tilde{w}}(\mathbf{v}) = \langle \tilde{w}, \mathbf{v} \rangle = \langle T^T(\mathbf{w}), \mathbf{v} \rangle$.
+    \end{proof}
+    \begin{myrmk}
+        We often just write $\langle T(\mathbf{v}), \mathbf{w} \rangle = \langle \mathbf{v}, T^T (\mathbf{w}) \rangle$, $\langle T\mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{v}, T^T \mathbf{w} \rangle$ or $\langle A\mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{v}, A^T \mathbf{w} \rangle$ where $A$ is a general operator (instead of a matrix) on $V$.
+    \end{myrmk}
+    \begin{mydef}
+        Suppose $V$ is a finite-dimensional vector space over field $\mathcal{K}$ and $T$ is an operator on $V$. Suppose $\mathcal{B}$ is a basis for $V$ and let $\mathcal{M}$ be the matrix representation of $T$ with respect to basis $\mathcal{B}$, then we define the determinant of operator $T$ to be the determinant of matrix $\mathcal{M}$, i.e., $\det(T) = \det(\mathcal{M})$.
+    \end{mydef}
+    \begin{myrmk}
+        Note that the determinant of an operator is well-defined since the value of the determinant of the matrix representation of $T$ does not depend on the choice of basis $\mathcal{B}$: suppose that if a different basis $\mathcal{B}'$ is chosen and $\mathcal{M}'$ is the matrix representation of $T$ with respect to $\mathcal{B}'$, then we have $\mathcal{M}' = P^{-1} \mathcal{M} P$ for some invertible matrix $P$ and thus $$\det(\mathcal{M}') = \det(P^{-1} \mathcal{M} P) = \det(P^{-1}) \det(\mathcal{M}) \det(P) = \det(\mathcal{M}).$$
+    \end{myrmk}
+    \begin{mythm}
+        Suppose $V,\mathcal{K}, \langle \cdot, \cdot \rangle$ satisfy the condition in Theorem~\ref{transpose existence}. Let $A,B$ be operators on $V$ and $c\in \mathcal{K}$. Then
+        \begin{enumerate}
+            \item $(A+B)^T = A^T + B^T$.
+            \item $(cA)^T = c A^T$.
+            \item $(AB)^T = B^T A^T$, where $AB$ means the composite operator: $V\to V: AB(x) = (A\circ B)(x) = A(B(x))$.
+            \item $(A^T)^T = A$.
+        \end{enumerate}
+    \end{mythm}
+    \begin{mydef}
+        Suppose $V,\mathcal{K}, \langle \cdot, \cdot \rangle$ satisfy the condition in Theorem~\ref{transpose existence} and $A$ is an operator on $V$. We say $A$ is \textbf{symmetric} if $A^T = A$.
+    \end{mydef}
+    \begin{mylma}\label{unique vector for functional}
+        Suppose $V$ is a finite-dimensional vector space over $\C$ with a positive definite hermitian product $\langle \cdot, \cdot \rangle$. Given a functional $L$ on $V$, there exists a unique vector $\tilde{w} \in V$ such that $L(x) = \langle x, \tilde{w} \rangle$ for all $x\in V$.
+    \end{mylma}
+    \begin{mythm}
+        Suppose $V, \C, \langle \cdot, \cdot \rangle$ satisfy the condition in Lemma~\ref{unique vector for functional} and $A$ is an operator on $V$. Then there exists a unique operator $A^*$ on $V$ such that $\langle A x, y \rangle = \langle x, A^* y \rangle$ for all $x,y \in V$. We call $A^*$ the \textbf{adjoint} or \textbf{complex transpose}, or the \textbf{conjugate transpose} of $A$.
+    \end{mythm}
+    \begin{myex}
+        Let $V = \C^n$ with the standard hermitian product $\langle x, y \rangle = \displaystyle \sum_{i=1}^n x_i \overline{y_i}$. For any $A \in \M_{n \times n}(\C)$, we have $$\langle A x, y \rangle = x^T A^T \overline{y} = x^T \overline{ \left( \overline{A^T} y \right) } = \langle x, \overline{A^T} y \rangle.$$ Thus $A^* = \overline{A^T}$.
+    \end{myex}
+    \begin{mydef}
+        Suppose $V, \C, \langle \cdot, \cdot \rangle$ satisfy the condition in Lemma~\ref{unique vector for functional}. An operator $A$ on $V$ is called \textbf{self-adjoint} or \textbf{hermitian} if $A^* = A$. Particularly, if $A$ is hermitian, then $\langle A x, y \rangle = \langle x, A y \rangle$ for all $x,y \in V$.
+    \end{mydef}
+    \begin{mythm}
+        Suppose $V, \C, \langle \cdot, \cdot \rangle$ satisfy the condition in Lemma~\ref{unique vector for functional}. Let $A$ and $B$ be operators on $V$ and $\alpha \in \C$. Then
+        \begin{enumerate}
+            \item $(A+B)^* = A^* + B^*$.
+            \item $(\alpha A)^* = \overline{\alpha} A^*$.
+            \item $(AB)^* = B^* A^*$, where $AB$ means the composite operator: $V\to V: AB(x) = (A\circ B)(x) = A(B(x))$.
+            \item $(A^*)^* = A$.
+        \end{enumerate}
+    \end{mythm}
+    \begin{mydef}\label{def: unitary operator}
+        Suppose $V$ is a finite-dimensional vector space over $\R$ with a positive definite scalar product $\langle \cdot, \cdot \rangle$. An operator $A$ on $V$ is called (real-)\textbf{unitary} or \textbf{orthogonal} if $\langle A x, A y \rangle = \langle x, y \rangle$ for all $x,y \in V$.
+    \end{mydef}
+    \begin{mythm}
+        Suppose $V$, $\R$, $\langle \cdot, \cdot \rangle$ satisfy the condition in Definition~\ref{def: unitary operator}. Let $A$ be an operator on $V$. Then the following conditions on $A$ are equivalent:
+        \begin{enumerate}[label=(\alph*)]
+            \item $A$ is real-unitary, i.e., $\langle A x, A y \rangle = \langle x, y \rangle$ for all $x,y \in V$.
+            \item $A$ preserves norm of vectores, i.e., $\|A x\| = \|x\|$ for all $x \in V$.
+            \item If $v\in V$ is a unit vector, then $A v$ is also a unit vector.
+            \item $A^T A = I$, where $I$ is the identity operator on $V$.
+        \end{enumerate}
+    \end{mythm}
+    \begin{proof}
+        (a) $\Rightarrow$ (b): by definition $\| Av \| = \sqrt{\langle Av, Av \rangle} = \sqrt{\langle v, v \rangle} = \|v\|$ for any $v\in V$.
+
+        (b) $\Rightarrow$ (c): trivial.
+
+        (d) $\Rightarrow$ (a): for any $x,y \in V$, we have $\langle A x, A y \rangle = \langle x, A^T A y \rangle = \langle x, y \rangle$.
+
+        (b) $\Rightarrow$ (a): for any $x,y \in V$, we have
+        \[
+        \begin{aligned}
+            \langle A x, A y \rangle &= \frac14 \left( \|A x + A y\|^2 - \|A x - A y\|^2 \right)\\  &= \frac{1}{4} \left( \|x + y\|^2 - \|x - y\|^2 \right) = \langle x, y \rangle.
+        \end{aligned}
+        \]
+
+        (c) $\Rightarrow$ (b): 
+        
+        Case 1: if $x=0$, then $\|A x\| = \|0\| = \|x\|$. 
+        
+        Case 2: if $x\neq 0$, then $\dfrac{x}{\|x\|}$ is a unit vector and thus
+        $$ \left\| A\frac{x}{\|x\|}\right\| ^2 = 1 = \langle \frac{x}{\|x\|}, \frac{x}{\|x\|} \rangle = \frac1{\|x\|^2} \langle x, x \rangle = \frac{\|x\|^2}{\|x\|^2} = 1. $$
+        Thus $\|A x\| = \|x\|$.
+
+        (a) $\Rightarrow$ (d): for any $x,y \in V$, we have
+        $$ \langle Ax, A y \rangle = \langle x,y \rangle = \langle x, A^T A y \rangle \implies \langle x, (A^T A - I) y \rangle = 0. $$
+        By the non-degeneracy of the scalar product, we have $(A^T A - I) y = 0$ for all $y\in V$ and thus $A^T A = I$.
+    \end{proof}
+    \begin{myex}
+        Let
+        $$ R(\theta) = \begin{bmatrix}
+            \cos \theta & -\sin \theta \\
+            \sin \theta & \cos \theta
+        \end{bmatrix}. $$
+        For a vector $x\in \R^2$, $R x$ rotated counterclockwise by $\theta$. We also call such a matrix unitary if the associated operator is unitary.
+    \end{myex}
+    \begin{mydef}\label{def: complex unitary operator}
+        Suppose $V$ is a finite-dimensional vector space over $\C$ with a positive definite hermitian product $\langle \cdot, \cdot \rangle$. An operator $A$ on $V$ is called (complex-)\textbf{unitary} if $\langle A x, A y \rangle = \langle x, y \rangle$ for all $x,y \in V$.
+    \end{mydef}
+    \begin{mythm}
+        Suppose $V$, $\C$, $\langle \cdot, \cdot \rangle$ satisfy the condition in Definition~\ref{def: complex unitary operator}. Then the following conditions on an operator $A$ on $V$ are equivalent:
+        \begin{enumerate}[label=(\alph*)]
+            \item $A$ is complex-unitary, i.e., $\langle A x, A y \rangle = \langle x, y \rangle$ for all $x,y \in V$.
+            \item $A$ preserves norm of vectores, i.e., $\|A x\| = \|x\|$ for all $x \in V$.
+            \item If $v\in V$ is a unit vector, then $A v$ is also a unit vector.
+            \item $A^* A = I$, where $I$ is the identity operator on $V$.
+        \end{enumerate}
+    \end{mythm}
+    \begin{mypro}
+        Let $V$ be a finite-dimensional vector space over $\R$ with a positive definite scalar product $\langle \cdot, \cdot \rangle$, or over $\C$ with a positive definite hermitian product $\langle \cdot, \cdot \rangle$. Suppose $A$ is an operator on $V$. Let $\{v_1, v_2, \ldots, v_n\}$ be an orthonormal basis for $V$.
+        \begin{enumerate}[label=(\alph*)]
+            \item If $A$ is real-/complex-unitary, then $\{A v_1, A v_2, \ldots, A v_n\}$ is also an orthonormal basis for $V$.
+            \item If $\{A v_1, A v_2, \ldots, A v_n\}$ is also an orthonormal basis for $V$, then $A$ is real-/complex-unitary.
+        \end{enumerate}
+    \end{mypro}
+    \begin{proof}
+        For (2), we can prove that $A$ is unitary by showing that $\| Av \| = \|v\|$ for any $v\in V$. Since $ \{v_1, v_2, \ldots, v_n\}$ is an orthonormal basis for $V$, we can write $v = \displaystyle \sum_{i=1}^n \alpha_i v_i$ for some unique $\alpha_i$ for $i=1,2,\ldots,n$. Then we have
+        \[
+        \| v \|^2 = \langle v, v \rangle = \sum_{i=1}^n |\alpha_i|^2, \quad \| Av \|^2 = \langle Av, Av \rangle = \sum_{i=1}^n |\alpha_i|^2.
+        \]
+        Thus $\| Av \| = \|v\|$ and $A$ is unitary.
+    \end{proof}
+    \begin{mypro}
+        Suppose $V$, $\C$, $\langle \cdot, \cdot \rangle$ satisfy the condition in Definition~\ref{def: complex unitary operator}. Then the following conditions on an operator $A$ on $V$ are equivalent:
+        \begin{enumerate}
+            \item $AA^* = A^*A$.
+            \item $\left\| Av\right\| = \left\| A^* v\right\|$ for all $v\in V$.
+            \item We can write $A=S+iT$ where $S$ and $T$ are self-adjoint operators on $V$ such that $ST=TS$. Moreover,
+            $$ S = \frac{A+A^*}{2}, \quad T = \frac{A-A^*}{2i}. $$
+        \end{enumerate}
+    \end{mypro}
+
+    \subsection{Eigenvectors and eigenvalues}
+    Recall: in Definition~\ref{def:eigenvalue} we defined the concept of eigenvectors and eigenvalues. After introducing operators, we can discuss more properties of eigenvectors and eigenvalues in this subsection.
+    
+    \begin{mydef}
+        Suppose $V$ is a vector space over $\mathcal{K}$ and $A$ is an operator on $V$. We say $\lambda \in \mathcal{K}$ is an \textbf{eigenvalue} of $A$ if there exists a nonzero vector $v\in V$ such that $Av = \lambda v$. In this case, we call $v$ an \textbf{eigenvector} of $A$ corresponding to eigenvalue $\lambda$.
+    \end{mydef}
+    \begin{myrmk}
+        Note that for a given eigenvector $v$ of $A$, the corresponding eigenvalue $\lambda$ is unique since $v\neq 0$. However, for a given eigenvalue $\lambda$, the corresponding eigenvectors are not unique.
+    \end{myrmk}
+    \begin{mydef}
+    $E_\lambda$ or $V_\lambda$ is defined to be a subspace of $V: E_\lambda = \{v\in V: Av = \lambda v\}$ when $\lambda$ is an eigenvalue of $A$. We call $E_\lambda$ the \textbf{eigenspace} of $A$ corresponding to $\lambda$.
+    \end{mydef}
+    \begin{myex}
+        \begin{enumerate}
+            \item Suppose $V$ is the vector space over $\R$ consisting of all infinitely differentiable functions defined on $\R$. Let $D:V\to V$ be the differentiation operator, i.e., $D(f) = f'$. Then $e^{\lambda x}$ is an eigenvector/eigenfunction of $D$ corresponding to eigenvalue $\lambda$ for any $\lambda \in \R$.
+            \item Let
+            $$ R(\theta) = \begin{pmatrix}
+                \cos \theta & -\sin \theta \\
+                \sin \theta & \cos \theta
+            \end{pmatrix}
+            $$
+            be an operator on $\R^2$. Then
+            \begin{itemize}
+                \item if $\theta = k\pi$ for $k\in \Z$, then $R(\theta)$ has two eigenvalues $1$ and $-1$.
+                \item if $\theta \neq k\pi$ for $k\in \Z$, then $R(\theta)$ has no eigenvalue.
+            \end{itemize}
+
+        \end{enumerate}
+    \end{myex}
+    \begin{mythm}
+        Let $V$ be a vector space over $\mathcal{K}$ and $A$ be an operator on $V$. Suppose $\left\{ v_1,\cdots, v_m \right\} $ are eigenvectors of $V$ corresponding to eigenvalues $\lambda_1, \cdots, \lambda_m$ respectively. If $\lambda_i \neq \lambda_j$ for any $i\neq j$, then $\left\{ v_1,\cdots, v_m \right\} $ is linearly independent.
+    \end{mythm}
+    \begin{proof}
+        We can prove the theorem by induction on $m$. The case $m=1$ is trivial. 
+
+        \textbf{Inductive step:} suppose the statement holds for case $m$ and we will prove for the case $m+1$. Suppose $\alpha_1, \alpha_2, \ldots, \alpha_{m+1} \in \mathcal{K}$ such that
+        $$ \sum_{i=1}^{m+1} \alpha_i v_i = 0. $$
+        Applying $\lambda_{m+1}$ to both sides of the above equation, we have
+        $$ \sum_{i=1}^{m+1} \alpha_i \lambda_{m+1} v_i = 0. $$
+        Apllying $A$ to both sides of the first equation, we have
+        $$ \sum_{i=1}^{m+1} \alpha_i A v_i = \sum_{i=1}^{m+1} \alpha_i \lambda_i v_i = 0. $$
+        Thus $$\sum_{i=1}^{m} \alpha_i (\lambda_{m+1} - \lambda_i) v_i = 0. $$
+        By the inductive hypothesis, we have $\alpha_i (\lambda_{m+1} - \lambda_i) = 0$ for $i=1,2,\ldots,m$. Since $\lambda_i \neq \lambda_{m+1}$ for $i=1,2,\ldots,m$, we have $\alpha_i = 0$ for $i=1,2,\ldots,m$. Thus $\alpha_{m+1} v_{m+1} = 0$ and thus $\alpha_{m+1} = 0$ since $v_{m+1}$ is nonzero. We have shown that $\alpha_1 = \alpha_2 = \cdots = \alpha_{m+1} = 0$ and thus $\{v_1, v_2, \ldots, v_{m+1}\}$ is linearly independent.
+    \end{proof}
+    \begin{mypro}
+        Suppose $V$ with $\dim V=n$ and $A$ is an operator on $V$. If $A$ has $n$ distinct eigenvalues, then the corresponding eigenvectors form a basis $\mathcal B$ for $V$. Moreover, the matrix representation of $A$ with respect to basis $\mathcal B$ is a diagonal matrix with diagonal entries being the eigenvalues of $A$, i.e.,
+        $$ \mathcal M_{\mathcal B}(A) = \begin{bmatrix}
+            \lambda_1 & 0 & \cdots & 0 \\
+            0 & \lambda_2 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & \lambda_n
+        \end{bmatrix}. $$
+    \end{mypro}
+    \begin{myrmk}
+        Note
+        $$ \text{A has } n \text{ distinct eigenvalues} \implies \text{A has an eigenbasis}.$$
+        However,
+        $$ \text{A has an eigenbasis} \centernot\implies \text{A has } n \text{ distinct eigenvalues}. $$
+        For example, let $A = \begin{bmatrix}
+            0 & 0 \\
+            0 & 0
+        \end{bmatrix}$ be an operator on $\R^2$. Then $A$ has only one eigenvalue $0$ but the corresponding eigenspace is $\R^2$ and thus any basis of $\R^2$ is an eigenbasis for $A$.
+    \end{myrmk}
+    \begin{mythm}
+        Let $V$ be a finite-dimensional vector space over $\mathcal{K}$ and $A$ be an operator on $V$. Suppose $\lambda \in \mathcal{K}$. Then $\lambda$ is an eigenvalue of $A$ if and only if $A-\lambda I$ is not invertible, where $I$ is the identity operator on $V$.
+    \end{mythm}
+    \begin{mydef}
+        Let $V$ be a vector space wtih $\dim V = n$ and $A$ be an operator on $V$. Then
+        $$ P_A(t) = \det(A-tI) $$
+        is called the \textbf{characteristic polynomial} of $A$. Note that $P_A$ is a polynomial of degree $n$. Suppose $$P_A(t) = (t-\lambda_1)^{m_1} (t-\lambda_2)^{m_2} \cdots (t-\lambda_k)^{m_k}\quad \text{with } \sum_{i=1}^k m_i = n $$ where $\lambda_1, \lambda_2, \ldots, \lambda_k$ are distinct eigenvalues of $A$ and $m_i$ is the multiplicity of $\lambda_i$ for $i=1,2,\ldots,k$. Then we call $m_i$ the \textbf{algebraic multiplicity} of eigenvalue $\lambda_i$. We also define the \textbf{geometric multiplicity} of eigenvalue $\lambda_i$ to be $E_\lambda=\ker(A-\lambda I)$, i.e., how many linearly independent eigenvectors of $A$ corresponding to $\lambda_i$.
+    \end{mydef}
+    \begin{myrmk}
+        There're two cases that a matrix $A$ cannot be diagonalized, i.e., $A$ does not have an eigenbasis:
+        \begin{itemize}
+            \item $A$ has no roots in $\R$, i.e., $A$ has no eigenvalue. We can expand the field $\R$ to $\C$ and then $A$ has eigenvalues in $\C$ since $\C$ is algebraically closed.
+            \item $A$ has eigenvalues but does not have enough linearly independent eigenvectors. For example, let $\displaystyle A=\begin{pmatrix}
+            2 & 1\\
+            0 & 2
+            \end{pmatrix}.$ Since the characteristic polynomial $$\det(tI-A)=\det\begin{pmatrix}
+            t-2 & -1\\
+            0 & t-2
+            \end{pmatrix}
+            =(t-2)^2.$$ Thus $A$ has only one eigenvalue $2$ with algebraic multiplicity $2$. However, the eigenspace corresponding to eigenvalue $2$ is $\{(x,0): x\in \R\}$ and thus the geometric multiplicity of eigenvalue $2$ is $1$. Thus $A$ does not have an eigenbasis and thus cannot be diagonalized.
+        \end{itemize}
+        
+    \end{myrmk}
+    \begin{mythm}\label{thm: eigenvalue of symmetric matrix is real}
+        If $A\in \M_{n\times n}(\R)$ is symmetric, i.e., $A^T = A$, and $\lambda \in \C$ is an eigenvalue of $A$, then $\lambda \in \R$.
+    \end{mythm}
+    \begin{proof}
+        Suppose $\lambda \in \C$ and $x\in \C ^n$ such that $A x = \lambda x$. With the standard Hermitian product, we have
+        \[
+        \begin{aligned}
+            \langle A x, x \rangle &= \langle \lambda x, x \rangle = \lambda \langle x, x \rangle,\\
+            \langle A x, x \rangle &= \langle x, A^* x \rangle = \langle x, \overline{A^T} x \rangle = \langle x, \overline{A} x \rangle=  \langle x, \lambda x \rangle = \overline{\lambda} \langle x, x \rangle.
+        \end{aligned}
+        \]
+        Since $\langle x, x \rangle > 0$, we have $\lambda = \overline{\lambda}$ and thus $\lambda \in \R$.
+    \end{proof}
+    \begin{myrmk}
+        Note
+        \begin{itemize}
+            \item the eigenvectors for a symmetric real matrix are not necessarily real.
+            \item Suppose $Ax = \lambda x$ for some $x=u+iv$ where $u,v\in \R^n$. Every eigenvalue $\lambda$ of $A$ must have an eigenvector in $\R^n$.
+        \end{itemize}
+    \end{myrmk}
+    \begin{mydef}\label{def: invariant subspace}
+        Let $V$ be a finite-dimensional vector space over $\R$ with $\dim V\ge 1$ and a positive definite scalar product $\langle \cdot, \cdot \rangle$. Let $A$ be a symmetric operator on $V$. We say a subspace $W$ of $V$ is \textbf{invariant} under $A$ if $A w \in W$ for all $w\in W$. In this case, we also say $A$ preserves $W$.
+    \end{mydef}
+    \begin{mylma}
+        Let $V$ and $A$ be defined in Definition~\ref{def: invariant subspace}. If $W$ is a subspace of $V$ invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
+    \end{mylma}
+    \begin{proof}
+        Suppose $W$ is invariant under $A$. By definition, for any $w\in W$, $Aw\in W$. Let $v\in W^\perp$ and we will show that $Av \in W^\perp$. Since $A$ is symmetric, we have $\langle Av, w \rangle = \langle v, A w \rangle = 0 $ for any $w\in W$. Thus $Av \in W^\perp$ and thus $W^\perp$ is invariant under $A$.
+    \end{proof}
+    \begin{mythm}\label{thm: real version of spectral theorem}
+        Let $V$ be a finite-dimensional vector space over $\R$ with $\dim V\ge 1$ and a positive definite scalar product $\langle \cdot, \cdot \rangle$. If $A$ is a symmetric operator on $V$, then $A$ has a orthonormal eigenbasis.
+    \end{mythm}
+    \begin{proof}
+        We prove by induction on $\dim V$.
+
+        \textbf{Initial case:} By the real version of Theorem~\ref{thm: eigenvalue of symmetric matrix is real}, $A$ has a real eigenvalue $\lambda$ and we pick an eigenvector with length $1$ to form an orthonormal basis.
+
+        \textbf{Inductive step:} suppose the statement holds for $V$ with $\dim V=n$. We need to prove for the case $\dim V=n+1$. Note that we can pick an eigenvector $v_1$ of $A$ with $\| v_1 \| = 1 $ due to the same reasoning in initial case. Let $V_1 = \operatorname{span} \{ v_1 \}$ and $V_1$ is invariant under $A$. By the previous lemma, the orthogonal complement $V_1^\perp$ of $V_1$ is also invariant under $A$. Since $V_1 \oplus V_1^\perp = V$ and $\dim V_1^\perp = n$, by the inductive hypothesis, the restrictd $A: V_1^\perp \to V_1^\perp$ has an orthonormal eigenbasis $\{v_2, v_3, \ldots, v_{n+1}\}$ for $V_1^\perp$. Thus $\{v_1, v_2, \ldots, v_{n+1}\}$ is an orthonormal eigenbasis for $V$.
+    \end{proof}
+    \begin{myrmk}
+        A real symmetric matrix/operator is always diagonalizable with an orthonormal eigenbasis. Particularly, suppose $A \in \M_{n\times n}(\R)$ is symmetric, let $\{x_1, x_2, \ldots, x_n\}$ be an orthonormal eigenbasis of $A$ and let $\lambda_1, \lambda_2, \ldots, \lambda_n$ be the corresponding eigenvalues. Then we have
+        $$ AX = X \Lambda, \quad \text{where } X = \begin{pmatrix}
+            | & | & & | \\
+            x_1 & x_2 & \cdots & x_n \\
+            | & | & & |
+        \end{pmatrix}, \quad \Lambda = \begin{pmatrix}
+            \lambda_1 & 0 & \cdots & 0 \\
+            0 & \lambda_2 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & \lambda_n
+        \end{pmatrix}. $$
+        Note that
+        $$ X^T X = \begin{pmatrix}
+            \langle x_1, x_1 \rangle & \langle x_1, x_2 \rangle & \cdots & \langle x_1, x_n \rangle \\
+            \langle x_2, x_1 \rangle & \langle x_2, x_2 \rangle & \cdots & \langle x_2, x_n \rangle \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \langle x_n, x_1 \rangle & \langle x_n, x_2 \rangle & \cdots & \langle x_n, x_n \rangle
+        \end{pmatrix}
+        = \begin{pmatrix}
+            1 & 0 & \cdots & 0 \\
+            0 & 1 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 1
+        \end{pmatrix} = I. $$
+        Thus $X$ is unitary and we call $A$ \textbf{unitarily/orthogonally diagonalizable}. Since $\Lambda$ is diagonal, we say $A$ is \textbf{unitarily similar to a diagonoal matrix} and $A=X\Lambda X^T = X \Lambda X^{-1}$ is a \textbf{spectral decomposition} of $A$ with $\lambda_1, \lambda_2, \ldots, \lambda_n$ being the \textbf{spectrum} of $A$.
+
+        The converse of Theorem~\ref{thm: real version of spectral theorem} is also true: if $A\in \M_{n\times n}(\R)$ has an orthonormal eigenbasis, i.e., $A=X\Lambda X^T$ for some unitary matrix $X$ and diagonal matrix $\Lambda$, then $A$ is symmetric since $A^T = (X\Lambda X^T)^T = X \Lambda X^T = A$.
+    \end{myrmk} 
+    \begin{mythm}\label{thm: eigenvalue of hermitian operator is real}
+        Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a hermitian operator on $V$ and $\lambda \in \C$ is an eigenvalue of $A$, then $\lambda \in \R$.
+    \end{mythm}
+    \begin{mydef}
+        Let $V$ be as in Theorem~\ref{thm: eigenvalue of hermitian operator is real} and $A$ be a hermitian operator on $V$. We say a subspace $W$ of $V$ is \textbf{invariant} under $A$ if $A w \in W$ for all $w\in W$. In this case, we also say $A$ preserves $W$.
+    \end{mydef}
+    \begin{mylma}
+        Let $V$ and $A$ be defined in the above definition. If $W$ is a subspace of $V$ invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
+    \end{mylma}
+    \begin{mythm}
+        Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a hermitian operator on $V$, then $A$ has an orthonormal eigenbasis.
+    \end{mythm}
+    \begin{myrmk}
+        If $A\in \M_{n\times n}(\C)$ is hermitian, then $A$ is unitarily diagonalizable, i.e., there exists a unitary matrix $X$ such that $X^* A X$ is diagonal. Moreover, the converse also holds: if $A\in \M_{n\times n}(\C)$ is unitarily diagonalizable, then $A$ is hermitian.
+    \end{myrmk}
+    \begin{mylma}
+        Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a unitary operator on $V$ and $W$ is invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
+    \end{mylma}
+    \begin{proof}
+        Suppose $Aw \in W$ for any $w\in W$ and $A$ is unitary. Let $v\in W^\perp$, then $\langle v,w \rangle = 0$ for any $w\in W$. We want to show $\langle Av,w \rangle = \langle v, A^* w \rangle = \langle v, A^{-1} w \rangle = 0$ for all $w\in W$, i.e., $Av \in W^\perp$. Note that if we restrict $A$ to be on $W$, i.e., $A_W:W\to W$, then $0\in \ker A_W \le \ker A = \{ 0\}$, then $A_W$ is an isomorphism on $W$. Hence, $A_W^{-1}: W\to W$ is also an isomorphism and $A^{-1} w \in W$ for any $w\in W$. Thus $\langle v, A^{-1} w \rangle = 0$ for any $w\in W$ and thus $Av \in W^\perp$.
+    \end{proof}
+    \begin{mythm}
+        For the complex case, if $A$ is a complex-unitary operator on $V$, then $A$ has an orthonormal eigenbasis. Particularly, if $A\in \M_{n\times n}(\C)$ is unitary, then $A=U\Lambda U^{-1} = U \Lambda U^*$ for some complex-unitary matrix $U$ and diagonal matrix $\Lambda$.
+    \end{mythm}
+    \begin{myrmk}
+        The eigenvalues of a complex-unitary operator must satisfy $|\lambda|=1$:
+        $$ \langle A v, A v \rangle = \langle \lambda v, \lambda v \rangle = \lambda \overline{\lambda} \langle v, v \rangle = |\lambda|^2 \langle v, v \rangle. $$
+         Since $A$ is unitary, we have $\langle A v, A v \rangle = \langle v, v \rangle$ and thus $|\lambda|=1$.
+    \end{myrmk}
+    \begin{myrmk}
+        A complex-unitary matrix/operator is not necessarily hermitian:
+        $$ A = \begin{pmatrix}
+            0 & -1 \\
+            1 & 0
+        \end{pmatrix}, \quad A^* = \begin{pmatrix}
+            0 & 1 \\
+            -1 & 0
+        \end{pmatrix} \ne A. $$
+        A hermitian matrix is not necessarily complex-unitary:
+        $$ A = \begin{pmatrix}
+            1 & 0 \\
+            0 & 2
+        \end{pmatrix}, \quad A^* = A, \quad \text{but } A^* A = \begin{pmatrix}
+            1 & 0 \\
+            0 & 4
+        \end{pmatrix} \ne I. $$
+    \end{myrmk}
+    \begin{mythm}
+        For the real case, if $A$ is a real-unitary operator on $V$, then $V$ can be expressed as $V=V_1 \oplus V_2 \oplus \cdots \oplus V_r$ where
+        \begin{enumerate}
+            \item each $V_i$ is a subspace of $V$ invariant under $A$
+            \item each $V_i$ is mutually orthogonal to each other, i.e., $\langle v_i, v_j \rangle = 0$ for any $v_i \in V_i$ and $v_j \in V_j$ with $i\neq j$
+            \item $\dim V_i = 1$ or $2$ for $i=1,2,\ldots,r$.
+        \end{enumerate}
+    \end{mythm}
+    \begin{proof}
+        We shall only prove the case $V=\R^n$ with the standard scalar product and $A$ is a real unitary operator. The general case can be reduced to this case by choosing an orthonormal basis for $V$ and consider the matrix representation of $A$ with respect to this basis.
+
+        We view $A$ as a complex-unitary matrix, i.e., $A\in \M_{n\times n}(\C)$ and $A^* A = I$. Suppose $z\ne 0$, $z\in \C^n$ is an eigenvector of $A$ corresponding to eigenvalue $\lambda \in \C$. Namely, $A z = \lambda z$ and $|\lambda|=1$. Let $z = x + i y$ for $x,y\in \R^n$ and $\lambda = \cos\theta + i\sin \theta$ for some $\theta\in \R$. We discuss by case.
+
+        \textbf{Case 1:} if $\lambda$ is real, then $\lambda = \pm 1$. Then $Ax + iAy = A(x+iy) = \lambda (x+iy) = \lambda x + i \lambda y$. Since $Ax, Ay, \lambda x, \lambda y$ are all real vectors, we have $Ax = \lambda x$ and $Ay = \lambda y$. We can let $v$ to be a non-zero vector in $\left\{ x,y \right\}$ and $v_1 = \dfrac{v}{\| v \|}$. We let $V_1 = \operatorname{span} \{ v_1 \}$, then $V_1$ is a one-dimensional subspace of $\R^n$ invariant under $A$. So $V_1^\perp$ is also invariant under $A$ and $V=V_1 \oplus V_1^\perp$.
+
+        \textbf{Case 2:} if $\lambda$ is not real, then $A z = \lambda z$ and $A \overline{z} = \overline{\lambda} \overline{z}$ since $A$ is a real matrix. Thus $\overline{z}$ is also an eigenvector of $A$ corresponding to eigenvalue $\overline{\lambda}$. Since $\left\{ z,\overline{z} \right\}$ are linearly independent, we know $\left\{ x,y \right\}$ are linearly independent. Note
+        $$\begin{cases}
+            A x = \cos\theta x - \sin\theta y \in \operatorname{span}\{x,y\},\\
+            A y = \sin\theta x + \cos\theta y \in \operatorname{span}\{x,y\}.
+        \end{cases}
+        $$
+        Let $V_1 = \operatorname{span} \{ x,y \}$, then $V_1$ is $A$-invariant and $\dim V_1 = 2$. So $V_1^\perp$ is also invariant under $A$ and $V=V_1 \oplus V_1^\perp$.
+        
+        By induction on $n$, we know $V$ can be reduced to the direct sum of $A$-invariant subspaces with dimension $1$ or $2$.
+    \end{proof}
+    \begin{mycor}
+        For the real case, if $A$ is a real-unitary operator on $V$, then there exists a basis $\mathcal{B}$ for $V$ such that 
+        $$\mathcal M_{\mathcal{B}}(A) = \begin{pmatrix}
+            M_1 & 0 & \cdots & 0 \\
+            0 & M_2 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & M_r
+        \end{pmatrix}$$
+        where each $M_i$ for $i=1,2,\ldots,r$ satisfies one of the following conditions:
+        $$ M_i = 1,\qquad M_i = -1, \qquad M_i = \begin{pmatrix}
+            \cos \theta_i & -\sin \theta_i \\
+            \sin \theta_i & \cos \theta_i
+        \end{pmatrix} \text{ with } \theta_i \neq k\pi \text{ for } k\in \Z. $$
+    \end{mycor}
+    \begin{myrmk}
+        Operators that have orthonormal eigenbasis $\mathcal B$, i.e., symmetric operators, hermitian operators and complex-unitary operators, are easy to handle. However, some operators do not have orthonormal eigenbasis (or even just an eigenbasis), but it's still possible to pick a basis $\mathcal B$ such that $\mathcal M_{\mathcal B}(A)$ has a nice form, i.e., ``is close to being diagonal''.
+    \end{myrmk}
+
+    \subsection{Polynomials and Triangulation of Matrices and Operators}
+    Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficients in $\mathcal{K}$ is a vector space with $\dim \mathbf P_n(\mathcal{K}) = n+1$. Also, the set of all polynomials $\mathcal{K}[x]$ with coefficients in $\mathcal{K}$ is a vector space with $\dim \mathcal K[x] = \infty$. 
+    \begin{mydef}
+        Suppose $A\in \M_{n\times n}(\mathcal{K})$ and $f\in \mathcal{K}[t]$ with $f(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_1 t + a_0$ for some non-negative integer $n$ and $a_i \in \mathcal K$ for $i=0,1,\ldots,n$. We define
+        $$ f(A) = a_n A^n + a_{n-1} A^{n-1} + \cdots + a_1 A + a_0 I_n, $$
+        and call it a \textbf{polynomial of matrix $A$}, where $I_n$ is the identity matrix of size $n$. We can also define $f(A)$ for any operator $A$ on a vector space $V$ by the same formula where $A^k := A \circ A \circ \cdots \circ A$ ($k$ times) and $I$ is the identity operator on $V$.
+    \end{mydef}
+    \begin{mythm}
+        Suppose $f,g\in \mathcal K[t]$ and $A\in \M_{n\times n}(\mathcal{K})$. Then we have
+        \begin{enumerate}[label=(\arabic*)]
+            \item for any $\alpha, \beta \in \mathcal K$, we have $(\alpha f + \beta g)(A) = \alpha f(A) + \beta g(A)$
+            \item $(fg)(A) = f(A) g(A)$
+        \end{enumerate}
+    \end{mythm}
+    \begin{mythm}
+        Suppose $A\in \M_{n\times n}(\mathcal{K})$. Then there exists a nonzero polynomial $f\in \mathcal{K}[t]$ such that $f(A) = 0$. 
+    \end{mythm}
+    \begin{proof}
+        Note $\dim \M_{n\times n}(\mathcal{K}) = n^2$. For any $N \ge n^2$, the set $\{ I, A, A^2, \ldots, A^N \}$ is linearly dependent. Thus there exist $\alpha_0, \alpha_1, \ldots, \alpha_N \in \mathcal K$ such that $\alpha_0 I + \alpha_1 A + \cdots + \alpha_N A^N = 0$. Let $f(t) = \alpha_N t^N + \cdots + \alpha_1 t + \alpha_0$, then $f(A) = 0$.
+    \end{proof}
+    \begin{myrmk}
+        The above theorems also hold for operators on a finite-dimensional vector space $V$ over $\mathcal K$.
+    \end{myrmk}
+    \begin{mydef}
+        Suppose $V$ is a finite-dimensional vector space over $\mathcal K$ with $\dim V\ge 1$ and $A$ is an operator on $V$. A set of subspaces $\{ V_1, V_2, \ldots, V_n \}$ of $V$ is called a \textbf{fan} of $A$ in $V$ if
+        \begin{enumerate}[label=(\arabic*)]
+            \item $V_i \subseteq V_{i+1}$ for $i=1,2,\ldots,n-1$,
+            \item $\dim V_i = i$ for $i=1,2,\ldots,n$,
+            \item $V_i$ is $A$-invariant for $i=1,2,\ldots,n$, i.e., $A v \in V_i$ for any $v\in V_i$ and $i=1,2,\ldots,n$.
+        \end{enumerate}
+        Let $\{ V_1, V_2, \ldots, V_n \}$ be a fan of $A$ in $V$. A basis $\{ v_1, \ldots, v_i \}$ of $V$ is called a \textbf{fan basis} if $\{ v_1, \ldots, v_i \}$ is a basis for $V_i$ for $i=1,2,\ldots,n$.
+    \end{mydef}
+    \begin{myrmk}
+        Note for a given fan of $A$, a fan basis always exists and is not unique. However, a fan may not exist.
+    \end{myrmk}
+    \begin{mythm}
+        Let $\mathcal{B} = \{v_1, \ldots, v_n\}$ be a fan basis for a operator $A$. Then $$\mathcal{M}_\mathcal{B} (A) = \begin{pmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            0 & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & a_{nn}
+        \end{pmatrix}$$ is an upper-triangular matrix.
+    \end{mythm}
+    \begin{proof}
+        Since $V_i = \operatorname{span}\{ v_1, \ldots, v_i \}$ is invariant under $A$ for $i=1,2,\ldots,n$, we have $A v_i \in V_i$ for $i=1,2,\ldots,n$. Thus $A v_i = a_{1i} v_1 + a_{2i} v_2 + \cdots + a_{ii} v_i$ for some $a_{1i}, a_{2i}, \ldots, a_{ii} \in \mathcal K$ and thus $\mathcal{M}_\mathcal{B}(A)$ is an upper-triangular matrix.
+    \end{proof}
+    \begin{myrmk}
+        If $\mathcal C = \{ u_1, \ldots, u_n \}$ is a basis of $V$ such that $\mathcal M_\mathcal{C}(A)$ is an upper-triangular matrix, then $\mathcal C$ is a fan basis for $A$ by letting $V_i = \operatorname{span} \{ u_1, \ldots, u_i \}$ for $i=1,2,\ldots,n$.
+    \end{myrmk}
+    \begin{mydef}
+        Suppose $V$ is a finite-dimensional vector space over $\mathcal K$ with $\dim V\ge 1$ and $A$ is an operator on $V$. If there exists a basis $\mathcal{B}$ for $V$ such that $\mathcal M_\mathcal{B}(A)$ is an upper-triangular matrix, then we say $A$ is \textbf{triangulable} and $\mathcal{B}$ is a \textbf{triangulation basis} for $A$. Particularly, we call a sqaure matrix $A$ \textbf{triangulable} if the associated operator is triangulable. For a triangulable matrix $A\in \M_{n\times n}(\mathcal K)$, there exists an invertible matrix $S \in \M_{n\times n}(\mathcal K)$ such that $S^{-1} A S$ is an upper-triangular matrix. We call the process of finding such a basis the \textbf{triangulation} of $A$.
+    \end{mydef}
+    \begin{mythm}
+        Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and $A$ is an operator on $V$. Then there exists a fan of $A$ in $V$ and thus $A$ is triangulable. Particularly, if $A\in \M_{n\times n}(\C)$, then there exists an invertible matrix $S$ such that $S^{-1} A S$ is an upper-triangular matrix.
+    \end{mythm}
+    \begin{proof}
+        We prove by induction on $n = \dim V$.
+
+        \textbf{Initial case:} if $n=1$, then $\mathcal{M}_\mathcal{B}(A) = (a)$ for some $a\in \C$ for any basis $\mathcal{B}$ of $V$. Thus $A$ is triangulable.
+
+        \textbf{Inductive step:} suppose the statement holds for $\dim V = n$. And we will prove for the case with $\dim V = n+1$. Note that we know we can pick an eigenvector $v_1 \ne 0$ of $A$ with eigenvalue $\lambda_1 \in \C$. Let $V_1 = \operatorname{span} \{ v_1 \}$, then $V = V_1 \oplus V_1^\perp$. Let $P_1 : V \to V$ where $P_1 (x) = \operatorname{Proj}_{V_1} (x)$ and $P_2: V \to V$ where $P_2(x) = \operatorname{Proj}_{V_1^\perp} (x)$ for any $x\in V$. Note
+        
+        \begin{itemize}
+            \item if $x\in V_1$, then $P_1(x) = x \in V_1$, $P_2(x) = 0$;
+            \item if $x\in V_1^\perp$, then $P_2(x) = x \in V_1^\perp$, $P_1(x) = 0$.
+        \end{itemize}
+        
+        Then $V_1^\perp$ is $P_2$-invariant and $P_2$ can also be restricted to be on $V_1^\perp$ as an operator. By the inductive assumption, there exists a fan of $P_2 A$ when restricted to be from $V_1^\perp$ to $V_1^\perp$. Let $\{ W_1, \ldots, W_n \}$ denote such a fan and define $V_i := V_1 + W_{i-1}$ for $i=2,3,\ldots,n+1$. Then
+
+        \begin{enumerate}[label=(\arabic*)]
+            \item $V_i \subseteq V_{i+1}$ for $i=1,2,\ldots,n$ since $W_{i-1} \subseteq W_i$ for $i=2,\ldots,n+1$,
+            \item $\dim V_i = \dim V_1 + \dim W_{i-1} = 1 + (i-1) = i$ because $W_{i-1} \subseteq V_1^\perp$
+            \item $V_1$ is $A$-invariant by definition. For $V_i$ with $i=2,3,\ldots,n+1$, note for any $x\in V$, $(P_1 + P_2)(x) = x$. Then $A = IA = (P_1 + P_2) A = P_1 A + P_2 A$. It suffices to show $Av \in V_i$ for any $v\in V_i$ with $i=2,3,\ldots,n+1$. Note $v = cv_1 + w_{i-1}$ where $c\in \C$ and $w_{i-1} \in W_{i-1}$. Then
+            $$
+            \begin{aligned}
+                Av &= P_1 A v + P_2 A v = P_1 A (cv_1 + w_{i-1}) + P_2 A (cv_1 + w_{i-1}) \\
+                &= \underbrace{(c\lambda_1)P_1 v_1 + P_1 A w_{i-1}}_{\in V_1} + \underbrace{c P_2 A v_1}_{=0} + \underbrace{(P_2 A) w_{i-1}}_{\in W_{i-1}} \in V_1 + W_{i-1} = V_i.
+            \end{aligned}
+            $$
+            Thus $V_i$ is $A$-invariant for $i=1,2,\ldots,n+1$.
+        \end{enumerate}
+        Hence, $\{ V_1, V_2, \ldots, V_{n+1} \}$ is a fan of $A$ in $V$ and thus $A$ is triangulable. 
+    \end{proof}
+    \begin{mythm}[Cayley-Hamilton Theorem]
+        Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and $A$ is an operator on $V$. Let $f(t) = \det (tI - A)$ be the characteristic polynomial of $A$. Then $f(A) = 0$.
+        
+    \end{mythm}
+    \begin{proof}
+        We can pick a fan $\{ V_1, V_2, \ldots, V_n \}$ of $A$ in $V$ and let $\mathcal B = \{ v_1, v_2, \ldots, v_n \}$ be a corresponding fan basis. Then we know
+        $$ \mathcal M_\mathcal{B}(A) = \begin{pmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            0 & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & a_{nn}
+        \end{pmatrix}$$
+        is a upper-triangular matrix. Thus 
+        $$ f(t) = \det (tI - A) = (a_{11} - t)(a_{22} - t) \cdots (a_{nn} - t) $$
+        and
+        $$ f(A) = (a_{11} I - A)(a_{22} I - A) \cdots (a_{nn} I - A). $$
+        We will show $\displaystyle \prod_{j=1}^{i}(a_{jj} I - A) v = 0$ for any $v \in V_i$ by induction on $i$.(Note when $i=n$, we have $f(A) =0$.)
+
+        \textbf{Initial case:} if $i=1$, then for $v \in V_1 = \operatorname{span} \{ v_1 \}$, i.e., $v = c v_1$ for some $c\in \C$, we have
+        $$ (a_{11} I - A) v = c(a_{11} I - A) v_1 = 0. $$
+
+
+        \textbf{Inductive step:} suppose the statement holds for $i$ case, i.e.,
+        $\displaystyle \prod_{j=1}^i (a_{jj} I - A) v = 0$ for any $v \in V_i$. We will prove for $i+1$ case: for $v \in V_{i+1} = \operatorname{span} \{ v_1, \ldots, v_{i+1} \} = cv_{i+1} + \tilde{v}$ where $c\in \C$ and $\tilde{v} \in \operatorname{span} \{ v_1, \ldots, v_i \} = V_i$, we have
+        \begin{align*}
+            \prod_{j=1}^{i+1} (a_{jj} I - A) v = c\prod_{j=1}^{i} (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} + \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \tilde{v}.
+        \end{align*}
+        Note
+        $$\begin{aligned}
+            (a_{i+1,i+1} I - A) v_{i+1} &= a_{i+1,i+1} v_{i+1} - (a_{1,i+1} v_1 + a_{2,i+1} v_2 + \cdots + a_{i,i+1} v_i + a_{i+1,i+1} v_{i+1})\\ &= -a_{1,i+1} v_1 - a_{2,i+1} v_2 - \cdots - a_{i,i+1} v_i \in V_i = \operatorname{span}\{ v_1, \ldots, v_i \}.
+        \end{aligned}$$
+        Thus we know the first term $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} = 0$ by the inductive assumption. Also, note $\displaystyle \tilde{v} \in V_i$ which is invariant under $(a_{i+1,i+1} I - A)$, we have $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \tilde{v} = 0$ by the inductive assumption. Hence,
+        $$\prod_{j=1}^{i+1} (a_{jj} I - A) v = 0 \quad \text{for any } v \in V_{i+1}. $$
+
+        By induction, we have $\displaystyle \prod_{j=1}^n (a_{jj} I - A) v = 0$ for any $v \in V_n = V$. Thus $f(A) = 0$.
+    \end{proof}
+
+
+	\newpage
+
+	\appendix
+
+
+	\section{Chinese–English glossary}
+	\begin{center}
+		\setlength\LTleft{0pt}
+		\setlength\LTright{0pt}
+		\rowcolors{2}{gray!20}{gray!5} % 深-浅-深-浅
+		\begin{longtable}{|>{\raggedright\arraybackslash}p{5cm}|>{\raggedright\arraybackslash}p{8cm}|}
+			\hline
+			\rowcolor{gray!35}
+			\textbf{中文} & \textbf{English} \\
+			\hline
+			\endfirsthead
+
+			\hline
+			\rowcolor{gray!35}
+			\textbf{中文} & \textbf{English} \\
+			\hline
+			\endhead
+
+			\hline
+			\endfoot
+
+			\hline
+			\endlastfoot
+
+			域 & Field \\
+			子域 & Subfield \\
+			加法单位元 & Additive identity element \\
+			乘法单位元 & Multiplicative identity element \\
+			加法逆元 & Additive inverse \\
+			乘法逆元 / 倒数 & Multiplicative inverse / Reciprocal \\
+			封闭性 & Closure \\
+			结合律 & Associative law \\
+			交换律 & Commutative law \\
+			分配律 & Distributive law \\
+			数 / 标量 & Number / Scalar \\
+			向量空间 & Vector space \\
+			零向量 & Zero vector \\
+			向量 & Vector \\
+			子空间 & Subspace \\
+			线（一维子空间） & Line (1-dimensional subspace) \\
+			平面（二维子空间） & Plane (2-dimensional subspace) \\
+			线性组合 & Linear combination \\
+			张成 / 生成子空间 & Span \\
+			生成集 / 张成集 & Spanning set / Set of generators \\
+			线性相关 & Linearly dependent \\
+			线性无关 & Linearly independent \\
+			极大线性无关组 & Maximal linearly independent set / subset \\
+			基 / 基底 & Basis \\
+			%有序基 & Ordered basis \\
+			维数 & Dimension \\
+			有限维向量空间 & Finite-dimensional vector space \\
+			无限维向量空间 & Infinite-dimensional vector space \\
+			分量 / 坐标 & Components / Coordinates \\
+			坐标向量 & Coordinate vector \\
+			多项式空间 $\mathcal{K}[x]$ & Polynomial space $\mathcal{K}[x]$ \\
+			多项式空间 $\mathbf P_n(\mathcal{K})$ & Polynomial space $\mathbf P_n(\mathcal{K})$ (degree $\le n$) \\
+			矩阵 & Matrix \\
+			% $m\times n$ 矩阵 & Matrix of size $m\times n$ \\
+			% 第 $(i,j)$ 个元素 & $(i,j)$-entry of a matrix \\
+			行向量 & Row vector \\
+			列向量 & Column vector \\
+			方阵 & Square matrix \\
+			非方阵 & Non-square matrix \\
+			零矩阵 & Zero matrix \\
+			矩阵加法 & Matrix addition \\
+			矩阵数乘 & Scalar multiplication of a matrix \\
+			矩阵空间 $\mathbf{M}_{m\times n}(\mathcal{K})$ & Matrix space $\mathbf{M}_{m\times n}(\mathcal{K})$ \\
+			标准基（矩阵空间） & Standard basis of $\mathbf{M}_{m\times n}(\mathcal{K})$ \\
+			% 矩阵乘法 & Matrix multiplication \\
+			单位矩阵 $I_n$ & Identity matrix $I_n$ \\
+			可逆矩阵 / 非奇异矩阵 & Invertible (non-singular) matrix \\
+			奇异矩阵 & Singular matrix \\
+			转置矩阵 & Transpose of a matrix \\
+			对称矩阵 & Symmetric matrix \\
+			对角矩阵 & Diagonal matrix \\
+			线性方程组 & Linear system \\
+			齐次线性方程组 & Homogeneous linear system \\
+			非齐次线性方程组 & Inhomogeneous / Nonhomogeneous linear system \\
+			解（方程组） & Solution (of a system) \\
+			平凡解 & Trivial solution \\
+			非平凡解 & Nontrivial solution \\
+			线性映射 / 线性变换 & Linear map / Linear transformation \\
+			平移 & Translation (by a vector) \\
+			线性映射空间 $\mathcal{L}(V,W)$ & Space of linear maps $\mathcal{L}(V,W)$ \\
+			核（线性映射的核） & Kernel of a linear map \\
+			像（线性映射的像） & Image of a linear map \\
+			列空间 $\mathrm{Col}(A)$ & Column space $\mathrm{Col}(A)$ \\
+			零空间 $\mathrm{Null}(A)$ & Null space $\mathrm{Null}(A)$ \\
+			秩 & Rank \\
+			零化度 & Nullity \\
+			秩–零化度定理 & Rank–Nullity Theorem \\
+			双射 & Bijective map \\
+			可逆映射 & Invertible mapping \\
+			同构 & Isomorphism \\
+			恒等映射 $\mathrm{Id}_V$ & Identity map $\mathrm{Id}_V$ \\
+			与矩阵对应的线性映射 & Linear map associated with a matrix \\
+			线性映射的矩阵表示 & Matrix representation of a linear map \\
+			对角化（线性映射/矩阵） & Diagonalization (of a linear map / matrix) \\
+			可对角化线性映射 / 矩阵 & Diagonalizable linear map / matrix \\
+			复合映射 $G\circ F$ & Composition $G\circ F$ of linear maps \\
+			特征值 & Eigenvalue \\
+			特征向量 & Eigenvector \\
+			特征基 & Eigenbasis \\
+			相似矩阵 & Similar matrices \\
+			变换基矩阵 & Change-of-basis matrix \\
+			标量积 & Scalar product \\
+			非退化 & Non-degenerate \\
+			正定 & Positive-definite \\
+			范数 & Norm \\
+			投影 & Projection \\
+			单位向量 & Unit vector \\
+			归一化 & Normalization \\
+			正交 & Orthogonal \\
+			正交补 & Orthogonal complement \\
+			正交基 & Orthogonal basis \\
+			柯西–施瓦茨不等式 & Cauchy–Schwarz inequality \\
+			三角不等式 & Triangle inequality \\
+			格拉姆–施密特正交化过程 & Gram–Schmidt process \\
+			贝塞尔不等式 & Bessel's inequality \\
+			% \hline
+		\end{longtable}
+	\end{center}
 
 \end{document}
