@@ -33,7 +33,7 @@ This repository contains the lecture notes for **Linear Algebra Track A**, deliv
 - **Primary Textbook / 主要教材**  
   Serge Lang, *Linear Algebra* (3rd edition).  
   Michael Artin, *Algebra* (2nd edition), Chapters 1, 3–7.  
-  本课程以 Serge Lang 所著《Linear Algebra》（第三版）及 Michael Artin 所著《Algebra》（第二版）第 1、3–7 章为主要教材。
+  本课程以 Serge Lang 所著《Linear Algebra》（第三版）为主要教材。
 
 ---
 
