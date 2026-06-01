@@ -245,7 +245,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\K}{\mathcal{K}}
-\newcommand{\M}{\mathbf{M}_{m\times n}}
+\newcommand{\M}{\mathbf{M}}
 
 % ===== FAA-style upright symbols =====
 \newcommand{\ee}{\mathrm{e}}

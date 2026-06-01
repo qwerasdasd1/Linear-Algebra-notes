@@ -1,252 +1,248 @@
-	\chapter{Matrices}
-	
-	These definitions are just for a quick review. Please refer to Artin's Algebra Chapter 1.1-1.3 for more detailed information.
-	
-	\section{Definitions}
-	
-	\begin{definitionenv}
-		Let $\mathcal{K}$ be a field and let $m, n$ be two positive integers.  
-		An array of elements in $\mathcal{K}$ of the form
+\chapter{Matrices}
+
+These definitions are just for a quick review. Please refer to Artin's Algebra Chapter 1.1-1.3 for more detailed information.
+
+\section{Definitions}
+
+\begin{definitionenv}
+	Let $\mathcal{K}$ be a field and let $m, n$ be two positive integers.
+	An array of elements in $\mathcal{K}$ of the form
+	\[
+	A =
+	\begin{pmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{m1} & a_{m2} & \cdots & a_{mn}
+	\end{pmatrix}
+	\]
+	is called a \textbf{matrix} over $\mathcal{K}$ of size $m \times n$, or an $m$-by-$n$ matrix.
+\end{definitionenv}
+
+\begin{definitionenv}
+	For convenience, we may write $A = (a_{ij})$ for $1 \leq i \leq m$ and $1 \leq j \leq n$ to denote a matrix in $\mathcal{K}^{m \times n}$.
+	The element $a_{ij}$ is called the $(i,j)$-entry of $A$.
+	Each \textbf{column} of $A$ is a vector in $\mathcal{K}^m$, and each \textbf{row} of $A$ is a vector in $\mathcal{K}^n$.
+\end{definitionenv}
+
+
+\begin{definitionenv}
+	If $m = n$, the matrix $A$ is called a \textbf{square matrix}.
+	If $m \neq n$, $A$ is called a \textbf{non-square matrix}.
+	The \textbf{zero matrix} is the matrix all of whose entries are zero.
+\end{definitionenv}
+
+\begin{definitionenv}
+	Let $A = (a_{ij})$ and $B = (b_{ij})$ be two matrices in $\mathbf{M}_{m \times n}(\mathcal{K})$, and let $\alpha \in \mathcal{K}$.
+	Matrix addition and scalar multiplication are defined as:
+	\[
+	(A + B) = (a_{ij} + b_{ij}), \quad
+	(\alpha A) = (\alpha a_{ij}), \quad
+	\text{for } 1 \leq i \leq m, \ 1 \leq j \leq n.
+	\]
+\end{definitionenv}
+
+\begin{remarkenv}
+	Let $\mathbf{M}_{m \times n}(\mathcal{K})$ (or $\mathrm{Mat}_{m \times n}(\mathcal{K})$) denote the set of all $m \times n$ matrices over $\mathcal{K}$.
+	Equipped with the matrix addition and scalar multiplication defined above,
+	$\mathbf{M}_{m \times n}(\mathcal{K})$ forms a \textbf{vector space} over $\mathcal{K}$.
+
+	Its dimension is
+	\[
+	\dim \mathbf{M}_{m \times n}(\mathcal{K}) = m n.
+	\]
+\end{remarkenv}
+
+\begin{definitionenv}
+	The \textbf{standard basis} of the vector space $\mathbf{M}_{m \times n}(\mathcal{K})$
+	is the collection of $m n$ matrices $\{e_{ij}\}$, where each $e_{ij}$ has entry
+	\[
+	(e_{ij})_{pq} =
+	\begin{cases}
+		1, & \text{if } p = i \text{ and } q = j,\\
+		0, & \text{otherwise}.
+	\end{cases}
+	\]
+	Each $e_{ij}$ has a single $1$ in the $(i,j)$-position and zeros elsewhere.
+	Every matrix $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$ can be expressed uniquely as
+	\[
+	A = \sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij} e_{ij}.
+	\]
+\end{definitionenv}
+
+\begin{definitionenv}
+	Let $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$ and
+	$B = (b_{jk}) \in \mathbf{M}_{n \times p}(\mathcal{K})$.
+	The \textbf{product} of $A$ and $B$, denoted by $AB$, is defined as the $m \times p$ matrix
+	\[
+	AB = (c_{ik}) \in \mathbf{M}_{m \times p}(\mathcal{K}),
+	\]
+	where each entry $c_{ik}$ is given by
+	\[
+	c_{ik} = \sum_{j=1}^{n} a_{ij} b_{jk},
+	\quad \text{for } 1 \leq i \leq m, \ 1 \leq k \leq p.
+	\]
+\end{definitionenv}
+
+\begin{theoremenv}
+	(\textbf{Associative Law})
+	Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$,
+	$B \in \mathbf{M}_{n \times p}(\mathcal{K})$,
+	and $C \in \mathbf{M}_{p \times q}(\mathcal{K})$.
+	Then matrix multiplication is associative:
+	\[
+	(AB)C = A(BC).
+	\]
+\end{theoremenv}
+
+\begin{theoremenv}
+	(\textbf{Distributive Laws})
+	For matrices $A, A_1, A_2 \in \mathbf{M}_{m \times n}(\mathcal{K})$
+	and $B, B_1, B_2 \in \mathbf{M}_{n \times p}(\mathcal{K})$,
+	matrix multiplication satisfies
+	\[
+	A(B_1 + B_2) = AB_1 + AB_2,
+	\quad (A_1 + A_2)B = A_1B + A_2B.
+	\]
+\end{theoremenv}
+
+\begin{definitionenv}
+	For each positive integer $n$, the \textbf{identity matrix} of order $n$, denoted by $I_n$,
+	is the $n \times n$ matrix whose entries are defined by
+	\[
+	(I_n)_{ij} =
+	\begin{cases}
+		1, & \text{if } i = j,\\
+		0, & \text{otherwise}.
+	\end{cases}
+	\]
+	The matrix $I_n$ satisfies the property that for any
+	$A \in \mathbf{M}_{m \times n}(\mathcal{K})$ and
+	$B \in \mathbf{M}_{n \times p}(\mathcal{K})$,
+	\[
+	AI_n = A, \quad I_nB = B.
+	\]
+\end{definitionenv}
+
+\begin{definitionenv}
+	Let $A \in \mathbf{M}_{n \times n}(\mathcal{K})$ be a square matrix.
+	If there exists a matrix $B \in \mathbf{M}_{n \times n}(\mathcal{K})$ such that
+	\[
+	AB = BA = I_n,
+	\]
+	then $A$ is called an \textbf{invertible matrix} (or \textbf{non-singular matrix}),
+	and $B$ is called the \textbf{inverse matrix} of $A$, denoted by $A^{-1}$. If no such $B$ exists, $A$ is called a \textbf{singular matrix}.
+\end{definitionenv}
+
+\begin{remarkenv}
+	Such inverse shown above is unique.
+\end{remarkenv}
+
+\begin{definitionenv}
+	Let $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$.
+	The \textbf{transpose} of $A$, denoted by $A^{T}$, is the $n \times m$ matrix obtained by interchanging the rows and columns of $A$.
+	Formally,
+	\[
+	A^{T} = (a_{ji}) \in \mathbf{M}_{n \times m}(\mathcal{K}),
+	\]
+	that is, the $(i,j)$-entry of $A^{T}$ equals the $(j,i)$-entry of $A$. If $A^{T} = A$, then $A$ is called a \textbf{symmetric matrix}.
+\end{definitionenv}
+
+\begin{theoremenv}
+	(\textbf{Properties of the Transpose})
+	Let $A, B \in \mathbf{M}_{m \times n}(\mathcal{K})$ and $\alpha \in \mathcal{K}$.
+	Then the transpose operation satisfies the following properties:
+	\begin{enumerate}
+		\item $(A^{T})^{T} = A$;
+		\item $(A + B)^{T} = A^{T} + B^{T}$;
+		\item $(\alpha A)^{T} = \alpha A^{T}$;
+		\item If $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ and
+		$B \in \mathbf{M}_{n \times p}(\mathcal{K})$, then
 		\[
-		A =
-		\begin{pmatrix}
-			a_{11} & a_{12} & \cdots & a_{1n} \\
-			a_{21} & a_{22} & \cdots & a_{2n} \\
-			\vdots & \vdots & \ddots & \vdots \\
-			a_{m1} & a_{m2} & \cdots & a_{mn}
-		\end{pmatrix}
+		(AB)^{T} = B^{T}A^{T}.
 		\]
-		is called a \textbf{matrix} over $\mathcal{K}$ of size $m \times n$, or an $m$-by-$n$ matrix.
-	\end{definitionenv}
-	
-	\begin{definitionenv}
-		For convenience, we may write $A = (a_{ij})$ for $1 \leq i \leq m$ and $1 \leq j \leq n$ to denote a matrix in $\mathcal{K}^{m \times n}$.  
-		The element $a_{ij}$ is called the $(i,j)$-entry of $A$.  
-		Each \textbf{column} of $A$ is a vector in $\mathcal{K}^m$, and each \textbf{row} of $A$ is a vector in $\mathcal{K}^n$.
-	\end{definitionenv}
-	
-	
-	\begin{definitionenv}
-		If $m = n$, the matrix $A$ is called a \textbf{square matrix}.  
-		If $m \neq n$, $A$ is called a \textbf{non-square matrix}.  
-		The \textbf{zero matrix} is the matrix all of whose entries are zero.
-	\end{definitionenv}
-	
-	\begin{definitionenv}
-		Let $A = (a_{ij})$ and $B = (b_{ij})$ be two matrices in $\mathbf{M}_{m \times n}(\mathcal{K})$, and let $\alpha \in \mathcal{K}$.  
-		\textbf{Matrix addition} and \textbf{scalar multiplication} are defined as:
-		\[
-		(A + B) = (a_{ij} + b_{ij}), \quad
-		(\alpha A) = (\alpha a_{ij}), \quad
-		\text{for } 1 \leq i \leq m, \ 1 \leq j \leq n.
-		\]
-	\end{definitionenv}
-	
-	\begin{remarkenv}
-		Let $\mathbf{M}_{m \times n}(\mathcal{K})$ (or $\mathrm{Mat}_{m \times n}(\mathcal{K})$) denote the set of all $m \times n$ matrices over $\mathcal{K}$.  
-		Equipped with the matrix addition and scalar multiplication defined above,  
-		$\mathbf{M}_{m \times n}(\mathcal{K})$ forms a \textbf{vector space} over $\mathcal{K}$.
-		
-		Its dimension is
-		\[
-		\dim \mathbf{M}_{m \times n}(\mathcal{K}) = m n.
-		\]
-	\end{remarkenv}
-	
-	\begin{definitionenv}
-		The \textbf{standard basis} of the vector space $\mathbf{M}_{m \times n}(\mathcal{K})$  
-		is the collection of $m n$ matrices $\{e_{ij}\}$, where each $e_{ij}$ has entry
-		\[
-		(e_{ij})_{pq} =
-		\begin{cases}
-			1, & \text{if } p = i \text{ and } q = j,\\
-			0, & \text{otherwise}.
-		\end{cases}
-		\]
-		Each $e_{ij}$ has a single $1$ in the $(i,j)$-position and zeros elsewhere.  
-		Every matrix $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$ can be expressed uniquely as
-		\[
-		A = \sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij} e_{ij}.
-		\]
-	\end{definitionenv}
-	
-	\begin{definitionenv}
-		Let $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$ and 
-		$B = (b_{jk}) \in \mathbf{M}_{n \times p}(\mathcal{K})$.  
-		The \textbf{product} of $A$ and $B$, denoted by $AB$, is defined as the $m \times p$ matrix
-		\[
-		AB = (c_{ik}) \in \mathbf{M}_{m \times p}(\mathcal{K}),
-		\]
-		where each entry $c_{ik}$ is given by
-		\[
-		c_{ik} = \sum_{j=1}^{n} a_{ij} b_{jk},
-		\quad \text{for } 1 \leq i \leq m, \ 1 \leq k \leq p.
-		\]
-	\end{definitionenv}
-	
-	\begin{theoremenv}
-		(\textbf{Associative Law})  
-		Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$, 
-		$B \in \mathbf{M}_{n \times p}(\mathcal{K})$, 
-		and $C \in \mathbf{M}_{p \times q}(\mathcal{K})$.  
-		Then matrix multiplication is associative:
-		\[
-		(AB)C = A(BC).
-		\]
-	\end{theoremenv}
-	
-	\begin{theoremenv}
-		(\textbf{Distributive Laws})  
-		For matrices $A, A_1, A_2 \in \mathbf{M}_{m \times n}(\mathcal{K})$ 
-		and $B, B_1, B_2 \in \mathbf{M}_{n \times p}(\mathcal{K})$,  
-		matrix multiplication satisfies
-		\[
-		A(B_1 + B_2) = AB_1 + AB_2, 
-		\quad (A_1 + A_2)B = A_1B + A_2B.
-		\]
-	\end{theoremenv}
-	
-	\begin{definitionenv}
-		For each positive integer $n$, the \textbf{identity matrix} of order $n$, denoted by $I_n$,  
-		is the $n \times n$ matrix whose entries are defined by
-		\[
-		(I_n)_{ij} =
-		\begin{cases}
-			1, & \text{if } i = j,\\
-			0, & \text{otherwise}.
-		\end{cases}
-		\]
-		The matrix $I_n$ satisfies the property that for any 
-		$A \in \mathbf{M}_{m \times n}(\mathcal{K})$ and 
-		$B \in \mathbf{M}_{n \times p}(\mathcal{K})$,
-		\[
-		AI_n = A, \quad I_nB = B.
-		\]
-	\end{definitionenv}
-	
-	\begin{definitionenv}
-		Let $A \in \mathbf{M}_{n \times n}(\mathcal{K})$ be a square matrix.  
-		If there exists a matrix $B \in \mathbf{M}_{n \times n}(\mathcal{K})$ such that
-		\[
-		AB = BA = I_n,
-		\]
-		then $A$ is called an \textbf{invertible matrix} (or \textbf{non-singular matrix}),  
-		and $B$ is called the \textbf{inverse matrix} of $A$, denoted by $A^{-1}$.
-		
-		If no such $B$ exists, $A$ is called a \textbf{singular matrix}.
-	\end{definitionenv}
-	
-	\begin{remarkenv}
-		Such inverse shown above is unique.
-	\end{remarkenv}
-	
-	\begin{definitionenv}
-		Let $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$.  
-		The \textbf{transpose} of $A$, denoted by $A^{T}$, is the $n \times m$ matrix obtained by interchanging the rows and columns of $A$.  
-		Formally,
-		\[
-		A^{T} = (a_{ji}) \in \mathbf{M}_{n \times m}(\mathcal{K}),
-		\]
-		that is, the $(i,j)$-entry of $A^{T}$ equals the $(j,i)$-entry of $A$.
-		
-		If $A^{T} = A$, then $A$ is called a \textbf{symmetric matrix}.
-	\end{definitionenv}
-	
-	\begin{theoremenv}
-		(\textbf{Properties of the Transpose})  
-		Let $A, B \in \mathbf{M}_{m \times n}(\mathcal{K})$ and $\alpha \in \mathcal{K}$.  
-		Then the transpose operation satisfies the following properties:
-		\begin{enumerate}
-			\item $(A^{T})^{T} = A$;
-			\item $(A + B)^{T} = A^{T} + B^{T}$;
-			\item $(\alpha A)^{T} = \alpha A^{T}$;
-			\item If $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ and 
-			$B \in \mathbf{M}_{n \times p}(\mathcal{K})$, then
-			\[
-			(AB)^{T} = B^{T}A^{T}.
-			\]
-		\end{enumerate}
-	\end{theoremenv}
-	
-	
-	\section{Linear Equations}
-	\begin{definitionenv}
-		A \textbf{linear system} over a field $\mathcal{K}$ is a collection of $m$ linear equations in $n$ variables or unknowns 
-		$x_1, x_2, \dots, x_n$ of the form
-		\[
-		\begin{cases}
-			a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1,\\
-			a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2,\\
-			\quad \vdots\\
-			a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m,
-		\end{cases}
-		\]
-		where $a_{ij}, b_i \in \mathcal{K}$ for all $i,j$.  
-		
-		It can be written compactly in matrix form as
-		\[
-		A\mathbf{x} = \mathbf{b},
-		\]
-		where
-		\[
-		A = 
-		\begin{pmatrix}
-			a_{11} & a_{12} & \cdots & a_{1n} \\
-			a_{21} & a_{22} & \cdots & a_{2n} \\
-			\vdots & \vdots & \ddots & \vdots \\
-			a_{m1} & a_{m2} & \cdots & a_{mn}
-		\end{pmatrix},
-		\quad
-		\mathbf{x} =
-		\begin{pmatrix}
-			x_1 \\ x_2 \\ \vdots \\ x_n
-		\end{pmatrix},
-		\quad
-		\mathbf{b} =
-		\begin{pmatrix}
-			b_1 \\ b_2 \\ \vdots \\ b_m
-		\end{pmatrix}.
-		\]
-	\end{definitionenv}
-	
-	
-	\begin{definitionenv}
-		A linear system $A\mathbf{x} = \mathbf{b}$ is called:
-		\begin{itemize}
-			\item \textbf{homogeneous} if $\mathbf{b} = \mathbf{0}$, i.e. the system is of the form $A\mathbf{x} = \mathbf{0}$;
-			\item \textbf{inhomogeneous} (or nonhomogeneous) if $\mathbf{b} \neq \mathbf{0}$.
-		\end{itemize}
-	\end{definitionenv}
-	
-	\begin{definitionenv}
-		A vector $\mathbf{x} \in \mathcal{K}^n$ satisfying the equation $A\mathbf{x} = \mathbf{b}$ is called a \textbf{solution} of the system.
-		
-		In the special case of a homogeneous system $A\mathbf{x} = \mathbf{0}$:
-		\begin{itemize}
-			\item the vector $\mathbf{0}$ is called the \textbf{trivial solution};
-			\item any nonzero vector $\mathbf{x} \neq \mathbf{0}$ satisfying $A\mathbf{x} = \mathbf{0}$ is called a \textbf{nontrivial solution}.
-		\end{itemize}
-	\end{definitionenv}
-	
-	\begin{theoremenv}
-		Let
-		\[
-		\begin{cases}
-			a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = 0,\\
-			a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = 0,\\
-			\quad \vdots \\
-			a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = 0,
-		\end{cases}
-		\]
-		be a homogeneous system of $m$ linear equations in $n$ unknowns, with coefficients in a field $\mathcal{K}$.  
-		Assume that $n > m$.  
-		Then the system has a \textbf{nontrivial solution} in $\mathcal{K}$.
-	\end{theoremenv}
-	
-	\begin{theoremenv}
-		Assume that $m = n$ in the system above, and that the column vectors 
-		$A^1, A^2, \dots, A^n$ of the coefficient matrix $A$ are linearly independent.  
-		Then the system has a \textbf{unique solution} in $\mathcal{K}$.
-	\end{theoremenv}
-	
-	\newpage
+	\end{enumerate}
+\end{theoremenv}
+
+
+\section{Linear Equations}
+\begin{definitionenv}
+	A \textbf{linear system} over a field $\mathcal{K}$ is a collection of $m$ linear equations in $n$ variables or unknowns
+	$x_1, x_2, \dots, x_n$ of the form
+	\[
+	\begin{cases}
+		a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1,\\
+		a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2,\\
+		\quad \vdots\\
+		a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m,
+	\end{cases}
+	\]
+	where $a_{ij}, b_i \in \mathcal{K}$ for all $i,j$.
+
+	It can be written compactly in matrix form as
+	\[
+	A\mathbf{x} = \mathbf{b},
+	\]
+	where
+	\[
+	A =
+	\begin{pmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{m1} & a_{m2} & \cdots & a_{mn}
+	\end{pmatrix},
+	\quad
+	\mathbf{x} =
+	\begin{pmatrix}
+		x_1 \\ x_2 \\ \vdots \\ x_n
+	\end{pmatrix},
+	\quad
+	\mathbf{b} =
+	\begin{pmatrix}
+		b_1 \\ b_2 \\ \vdots \\ b_m
+	\end{pmatrix}.
+	\]
+\end{definitionenv}
+
+
+\begin{definitionenv}
+	A linear system $A\mathbf{x} = \mathbf{b}$ is called:
+	\begin{itemize}
+		\item \textbf{homogeneous} if $\mathbf{b} = \mathbf{0}$, i.e. the system is of the form $A\mathbf{x} = \mathbf{0}$;
+		\item \textbf{inhomogeneous} (or nonhomogeneous) if $\mathbf{b} \neq \mathbf{0}$.
+	\end{itemize}
+\end{definitionenv}
+
+\begin{definitionenv}
+	A vector $\mathbf{x} \in \mathcal{K}^n$ satisfying the equation $A\mathbf{x} = \mathbf{b}$ is called a \textbf{solution} of the system.
+
+	In the special case of a homogeneous system $A\mathbf{x} = \mathbf{0}$:
+	\begin{itemize}
+		\item the vector $\mathbf{0}$ is called the \textbf{trivial solution};
+		\item any nonzero vector $\mathbf{x} \neq \mathbf{0}$ satisfying $A\mathbf{x} = \mathbf{0}$ is called a \textbf{nontrivial solution}.
+	\end{itemize}
+\end{definitionenv}
+
+\begin{theoremenv}
+	Let
+	\[
+	\begin{cases}
+		a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = 0,\\
+		a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = 0,\\
+		\quad \vdots \\
+		a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = 0,
+	\end{cases}
+	\]
+	be a homogeneous system of $m$ linear equations in $n$ unknowns, with coefficients in a field $\mathcal{K}$.
+	Assume that $n > m$.
+	Then the system has a \textbf{nontrivial solution} in $\mathcal{K}$.
+\end{theoremenv}
+
+\begin{theoremenv}
+	Assume that $m = n$ in the system above, and that the column vectors
+	$A^1, A^2, \dots, A^n$ of the coefficient matrix $A$ are linearly independent.
+	Then the system has a \textbf{unique solution} in $\mathcal{K}$.
+\end{theoremenv}
+
+\newpage

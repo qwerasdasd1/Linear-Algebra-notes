@@ -1,0 +1,262 @@
+    \chapter{Eigenvectors and eigenvalues}
+    \section{Definitions}
+    Recall: in Definition~\ref{def:eigenvalue} we defined the concept of eigenvectors and eigenvalues. After introducing operators, we can discuss more properties of eigenvectors and eigenvalues in this subsection.
+
+    \begin{definitionenv}
+        Suppose $V$ is a vector space over $\mathcal{K}$ and $A$ is an operator on $V$. We say $\lambda \in \mathcal{K}$ is an \textbf{eigenvalue} of $A$ if there exists a nonzero vector $v\in V$ such that $Av = \lambda v$. In this case, we call $v$ an \textbf{eigenvector} of $A$ corresponding to eigenvalue $\lambda$.
+    \end{definitionenv}
+    \begin{remarkenv}
+        Note that for a given eigenvector $v$ of $A$, the corresponding eigenvalue $\lambda$ is unique since $v\neq 0$. However, for a given eigenvalue $\lambda$, the corresponding eigenvectors are not unique.
+    \end{remarkenv}
+    \begin{definitionenv}
+    $E_\lambda$ or $V_\lambda$ is defined to be a subspace of $V: E_\lambda = \{v\in V: Av = \lambda v\}$ when $\lambda$ is an eigenvalue of $A$. We call $E_\lambda$ the \textbf{eigenspace} of $A$ corresponding to $\lambda$.
+    \end{definitionenv}
+    \begin{exampleenv}
+        \begin{enumerate}
+            \item Suppose $V$ is the vector space over $\R$ consisting of all infinitely differentiable functions defined on $\R$. Let $D:V\to V$ be the differentiation operator, i.e., $D(f) = f'$. Then $e^{\lambda x}$ is an eigenvector/eigenfunction of $D$ corresponding to eigenvalue $\lambda$ for any $\lambda \in \R$.
+            \item Let
+            $$ R(\theta) = \begin{pmatrix}
+                \cos \theta & -\sin \theta \\
+                \sin \theta & \cos \theta
+            \end{pmatrix}
+            $$
+            be an operator on $\R^2$. Then
+            \begin{itemize}
+                \item if $\theta = k\pi$ for $k\in \Z$, then $R(\theta)$ has two eigenvalues $1$ and $-1$.
+                \item if $\theta \neq k\pi$ for $k\in \Z$, then $R(\theta)$ has no eigenvalue.
+            \end{itemize}
+
+        \end{enumerate}
+    \end{exampleenv}
+    \begin{theoremenv}
+        Let $V$ be a vector space over $\mathcal{K}$ and $A$ be an operator on $V$. Suppose $\left\{ v_1,\cdots, v_m \right\} $ are eigenvectors of $V$ corresponding to eigenvalues $\lambda_1, \cdots, \lambda_m$ respectively. If $\lambda_i \neq \lambda_j$ for any $i\neq j$, then $\left\{ v_1,\cdots, v_m \right\} $ is linearly independent.
+    \end{theoremenv}
+    \begin{proofenv}
+        We can prove the theorem by induction on $m$. The case $m=1$ is trivial.
+
+        \textbf{Inductive step:} suppose the statement holds for case $m$ and we will prove for the case $m+1$. Suppose $\alpha_1, \alpha_2, \ldots, \alpha_{m+1} \in \mathcal{K}$ such that
+        $$ \sum_{i=1}^{m+1} \alpha_i v_i = 0. $$
+        Applying $\lambda_{m+1}$ to both sides of the above equation, we have
+        $$ \sum_{i=1}^{m+1} \alpha_i \lambda_{m+1} v_i = 0. $$
+        Apllying $A$ to both sides of the first equation, we have
+        $$ \sum_{i=1}^{m+1} \alpha_i A v_i = \sum_{i=1}^{m+1} \alpha_i \lambda_i v_i = 0. $$
+        Thus $$\sum_{i=1}^{m} \alpha_i (\lambda_{m+1} - \lambda_i) v_i = 0. $$
+        By the inductive hypothesis, we have $\alpha_i (\lambda_{m+1} - \lambda_i) = 0$ for $i=1,2,\ldots,m$. Since $\lambda_i \neq \lambda_{m+1}$ for $i=1,2,\ldots,m$, we have $\alpha_i = 0$ for $i=1,2,\ldots,m$. Thus $\alpha_{m+1} v_{m+1} = 0$ and thus $\alpha_{m+1} = 0$ since $v_{m+1}$ is nonzero. We have shown that $\alpha_1 = \alpha_2 = \cdots = \alpha_{m+1} = 0$ and thus $\{v_1, v_2, \ldots, v_{m+1}\}$ is linearly independent.
+    \end{proofenv}
+    \begin{propositionenv}
+        Suppose $V$ with $\dim V=n$ and $A$ is an operator on $V$. If $A$ has $n$ distinct eigenvalues, then the corresponding eigenvectors form a basis $\mathcal B$ for $V$. Moreover, the matrix representation of $A$ with respect to basis $\mathcal B$ is a diagonal matrix with diagonal entries being the eigenvalues of $A$, i.e.,
+        $$ \mathcal M_{\mathcal B}(A) = \begin{bmatrix}
+            \lambda_1 & 0 & \cdots & 0 \\
+            0 & \lambda_2 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & \lambda_n
+        \end{bmatrix}. $$
+    \end{propositionenv}
+    \begin{remarkenv}
+        Note
+        $$ \text{A has } n \text{ distinct eigenvalues} \implies \text{A has an eigenbasis}.$$
+        However,
+        $$ \text{A has an eigenbasis} \centernot\implies \text{A has } n \text{ distinct eigenvalues}. $$
+        For example, let $A = \begin{bmatrix}
+            0 & 0 \\
+            0 & 0
+        \end{bmatrix}$ be an operator on $\R^2$. Then $A$ has only one eigenvalue $0$ but the corresponding eigenspace is $\R^2$ and thus any basis of $\R^2$ is an eigenbasis for $A$.
+    \end{remarkenv}
+    \begin{theoremenv}
+        Let $V$ be a finite-dimensional vector space over $\mathcal{K}$ and $A$ be an operator on $V$. Suppose $\lambda \in \mathcal{K}$. Then $\lambda$ is an eigenvalue of $A$ if and only if $A-\lambda I$ is not invertible, where $I$ is the identity operator on $V$.
+    \end{theoremenv}
+    \begin{definitionenv}
+        Let $V$ be a vector space wtih $\dim V = n$ and $A$ be an operator on $V$. Then
+        $$ P_A(t) = \det(A-tI) $$
+        is called the \textbf{characteristic polynomial} of $A$. Note that $P_A$ is a polynomial of degree $n$. Suppose $$P_A(t) = (t-\lambda_1)^{m_1} (t-\lambda_2)^{m_2} \cdots (t-\lambda_k)^{m_k}\quad \text{with } \sum_{i=1}^k m_i = n $$ where $\lambda_1, \lambda_2, \ldots, \lambda_k$ are distinct eigenvalues of $A$ and $m_i$ is the multiplicity of $\lambda_i$ for $i=1,2,\ldots,k$. Then we call $m_i$ the \textbf{algebraic multiplicity} of eigenvalue $\lambda_i$. We also define the \textbf{geometric multiplicity} of eigenvalue $\lambda_i$ to be $E_\lambda=\ker(A-\lambda I)$, i.e., how many linearly independent eigenvectors of $A$ corresponding to $\lambda_i$.
+    \end{definitionenv}
+    \begin{remarkenv}
+        There're two cases that a matrix $A$ cannot be diagonalized, i.e., $A$ does not have an eigenbasis:
+        \begin{itemize}
+            \item $A$ has no roots in $\R$, i.e., $A$ has no eigenvalue. We can expand the field $\R$ to $\C$ and then $A$ has eigenvalues in $\C$ since $\C$ is algebraically closed.
+            \item $A$ has eigenvalues but does not have enough linearly independent eigenvectors. For example, let $\displaystyle A=\begin{pmatrix}
+            2 & 1\\
+            0 & 2
+            \end{pmatrix}.$ Since the characteristic polynomial $$\det(tI-A)=\det\begin{pmatrix}
+            t-2 & -1\\
+            0 & t-2
+            \end{pmatrix}
+            =(t-2)^2.$$ Thus $A$ has only one eigenvalue $2$ with algebraic multiplicity $2$. However, the eigenspace corresponding to eigenvalue $2$ is $\{(x,0): x\in \R\}$ and thus the geometric multiplicity of eigenvalue $2$ is $1$. Thus $A$ does not have an eigenbasis and thus cannot be diagonalized.
+        \end{itemize}
+
+    \end{remarkenv}
+    \begin{theoremenv}\label{thm: eigenvalue of symmetric matrix is real}
+        If $A\in \M_{n\times n}(\R)$ is symmetric, i.e., $A^T = A$, and $\lambda \in \C$ is an eigenvalue of $A$, then $\lambda \in \R$.
+    \end{theoremenv}
+    \begin{proofenv}
+        Suppose $\lambda \in \C$ and $x\in \C ^n$ such that $A x = \lambda x$. With the standard Hermitian product, we have
+        \[
+        \begin{aligned}
+            \langle A x, x \rangle &= \langle \lambda x, x \rangle = \lambda \langle x, x \rangle,\\
+            \langle A x, x \rangle &= \langle x, A^* x \rangle = \langle x, \overline{A^T} x \rangle = \langle x, \overline{A} x \rangle=  \langle x, \lambda x \rangle = \overline{\lambda} \langle x, x \rangle.
+        \end{aligned}
+        \]
+        Since $\langle x, x \rangle > 0$, we have $\lambda = \overline{\lambda}$ and thus $\lambda \in \R$.
+    \end{proofenv}
+    \begin{remarkenv}
+        Note
+        \begin{itemize}
+            \item the eigenvectors for a symmetric real matrix are not necessarily real.
+            \item Suppose $Ax = \lambda x$ for some $x=u+iv$ where $u,v\in \R^n$. Every eigenvalue $\lambda$ of $A$ must have an eigenvector in $\R^n$.
+        \end{itemize}
+    \end{remarkenv}
+    \section{Spectral Theorems}
+    \begin{definitionenv}\label{def: invariant subspace}
+        Let $V$ be a finite-dimensional vector space over $\R$ with $\dim V\ge 1$ and a positive definite scalar product $\langle \cdot, \cdot \rangle$. Let $A$ be a symmetric operator on $V$. We say a subspace $W$ of $V$ is \textbf{invariant} under $A$ if $A w \in W$ for all $w\in W$. In this case, we also say $A$ preserves $W$.
+    \end{definitionenv}
+    \begin{lemmaenv}
+        Let $V$ and $A$ be defined in Definition~\ref{def: invariant subspace}. If $W$ is a subspace of $V$ invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
+    \end{lemmaenv}
+    \begin{proofenv}
+        Suppose $W$ is invariant under $A$. By definition, for any $w\in W$, $Aw\in W$. Let $v\in W^\perp$ and we will show that $Av \in W^\perp$. Since $A$ is symmetric, we have $\langle Av, w \rangle = \langle v, A w \rangle = 0 $ for any $w\in W$. Thus $Av \in W^\perp$ and thus $W^\perp$ is invariant under $A$.
+    \end{proofenv}
+    \begin{theoremenv}\label{thm: real version of spectral theorem}
+        Let $V$ be a finite-dimensional vector space over $\R$ with $\dim V\ge 1$ and a positive definite scalar product $\langle \cdot, \cdot \rangle$. If $A$ is a symmetric operator on $V$, then $A$ has a orthonormal eigenbasis.
+    \end{theoremenv}
+    \begin{proofenv}
+        We prove by induction on $\dim V$.
+
+        \textbf{Initial case:} By the real version of Theorem~\ref{thm: eigenvalue of symmetric matrix is real}, $A$ has a real eigenvalue $\lambda$ and we pick an eigenvector with length $1$ to form an orthonormal basis.
+
+        \textbf{Inductive step:} suppose the statement holds for $V$ with $\dim V=n$. We need to prove for the case $\dim V=n+1$. Note that we can pick an eigenvector $v_1$ of $A$ with $\| v_1 \| = 1 $ due to the same reasoning in initial case. Let $V_1 = \operatorname{span} \{ v_1 \}$ and $V_1$ is invariant under $A$. By the previous lemma, the orthogonal complement $V_1^\perp$ of $V_1$ is also invariant under $A$. Since $V_1 \oplus V_1^\perp = V$ and $\dim V_1^\perp = n$, by the inductive hypothesis, the restrictd $A: V_1^\perp \to V_1^\perp$ has an orthonormal eigenbasis $\{v_2, v_3, \ldots, v_{n+1}\}$ for $V_1^\perp$. Thus $\{v_1, v_2, \ldots, v_{n+1}\}$ is an orthonormal eigenbasis for $V$.
+    \end{proofenv}
+    \begin{remarkenv}
+        A real symmetric matrix/operator is always diagonalizable with an orthonormal eigenbasis. Particularly, suppose $A \in \M_{n\times n}(\R)$ is symmetric, let $\{x_1, x_2, \ldots, x_n\}$ be an orthonormal eigenbasis of $A$ and let $\lambda_1, \lambda_2, \ldots, \lambda_n$ be the corresponding eigenvalues. Then we have
+        $$ AX = X \Lambda, \quad \text{where } X = \begin{pmatrix}
+            | & | & & | \\
+            x_1 & x_2 & \cdots & x_n \\
+            | & | & & |
+        \end{pmatrix}, \quad \Lambda = \begin{pmatrix}
+            \lambda_1 & 0 & \cdots & 0 \\
+            0 & \lambda_2 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & \lambda_n
+        \end{pmatrix}. $$
+        Note that
+        $$ X^T X = \begin{pmatrix}
+            \langle x_1, x_1 \rangle & \langle x_1, x_2 \rangle & \cdots & \langle x_1, x_n \rangle \\
+            \langle x_2, x_1 \rangle & \langle x_2, x_2 \rangle & \cdots & \langle x_2, x_n \rangle \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \langle x_n, x_1 \rangle & \langle x_n, x_2 \rangle & \cdots & \langle x_n, x_n \rangle
+        \end{pmatrix}
+        = \begin{pmatrix}
+            1 & 0 & \cdots & 0 \\
+            0 & 1 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 1
+        \end{pmatrix} = I. $$
+        Thus $X$ is unitary and we call $A$ \textbf{unitarily/orthogonally diagonalizable}. Since $\Lambda$ is diagonal, we say $A$ is \textbf{unitarily similar to a diagonoal matrix} and $A=X\Lambda X^T = X \Lambda X^{-1}$ is a \textbf{spectral decomposition} of $A$ with $\lambda_1, \lambda_2, \ldots, \lambda_n$ being the \textbf{spectrum} of $A$.
+
+        The converse of Theorem~\ref{thm: real version of spectral theorem} is also true: if $A\in \M_{n\times n}(\R)$ has an orthonormal eigenbasis, i.e., $A=X\Lambda X^T$ for some unitary matrix $X$ and diagonal matrix $\Lambda$, then $A$ is symmetric since $A^T = (X\Lambda X^T)^T = X \Lambda X^T = A$.
+    \end{remarkenv}
+    \begin{theoremenv}\label{thm: eigenvalue of hermitian operator is real}
+        Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a hermitian operator on $V$ and $\lambda \in \C$ is an eigenvalue of $A$, then $\lambda \in \R$.
+    \end{theoremenv}
+    \begin{definitionenv}
+        Let $V$ be as in Theorem~\ref{thm: eigenvalue of hermitian operator is real} and $A$ be a hermitian operator on $V$. We say a subspace $W$ of $V$ is \textbf{invariant} under $A$ if $A w \in W$ for all $w\in W$. In this case, we also say $A$ preserves $W$.
+    \end{definitionenv}
+    \begin{lemmaenv}
+        Let $V$ and $A$ be defined in the above definition. If $W$ is a subspace of $V$ invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
+    \end{lemmaenv}
+    \begin{theoremenv}
+        Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a hermitian operator on $V$, then $A$ has an orthonormal eigenbasis.
+    \end{theoremenv}
+    \begin{remarkenv}
+        If $A\in \M_{n\times n}(\C)$ is hermitian, then $A$ is unitarily diagonalizable, i.e., there exists a unitary matrix $X$ such that $X^* A X$ is diagonal. Moreover, the converse also holds: if $A\in \M_{n\times n}(\C)$ is unitarily diagonalizable, then $A$ is hermitian.
+    \end{remarkenv}
+    \begin{lemmaenv}
+        Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a unitary operator on $V$ and $W$ is invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
+    \end{lemmaenv}
+    \begin{proofenv}
+        Suppose $Aw \in W$ for any $w\in W$ and $A$ is unitary. Let $v\in W^\perp$, then $\langle v,w \rangle = 0$ for any $w\in W$. We want to show $\langle Av,w \rangle = \langle v, A^* w \rangle = \langle v, A^{-1} w \rangle = 0$ for all $w\in W$, i.e., $Av \in W^\perp$. Note that if we restrict $A$ to be on $W$, i.e., $A_W:W\to W$, then $0\in \ker A_W \le \ker A = \{ 0\}$, then $A_W$ is an isomorphism on $W$. Hence, $A_W^{-1}: W\to W$ is also an isomorphism and $A^{-1} w \in W$ for any $w\in W$. Thus $\langle v, A^{-1} w \rangle = 0$ for any $w\in W$ and thus $Av \in W^\perp$.
+    \end{proofenv}
+    \begin{theoremenv}
+        For the complex case, if $A$ is a complex-unitary operator on $V$, then $A$ has an orthonormal eigenbasis. Particularly, if $A\in \M_{n\times n}(\C)$ is unitary, then $A=U\Lambda U^{-1} = U \Lambda U^*$ for some complex-unitary matrix $U$ and diagonal matrix $\Lambda$.
+    \end{theoremenv}
+    \begin{remarkenv}
+        The eigenvalues of a complex-unitary operator must satisfy $|\lambda|=1$:
+        $$ \langle A v, A v \rangle = \langle \lambda v, \lambda v \rangle = \lambda \overline{\lambda} \langle v, v \rangle = |\lambda|^2 \langle v, v \rangle. $$
+         Since $A$ is unitary, we have $\langle A v, A v \rangle = \langle v, v \rangle$ and thus $|\lambda|=1$.
+    \end{remarkenv}
+    \begin{remarkenv}
+        A complex-unitary matrix/operator is not necessarily hermitian:
+        $$ A = \begin{pmatrix}
+            0 & -1 \\
+            1 & 0
+        \end{pmatrix}, \quad A^* = \begin{pmatrix}
+            0 & 1 \\
+            -1 & 0
+        \end{pmatrix} \ne A. $$
+        A hermitian matrix is not necessarily complex-unitary:
+        $$ A = \begin{pmatrix}
+            1 & 0 \\
+            0 & 2
+        \end{pmatrix}, \quad A^* = A, \quad \text{but } A^* A = \begin{pmatrix}
+            1 & 0 \\
+            0 & 4
+        \end{pmatrix} \ne I. $$
+    \end{remarkenv}
+    \begin{remarkenv}
+        Note for symmetric, hermitian and unitary operators, the spectrum theorems are quite similar, which motivates us to find a more general class of operators that can unify these three types of operators.
+    \end{remarkenv}
+    \begin{definitionenv}
+        Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. We say an operator $A$ on $V$ is \textbf{normal} if $A^* A = A A^*$.
+    \end{definitionenv}
+    \begin{theoremenv}
+        Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a normal operator on $V$, then $A$ has an orthonormal eigenbasis.
+    \end{theoremenv}
+    \begin{remarkenv}
+        The converse still holds.
+    \end{remarkenv}
+    \begin{theoremenv}
+        For the real case, if $A$ is a real-unitary operator on $V$, then $V$ can be expressed as $V=V_1 \oplus V_2 \oplus \cdots \oplus V_r$ where
+        \begin{enumerate}
+            \item each $V_i$ is a subspace of $V$ invariant under $A$
+            \item each $V_i$ is mutually orthogonal to each other, i.e., $\langle v_i, v_j \rangle = 0$ for any $v_i \in V_i$ and $v_j \in V_j$ with $i\neq j$
+            \item $\dim V_i = 1$ or $2$ for $i=1,2,\ldots,r$.
+        \end{enumerate}
+    \end{theoremenv}
+    \begin{proofenv}
+        We shall only prove the case $V=\R^n$ with the standard scalar product and $A$ is a real unitary operator. The general case can be reduced to this case by choosing an orthonormal basis for $V$ and consider the matrix representation of $A$ with respect to this basis.
+
+        We view $A$ as a complex-unitary matrix, i.e., $A\in \M_{n\times n}(\C)$ and $A^* A = I$. Suppose $z\ne 0$, $z\in \C^n$ is an eigenvector of $A$ corresponding to eigenvalue $\lambda \in \C$. Namely, $A z = \lambda z$ and $|\lambda|=1$. Let $z = x + i y$ for $x,y\in \R^n$ and $\lambda = \cos\theta + i\sin \theta$ for some $\theta\in \R$. We discuss by case.
+
+        \textbf{Case 1:} if $\lambda$ is real, then $\lambda = \pm 1$. Then $Ax + iAy = A(x+iy) = \lambda (x+iy) = \lambda x + i \lambda y$. Since $Ax, Ay, \lambda x, \lambda y$ are all real vectors, we have $Ax = \lambda x$ and $Ay = \lambda y$. We can let $v$ to be a non-zero vector in $\left\{ x,y \right\}$ and $v_1 = \dfrac{v}{\| v \|}$. We let $V_1 = \operatorname{span} \{ v_1 \}$, then $V_1$ is a one-dimensional subspace of $\R^n$ invariant under $A$. So $V_1^\perp$ is also invariant under $A$ and $V=V_1 \oplus V_1^\perp$.
+
+        \textbf{Case 2:} if $\lambda$ is not real, then $A z = \lambda z$ and $A \overline{z} = \overline{\lambda} \overline{z}$ since $A$ is a real matrix. Thus $\overline{z}$ is also an eigenvector of $A$ corresponding to eigenvalue $\overline{\lambda}$. Since $\left\{ z,\overline{z} \right\}$ are linearly independent, we know $\left\{ x,y \right\}$ are linearly independent. Note
+        $$\begin{cases}
+            A x = \cos\theta x - \sin\theta y \in \operatorname{span}\{x,y\},\\
+            A y = \sin\theta x + \cos\theta y \in \operatorname{span}\{x,y\}.
+        \end{cases}
+        $$
+        Let $V_1 = \operatorname{span} \{ x,y \}$, then $V_1$ is $A$-invariant and $\dim V_1 = 2$. So $V_1^\perp$ is also invariant under $A$ and $V=V_1 \oplus V_1^\perp$.
+
+        By induction on $n$, we know $V$ can be reduced to the direct sum of $A$-invariant subspaces with dimension $1$ or $2$.
+    \end{proofenv}
+    \begin{corollaryenv}
+        For the real case, if $A$ is a real-unitary operator on $V$, then there exists a basis $\mathcal{B}$ for $V$ such that
+        $$\mathcal M_{\mathcal{B}}(A) = \begin{pmatrix}
+            M_1 & 0 & \cdots & 0 \\
+            0 & M_2 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & M_r
+        \end{pmatrix}$$
+        where each $M_i$ for $i=1,2,\ldots,r$ satisfies one of the following conditions:
+        $$ M_i = 1,\qquad M_i = -1, \qquad M_i = \begin{pmatrix}
+            \cos \theta_i & -\sin \theta_i \\
+            \sin \theta_i & \cos \theta_i
+        \end{pmatrix} \text{ with } \theta_i \neq k\pi \text{ for } k\in \Z. $$
+    \end{corollaryenv}
+    \begin{remarkenv}
+        The mapping $\theta_i \mapsto -\theta_i$ gives the standard rotation matrix.
+    \end{remarkenv}
+    \begin{remarkenv}
+        Operators that have orthonormal eigenbasis $\mathcal B$, i.e., symmetric operators, hermitian operators and complex-unitary operators, are easy to handle. However, some operators do not have orthonormal eigenbasis (or even just an eigenbasis), but it's still possible to pick a basis $\mathcal B$ such that $\mathcal M_{\mathcal B}(A)$ has a nice form, i.e., ``is close to being diagonal''.
+    \end{remarkenv}
+
+    \newpage
