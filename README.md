@@ -64,7 +64,7 @@ This repository contains the lecture notes for **Linear Algebra Track A**, deliv
 
 These notes were compiled through the following process:
 
-1. **Board note transcription / 板书整理** — The core content is based on Prof. Zhang's lecture board work, faithfully transcribed and typeset.
+1. **Board note transcription / 板书整理** — The core content is based on Prof. Zhang's lecture board work. It has been reorganized and typeset, with some statements rephrased in equivalent form and supplemented by minor explanatory adjustments where appropriate.
 2. **Motivational context and remarks / 动机阐释与评注** — The author has added their own commentary to provide motivation, intuitive explanations, and supplementary remarks where deemed helpful.
 3. **Restructuring and pruning / 重排与删节** — The material has undergone a degree of rearrangement to improve logical flow, and overly trivial examples have been removed to keep the notes concise.
 4. **Supplementary content / 补充内容** — Material from exercise sessions (习题课) and homework assignments has been incorporated to enrich the treatment of certain topics.
@@ -73,7 +73,7 @@ In summary, these notes are **not** a verbatim transcript of lectures; they are 
 
 本讲义的创作过程如下：
 
-1. **板书整理** — 核心内容基于张老师的课堂板书进行转录与排版；
+1. **板书整理** — 核心内容基于张老师的课堂板书整理而成。笔记在整理与排版过程中对部分表述进行了等价改写，并在适当位置加入了少量解释性补充;
 2. **动机阐释与评注** — 作者适当加入了自身的理解与评注，以提供学习动机和直观解释；
 3. **重排与删节** — 对内容进行了一定程度的重排以优化逻辑脉络，并删去了部分过于简单的例题；
 4. **补充内容** — 结合习题课与课后作业内容，对相关知识点进行了补充。
