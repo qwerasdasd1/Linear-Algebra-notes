@@ -1,232 +1,330 @@
-    \chapter{Triangulation and Jordan Form}
-    Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficients in $\mathcal{K}$ is a vector space with $\dim \mathbf P_n(\mathcal{K}) = n+1$. Also, the set of all polynomials $\mathcal{K}[x]$ with coefficients in $\mathcal{K}$ is a vector space with $\dim \mathcal K[x] = \infty$.
-    \section{Polynomials and Triangulation of Matrices and Operators}
-    \begin{definitionenv}
-        Suppose $A\in \M_{n\times n}(\mathcal{K})$ and $f\in \mathcal{K}[t]$ with $f(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_1 t + a_0$ for some non-negative integer $n$ and $a_i \in \mathcal K$ for $i=0,1,\ldots,n$. We define
-        $$ f(A) = a_n A^n + a_{n-1} A^{n-1} + \cdots + a_1 A + a_0 I_n, $$
-        and call it a \textbf{polynomial of matrix $A$}, where $I_n$ is the identity matrix of size $n$.
-    \end{definitionenv}
-    \begin{remarkenv}
-        We can also define $f(A)$ for any operator $A$ on a vector space $V$ by the same formula where $A^k := A \circ A \circ \cdots \circ A$ ($k$ times) and $I$ is the identity operator on $V$.
-    \end{remarkenv}
-    \begin{theoremenv}\label{thm: properties of polynomial of matrix}
-        Suppose $f,g\in \mathcal K[t]$ and $A\in \M_{n\times n}(\mathcal{K})$. Then we have
-        \begin{enumerate}[label=(\arabic*)]
-            \item for any $\alpha, \beta \in \mathcal K$, we have $(\alpha f + \beta g)(A) = \alpha f(A) + \beta g(A)$
-            \item $(fg)(A) = f(A) g(A)$
-        \end{enumerate}
-    \end{theoremenv}
-    \begin{theoremenv}\label{thm: existence of annihilating polynomial}
-        Suppose $A\in \M_{n\times n}(\mathcal{K})$. Then there exists a nonzero polynomial $f\in \mathcal{K}[t]$ such that $f(A) = 0$.
-    \end{theoremenv}
-    \begin{proofenv}
-        Note $\dim \M_{n\times n}(\mathcal{K}) = n^2$. For any $N \ge n^2$, the set $\{ I, A, A^2, \ldots, A^N \}$ is linearly dependent. Thus there exist $\alpha_0, \alpha_1, \ldots, \alpha_N \in \mathcal K$ such that $\alpha_0 I + \alpha_1 A + \cdots + \alpha_N A^N = 0$. Let $f(t) = \alpha_N t^N + \cdots + \alpha_1 t + \alpha_0$, then $f(A) = 0$.
-    \end{proofenv}
-    \begin{remarkenv}
-        Theorem~\ref{thm: properties of polynomial of matrix} and Theorem~\ref{thm: existence of annihilating polynomial} also hold for operators on a finite-dimensional vector space $V$ over $\mathcal K$.
-    \end{remarkenv}
-    \begin{definitionenv}
-        Suppose $V$ is a finite-dimensional vector space over $\mathcal K$ with $\dim V\ge 1$ and $A$ is an operator on $V$. A set of subspaces $\{ V_1, V_2, \ldots, V_n \}$ of $V$ is called a \textbf{fan} of $A$ in $V$ if
-        \begin{enumerate}[label=(\arabic*)]
-            \item $V_i \subseteq V_{i+1}$ for $i=1,2,\ldots,n-1$,
-            \item $\dim V_i = i$ for $i=1,2,\ldots,n$,
-            \item $V_i$ is $A$-invariant for $i=1,2,\ldots,n$, i.e., $A v \in V_i$ for any $v\in V_i$ and $i=1,2,\ldots,n$.
-        \end{enumerate}
-        Moreover, a basis $\{ v_1, \ldots, v_i \}$ of $V$ is called a \textbf{fan basis} if $\{ v_1, \ldots, v_i \}$ is a basis for $V_i$ for $i=1,2,\ldots,n$.
-    \end{definitionenv}
-    \begin{remarkenv}
-        Note for a given fan of $A$, a fan basis always exists and is not unique. However, a fan may not exist.
-    \end{remarkenv}
-    \begin{theoremenv}
-        Let $\mathcal{B} = \{v_1, \ldots, v_n\}$ be a fan basis for a operator $A$. Then $$\mathcal{M}_\mathcal{B} (A) = \begin{pmatrix}
-            a_{11} & a_{12} & \cdots & a_{1n} \\
-            0 & a_{22} & \cdots & a_{2n} \\
-            \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & a_{nn}
-        \end{pmatrix}$$ is an upper-triangular matrix.
-    \end{theoremenv}
-    \begin{proofenv}
-        Since $V_i = \operatorname{span}\{ v_1, \ldots, v_i \}$ is invariant under $A$ for $i=1,2,\ldots,n$, we have $A v_i \in V_i$ for $i=1,2,\ldots,n$. Thus $A v_i = a_{1i} v_1 + a_{2i} v_2 + \cdots + a_{ii} v_i$ for some $a_{1i}, a_{2i}, \ldots, a_{ii} \in \mathcal K$ and thus $\mathcal{M}_\mathcal{B}(A)$ is an upper-triangular matrix.
-    \end{proofenv}
-    \begin{remarkenv}
-        If $\mathcal C = \{ u_1, \ldots, u_n \}$ is a basis of $V$ such that $\mathcal M_\mathcal{C}(A)$ is an upper-triangular matrix, then $\mathcal C$ is a fan basis for $A$ by letting $V_i = \operatorname{span} \{ u_1, \ldots, u_i \}$ for $i=1,2,\ldots,n$.
-    \end{remarkenv}
-    \begin{definitionenv}
-        Suppose $V$ is a finite-dimensional vector space over $\mathcal K$ with $\dim V\ge 1$ and $A$ is an operator on $V$. If there exists a basis $\mathcal{B}$ for $V$ such that $\mathcal M_\mathcal{B}(A)$ is an upper-triangular matrix, then we say $A$ is \textbf{triangulable} and $\mathcal{B}$ is a \textbf{triangulation basis} for $A$. Particularly, we call a sqaure matrix $A$ \textbf{triangulable} if the associated operator is triangulable. For a triangulable matrix $A\in \M_{n\times n}(\mathcal K)$, there exists an invertible matrix $S \in \M_{n\times n}(\mathcal K)$ such that $S^{-1} A S$ is an upper-triangular matrix. We call the process of finding such a basis the \textbf{triangulation} of $A$.
-    \end{definitionenv}
-    \begin{theoremenv}
-        Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and $A$ is an operator on $V$. Then there exists a fan of $A$ in $V$ and thus $A$ is triangulable. Particularly, if $A\in \M_{n\times n}(\C)$, then there exists an invertible matrix $S$ such that $S^{-1} A S$ is an upper-triangular matrix.
-    \end{theoremenv}
-    \begin{proofenv}
-        We prove by induction on $n = \dim V$.
+\chapter{Triangulation and Jordan Form}
+Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficients in $\mathcal{K}$ is a vector space with $\dim \mathbf P_n(\mathcal{K}) = n+1$. Also, the set of all polynomials $\mathcal{K}[x]$ with coefficients in $\mathcal{K}$ is a vector space with $\dim \mathcal K[x] = \infty$.
+\section{Polynomials and Triangulation of Matrices and Operators}
+\begin{definitionenv}
+    Suppose $A\in \M_{n\times n}(\mathcal{K})$ and $f\in \mathcal{K}[t]$ with $f(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_1 t + a_0$ for some non-negative integer $n$ and $a_i \in \mathcal K$ for $i=0,1,\ldots,n$. We define
+    $$ f(A) = a_n A^n + a_{n-1} A^{n-1} + \cdots + a_1 A + a_0 I_n, $$
+    and call it a \textbf{polynomial of matrix $A$}, where $I_n$ is the identity matrix of size $n$.
+\end{definitionenv}
+\begin{remarkenv}
+    We can also define $f(A)$ for any operator $A$ on a vector space $V$ by the same formula where $A^k := A \circ A \circ \cdots \circ A$ ($k$ times) and $I$ is the identity operator on $V$.
+\end{remarkenv}
+\begin{theoremenv}\label{thm: properties of polynomial of matrix}
+    Suppose $f,g\in \mathcal K[t]$ and $A\in \M_{n\times n}(\mathcal{K})$. Then we have
+    \begin{enumerate}[label=(\arabic*)]
+        \item for any $\alpha, \beta \in \mathcal K$, we have $(\alpha f + \beta g)(A) = \alpha f(A) + \beta g(A)$
+        \item $(fg)(A) = f(A) g(A)$
+    \end{enumerate}
+\end{theoremenv}
+\begin{theoremenv}\label{thm: existence of annihilating polynomial}
+    Suppose $A\in \M_{n\times n}(\mathcal{K})$. Then there exists a nonzero polynomial $f\in \mathcal{K}[t]$ such that $f(A) = 0$.
+\end{theoremenv}
+\begin{proofenv}
+    Note $\dim \M_{n\times n}(\mathcal{K}) = n^2$. For any $N \ge n^2$, the set $\{ I, A, A^2, \ldots, A^N \}$ is linearly dependent. Thus there exist $\alpha_0, \alpha_1, \ldots, \alpha_N \in \mathcal K$ such that $\alpha_0 I + \alpha_1 A + \cdots + \alpha_N A^N = 0$. Let $f(t) = \alpha_N t^N + \cdots + \alpha_1 t + \alpha_0$, then $f(A) = 0$.
+\end{proofenv}
+\begin{remarkenv}
+    Theorem~\ref{thm: properties of polynomial of matrix} and Theorem~\ref{thm: existence of annihilating polynomial} also hold for operators on a finite-dimensional vector space $V$ over $\mathcal K$.
+\end{remarkenv}
+\begin{definitionenv}
+    Suppose $V$ is a finite-dimensional vector space over $\mathcal K$ with $\dim V\ge 1$ and $A$ is an operator on $V$. A set of subspaces $\{ V_1, V_2, \ldots, V_n \}$ of $V$ is called a \textbf{fan} of $A$ in $V$ if
+    \begin{enumerate}[label=(\arabic*)]
+        \item $V_i \subseteq V_{i+1}$ for $i=1,2,\ldots,n-1$,
+        \item $\dim V_i = i$ for $i=1,2,\ldots,n$,
+        \item $V_i$ is $A$-invariant for $i=1,2,\ldots,n$, i.e., $A v \in V_i$ for any $v\in V_i$ and $i=1,2,\ldots,n$.
+    \end{enumerate}
+    Moreover, a basis $\{ v_1, \ldots, v_i \}$ of $V$ is called a \textbf{fan basis} if $\{ v_1, \ldots, v_i \}$ is a basis for $V_i$ for $i=1,2,\ldots,n$.
+\end{definitionenv}
+\begin{remarkenv}
+    Note for a given fan of $A$, a fan basis always exists and is not unique. However, a fan may not exist.
+\end{remarkenv}
+\begin{theoremenv}
+    Let $\mathcal{B} = \{v_1, \ldots, v_n\}$ be a fan basis for a operator $A$. Then $$\mathcal{M}_\mathcal{B} (A) = \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        0 & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & a_{nn}
+    \end{pmatrix}$$ is an upper-triangular matrix.
+\end{theoremenv}
+\begin{proofenv}
+    Since $V_i = \operatorname{span}\{ v_1, \ldots, v_i \}$ is invariant under $A$ for $i=1,2,\ldots,n$, we have $A v_i \in V_i$ for $i=1,2,\ldots,n$. Thus $A v_i = a_{1i} v_1 + a_{2i} v_2 + \cdots + a_{ii} v_i$ for some $a_{1i}, a_{2i}, \ldots, a_{ii} \in \mathcal K$ and thus $\mathcal{M}_\mathcal{B}(A)$ is an upper-triangular matrix.
+\end{proofenv}
+\begin{remarkenv}
+    If $\mathcal C = \{ u_1, \ldots, u_n \}$ is a basis of $V$ such that $\mathcal M_\mathcal{C}(A)$ is an upper-triangular matrix, then $\mathcal C$ is a fan basis for $A$ by letting $V_i = \operatorname{span} \{ u_1, \ldots, u_i \}$ for $i=1,2,\ldots,n$.
+\end{remarkenv}
+\begin{definitionenv}
+    Suppose $V$ is a finite-dimensional vector space over $\mathcal K$ with $\dim V\ge 1$ and $A$ is an operator on $V$. If there exists a basis $\mathcal{B}$ for $V$ such that $\mathcal M_\mathcal{B}(A)$ is an upper-triangular matrix, then we say $A$ is \textbf{triangulable} and $\mathcal{B}$ is a \textbf{triangulation basis} for $A$. Particularly, we call a sqaure matrix $A$ \textbf{triangulable} if the associated operator is triangulable. For a triangulable matrix $A\in \M_{n\times n}(\mathcal K)$, there exists an invertible matrix $S \in \M_{n\times n}(\mathcal K)$ such that $S^{-1} A S$ is an upper-triangular matrix. We call the process of finding such a basis the \textbf{triangulation} of $A$.
+\end{definitionenv}
+\begin{theoremenv}
+    Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and $A$ is an operator on $V$. Then there exists a fan of $A$ in $V$ and thus $A$ is triangulable. Particularly, if $A\in \M_{n\times n}(\C)$, then there exists an invertible matrix $S$ such that $S^{-1} A S$ is an upper-triangular matrix.
+\end{theoremenv}
+\begin{proofenv}
+    We prove by induction on $n = \dim V$.
 
-        \textbf{Initial case:} if $n=1$, then $\mathcal{M}_\mathcal{B}(A) = (a)$ for some $a\in \C$ for any basis $\mathcal{B}$ of $V$. Thus $A$ is triangulable.
+    \textbf{Initial case:} if $n=1$, then $\mathcal{M}_\mathcal{B}(A) = (a)$ for some $a\in \C$ for any basis $\mathcal{B}$ of $V$. Thus $A$ is triangulable.
 
-        \textbf{Inductive step:} suppose the statement holds for $\dim V = n$. And we will prove for the case with $\dim V = n+1$. Note that we know we can pick an eigenvector $v_1 \ne 0$ of $A$ with eigenvalue $\lambda_1 \in \C$. Let $V_1 = \operatorname{span} \{ v_1 \}$, then $V = V_1 \oplus V_1^\perp$.
+    \textbf{Inductive step:} suppose the statement holds for $\dim V = n$. And we will prove for the case with $\dim V = n+1$. Note that we know we can pick an eigenvector $v_1 \ne 0$ of $A$ with eigenvalue $\lambda_1 \in \C$. Let $V_1 = \operatorname{span} \{ v_1 \}$, then $V = V_1 \oplus V_1^\perp$.
 
-        Let
-        $$\begin{array}{c l c l}
-            P_1 : & V & \longrightarrow & V \\
-            & x & \longmapsto & \operatorname{Proj}_{V_1} (x)
-        \end{array}\qquad
-        \begin{array}{c l c l}
-            P_2 : & V & \longrightarrow & V \\
-            & x & \longmapsto & \operatorname{Proj}_{V_1^\perp} (x)
-        \end{array}
+    Let
+    $$\begin{array}{c l c l}
+        P_1 : & V & \longrightarrow & V \\
+        & x & \longmapsto & \operatorname{Proj}_{V_1} (x)
+    \end{array}\qquad
+    \begin{array}{c l c l}
+        P_2 : & V & \longrightarrow & V \\
+        & x & \longmapsto & \operatorname{Proj}_{V_1^\perp} (x)
+    \end{array}
+    $$
+    Note
+    \begin{itemize}
+        \item if $x\in V_1$, then $P_1(x) = x \in V_1$, $P_2(x) = 0$;
+        \item if $x\in V_1^\perp$, then $P_2(x) = x \in V_1^\perp$, $P_1(x) = 0$.
+    \end{itemize}
+
+    Then $V_1^\perp$ is $P_2$-invariant and $P_2$ can also be restricted to be on $V_1^\perp$ as an operator. By the inductive assumption, there exists a fan of $P_2 A$ when restricted to be from $V_1^\perp$ to $V_1^\perp$. Let $\{ W_1, \ldots, W_n \}$ denote such a fan and define $V_i := V_1 + W_{i-1}$ for $i=2,3,\ldots,n+1$. Then
+
+    \begin{enumerate}[label=(\arabic*)]
+        \item $V_i \subseteq V_{i+1}$ for $i=1,2,\ldots,n$ since $W_{i-1} \subseteq W_i$ for $i=2,\ldots,n+1$,
+        \item $\dim V_i = \dim V_1 + \dim W_{i-1} = 1 + (i-1) = i$ because $W_{i-1} \subseteq V_1^\perp$
+        \item $V_1$ is $A$-invariant by definition. For $V_i$ with $i=2,3,\ldots,n+1$, note for any $x\in V$, $(P_1 + P_2)(x) = x$. Then $A = IA = (P_1 + P_2) A = P_1 A + P_2 A$. It suffices to show $Av \in V_i$ for any $v\in V_i$ with $i=2,3,\ldots,n+1$. Note $v = cv_1 + w_{i-1}$ where $c\in \C$ and $w_{i-1} \in W_{i-1}$. Then
         $$
-        Note
+        \begin{aligned}
+            Av &= P_1 A v + P_2 A v = P_1 A (cv_1 + w_{i-1}) + P_2 A (cv_1 + w_{i-1}) \\
+            &= \underbrace{(c\lambda_1)P_1 v_1 + P_1 A w_{i-1}}_{\in V_1} + \underbrace{c P_2 A v_1}_{=0} + \underbrace{(P_2 A) w_{i-1}}_{\in W_{i-1}} \in V_1 + W_{i-1} = V_i.
+        \end{aligned}
+        $$
+        Thus $V_i$ is $A$-invariant for $i=1,2,\ldots,n+1$.
+    \end{enumerate}
+    Hence, $\{ V_1, V_2, \ldots, V_{n+1} \}$ is a fan of $A$ in $V$ and thus $A$ is triangulable.
+\end{proofenv}
+\begin{theoremenv}[Cayley-Hamilton Theorem]
+    Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and $A$ is an operator on $V$. Let $f(t) = \det (tI - A)$ be the characteristic polynomial of $A$. Then $f(A) = 0$.
+
+\end{theoremenv}
+\begin{proofenv}
+    We can pick a fan $\{ V_1, V_2, \ldots, V_n \}$ of $A$ in $V$ and let $\mathcal B = \{ v_1, v_2, \ldots, v_n \}$ be a corresponding fan basis. Then we know
+    $$ \mathcal M_\mathcal{B}(A) = \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        0 & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & a_{nn}
+    \end{pmatrix}$$
+    is a upper-triangular matrix. Thus
+    $$ f(t) = \det (tI - A) = (a_{11} - t)(a_{22} - t) \cdots (a_{nn} - t) $$
+    and
+    $$ f(A) = (a_{11} I - A)(a_{22} I - A) \cdots (a_{nn} I - A). $$
+    We will show $\displaystyle \prod_{j=1}^{i}(a_{jj} I - A) v = 0$ for any $v \in V_i$ by induction on $i$.(Note when $i=n$, we have $f(A) =0$.)
+
+    \textbf{Initial case:} if $i=1$, then for $v \in V_1 = \operatorname{span} \{ v_1 \}$, i.e., $v = c v_1$ for some $c\in \C$, we have
+    $$ (a_{11} I - A) v = c(a_{11} I - A) v_1 = 0. $$
+
+
+    \textbf{Inductive step:} suppose the statement holds for $i$ case, i.e.,
+    $\displaystyle \prod_{j=1}^i (a_{jj} I - A) v = 0$ for any $v \in V_i$. We will prove for $i+1$ case: for $v \in V_{i+1} = \operatorname{span} \{ v_1, \ldots, v_{i+1} \} = cv_{i+1} + \tilde{v}$ where $c\in \C$ and $\tilde{v} \in \operatorname{span} \{ v_1, \ldots, v_i \} = V_i$, we have
+    \begin{align*}
+        \prod_{j=1}^{i+1} (a_{jj} I - A) v = c\prod_{j=1}^{i} (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} + \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \tilde{v}.
+    \end{align*}
+    Note
+    $$\begin{aligned}
+        (a_{i+1,i+1} I - A) v_{i+1} &= a_{i+1,i+1} v_{i+1} - (a_{1,i+1} v_1 + a_{2,i+1} v_2 + \cdots + a_{i,i+1} v_i + a_{i+1,i+1} v_{i+1})\\ &= -a_{1,i+1} v_1 - a_{2,i+1} v_2 - \cdots - a_{i,i+1} v_i \in V_i = \operatorname{span}\{ v_1, \ldots, v_i \}.
+    \end{aligned}$$
+    Thus we know the first term $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} = 0$ by the inductive assumption. Also, note $\displaystyle \tilde{v} \in V_i$ which is invariant under $(a_{i+1,i+1} I - A)$, we have $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \tilde{v} = 0$ by the inductive assumption. Hence,
+    $$\prod_{j=1}^{i+1} (a_{jj} I - A) v = 0 \quad \text{for any } v \in V_{i+1}. $$
+
+    By induction, we have $\displaystyle \prod_{j=1}^n (a_{jj} I - A) v = 0$ for any $v \in V_n = V$. Thus $f(A) = 0$.
+\end{proofenv}
+\begin{remarkenv}
+    The Cayley-Hamilton theorem also holds for any operator on a finite-dimensional vector space over $\R$.
+\end{remarkenv}
+\begin{remarkenv}
+    Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V \ge 1$ and $A$ is an operator on $V$. So far, we know there exists a fan basis $\mathcal B$ such that $\mathcal M_{\mathcal{B}} (A)$ is upper-triangular. Later, we shall see that there exists a ``particularly nice'' fan basis $\tilde{\mathcal{B}}$ such that $\mathcal{M}_{\tilde{\mathcal{B}}}$ looks like
+    $$
+    \begin{pmatrix}
+        J_1 & 0 & \cdots & 0 \\
+        0 & J_2 & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & J_k
+    \end{pmatrix},
+    \qquad
+    \text{where }
+    J_i =
+    \begin{pmatrix}
+        \alpha_i & 1 & 0 & \cdots & 0 \\
+        0 & \alpha_i & 1 & \cdots & 0 \\
+        0 & 0 & \alpha_i & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & 1 \\
+        0 & 0 & 0 & \cdots & \alpha_i
+    \end{pmatrix}
+        \text{ for } i=1,2,\ldots,k.
+    $$
+\end{remarkenv}
+\section{Ideals}
+\begin{theoremenv}
+    Suppose $f$ and $g$ are polynomials in $\mathcal K[t]$. Then there exist polynomials $q,r\in \mathcal K[t]$ such that $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$. Furthermore, such $q$ and $r$ are unique.
+\end{theoremenv}
+\begin{proofenv}
+    Let $m = \deg g$ and $f(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_0$, $g(t) = b_m t^m + b_{m-1} t^{m-1} + \cdots + b_0$ with $b_m \ne 0$. We will discuss by case.
+
+    \textbf{Case 1:} if $n < m$, then we can let $q(t) = 0$ and $r(t) = f(t)$, then $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$.
+
+    \textbf{Case 2:} if $n \ge m$, then we prove by induction on $n$.
+
+    \textbf{Initial case:} if $n=m$, then we can let $q(t) = \dfrac{a_n}{b_m}$ and $r(t) = a_{n-1} t^{n-1} + \cdots + a_0 - q(t)(b_{m-1} t^{m-1} + \cdots + b_0)$, then $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$.
+
+    \textbf{Inductive step:} suppose the statement holds for $n$ case, i.e., if $\deg f = n \ge m$, then there exist $q,r\in \mathcal K[t]$ such that $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$. We will prove for $n+1$ case: if $\deg f = n+1 \ge m$, then we can let $q_1(t) = \dfrac{a_{n+1}}{b_m} t^{n+1-m}$ and $r_1(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_0 - q_1(t)(b_{m-1} t^{m-1} + \cdots + b_0)$, then $\deg r_1 < n+1$. If $\deg r_1 < m$, then we can let $q(t) = q_1(t)$ and $r(t) = r_1(t)$, then $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$. If $\deg r_1 \ge m$, then by the inductive assumption, there exist $q_2, r_2\in \mathcal K[t]$ such that $r_1(t) = q_2(t) g(t) + r_2(t)$ with $\deg r_2 < \deg g$. Thus we have
+    $$ f(t) = q_1(t) g(t) + r_1(t) = (q_1(t) + q_2(t)) g(t) + r_2(t). $$
+    Let $q(t) = q_1(t) + q_2(t)$ and $r(t) = r_2(t)$, then $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$.
+
+    Finally, we will show the uniqueness of $q$ and $r$. Suppose there exist $q', r' \in \mathcal K[t]$ such that $f(t) = q'(t) g(t) + r'(t)$ with $\deg r' < \deg g$. Then we have
+    $$ (q(t) - q'(t)) g(t) = r'(t) - r(t). $$
+    Then $\deg ((q(t) - q'(t)) g(t)) \ge \deg g$ or is zero while $\deg (r'(t) - r(t)) < \deg g$ or is zero. Thus $q(t) - q'(t) = 0$ and $r'(t) - r(t) = 0$, i.e., $q(t) = q'(t)$ and $r(t) = r'(t)$.
+\end{proofenv}
+\begin{definitionenv}
+    We call a subset $J$ of $\mathcal K[t]$ an \textbf{ideal} or a \textbf{polynomial ideal} if $J$ satisfies the following three conditions:
+    \begin{enumerate}[label=(\arabic*)]
+        \item $0 \in J$,
+        \item if $f,g \in J$, then $f+g \in J$,
+        \item if $f\in J$ and $h\in \mathcal K[t]$, then $hf \in J$.
+    \end{enumerate}
+\end{definitionenv}
+\begin{remarkenv}
+    Note $J$ being an ideal implies that $J$ is a subspace of $\mathcal K[t]$. However, the converse does not hold, i.e., a subspace of $\mathcal K[t]$ may not be an ideal. For example, $\mathbf{P}_2(\mathcal K)$ is a subspace of $\mathcal K[t]$ but is not an ideal since picking $f(t) = t^2 \in \mathbf{P}_2(\mathcal K)$ and $h(t) = t \in \mathcal K[t]$, we have $h(t) f(t) = t^3 \notin \mathbf{P}_2(\mathcal K)$.
+\end{remarkenv}
+\begin{exampleenv}
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\{ 0 \}$ is an ideal of $\mathcal K[t]$, called the \textbf{zero ideal};
+        \item $\mathcal K[t]$ is an ideal of $\mathcal K[t]$;
+        \item let $f_1, f_2, \ldots, f_n \in \mathcal K[t]$ and
+        $$ J := \{ g \in \mathcal K[t] : g = g_1 f_1 + g_2 f_2 + \cdots + g_n f_n \text{ for some } g_1, g_2, \ldots, g_n \in \mathcal K[t] \}, $$
+        then $J$ is an ideal of $\mathcal K[t]$. We say $J$ is \textbf{generated} by $f_1, f_2, \ldots, f_n$ and call $\{ f_1, f_2, \ldots, f_n \}$ a \textbf{generating set} of $J$. Particularly, if a generating set of an ideal $J$ contains only one element, we call this element a \textbf{single generator} of ideal $J$. Note $\{ 1 \}$ is a single generator of $\mathcal K[t]$.
+    \end{enumerate}
+\end{exampleenv}
+\begin{remarkenv}
+    In general, an ideal may be generated by different sets; particularly, a generating set may contain several polynomials or just a single generator.
+\end{remarkenv}
+\begin{theoremenv}
+    Let $J$ be an ideal of $\mathcal K[t]$. Then there exists a $g\in J$ such that $g$ is a single generator of $J$.
+\end{theoremenv}
+\begin{remarkenv}
+    Suppose $g_1$ is a single generator of an ideal $J$ and $g_2$ is another single generator of $J$. We know $g_1 = h g_2$ for some $h\in \mathcal K[t]$ and $\deg g_1 \ge \deg g_2$ since $g_1$ is a single generator of $J$. Similarly, we have $\deg g_2 \ge \deg g_1$. Thus $\deg g_1 = \deg g_2$ and $h$ is a nonzero constant. Hence, $g_1$ and $g_2$ differ by a nonzero constant factor.
+
+    Particularly, if $g_1(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_0$ with $a_n \ne 0$, then $g_2 := \dfrac{1}{a_n} g_1$ is also a single generator of $J$ with leading coefficient $1$. Hence we can always find a single generator for a nonzero ideal $J$ with leading coefficient $1$ uniquely, which motivates the following definition.
+\end{remarkenv}
+\begin{definitionenv}
+    Suppose $f,g\in \mathcal K[t]$ are nonzero.
+    \begin{enumerate}[label=(\arabic*)]
+        \item We say $g$ \textbf{devides} $f$ (or $g$ is a \textbf{divisor} of $f$) and write $g \mid f$ if there exists an $q\in \mathcal K[t]$ such that $f = qg$.
+        \item We say $h\in \mathcal{K}[t]$ is a \textbf{common divisor} of $f$ and $g$ if $h \mid f$ and $h \mid g$.
+        \item We say $r\in \mathcal K[t]$ is a \textbf{greatest common divisor} of $f$ and $g$ if
         \begin{itemize}
-            \item if $x\in V_1$, then $P_1(x) = x \in V_1$, $P_2(x) = 0$;
-            \item if $x\in V_1^\perp$, then $P_2(x) = x \in V_1^\perp$, $P_1(x) = 0$.
+            \item $r$ is a common divisor of $f$ and $g$,
+            \item if $h$ is any common divisor of $f$ and $g$, then $h \mid r$.
         \end{itemize}
+    \end{enumerate}
+\end{definitionenv}
+% \begin{notationenv}
+%     If $f$ and $g$ are nonzero polynomials in $\mathcal K[t]$, we write $\gcd(f,g)$ to denote a greatest common divisor of $f$ and $g$.
+% \end{notationenv}
+\begin{theoremenv}\label{thm: single generator is gcd}
+    Suppose $f_1$ and $f_2$ are nonzero polynomials in $\mathcal K[t]$. If $g$ is a single generator for the ideal generated by $f_1$ and $f_2$, then $g$ is a greatest common divisor of $f_1$ and $f_2$.
+\end{theoremenv}
+\begin{remarkenv}\label{rem: uniqueness of gcd}
+    The greatest common divisor of two nonzero polynomials is unique up to a nonzero constant factor. If we require the greatest common divisor to have leading coefficient $1$, then the greatest common divisor is unique.
 
-        Then $V_1^\perp$ is $P_2$-invariant and $P_2$ can also be restricted to be on $V_1^\perp$ as an operator. By the inductive assumption, there exists a fan of $P_2 A$ when restricted to be from $V_1^\perp$ to $V_1^\perp$. Let $\{ W_1, \ldots, W_n \}$ denote such a fan and define $V_i := V_1 + W_{i-1}$ for $i=2,3,\ldots,n+1$. Then
+    Theorem~\ref{thm: single generator is gcd} also holds for more than two nonzero polynomials, i.e., if $g$ is a single generator for the ideal generated by $f_1, f_2, \ldots, f_n$ with $f_i \ne 0$ for $i = 1, 2, \ldots, n$, then $g$ is a greatest common divisor of $f_1, f_2, \ldots, f_n$.
+\end{remarkenv}
+\begin{definitionenv}
+    Let $f_1, f_2, \ldots, f_n$ be nonzero polynomials in $\mathcal K[t]$. We say $f_1, f_2, \ldots, f_n$ are \textbf{relatively prime} if $1$ is a common divisor of $f_1, f_2, \ldots, f_n$.
+\end{definitionenv}
+\begin{corollaryenv}[Bézout's Identity]
+    Let $\mathcal K$ be a field and $f_1, f_2 \in \mathcal K[t]$. Suppose $h$ is a greatest common divisor of $f_1$ and $f_2$. Then there exist $g_1, g_2 \in \mathcal K[t]$ such that $$h = g_1 f_1 + g_2 f_2.$$
+\end{corollaryenv}
+\begin{proofenv}
+    Let
+    $$ J := \{ g_1 f_1 + g_2 f_2 : g_1, g_2 \in \mathcal K[t] \} $$
+    be the ideal of $\mathcal K[t]$ generated by $f_1$ and $f_2$. By Theorem~\ref{thm: single generator is gcd}, $g$ is a greatest common divisor of $f_1$ and $f_2$. Thus by Remark~\ref{rem: uniqueness of gcd}, there exists a nonzero constant $c\in \mathcal K$ such that $h = cg$. So $h\in J$ and thus by definition of $J$, there exist $g_1, g_2 \in \mathcal K[t]$ such that $h = g_1 f_1 + g_2 f_2$.
+\end{proofenv}
+\begin{definitionenv}
+    Let $p$ be a polynomial in $\mathcal K[t]$ with $\deg p \ge 1$. We say $p$ is \textbf{irreducible} if given any factorization $p = fg$ with $f,g \in \mathcal K[t]$, then either $\deg f = 0$ or $\deg g = 0$.
+\end{definitionenv}
+\begin{exampleenv}
+    \begin{enumerate}[label=(\arabic*)]
+        \item if $\mathcal K = \C$, then the only irreducible polynomials in $\C[t]$ are the polynomials of degree $1$, i.e., those of the form $c (t - \alpha)$ with $c\in \C$ and $\alpha \in \C$.
+        \item if $\mathcal K = \R$, then a quadratic polynomial $at^2 + bt + c$ with $a\ne 0$ is irreducible if and only if its discriminant $b^2 - 4ac < 0$.
+    \end{enumerate}
+\end{exampleenv}
+\begin{lemmaenv}[Euclid's Lemma]
+    Let $p$ be an irreducible polynomial in $\mathcal K[t]$. If $p \mid fg$ for some $f,g \in \mathcal K[t]$, then either $p \mid f$ or $p \mid g$.
+\end{lemmaenv}
+\begin{proofenv}
+    Assume $p \nmid f$ and by symmetry it suffices to show $p \mid g$. Then the greatest common divisor of $p$ and $f$ is $1$. By Bézout's identity, there exist $h_1, h_2 \in \mathcal K[t]$ such that $1 = h_1 p + h_2 f$. Thus
+    $$ g = 1 \cdot g = (h_1 p + h_2 f) g = h_1 p g + h_2 f g. $$
+    Since $p \mid fg$, we have $fg = p h_3$ for some $h_3 \in \mathcal K[t]$. Thus
+    $$ g = h_1 p g + h_2 p h_3 = p (h_1 g + h_2 h_3). $$
+    Hence, $p \mid g$.
+\end{proofenv}
+\begin{theoremenv}[The Fundamental Theorem of Arithmetic]
+    Every polynomial $f$ in $\mathcal K[t]$ with $\deg f \ge 1$ can be factorized as a product $p_1, p_2, \ldots, p_m$ of irreducible polynomials in $\mathcal K[t]$. Moreover, such factorization is unique up to a nonzero constant factor and the order of the factors. Formally, if $$f = p_1 p_2 \cdots p_m\quad \text{and}\quad f = q_1 q_2 \cdots q_n$$ are two factorizations of $f$ with $p_i$ and $q_j$ irreducible for $i=1,2,\ldots,m$ and $j=1,2,\ldots,n$, then $n=m$ and there exists nonzero constants $c_1, c_2, \ldots, c_m$ such that $p_i = c_i q_{\sigma(i)}$ for some permutation $\sigma$ of $\{ 1, 2, \ldots, m \}$.
+\end{theoremenv}
+\begin{proofenv}
+    We prove the existence first by induction on $\deg f$.
 
-        \begin{enumerate}[label=(\arabic*)]
-            \item $V_i \subseteq V_{i+1}$ for $i=1,2,\ldots,n$ since $W_{i-1} \subseteq W_i$ for $i=2,\ldots,n+1$,
-            \item $\dim V_i = \dim V_1 + \dim W_{i-1} = 1 + (i-1) = i$ because $W_{i-1} \subseteq V_1^\perp$
-            \item $V_1$ is $A$-invariant by definition. For $V_i$ with $i=2,3,\ldots,n+1$, note for any $x\in V$, $(P_1 + P_2)(x) = x$. Then $A = IA = (P_1 + P_2) A = P_1 A + P_2 A$. It suffices to show $Av \in V_i$ for any $v\in V_i$ with $i=2,3,\ldots,n+1$. Note $v = cv_1 + w_{i-1}$ where $c\in \C$ and $w_{i-1} \in W_{i-1}$. Then
-            $$
-            \begin{aligned}
-                Av &= P_1 A v + P_2 A v = P_1 A (cv_1 + w_{i-1}) + P_2 A (cv_1 + w_{i-1}) \\
-                &= \underbrace{(c\lambda_1)P_1 v_1 + P_1 A w_{i-1}}_{\in V_1} + \underbrace{c P_2 A v_1}_{=0} + \underbrace{(P_2 A) w_{i-1}}_{\in W_{i-1}} \in V_1 + W_{i-1} = V_i.
-            \end{aligned}
-            $$
-            Thus $V_i$ is $A$-invariant for $i=1,2,\ldots,n+1$.
-        \end{enumerate}
-        Hence, $\{ V_1, V_2, \ldots, V_{n+1} \}$ is a fan of $A$ in $V$ and thus $A$ is triangulable.
-    \end{proofenv}
-    \begin{theoremenv}[Cayley-Hamilton Theorem]
-        Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and $A$ is an operator on $V$. Let $f(t) = \det (tI - A)$ be the characteristic polynomial of $A$. Then $f(A) = 0$.
+    \textbf{Initial case:} if $\deg f = 1$, then $f$ is irreducible and thus the factorization of $f$ is just $f$ itself.
 
-    \end{theoremenv}
-    \begin{proofenv}
-        We can pick a fan $\{ V_1, V_2, \ldots, V_n \}$ of $A$ in $V$ and let $\mathcal B = \{ v_1, v_2, \ldots, v_n \}$ be a corresponding fan basis. Then we know
-        $$ \mathcal M_\mathcal{B}(A) = \begin{pmatrix}
-            a_{11} & a_{12} & \cdots & a_{1n} \\
-            0 & a_{22} & \cdots & a_{2n} \\
-            \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & a_{nn}
-        \end{pmatrix}$$
-        is a upper-triangular matrix. Thus
-        $$ f(t) = \det (tI - A) = (a_{11} - t)(a_{22} - t) \cdots (a_{nn} - t) $$
-        and
-        $$ f(A) = (a_{11} I - A)(a_{22} I - A) \cdots (a_{nn} I - A). $$
-        We will show $\displaystyle \prod_{j=1}^{i}(a_{jj} I - A) v = 0$ for any $v \in V_i$ by induction on $i$.(Note when $i=n$, we have $f(A) =0$.)
+    \textbf{Inductive step:} suppose the statement holds for any polynomial with degree $n\ge 1$. We will prove for the case with $\deg f = n+1$. If $f$ is irreducible, then the factorization of $f$ is just $f$ itself. If $f$ is reducible, then there exist $f_1, f_2 \in \mathcal K[t]$ such that $f = f_1 f_2$ and $\deg f_1, \deg f_2 < \deg f = n+1$. By the inductive assumption, there exist factorizations of $f_1$ and $f_2$ as products of irreducible polynomials. Thus we can get a factorization of $f$ as a product of irreducible polynomials by concatenating the factorizations of $f_1$ and $f_2$.
 
-        \textbf{Initial case:} if $i=1$, then for $v \in V_1 = \operatorname{span} \{ v_1 \}$, i.e., $v = c v_1$ for some $c\in \C$, we have
-        $$ (a_{11} I - A) v = c(a_{11} I - A) v_1 = 0. $$
+    Then, we show the uniqueness of the factorization. Suppose
+    $$ f = p_1 p_2 \cdots p_m\quad \text{and}\quad f = q_1 q_2 \cdots q_n $$
+    are two factorizations of $f$ with $p_i$ and $q_j$ irreducible for $i=1,2,\ldots,m$ and $j=1,2,\ldots,n$. By Euclid's lemma, either $p_1 \mid q_1$ or $p_1 \mid q_j$ for some $j=2,3,\ldots,n$. Now we rearrange the order of $q_1, q_2, \ldots, q_n$ such that $p_1 \mid q_1$. Since $p_1$ and $q_1$ are irreducible, we have $p_1 = c_1 q_1$ for some nonzero constant $c_1$. Thus
+    $$ c_1 q_1 p_2 \cdots p_m = p_1 p_2 \cdots p_m = f = q_1 q_2 \cdots q_n. $$
+    Canceling $q_1$ on both sides, we have
+    $$ c_1 p_2 \cdots p_m = q_2 \cdots q_n. $$
+    By repeating the above process, we can get $p_i = c_i q_i$ for some nonzero constant $c_i$ and $i=1,2,\ldots,m$. By symmetry, we have $n=m$ and there exists nonzero constants $c_1, c_2, \ldots, c_m$ such that $p_i = c_i q_i$ for $i=1,2,\ldots,m$.
+\end{proofenv}
+\begin{definitionenv}
+    A polynomial with leading coefficient $1$ is called a \textbf{monic} polynomial. 
+\end{definitionenv}
+\begin{corollaryenv}
+    Let $f\in \mathcal K[t]$ with $\deg f \ge 1$. Then there exist irreducible monic polynomials $p_1, p_2, \ldots, p_m$ in $\mathcal K[t]$ such that
+    $$ f=c p_1 p_2 \cdots p_m \quad \text{for some } c\in \mathcal K, c\ne 0. $$ Moreover, such factorization is unique up to the order of the factors.
+\end{corollaryenv}
+\begin{corollaryenv}
+    Let $f\in \C[t]$ with $\deg f = n\ge 1$. Then there exist $\alpha_1, \alpha_2, \ldots, \alpha_n \in \C$ such that
+    $$ f = c (t - \alpha_1)(t - \alpha_2) \cdots (t - \alpha_n) \quad \text{for some } c\in \C, c\ne 0. $$
+\end{corollaryenv}
+\begin{definitionenv}
+    Suppose $f$ and $g$ are nonzero polynomials in $\mathcal K[t]$ and $p\in \mathcal K[t]$ is irreducible. If $f=p^m g$ for some $m\ge 0$ and $p \nmid g$, then we call $m$ the \textbf{multiplicity} of $p$ in $f$. Moreover, if $p=t-\alpha$ for some $\alpha \in \C$, then we call $m$ the \textbf{multiplicity} of $\alpha$ in $f$.
+\end{definitionenv}
+\begin{propositionenv}
+    Let $f\in \mathcal K[t]$ and $W = \ker f(A)$. Then $W$ is an $A$-invariant subspace of $V$.
+\end{propositionenv}
+\begin{proofenv}
+    Let $\bm w \in W$, i.e., $f(A) \bm w = \bm 0$. Then by the commutativity of polynomials of matrices, we have
+    $$ [f(A)](A\bm w) = [f(A) A] \bm w = [A f(A)] \bm w = A [f(A) \bm w] = A \bm 0 = \bm 0. $$
+    Thus $A\bm w \in W$. Hence, $W$ is an $A$-invariant subspace of $V$.
+\end{proofenv}
+\begin{theoremenv}
+    Let $f\in \mathcal K[t]$ such that $f = f_1 f_2$ for some $f_1, f_2 \in \mathcal K[t]$ where the greatest common divisor of $f_1$ and $f_2$ is 1. Suppose $V$ is a vector space and $A$ is an operator on $V$ such that $f(A) = 0$. Then we have
+    $$ V = \ker f_1(A) \oplus \ker f_2(A). $$
+\end{theoremenv}
+\begin{proofenv}
+    By Bézout's identity, there exist $g_1, g_2 \in \mathcal K[t]$ such that
+    $$ 1 = g_1 f_1 + g_2 f_2. $$
+    Hence we have
+    $$ I = g_1(A) f_1(A) + g_2(A) f_2(A). $$
+    Let $\bm v \in V$. Then applying both sides to $\bm v$, we have
+    $$ \bm v = \underbrace{g_1(A) f_1(A) \bm v}_{\in \ker f_2(A)} + \underbrace{g_2(A) f_2(A) \bm v}_{\in \ker f_1(A)}. $$
+    Since
+    $$ f_2(A) [g_1(A) f_1(A) \bm v] = g_1(A) f_1(A) [f_2(A) \bm v] = g_1(A) f_1(A) \bm 0 = \bm 0, $$
+    we have $g_1(A) f_1(A) \bm v \in \ker f_2(A)$. Similarly, we have $g_2(A) f_2(A) \bm v \in \ker f_1(A)$. Thus $V = \ker f_1(A) + \ker f_2(A)$.
 
-
-        \textbf{Inductive step:} suppose the statement holds for $i$ case, i.e.,
-        $\displaystyle \prod_{j=1}^i (a_{jj} I - A) v = 0$ for any $v \in V_i$. We will prove for $i+1$ case: for $v \in V_{i+1} = \operatorname{span} \{ v_1, \ldots, v_{i+1} \} = cv_{i+1} + \tilde{v}$ where $c\in \C$ and $\tilde{v} \in \operatorname{span} \{ v_1, \ldots, v_i \} = V_i$, we have
-        \begin{align*}
-            \prod_{j=1}^{i+1} (a_{jj} I - A) v = c\prod_{j=1}^{i} (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} + \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \tilde{v}.
-        \end{align*}
-        Note
-        $$\begin{aligned}
-            (a_{i+1,i+1} I - A) v_{i+1} &= a_{i+1,i+1} v_{i+1} - (a_{1,i+1} v_1 + a_{2,i+1} v_2 + \cdots + a_{i,i+1} v_i + a_{i+1,i+1} v_{i+1})\\ &= -a_{1,i+1} v_1 - a_{2,i+1} v_2 - \cdots - a_{i,i+1} v_i \in V_i = \operatorname{span}\{ v_1, \ldots, v_i \}.
-        \end{aligned}$$
-        Thus we know the first term $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} = 0$ by the inductive assumption. Also, note $\displaystyle \tilde{v} \in V_i$ which is invariant under $(a_{i+1,i+1} I - A)$, we have $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \tilde{v} = 0$ by the inductive assumption. Hence,
-        $$\prod_{j=1}^{i+1} (a_{jj} I - A) v = 0 \quad \text{for any } v \in V_{i+1}. $$
-
-        By induction, we have $\displaystyle \prod_{j=1}^n (a_{jj} I - A) v = 0$ for any $v \in V_n = V$. Thus $f(A) = 0$.
-    \end{proofenv}
-    \begin{remarkenv}
-        The Cayley-Hamilton theorem also holds for any operator on a finite-dimensional vector space over $\R$.
-    \end{remarkenv}
-    \begin{remarkenv}
-        Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V \ge 1$ and $A$ is an operator on $V$. So far, we know there exists a fan basis $\mathcal B$ such that $\mathcal M_{\mathcal{B}} (A)$ is upper-triangular. Later, we shall see that there exists a ``particularly nice'' fan basis $\tilde{\mathcal{B}}$ such that $\mathcal{M}_{\tilde{\mathcal{B}}}$ looks like
-        $$
-        \begin{pmatrix}
-            J_1 & 0 & \cdots & 0 \\
-            0 & J_2 & \cdots & 0 \\
-            \vdots & \vdots & \ddots & \vdots \\
-            0 & 0 & \cdots & J_k
-        \end{pmatrix},
-        \qquad
-        \text{where }
-        J_i =
-        \begin{pmatrix}
-            \alpha_i & 1 & 0 & \cdots & 0 \\
-            0 & \alpha_i & 1 & \cdots & 0 \\
-            0 & 0 & \alpha_i & \cdots & 0 \\
-            \vdots & \vdots & \vdots & \ddots & 1 \\
-            0 & 0 & 0 & \cdots & \alpha_i
-        \end{pmatrix}
-            \text{ for } i=1,2,\ldots,k.
-        $$
-    \end{remarkenv}
-    \section{Ideals}
-    \begin{theoremenv}
-        Suppose $f$ and $g$ are polynomials in $\mathcal K[t]$. Then there exist polynomials $q,r\in \mathcal K[t]$ such that $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$. Furthermore, such $q$ and $r$ are unique.
-    \end{theoremenv}
-    \begin{proofenv}
-        Let $m = \deg g$ and $f(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_0$, $g(t) = b_m t^m + b_{m-1} t^{m-1} + \cdots + b_0$ with $b_m \ne 0$. We will discuss by case.
-
-        \textbf{Case 1:} if $n < m$, then we can let $q(t) = 0$ and $r(t) = f(t)$, then $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$.
-
-        \textbf{Case 2:} if $n \ge m$, then we prove by induction on $n$.
-
-        \textbf{Initial case:} if $n=m$, then we can let $q(t) = \dfrac{a_n}{b_m}$ and $r(t) = a_{n-1} t^{n-1} + \cdots + a_0 - q(t)(b_{m-1} t^{m-1} + \cdots + b_0)$, then $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$.
-
-        \textbf{Inductive step:} suppose the statement holds for $n$ case, i.e., if $\deg f = n \ge m$, then there exist $q,r\in \mathcal K[t]$ such that $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$. We will prove for $n+1$ case: if $\deg f = n+1 \ge m$, then we can let $q_1(t) = \dfrac{a_{n+1}}{b_m} t^{n+1-m}$ and $r_1(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_0 - q_1(t)(b_{m-1} t^{m-1} + \cdots + b_0)$, then $\deg r_1 < n+1$. If $\deg r_1 < m$, then we can let $q(t) = q_1(t)$ and $r(t) = r_1(t)$, then $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$. If $\deg r_1 \ge m$, then by the inductive assumption, there exist $q_2, r_2\in \mathcal K[t]$ such that $r_1(t) = q_2(t) g(t) + r_2(t)$ with $\deg r_2 < \deg g$. Thus we have
-        $$ f(t) = q_1(t) g(t) + r_1(t) = (q_1(t) + q_2(t)) g(t) + r_2(t). $$
-        Let $q(t) = q_1(t) + q_2(t)$ and $r(t) = r_2(t)$, then $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$.
-
-        Finally, we will show the uniqueness of $q$ and $r$. Suppose there exist $q', r' \in \mathcal K[t]$ such that $f(t) = q'(t) g(t) + r'(t)$ with $\deg r' < \deg g$. Then we have
-        $$ (q(t) - q'(t)) g(t) = r'(t) - r(t). $$
-        Then $\deg ((q(t) - q'(t)) g(t)) \ge \deg g$ or is zero while $\deg (r'(t) - r(t)) < \deg g$ or is zero. Thus $q(t) - q'(t) = 0$ and $r'(t) - r(t) = 0$, i.e., $q(t) = q'(t)$ and $r(t) = r'(t)$.
-    \end{proofenv}
-    \begin{definitionenv}
-        We call a subset $J$ of $\mathcal K[t]$ an \textbf{ideal} or a \textbf{polynomial ideal} if $J$ satisfies the following three conditions:
-        \begin{enumerate}[label=(\arabic*)]
-            \item $0 \in J$,
-            \item if $f,g \in J$, then $f+g \in J$,
-            \item if $f\in J$ and $h\in \mathcal K[t]$, then $hf \in J$.
-        \end{enumerate}
-    \end{definitionenv}
-    \begin{remarkenv}
-        Note $J$ being an ideal implies that $J$ is a subspace of $\mathcal K[t]$. However, the converse does not hold, i.e., a subspace of $\mathcal K[t]$ may not be an ideal. For example, $\mathbf{P}_2(\mathcal K)$ is a subspace of $\mathcal K[t]$ but is not an ideal since picking $f(t) = t^2 \in \mathbf{P}_2(\mathcal K)$ and $h(t) = t \in \mathcal K[t]$, we have $h(t) f(t) = t^3 \notin \mathbf{P}_2(\mathcal K)$.
-    \end{remarkenv}
-    \begin{exampleenv}
-        \begin{enumerate}[label=(\arabic*)]
-            \item $\{ 0 \}$ is an ideal of $\mathcal K[t]$, called the \textbf{zero ideal};
-            \item $\mathcal K[t]$ is an ideal of $\mathcal K[t]$;
-            \item let $f_1, f_2, \ldots, f_n \in \mathcal K[t]$ and
-            $$ J := \{ g \in \mathcal K[t] : g = g_1 f_1 + g_2 f_2 + \cdots + g_n f_n \text{ for some } g_1, g_2, \ldots, g_n \in \mathcal K[t] \}, $$
-            then $J$ is an ideal of $\mathcal K[t]$. We say $J$ is \textbf{generated} by $f_1, f_2, \ldots, f_n$ and call $\{ f_1, f_2, \ldots, f_n \}$ a \textbf{generating set} of $J$. Particularly, if a generating set of an ideal $J$ contains only one element, we call this element a \textbf{single generator} of ideal $J$. Note $\{ 1 \}$ is a single generator of $\mathcal K[t]$.
-        \end{enumerate}
-    \end{exampleenv}
-    \begin{remarkenv}
-        In general, an ideal may be generated by different sets; particularly, a generating set may contain several polynomials or just a single generator.
-    \end{remarkenv}
-    \begin{theoremenv}
-        Let $J$ be an ideal of $\mathcal K[t]$. Then there exists a $g\in J$ such that $g$ is a single generator of $J$.
-    \end{theoremenv}
-    \begin{remarkenv}
-        Suppose $g_1$ is a single generator of an ideal $J$ and $g_2$ is another single generator of $J$. We know $g_1 = h g_2$ for some $h\in \mathcal K[t]$ and $\deg g_1 \ge \deg g_2$ since $g_1$ is a single generator of $J$. Similarly, we have $\deg g_2 \ge \deg g_1$. Thus $\deg g_1 = \deg g_2$ and $h$ is a nonzero constant. Hence, $g_1$ and $g_2$ differ by a nonzero constant factor.
-
-        Particularly, if $g_1(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_0$ with $a_n \ne 0$, then $g_2 := \dfrac{1}{a_n} g_1$ is also a single generator of $J$ with leading coefficient $1$. Hence we can always find a single generator for a nonzero ideal $J$ with leading coefficient $1$ uniquely, which motivates the following definition.
-    \end{remarkenv}
-    \begin{definitionenv}
-        Suppose $f,g\in \mathcal K[t]$ are nonzero.
-        \begin{enumerate}[label=(\arabic*)]
-            \item We say $g$ \textbf{devides} $f$ (or $g$ is a \textbf{divisor} of $f$) and write $g \mid f$ if there exists an $q\in \mathcal K[t]$ such that $f = qg$.
-            \item We say $h\in \mathcal{K}[t]$ is a \textbf{common divisor} of $f$ and $g$ if $h \mid f$ and $h \mid g$.
-            \item We say $r\in \mathcal K[t]$ is a \textbf{greatest common divisor} of $f$ and $g$ if
-            \begin{itemize}
-                \item $r$ is a common divisor of $f$ and $g$,
-                \item if $h$ is any common divisor of $f$ and $g$, then $h \mid r$.
-            \end{itemize}
-        \end{enumerate}
-    \end{definitionenv}
-    \begin{theoremenv}\label{thm: single generator is gcd}
-        Suppose $f_1$ and $f_2$ are nonzero polynomials in $\mathcal K[t]$. If $g$ is a single generator for the ideal generated by $f_1$ and $f_2$, then $g$ is a greatest common divisor of $f_1$ and $f_2$.
-    \end{theoremenv}
-    \begin{remarkenv}
-        The greatest common divisor of two nonzero polynomials is unique up to a nonzero constant factor. If we require the greatest common divisor to have leading coefficient $1$, then the greatest common divisor is unique.
-
-        Theorem~\ref{thm: single generator is gcd} also holds for more than two nonzero polynomials, i.e., if $g$ is a single generator for the ideal generated by $f_1, f_2, \ldots, f_n$ with $f_i \ne 0$ for $i = 1, 2, \ldots, n$, then $g$ is a greatest common divisor of $f_1, f_2, \ldots, f_n$. Particularly, if $1$ is a greatest common divisor of $f_1, f_2, \ldots, f_n$, then we call $f_1, f_2, \ldots, f_n$ \textbf{relatively prime}.
-    \end{remarkenv}
-	\newpage
+    Then it suffices to show $\ker f_1(A) \cap \ker f_2(A) = \{ \bm 0 \}$. Let $\bm w \in \ker f_1(A) \cap \ker f_2(A)$, i.e., $f_1(A) \bm w = f_2(A) \bm w = \bm 0$. Then
+    $$ \bm w = I \bm w = [g_1(A) f_1(A) + g_2(A) f_2(A)] \bm w = g_1(A) f_1(A) \bm w + g_2(A) f_2(A) \bm w = \bm 0. $$
+    Hence, $\ker f_1(A) \cap \ker f_2(A) = \{ \bm 0 \}$ and thus $V = \ker f_1(A) \oplus \ker f_2(A)$.
+\end{proofenv}
+\begin{theoremenv}
+    Let $V$ be a vector space over $\C$ and $A$ be an operator on $V$. Let $P\in \C[t]$ be a monic polynomial such that $P(A) = 0$. If we write $P$ as
+    $$ P = (t - \alpha_1)^{m_1} (t - \alpha_2)^{m_2} \cdots (t - \alpha_k)^{m_k} $$
+    where $\alpha_i \in \C$ are distinct and $m_i \ge 1$ for $i=1,2,\ldots,k$, then we have
+    $$ V = \bigoplus_{i=1}^k \ker (A - \alpha_i I)^{m_i}. $$
+\end{theoremenv}
+\newpage
