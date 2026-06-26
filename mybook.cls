@@ -83,7 +83,69 @@
 
 % ===== Hyperref (FAA colors) =====
 \definecolor{mlv}{RGB}{40, 137, 124}
-\RequirePackage[colorlinks, linkcolor=mlv, anchorcolor=mlv, citecolor=mlv]{hyperref}
+\RequirePackage[colorlinks, linkcolor=mlv, anchorcolor=mlv, citecolor=mlv, urlcolor=black]{hyperref}
+
+% ===== Title page metadata =====
+\newcommand{\@authoremail}{}
+\newcommand{\authoremail}[1]{\gdef\@authoremail{#1}}
+
+% ===== Instructor metadata =====
+
+\newcommand{\@instructors}{}
+\newcommand{\instructor}[1]{%
+    \g@addto@macro\@instructors{#1\\}%
+}
+
+\newcommand{\@instructoremails}{}
+\newcommand{\instructoremail}[1]{%
+    \g@addto@macro\@instructoremails{\bookemail{#1}\\}%
+}
+
+% \newcommand{\@subtitle}{Lecture Notes}
+% \newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+
+\newcommand{\bookemail}[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+
+% ===== Custom title page =====
+\renewcommand{\maketitle}{
+    \begin{titlepage}
+        \thispagestyle{empty}
+        \centering
+
+        \vspace*{0.18\textheight}
+
+        {\fontsize{54}{64}\selectfont\normalfont\mdseries \@title\par}
+
+        \vspace{1.2em}
+
+        % {\Large \@subtitle\par}
+
+        % \vspace{2em}
+
+        \rule{0.65\textwidth}{0.4pt}
+
+        \vfill
+
+        {\large
+        \begin{tabular}{rl}
+            Author: & \@author \\
+            Email: & \bookemail{\@authoremail} \\[0.8em]
+            Instructors: &
+            \begin{tabular}[t]{@{}l@{}}
+                \@instructors
+            \end{tabular}
+            \\[0.8em]
+
+            Emails: &
+            \begin{tabular}[t]{@{}l@{}}
+                \@instructoremails
+            \end{tabular}
+        \end{tabular}
+        \par}
+
+        \vspace*{0.12\textheight}
+    \end{titlepage}
+}
 
 % ===== Custom colors (FAA palette) =====
 \definecolor{qlv}{RGB}{240, 251, 248}

@@ -16,8 +16,20 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
         \item $(fg)(A) = f(A) g(A)$
     \end{enumerate}
 \end{theoremenv}
+\begin{definitionenv}
+    A polynomial with leading coefficient $1$ is called a \textbf{monic} polynomial. 
+\end{definitionenv}
+\begin{exampleenv}
+    Suppose $A\in \M_{n\times n}(\mathcal{K})$. Then the characteristic polynomial $\chi_A$ of $A$ is monic.
+\end{exampleenv}
+\begin{definitionenv}
+    Suppose $A\in \M_{n\times n}(\mathcal{K})$ and $f\in \mathcal{K}[t]\setminus \{0\}$. We say that $f$ is an \textbf{annihilating polynomial} of $A$ if $f(A) = 0$.
+\end{definitionenv}
+\begin{remarkenv}
+    An annihilating polynomial of $A$ does not need to be unique. 
+\end{remarkenv}
 \begin{theoremenv}\label{thm: existence of annihilating polynomial}
-    Suppose $A\in \M_{n\times n}(\mathcal{K})$. Then there exists a nonzero polynomial $f\in \mathcal{K}[t]$ such that $f(A) = 0$.
+    Suppose $A\in \M_{n\times n}(\mathcal{K})$. Then there exists a nonzero polynomial $f\in \mathcal{K}[t]$ such that $f$ is an annihilating polynomial of $A$, i.e., $f(A) = 0$.
 \end{theoremenv}
 \begin{proofenv}
     Note $\dim \M_{n\times n}(\mathcal{K}) = n^2$. For any $N \ge n^2$, the set $\{ I, A, A^2, \ldots, A^N \}$ is linearly dependent. Thus there exist $\alpha_0, \alpha_1, \ldots, \alpha_N \in \mathcal K$ such that $\alpha_0 I + \alpha_1 A + \cdots + \alpha_N A^N = 0$. Let $f(t) = \alpha_N t^N + \cdots + \alpha_1 t + \alpha_0$, then $f(A) = 0$.
@@ -97,7 +109,7 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
     Hence, $\{ V_1, V_2, \ldots, V_{n+1} \}$ is a fan of $A$ in $V$ and thus $A$ is triangulable.
 \end{proofenv}
 \begin{theoremenv}[Cayley-Hamilton Theorem]
-    Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and $A$ is an operator on $V$. Let $f(t) = \det (tI - A)$ be the characteristic polynomial of $A$. Then $f(A) = 0$.
+    Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and $A$ is an operator on $V$. Let $$\chi_A(t) = \det (tI - A)$$ be the characteristic polynomial of $A$. Then $\chi_A(A) = 0$.
 
 \end{theoremenv}
 \begin{proofenv}
@@ -109,34 +121,34 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
         0 & 0 & \cdots & a_{nn}
     \end{pmatrix}$$
     is a upper-triangular matrix. Thus
-    $$ f(t) = \det (tI - A) = (a_{11} - t)(a_{22} - t) \cdots (a_{nn} - t) $$
+    $$ \chi_A(t) = \det (tI - A) = (a_{11} - t)(a_{22} - t) \cdots (a_{nn} - t) $$
     and
-    $$ f(A) = (a_{11} I - A)(a_{22} I - A) \cdots (a_{nn} I - A). $$
-    We will show $\displaystyle \prod_{j=1}^{i}(a_{jj} I - A) v = 0$ for any $v \in V_i$ by induction on $i$.(Note when $i=n$, we have $f(A) =0$.)
+    $$ \chi_A(A) = (a_{11} I - A)(a_{22} I - A) \cdots (a_{nn} I - A). $$
+    We will show $\displaystyle \prod_{j=1}^{i}(a_{jj} I - A) v = 0$ for any $v \in V_i$ by induction on $i$.(Note when $i=n$, we have $\chi_A(A) =0$.)
 
     \textbf{Initial case:} if $i=1$, then for $v \in V_1 = \operatorname{span} \{ v_1 \}$, i.e., $v = c v_1$ for some $c\in \C$, we have
     $$ (a_{11} I - A) v = c(a_{11} I - A) v_1 = 0. $$
 
 
     \textbf{Inductive step:} suppose the statement holds for $i$ case, i.e.,
-    $\displaystyle \prod_{j=1}^i (a_{jj} I - A) v = 0$ for any $v \in V_i$. We will prove for $i+1$ case: for $v \in V_{i+1} = \operatorname{span} \{ v_1, \ldots, v_{i+1} \} = cv_{i+1} + \tilde{v}$ where $c\in \C$ and $\tilde{v} \in \operatorname{span} \{ v_1, \ldots, v_i \} = V_i$, we have
+    $\displaystyle \prod_{j=1}^i (a_{jj} I - A) v = 0$ for any $v \in V_i$. We will prove for $i+1$ case: for $v \in V_{i+1} = \operatorname{span} \{ v_1, \ldots, v_{i+1} \} = cv_{i+1} + \widetilde{v}$ where $c\in \C$ and $\widetilde{v} \in \operatorname{span} \{ v_1, \ldots, v_i \} = V_i$, we have
     \begin{align*}
-        \prod_{j=1}^{i+1} (a_{jj} I - A) v = c\prod_{j=1}^{i} (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} + \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \tilde{v}.
+        \prod_{j=1}^{i+1} (a_{jj} I - A) v = c\prod_{j=1}^{i} (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} + \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \widetilde{v}.
     \end{align*}
     Note
     $$\begin{aligned}
         (a_{i+1,i+1} I - A) v_{i+1} &= a_{i+1,i+1} v_{i+1} - (a_{1,i+1} v_1 + a_{2,i+1} v_2 + \cdots + a_{i,i+1} v_i + a_{i+1,i+1} v_{i+1})\\ &= -a_{1,i+1} v_1 - a_{2,i+1} v_2 - \cdots - a_{i,i+1} v_i \in V_i = \operatorname{span}\{ v_1, \ldots, v_i \}.
     \end{aligned}$$
-    Thus we know the first term $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} = 0$ by the inductive assumption. Also, note $\displaystyle \tilde{v} \in V_i$ which is invariant under $(a_{i+1,i+1} I - A)$, we have $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \tilde{v} = 0$ by the inductive assumption. Hence,
+    Thus we know the first term $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) v_{i+1} = 0$ by the inductive assumption. Also, note $\displaystyle \widetilde{v} \in V_i$ which is invariant under $(a_{i+1,i+1} I - A)$, we have $\displaystyle \prod_{j=1}^i (a_{jj} I - A) \cdot (a_{i+1,i+1} I - A) \widetilde{v} = 0$ by the inductive assumption. Hence,
     $$\prod_{j=1}^{i+1} (a_{jj} I - A) v = 0 \quad \text{for any } v \in V_{i+1}. $$
 
-    By induction, we have $\displaystyle \prod_{j=1}^n (a_{jj} I - A) v = 0$ for any $v \in V_n = V$. Thus $f(A) = 0$.
+    By induction, we have $\displaystyle \prod_{j=1}^n (a_{jj} I - A) v = 0$ for any $v \in V_n = V$. Thus $\chi_A(A) = 0$.
 \end{proofenv}
 \begin{remarkenv}
     The Cayley-Hamilton theorem also holds for any operator on a finite-dimensional vector space over $\R$.
 \end{remarkenv}
 \begin{remarkenv}
-    Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V \ge 1$ and $A$ is an operator on $V$. So far, we know there exists a fan basis $\mathcal B$ such that $\mathcal M_{\mathcal{B}} (A)$ is upper-triangular. Later, we shall see that there exists a ``particularly nice'' fan basis $\tilde{\mathcal{B}}$ such that $\mathcal{M}_{\tilde{\mathcal{B}}}$ looks like
+    Suppose $V$ is a finite-dimensional vector space over $\C$ with $\dim V \ge 1$ and $A$ is an operator on $V$. So far, we know there exists a fan basis $\mathcal B$ such that $\mathcal M_{\mathcal{B}} (A)$ is upper-triangular. Later, we shall see that there exists a ``particularly nice'' fan basis $\widetilde{\mathcal{B}}$ such that $\mathcal{M}_{\widetilde{\mathcal{B}}}$ looks like
     $$
     \begin{pmatrix}
         J_1 & 0 & \cdots & 0 \\
@@ -157,7 +169,7 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
         \text{ for } i=1,2,\ldots,k.
     $$
 \end{remarkenv}
-\section{Ideals}
+\section{Ideals in $\mathcal K[t]$}
 \begin{theoremenv}
     Suppose $f$ and $g$ are polynomials in $\mathcal K[t]$. Then there exist polynomials $q,r\in \mathcal K[t]$ such that $f(t) = q(t) g(t) + r(t)$ with $\deg r < \deg g$. Furthermore, such $q$ and $r$ are unique.
 \end{theoremenv}
@@ -201,13 +213,11 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
 \begin{remarkenv}
     In general, an ideal may be generated by different sets; particularly, a generating set may contain several polynomials or just a single generator.
 \end{remarkenv}
-\begin{theoremenv}
+\begin{theoremenv}\label{thm: single generator of ideal}
     Let $J$ be an ideal of $\mathcal K[t]$. Then there exists a $g\in J$ such that $g$ is a single generator of $J$.
 \end{theoremenv}
-\begin{remarkenv}
-    Suppose $g_1$ is a single generator of an ideal $J$ and $g_2$ is another single generator of $J$. We know $g_1 = h g_2$ for some $h\in \mathcal K[t]$ and $\deg g_1 \ge \deg g_2$ since $g_1$ is a single generator of $J$. Similarly, we have $\deg g_2 \ge \deg g_1$. Thus $\deg g_1 = \deg g_2$ and $h$ is a nonzero constant. Hence, $g_1$ and $g_2$ differ by a nonzero constant factor.
-
-    Particularly, if $g_1(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_0$ with $a_n \ne 0$, then $g_2 := \dfrac{1}{a_n} g_1$ is also a single generator of $J$ with leading coefficient $1$. Hence we can always find a single generator for a nonzero ideal $J$ with leading coefficient $1$ uniquely, which motivates the following definition.
+\begin{remarkenv}\label{rem: uniqueness of single generator}
+    Note, if we require the single generator to be monic, then the single generator is unique: suppose $g_1$ is a single generator of an ideal $J$ and $g_2$ is another single generator of $J$. We know $g_1 = h g_2$ for some $h\in \mathcal K[t]$ and $\deg g_1 \ge \deg g_2$ since $g_1$ is a single generator of $J$. Similarly, we have $\deg g_2 \ge \deg g_1$. Thus $\deg g_1 = \deg g_2$ and $h$ is a nonzero constant. Hence, $g_1$ and $g_2$ differ by a nonzero constant factor and thus if we require the single generator to be monic, then $g_1 = g_2$.
 \end{remarkenv}
 \begin{definitionenv}
     Suppose $f,g\in \mathcal K[t]$ are nonzero.
@@ -228,13 +238,20 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
     Suppose $f_1$ and $f_2$ are nonzero polynomials in $\mathcal K[t]$. If $g$ is a single generator for the ideal generated by $f_1$ and $f_2$, then $g$ is a greatest common divisor of $f_1$ and $f_2$.
 \end{theoremenv}
 \begin{remarkenv}\label{rem: uniqueness of gcd}
-    The greatest common divisor of two nonzero polynomials is unique up to a nonzero constant factor. If we require the greatest common divisor to have leading coefficient $1$, then the greatest common divisor is unique.
-
-    Theorem~\ref{thm: single generator is gcd} also holds for more than two nonzero polynomials, i.e., if $g$ is a single generator for the ideal generated by $f_1, f_2, \ldots, f_n$ with $f_i \ne 0$ for $i = 1, 2, \ldots, n$, then $g$ is a greatest common divisor of $f_1, f_2, \ldots, f_n$.
+    If we require the greatest common divisor to be monic, then the greatest common divisor is unique. Moreover, Theorem~\ref{thm: single generator is gcd} also holds for more than two nonzero polynomials, i.e., if $g$ is a single generator for the ideal generated by $f_1, f_2, \ldots, f_n$ with $f_i \ne 0$ for $i = 1, 2, \ldots, n$, then $g$ is a greatest common divisor of $f_1, f_2, \ldots, f_n$.
 \end{remarkenv}
 \begin{definitionenv}
     Let $f_1, f_2, \ldots, f_n$ be nonzero polynomials in $\mathcal K[t]$. We say $f_1, f_2, \ldots, f_n$ are \textbf{relatively prime} if $1$ is a common divisor of $f_1, f_2, \ldots, f_n$.
 \end{definitionenv}
+\begin{definitionenv}
+    Suppose $A\in \M_{n\times n}(\mathcal K)$. Let
+    $$ J = \{ f \in \mathcal K[t] : f(A) = 0 \} $$
+    be the ideal of $\mathcal K[t]$ consisting of all polynomials that annihilate $A$. Then we call the unique monic single generator $m_A(t)$ of $J$ the \textbf{minimal polynomial} of $A$.
+\end{definitionenv}
+\begin{remarkenv}
+    Theorem~\ref{thm: single generator of ideal} guarantees the existence of the minimal polynomial $m_A(t)$. The uniqueness of the minimal polynomial $m_A(t)$ follows from Remark~\ref{rem: uniqueness of single generator}. Note $m_A(t) | \chi_A(t)$, where $\chi_A(t)$ is the characteristic polynomial of $A$.
+\end{remarkenv}
+\section{Divisibility and Factorization of Polynomials}
 \begin{corollaryenv}[Bézout's Identity]
     Let $\mathcal K$ be a field and $f_1, f_2 \in \mathcal K[t]$. Suppose $h$ is a greatest common divisor of $f_1$ and $f_2$. Then there exist $g_1, g_2 \in \mathcal K[t]$ such that $$h = g_1 f_1 + g_2 f_2.$$
 \end{corollaryenv}
@@ -280,9 +297,6 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
     $$ c_1 p_2 \cdots p_m = q_2 \cdots q_n. $$
     By repeating the above process, we can get $p_i = c_i q_i$ for some nonzero constant $c_i$ and $i=1,2,\ldots,m$. By symmetry, we have $n=m$ and there exists nonzero constants $c_1, c_2, \ldots, c_m$ such that $p_i = c_i q_i$ for $i=1,2,\ldots,m$.
 \end{proofenv}
-\begin{definitionenv}
-    A polynomial with leading coefficient $1$ is called a \textbf{monic} polynomial. 
-\end{definitionenv}
 \begin{corollaryenv}
     Let $f\in \mathcal K[t]$ with $\deg f \ge 1$. Then there exist irreducible monic polynomials $p_1, p_2, \ldots, p_m$ in $\mathcal K[t]$ such that
     $$ f=c p_1 p_2 \cdots p_m \quad \text{for some } c\in \mathcal K, c\ne 0. $$ Moreover, such factorization is unique up to the order of the factors.
@@ -294,7 +308,10 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
 \begin{definitionenv}
     Suppose $f$ and $g$ are nonzero polynomials in $\mathcal K[t]$ and $p\in \mathcal K[t]$ is irreducible. If $f=p^m g$ for some $m\ge 0$ and $p \nmid g$, then we call $m$ the \textbf{multiplicity} of $p$ in $f$. Moreover, if $p=t-\alpha$ for some $\alpha \in \C$, then we call $m$ the \textbf{multiplicity} of $\alpha$ in $f$.
 \end{definitionenv}
-\begin{propositionenv}
+
+
+\section{Cyclic Decomposition and Jordan Form}
+\begin{propositionenv}\label{prop: kernel is invariant}
     Let $f\in \mathcal K[t]$ and $W = \ker f(A)$. Then $W$ is an $A$-invariant subspace of $V$.
 \end{propositionenv}
 \begin{proofenv}
@@ -302,7 +319,7 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
     $$ [f(A)](A\bm w) = [f(A) A] \bm w = [A f(A)] \bm w = A [f(A) \bm w] = A \bm 0 = \bm 0. $$
     Thus $A\bm w \in W$. Hence, $W$ is an $A$-invariant subspace of $V$.
 \end{proofenv}
-\begin{theoremenv}
+\begin{theoremenv}\label{thm: kernel decomposition}
     Let $f\in \mathcal K[t]$ such that $f = f_1 f_2$ for some $f_1, f_2 \in \mathcal K[t]$ where the greatest common divisor of $f_1$ and $f_2$ is 1. Suppose $V$ is a vector space and $A$ is an operator on $V$ such that $f(A) = 0$. Then we have
     $$ V = \ker f_1(A) \oplus \ker f_2(A). $$
 \end{theoremenv}
@@ -314,7 +331,7 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
     Let $\bm v \in V$. Then applying both sides to $\bm v$, we have
     $$ \bm v = \underbrace{g_1(A) f_1(A) \bm v}_{\in \ker f_2(A)} + \underbrace{g_2(A) f_2(A) \bm v}_{\in \ker f_1(A)}. $$
     Since
-    $$ f_2(A) [g_1(A) f_1(A) \bm v] = g_1(A) f_1(A) [f_2(A) \bm v] = g_1(A) f_1(A) \bm 0 = \bm 0, $$
+    $$ f_2(A) [g_1(A) f_1(A) \bm v] = g_1(A) [f_1(A) f_2(A)] \bm v =g_1(A) f(A) \bm v= \bm 0, $$
     we have $g_1(A) f_1(A) \bm v \in \ker f_2(A)$. Similarly, we have $g_2(A) f_2(A) \bm v \in \ker f_1(A)$. Thus $V = \ker f_1(A) + \ker f_2(A)$.
 
     Then it suffices to show $\ker f_1(A) \cap \ker f_2(A) = \{ \bm 0 \}$. Let $\bm w \in \ker f_1(A) \cap \ker f_2(A)$, i.e., $f_1(A) \bm w = f_2(A) \bm w = \bm 0$. Then
@@ -324,7 +341,309 @@ Recall that the set of all polynomials $\mathbf P_n(\mathcal{K})$ with coefficie
 \begin{theoremenv}
     Let $V$ be a vector space over $\C$ and $A$ be an operator on $V$. Let $P\in \C[t]$ be a monic polynomial such that $P(A) = 0$. If we write $P$ as
     $$ P = (t - \alpha_1)^{m_1} (t - \alpha_2)^{m_2} \cdots (t - \alpha_k)^{m_k} $$
-    where $\alpha_i \in \C$ are distinct and $m_i \ge 1$ for $i=1,2,\ldots,k$, then we have
+    where $\alpha_i \in \C$ are the distinct roots and $m_i \ge 1$ are the multiplicities of $\alpha_i$ for $i=1,2,\ldots,k$, then we have
     $$ V = \bigoplus_{i=1}^k \ker (A - \alpha_i I)^{m_i}. $$
 \end{theoremenv}
+\begin{proofenv}
+    We prove the theorem by induction on $k$, the number of distinct roots of $P$.
+
+    \textbf{Base case.} If $k=1$, then $P(t)=(t-\alpha_1)^{m_1}$. Since $P(A)=0$, we have $(A-\alpha_1 I)^{m_1}=0$, so every vector in $V$ lies in $\ker(A-\alpha_1 I)^{m_1}$. Hence
+    $$
+    V=\ker(A-\alpha_1 I)^{m_1}.
+    $$
+
+    \textbf{Inductive step.} Suppose the result holds for polynomials with $k-1$ distinct roots. Now let
+    $$
+    P(t)=\prod_{i=1}^k(t-\alpha_i)^{m_i}
+    $$
+    and assume $P(A)=0$. Write $g_i(t)=(t-\alpha_i)^{m_i}$. Since $g_1$ and $g_2\cdots g_k$ are relatively coprime, Theorem~\ref{thm: kernel decomposition} gives
+    $$
+    V=\ker g_1(A)\oplus W,
+    \qquad
+    W=\ker\bigl(g_2(A)\cdots g_k(A)\bigr).
+    $$
+    Let $$Q(t)=\prod_{i=2}^k(t-\alpha_i)^{m_i}, \quad W=\ker Q(A)$$
+
+    Since $Q(A)$ commutes with $A$, Proposition~\ref{prop: kernel is invariant} implies that $W$ is $A$-invariant. Thus $A$ restricts to an operator $B=A|_W$ on $W$. By the definition of $W$, we have $Q(A)w=0$ for every $w\in W$. Since $B=A|_W$, this means $Q(B)=Q(A)|_W=0$.
+
+    The polynomial $Q$ has $k-1$ distinct roots, namely $\alpha_2,\ldots,\alpha_k$. By the inductive hypothesis,
+    $$
+    W=\bigoplus_{i=2}^k \ker(B-\alpha_i I_W)^{m_i}.
+    $$
+    We now identify these kernels with the corresponding kernels for $A$. Since $B=A|_W$,
+    $$
+    \ker(B-\alpha_i I_W)^{m_i}
+    =
+    W\cap\ker(A-\alpha_i I_V)^{m_i}.
+    $$
+    It remains to show that $\ker(A-\alpha_i I_V)^{m_i}\subseteq W$ for $i=2,\ldots,k$. If $v\in\ker(A-\alpha_i I_V)^{m_i}$, then $g_i(A)v=0$. Since polynomials in $A$ commute,
+    $$
+    Q(A)v
+    =
+    \left(\prod_{j=2}^k g_j(A)\right)v
+    =
+    \left(\prod_{\substack{j=2\\ j\neq i}}^k g_j(A)\right)g_i(A)v
+    =
+    0.
+    $$
+    Thus $v\in\ker Q(A)=W$. Therefore
+    $$
+    \ker(B-\alpha_i I_W)^{m_i}
+    =
+    \ker(A-\alpha_i I_V)^{m_i},\quad \text{for } i=2,\ldots,k.
+    $$
+
+    Combining the decompositions, we get
+    $$
+    \begin{aligned}
+    V
+    =\ker g_1(A)\oplus W
+    =\ker(A-\alpha_1 I)^{m_1}
+    \oplus
+    \bigoplus_{i=2}^k \ker(A-\alpha_i I)^{m_i}
+    =\bigoplus_{i=1}^k \ker(A-\alpha_i I)^{m_i}.
+    \end{aligned}
+    $$
+    This completes the proof.
+\end{proofenv}
+\begin{definitionenv}
+    Let $V$ be a vector space over a field $\mathcal K$ and $\mathcal S$ be a set of operators on $V$. We say a subspace $W$ of $V$ is \textbf{$\mathcal S$-invariant} if $W$ is invariant under every operator in $\mathcal S$, i.e., for any $A\in \mathcal S$ and $\bm w \in W$, we have $A \bm w \in W$. Moreover, we say $V$ is a \textbf{simple $\mathcal S$-space} if $V\ne \{ \bm 0 \}$ and the only $\mathcal S$-invariant subspaces of $V$ are $\{ \bm 0 \}$ and $V$ itself.
+\end{definitionenv}
+\begin{propositionenv}\label{prop:kernel-and-image-invariant-subspaces}
+    Let $V$ be a vector space over a field $\mathcal K$ and $\mathcal S$ be a set of operators on $V$. Suppose $A$ is an operator on $V$ such that
+    $$ AB = BA \quad \text{for any } B \in \mathcal S. $$
+    Then $\ker A$ and $\operatorname{im} A$ are both $\mathcal S$-invariant subspaces of $V$.
+\end{propositionenv}
+\begin{proofenv}
+    Let $\bm w \in \ker A$, i.e., $A \bm w = \bm 0$. Then for any $B \in \mathcal S$, we have
+    $$ A (B \bm w) = B (A \bm w) = B \bm 0 = \bm 0. $$
+    Thus $B \bm w \in \ker A$. Hence, $\ker A$ is an $\mathcal S$-invariant subspace of $V$.
+    
+    Let $\bm v \in \operatorname{im} A$, i.e., there exists $\widetilde{\bm v} \in V$ such that $A \widetilde{\bm v} = \bm v$. Then for any $B\in \mathcal S$, we have
+    $$ B \bm v = B (A \widetilde{\bm v}) = A (B \widetilde{\bm v}). $$
+    Thus $B\bm v \in \operatorname{im} A$. Hence, $\operatorname{im} A$ is an $\mathcal S$-invariant subspace of $V$.
+\end{proofenv}
+\begin{propositionenv}
+    Let $V$ be a vector space over a field $\mathcal K$ and $\mathcal S$ be a set of operators on $V$. Suppose $A$ is an operator on $V$ such that
+    $$ AB = BA \quad \text{for any } B \in \mathcal S. $$
+    If $f$ is a polynomial in $\mathcal K[t]$, then
+    $$ f(A) B = B f(A) \quad \text{for any } B \in \mathcal S. $$
+\end{propositionenv}
+\begin{proofenv}
+    Let $f(t) = a_n t^n + a_{n-1} t^{n-1} + \cdots + a_0$ with $a_n \ne 0$. Then for any $B \in \mathcal S$, we have
+    $$ f(A) B = (a_n A^n + a_{n-1} A^{n-1} + \cdots + a_0 I) B = a_n A^n B + a_{n-1} A^{n-1} B + \cdots + a_0 B. $$
+    Since $AB = BA$ for any $B \in \mathcal S$, we have
+    $$ A^2 B = A (A B) = A (B A) = (A B) A = (B A) A = B A^2, $$
+    and by repeating the above process, we can get $A^k B = B A^k$ for any positive integer $k$. Thus
+    $$ f(A) B = a_n B A^n + a_{n-1} B A^{n-1} + \cdots + a_0 B = B f(A). $$
+\end{proofenv}
+\begin{theoremenv}[Schur's Lemma]\label{thm: schur's lemma}
+    Let $V$ be a vector space over a field $\mathcal K$ and $\mathcal S$ be a set of operators on $V$. Suppose $V$ is a simple $\mathcal S$-space and $A$ is an operator on $V$ such that
+    $$ AB = BA \quad \text{for any } B \in \mathcal S. $$
+    Then either $A$ is invertible or $A=0$.
+\end{theoremenv}
+\begin{proofenv}
+    Since $V$ is simple, $V\ne \{ \bm 0 \}$ and $A$ cannot be both invertible and the zero operator. Moreover, if $A=0$, then the statement trivially holds. Thus we assume $A \ne 0$ and we will show $A$ is invertible.
+
+    By Proposition~\ref{prop:kernel-and-image-invariant-subspaces}, $\ker A$ and $\operatorname{im} A$ are both $\mathcal S$-invariant subspaces of $V$. Since $V$ is simple, its only $\mathcal S$-invariant subspaces are $\{ \bm 0 \}$ and $V$ itself. Thus
+    $$ \begin{cases}
+        \ker A = \{ \bm 0 \} \\
+        \operatorname{im} A = V
+    \end{cases}
+    \quad \text{or} \quad
+    \begin{cases}
+        \ker A = V \\
+        \operatorname{im} A = \{ \bm 0 \}
+    \end{cases}
+    $$
+    Since $A \ne 0$, we cannot have $\ker A = V$ and nor can we have $\operatorname{im} A = \{ \bm 0 \}$. Thus $\ker A = \{ \bm 0 \}$ and $\operatorname{im} A = V$. Hence, $A$ is injective and surjective, i.e., $A$ is invertible.
+\end{proofenv}
+\begin{theoremenv}
+    Let $V$ be a finite-dimensional vector space over $\C$ and $\mathcal S$ be a set of operators on $V$. Suppose $V$ is a simple $\mathcal S$-space and $A$ is an operator on $V$ such that
+    $$ AB = BA \quad \text{for any } B \in \mathcal S. $$
+    Then there exists $\lambda \in \C$ such that $A = \lambda I$.
+\end{theoremenv}
+\begin{proofenv}
+    Let $g$ be the minimal polynomial of $A$ and we will prove $g$ to be irreducible. Suppose, for a contradiction, $g$ is reducible in $\C[t]$. Then there exist nonconstant polynomials $g_1, g_2 \in \C[t]$ such that $g = g_1 g_2$. Note $g$ is the minimal polynomial of $A$, so $g_1(A) \ne 0$ and $g_2(A) \ne 0$. By Theorem~\ref{thm: schur's lemma}, $g_1(A)$ and $g_2(A)$ are both invertible. Since $g(A) = g_1(A) g_2(A) = 0$, we get a contradiction. Hence, $g$ is irreducible in $\C[t]$. Note $\C$ is algebraically closed. Hence, the only irreducible polynomials in $\C[t]$ are of the form $t-\lambda$ for some $\lambda \in \C$, and we have $g(t) = t - \lambda$ for some $\lambda \in \C$. Thus $A = g(A) + \lambda I = \lambda I$.
+\end{proofenv}
+\begin{definitionenv}
+    Suppose $V$ is a finite-dimensional vector space over $\K$ and $A$ is an operator on $V$. We say $A$ is \textbf{nilpotent} if there exists a positive integer $k\ge 1$ such that $A^k = 0$.
+\end{definitionenv}
+\begin{definitionenv}
+    Let $V$ be a vector space over $\C$ and $A$ be an operator on $V$. Suppose $\bm v \in V$ is a nonzero vector. We say $\bm v$ is \textbf{$(A-\alpha I)$-cyclic} if there exists a positive integer $r$ such that
+    $$ (A - \alpha I)^r \bm v = \bm 0, \quad \alpha \in \C. $$
+    The smallest positive integer $r$ satisfying the above condition is called the \textbf{period} of $\bm v$.
+\end{definitionenv}
+\begin{lemmaenv}
+    Let $V$ be a vector space over $\C$ and $A$ be an operator on $V$. Suppose $\bm v \in V$ is an $(A-\alpha I)$-cyclic vector with period $r$ and $\alpha \in \C$. Then the vectors
+    $$ \bm v, (A-\alpha I) \bm v, (A-\alpha I)^2 \bm v, \ldots, (A-\alpha I)^{r-1} \bm v $$
+    are linearly independent.
+\end{lemmaenv}
+\begin{proofenv}
+    For convenience, we write $B := A - \alpha I$. Suppose there exist $c_0, c_1, \ldots, c_{r-1} \in \C$ such that
+    $$ c_0 \bm v + c_1 B \bm v + c_2 B^2 \bm v + \cdots + c_{r-1} B^{r-1} \bm v = \bm 0. $$
+    Let $k$ be the smallest nonnegative integer such that $c_k \ne 0$. Then we have
+    $$ c_k B^k \bm v + c_{k+1} B^{k+1} \bm v + \cdots + c_{r-1} B^{r-1} \bm v = \bm 0. $$
+    Applying $B^{r-1-k}$ to both sides, we have
+    $$ c_k B^{r-1} \bm v = \bm 0. $$
+    Since $c_k \ne 0$ and $B^{r-1} \bm v \ne \bm 0$, we get a contradiction. Hence, such $k$ does not exist, and the vectors $\bm v, B \bm v, B^2 \bm v, \ldots, B^{r-1} \bm v$ are linearly independent.
+\end{proofenv}
+\begin{definitionenv}
+    Let $V$ be a finite-dimensional vector space over $\C$ and $A$ be an operator on $V$. We say $V$ is \textbf{cyclic with respect to $A$} if there exists a nonzero vector $\bm v \in V$ such that $\bm v$ is $(A-\alpha I)$-cyclic with period $r$ for some $\alpha \in \C$, and the ordered set
+    $$ \mathcal B := \{ (A-\alpha I)^{r-1} \bm v, (A-\alpha I)^{r-2} \bm v, \ldots, (A-\alpha I) \bm v, \bm v \} $$
+    is a basis of $V$. In this case, we call $\mathcal B$ a \textbf{Jordan basis} for $V$ with respect to $A$. Note
+    $$ A(A-\alpha I)^j \bm v = (A-\alpha I)^{j+1} \bm v + \alpha (A-\alpha I)^j \bm v \quad \text{for } j=0,1,\ldots,r-1, $$
+    and $(A-\alpha I)^r \bm v = \bm 0$. Thus, the matrix representation of $A$ with respect to the Jordan basis $\mathcal B$, called the \textbf{Jordan block}, is
+    $$ J_r(\alpha) =
+    \begin{pmatrix}
+        \alpha & 1 & 0 & \cdots & 0 \\
+        0 & \alpha & 1 & \cdots & 0 \\
+        0 & 0 & \alpha & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & 1 \\
+        0 & 0 & 0 & \cdots & \alpha
+    \end{pmatrix}_{r\times r}.
+    $$
+    More generally, if
+    $$ V = \bigoplus_{i=1}^k V_i $$
+    is a direct sum of invariant and cyclic subspaces $V_i$ with respect to $A$, and $\mathcal B_i$ is a Jordan basis for $V_i$ with respect to $A$, then the ordered set
+    $\displaystyle \mathcal B := \bigcup_{i=1}^k \mathcal B_i $
+    is a basis of $V$ called a \textbf{Jordan basis} for $V$ with respect to $A$. In this case, the matrix representation of $A$ with respect to the Jordan basis $\mathcal B$, called the \textbf{Jordan normal form}, is
+    $$ J = \bigoplus_{i=1}^k J_{r_i}(\alpha_i) = \begin{pmatrix}
+        J_{r_1}(\alpha_1) & 0 & 0 & \cdots & 0 \\
+        0 & J_{r_2}(\alpha_2) & 0 & \cdots & 0 \\
+        0 & 0 & J_{r_3}(\alpha_3) & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & 0 \\
+        0 & 0 & 0 & \cdots & J_{r_k}(\alpha_k)
+    \end{pmatrix}
+    $$
+    where $\alpha_i \in \C$ and $r_i \ge 1$ for $i=1,2,\ldots,k$.
+\end{definitionenv}
+\begin{theoremenv}
+    Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V \ge 1$ and $A$ be an operator on $V$. Then $V$ can be decomposed as a direct sum of subspaces invariant and cyclic with respect to $A$.
+\end{theoremenv}
+\begin{proofenv}
+    Suppose there exists $\alpha \in \C$ and a positive integer $r$ such that
+    $$ (A - \alpha I)^r = 0, \quad (A - \alpha I)^{r-1} \ne 0. $$
+    Let $B := A - \alpha I$. We want to show that $V$ can be decomposed as a direct sum of subspaces invariant and cyclic with respect to $B$. We will prove this by induction on $\dim V$.
+
+    \textbf{Base case:} if $\dim V=1$, then $B$ is a scalar operator, say $B=\lambda I$. Since $B^r=0$, we have $\lambda^r=0$, hence $\lambda=0$ and $B=0$. Thus, for any nonzero $\bm v\in V$, $V=\operatorname{span}\{\bm v\}$ is one-dimensional, invariant, and cyclic with respect to $B$.
+
+    \textbf{Inductive step:} now assume $\dim V>1$ and that the result holds for all vector spaces of smaller dimension. If $\operatorname{im}B =: BV=\{\bm 0\}$, then $B=0$, so any basis $\{\bm v_1,\dots,\bm v_n\}$ of $V$ gives
+    $$
+    V=\C\bm v_1\oplus\cdots\oplus\C\bm v_n, \quad \text{where } \C\bm v_i = \operatorname{span}\{\bm v_i\} \text{ for } i=1,2,\ldots,n.
+    $$
+    and each $\C\bm v_i$ is one-dimensional, invariant, and cyclic with respect to $B$. Hence we may assume $BV\ne\{\bm 0\}$.
+
+    Since $B$ is nilpotent, $\ker B\ne\{\bm 0\}$, and so $\dim BV<\dim V$ by the rank-nullity theorem. Also, $BV$ is invariant under $B$. Hence, by the inductive hypothesis applied to $B|_{BV}$, we may write
+    $$
+    BV=W_1\oplus\cdots\oplus W_m,
+    $$
+    where each $W_i$ is cyclic with respect to $B$. Say $W_i=\operatorname{span}\{\bm w_i,B\bm w_i,\dots,B^{r_i-1}\bm w_i\}$, with $B^{r_i}\bm w_i=\bm 0$ and $B^{r_i-1}\bm w_i\ne\bm 0$. Since $\bm w_i\in BV$, choose $\bm v_i\in V$ such that $B\bm v_i=\bm w_i$, and define $V_i:=\operatorname{span}\{\bm v_i,B\bm v_i,\dots,B^{r_i}\bm v_i\}$. Then each $V_i$ is cyclic and invariant with respect to $B$.
+
+    \textbf{Claim:}
+    
+    \begin{center}
+        $V'=V_1+\cdots+V_m$ is a direct sum.
+    \end{center}
+
+    Suppose $f_1(B)\bm v_1+\cdots+f_m(B)\bm v_m=\bm 0$, where $\deg f_i\le r_i$. Applying $B$ gives $$f_1(B)\bm w_1+\cdots+f_m(B)\bm w_m=\bm 0.$$
+    Since $BV=W_1\oplus\cdots\oplus W_m$, we get $f_i(B)\bm w_i=\bm 0$ for every $i$. Writing $f_i(t)=c_{i,0}+c_{i,1}t+\cdots+c_{i,r_i}t^{r_i}$, the linear independence of $\bm w_i,B\bm w_i,\dots,B^{r_i-1}\bm w_i$ implies $c_{i,0}=\cdots=c_{i,r_i-1}=0$. Hence $f_i(t)=c_{i,r_i}t^{r_i}$.
+
+    Substituting this back gives $c_{1,r_1}B^{r_1}\bm v_1+\cdots+c_{m,r_m}B^{r_m}\bm v_m=\bm 0$. But $B^{r_i}\bm v_i=B^{r_i-1}\bm w_i\in W_i$ and $B^{r_i-1}\bm w_i\ne\bm 0$. Since $W_1\oplus\cdots\oplus W_m$ is direct, each $c_{i,r_i}=0$. Thus each $f_i=0$, and therefore
+    $$
+    V'=V_1\oplus\cdots\oplus V_m.
+    $$
+
+    Moreover, $BV_i=W_i$ for each $i$, so $BV'=BV$. Hence for any $\bm v\in V$, there exists $\bm v'\in V'$ such that $B\bm v=B\bm v'$, which means $\bm v-\bm v'\in\ker B$. Therefore $V=V'+\ker B$.
+
+    Now choose a subspace $U\subseteq\ker B$ such that $\ker B=(V'\cap\ker B)\oplus U$. Let $\{\bm u_1,\dots,\bm u_\ell\}$ be a basis of $U$. Then $V=V'\oplus U$. Indeed, since $V=V'+\ker B$ and $\ker B=(V'\cap\ker B)\oplus U$, we get $V=V'+U$; moreover, if $\bm x\in V'\cap U$, then $\bm x\in V'\cap\ker B$ and also $\bm x\in U$, so $\bm x=\bm 0$. Hence
+    $$
+    V=V'\oplus\C\bm u_1\oplus\cdots\oplus\C\bm u_\ell.
+    $$
+    Each $\C\bm u_j$ is one-dimensional, invariant, and cyclic with respect to $B$, since $B\bm u_j=\bm 0$. Combining this with the decomposition $V'=V_1\oplus\cdots\oplus V_m$ gives
+    $$
+    V=V_1\oplus\cdots\oplus V_m\oplus\C\bm u_1\oplus\cdots\oplus\C\bm u_\ell,
+    $$
+    which is the desired direct sum decomposition into invariant cyclic subspaces.
+
+    Finally, since $A=B+\alpha I$, every subspace invariant and cyclic with respect to $B$ is also invariant and cyclic with respect to $A$ and the scalar $\alpha$. This completes the proof.
+\end{proofenv}
+\begin{corollaryenv}
+    Let $V$ be a finite-dimensional vector space over $\C$, and let $A:V\to V$ be a linear operator. Then $A$ can be written as $A=D+N$, where $D$ is diagonalizable and $N$ is nilpotent.
+\end{corollaryenv}
+\begin{proofenv}
+    By the Jordan normal form theorem, there exists a basis of $V$ with respect to which the matrix of $A$ is a direct sum of Jordan blocks:
+    $$
+    [A]=J_{k_1}(\alpha_1)\oplus\cdots\oplus J_{k_m}(\alpha_m).
+    $$
+    Each Jordan block can be written as
+    $J_{k_i}(\alpha_i)=\alpha_i I_{k_i}+M_i$, where $M_i$ is the nilpotent Jordan block with zeros on the diagonal and ones on the superdiagonal. Define linear operators $D$ and $N$ by declaring their matrices in this Jordan basis to be
+    $$
+    [D]=\alpha_1 I_{k_1}\oplus\cdots\oplus \alpha_m I_{k_m},
+    \qquad
+    [N]=M_1\oplus\cdots\oplus M_m.
+    $$
+    Then $[A]=[D]+[N]$, hence $A=D+N$. Moreover, $D$ is diagonal in this basis, so $D$ is diagonalizable. Also, each $M_i$ is nilpotent, and therefore the block diagonal matrix $[N]=M_1\oplus\cdots\oplus M_m$ is nilpotent. Hence $N$ is nilpotent. This proves the result.
+\end{proofenv}
+\begin{theoremenv}
+    Let $A,B\in \M_{n\times n}(\C)$. Then $A$ and $B$ are similar if and only if they have the same Jordan normal form up to permutation of the Jordan blocks.
+\end{theoremenv}
+\begin{propositionenv}
+    Let $A\in \M_{n\times n}(\C)$ and let
+    $$ \chi_A(t) = (t-\lambda_1)^{m_1} (t-\lambda_2)^{m_2} \cdots (t-\lambda_k)^{m_k} $$
+    be its characteristic polynomial where $\lambda_i \in \C$ are the distinct eigenvalues for $A$ with respective algebraic multiplicities $m_i \ge 1$ for $i=1,2,\ldots,k$. Let
+    $$ \mu_i = \dim \ker (A - \lambda_i I) \quad \text{for } i=1,2,\ldots,k, $$
+    be the geometric multiplicity of $\lambda_i$ for $i=1,2,\ldots,k$. Then there exist positive integers $\ell_{i,1}, \ell_{i,2}, \ldots, \ell_{i,\mu_i}$ such that
+    $$ \ell_{i,1} \ge \ell_{i,2} \ge \cdots \ge \ell_{i,\mu_i} \quad \text{and} \quad \sum_{j=1}^{\mu_i} \ell_{i,j} = m_i, $$
+    and the jordan normal form of $A$ is
+    $$
+    \bigoplus_{i=1}^k \bigoplus_{j=1}^{\mu_i} J_{\ell_{i,j}}(\lambda_i).
+    $$
+\end{propositionenv}
+\begin{remarkenv}
+    Note, for each eigenvalue $\lambda_i$, the Jordan blocks corresponding to $\lambda_i$ are determined by the integer partition (of $m_i$ into $\mu_i$ parts)
+    $$ m_i = \ell_{i,1} + \ell_{i,2} + \cdots + \ell_{i,\mu_i}. $$
+    Therefore, computing the Jordan normal form of $A$ is equivalent to computing these integer partitions for each eigenvalue $\lambda_i$.
+\end{remarkenv}
+\begin{theoremenv}
+    Fix an eigenvalue $\lambda_i$ of $A\in \M_{n\times n}(\C)$ with algebraic multiplicity $m_i$ and let
+    $$ N_{i,j}  := \dim \ker \left( (A-\lambda_i I) ^j \right), \quad j=1,2,\ldots,m_i, $$
+    and put $N_{i,0} := 0$. If the Jordan blocks corresponding to $\lambda_i$ have sizes $\ell_{i,1} \ge \ell_{i,2} \ge \cdots \ge \ell_{i,\mu_i}$, then for each $j\ge 1$, we have
+    $$ N_{i,j} - N_{i,j-1} = \# \{ r : \ell_{i,r} \ge j \}, $$
+    i.e., the difference $N_{i,j} - N_{i,j-1}$ is the number of Jordan blocks corresponding to $\lambda_i$ of size at least $j$. Thus
+    $$ \# \{ r : \ell_{i,r} = j \} = (N_{i,j} - N_{i,j-1}) - (N_{i,j+1} - N_{i,j}) = 2 N_{i,j} - N_{i,j-1} - N_{i,j+1}. $$
+\end{theoremenv}
+\begin{remarkenv}
+    This gives us a way to compute the Jordan normal form of a matrix.
+\end{remarkenv}
+\begin{methodenv}
+    Given a matrix $A\in \M_{n\times n}(\C)$, we can compute its Jordan normal form by the following steps:
+    \begin{enumerate}[label=(\arabic*)]
+        \item Solve the characteristic polynomial
+        $$ \chi_A(t) = \det(tI - A) = 0 $$
+        to find the eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_k$ of $A$ and their respective algebraic multiplicities $m_1, m_2, \ldots, m_k$.
+        \item For each eigenvalue $\lambda_i$, compute the nullities
+        $$ N_{i,j} := \dim \ker \left( (A-\lambda_i I)^j \right), \quad j=1,2,\ldots,m_i, $$
+        and put $N_{i,0} := 0$.
+        \item For each eigenvalue $\lambda_i$, compute the number of Jordan blocks of size exactly $j$ corresponding to $\lambda_i$ by
+        $$ \# \{ r : \ell_{i,r} = j \} = 2 N_{i,j} - N_{i,j-1} - N_{i,j+1}, \quad j=1,2,\ldots,m_i. $$
+        \item For each eigenvalue $\lambda_i$, write down the block size
+        $$ \ell_{i,1} \ge \ell_{i,2} \ge \cdots \ge \ell_{i,\mu_i} $$
+        and thus repeating the above process gives the Jordan normal form of $A$
+        $$ \bigoplus_{i=1}^k \bigoplus_{j=1}^{\mu_i} J_{\ell_{i,j}}(\lambda_i). $$
+        
+    \end{enumerate}
+\end{methodenv}
+\begin{corollaryenv}
+    Suppose $A\in \M_{n\times n}(\C)$ and its Jordan normal form is
+    $$ \bigoplus_{i=1}^k \bigoplus_{j=1}^{\mu_i} J_{\ell_{i,j}}(\lambda_i), $$
+    where for each eigenvalue $\lambda_i$, the block sizes are
+    $ \ell_{i,1} \ge \ell_{i,2} \ge \cdots \ge \ell_{i,\mu_i}. $
+    Then the minimal polynomial of $A$ is given by
+    $$ m_A(t) = \prod_{i=1}^k (t - \lambda_i)^{\ell_{i,1}}. $$
+\end{corollaryenv}
+\begin{remarkenv}
+    Note that the minimal polynomial of $A$ is determined by the largest Jordan block corresponding to each eigenvalue $\lambda_i$. Thus, even if two matrices $A,B\in \M_{n\times n}(\C)$ satisfy $m_A(t) = m_B(t)$ and $\chi_A(t) = \chi_B(t)$, it does not follows that $A$ and $B$ have the same Jordan normal form, and thus $A$ and $B$ may not be similar.
+\end{remarkenv}
 \newpage
+

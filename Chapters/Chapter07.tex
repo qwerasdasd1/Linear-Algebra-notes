@@ -66,9 +66,21 @@
         Let $V$ be a finite-dimensional vector space over $\mathcal{K}$ and $A$ be an operator on $V$. Suppose $\lambda \in \mathcal{K}$. Then $\lambda$ is an eigenvalue of $A$ if and only if $A-\lambda I$ is not invertible, where $I$ is the identity operator on $V$.
     \end{theoremenv}
     \begin{definitionenv}
-        Let $V$ be a vector space wtih $\dim V = n$ and $A$ be an operator on $V$. Then
-        $$ P_A(t) = \det(A-tI) $$
-        is called the \textbf{characteristic polynomial} of $A$. Note that $P_A$ is a polynomial of degree $n$. Suppose $$P_A(t) = (t-\lambda_1)^{m_1} (t-\lambda_2)^{m_2} \cdots (t-\lambda_k)^{m_k}\quad \text{with } \sum_{i=1}^k m_i = n $$ where $\lambda_1, \lambda_2, \ldots, \lambda_k$ are distinct eigenvalues of $A$ and $m_i$ is the multiplicity of $\lambda_i$ for $i=1,2,\ldots,k$. Then we call $m_i$ the \textbf{algebraic multiplicity} of eigenvalue $\lambda_i$. We also define the \textbf{geometric multiplicity} of eigenvalue $\lambda_i$ to be $E_\lambda=\ker(A-\lambda I)$, i.e., how many linearly independent eigenvectors of $A$ corresponding to $\lambda_i$.
+        Let $V$ be a finite-dimensional vector space over $\mathcal{K}$ and $A$ be an operator on $V$. Then
+        $$ \chi_A(t) = \det(A-tI) $$
+        is called the \textbf{characteristic polynomial} of $A$.
+    \end{definitionenv}
+    \begin{definitionenv}
+        Let $\mathcal{K}$ be a field. We say $\mathcal{K}$ is \textbf{algebraically closed} if every nonconstant polynomial $f$ in $\mathcal{K}[t]$ has a root $\lambda\in \mathcal{K}$, i.e., $f(\lambda) = 0$. 
+    \end{definitionenv}
+    \begin{remarkenv}
+        Note that $\C$ is algebraically closed but $\R$ is not.
+    \end{remarkenv}
+    \begin{definitionenv}
+        Let $V$ be a finite-dimensional vector space over $\mathcal{\C}$ with $\dim V = n$ and $A$ be an operator on $V$. Let $\chi_A$ be the characteristic polynomial of $A$. Note $\deg \chi_A = n$. Suppose $$\chi_A(t) = (t-\lambda_1)^{m_1} (t-\lambda_2)^{m_2} \cdots (t-\lambda_k)^{m_k}\quad \text{with } \sum_{i=1}^k m_i = n $$ where $\lambda_1, \lambda_2, \ldots, \lambda_k$ are distinct eigenvalues of $A$. Then we call $m_i$ the \textbf{algebraic multiplicity} of eigenvalue $\lambda_i$.
+        
+        We also define the \textbf{geometric multiplicity} of eigenvalue $\lambda_i$ to be $$\mu_i := \dim E_{\lambda_i}, \quad \text{where } E_{\lambda_i} = \ker(A-\lambda_i I).$$
+        Note the geometric multiplicity is always less than or equal to the algebraic multiplicity, i.e., $\mu_i \le m_i$ for $i=1,2,\ldots,k$.
     \end{definitionenv}
     \begin{remarkenv}
         There're two cases that a matrix $A$ cannot be diagonalized, i.e., $A$ does not have an eigenbasis:
@@ -107,10 +119,15 @@
     \end{remarkenv}
     \section{Spectral Theorems}
     \begin{definitionenv}\label{def: invariant subspace}
-        Let $V$ be a finite-dimensional vector space over $\R$ with $\dim V\ge 1$ and a positive definite scalar product $\langle \cdot, \cdot \rangle$. Let $A$ be a symmetric operator on $V$. We say a subspace $W$ of $V$ is \textbf{invariant} under $A$ if $A w \in W$ for all $w\in W$. In this case, we also say $A$ preserves $W$.
+        Let $V$ be a vector space over $\mathcal{K}$ and $A$ be an operator on $V$. We say a subspace $W$ of $V$ is \textbf{invariant} under $A$ if $A w \in W$ for all $w\in W$. In this case, we also say $A$ preserves $W$.
     \end{definitionenv}
+    \begin{exampleenv}
+        Let $V,A$ be defined as in Definition~\ref{def: invariant subspace}. Then
+        $$ E_\lambda = \{v\in V: Av = \lambda v\} = \ker(A-\lambda I) $$
+        is invariant under $A$ for any eigenvalue $\lambda$ of $A$. This special space is called the \textbf{eigenspace} of $A$ corresponding to eigenvalue $\lambda$.
+    \end{exampleenv}
     \begin{lemmaenv}
-        Let $V$ and $A$ be defined in Definition~\ref{def: invariant subspace}. If $W$ is a subspace of $V$ invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
+        Let $V$ be a finite-dimensional vector space over $\R$ with $\dim V\ge 1$ and a positive definite scalar product $\langle \cdot, \cdot \rangle$. Let $A$ be a symmetric operator on $V$. If $W$ is a subspace of $V$ invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
     \end{lemmaenv}
     \begin{proofenv}
         Suppose $W$ is invariant under $A$. By definition, for any $w\in W$, $Aw\in W$. Let $v\in W^\perp$ and we will show that $Av \in W^\perp$. Since $A$ is symmetric, we have $\langle Av, w \rangle = \langle v, A w \rangle = 0 $ for any $w\in W$. Thus $Av \in W^\perp$ and thus $W^\perp$ is invariant under $A$.
@@ -157,11 +174,11 @@
     \begin{theoremenv}\label{thm: eigenvalue of hermitian operator is real}
         Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a hermitian operator on $V$ and $\lambda \in \C$ is an eigenvalue of $A$, then $\lambda \in \R$.
     \end{theoremenv}
-    \begin{definitionenv}
-        Let $V$ be as in Theorem~\ref{thm: eigenvalue of hermitian operator is real} and $A$ be a hermitian operator on $V$. We say a subspace $W$ of $V$ is \textbf{invariant} under $A$ if $A w \in W$ for all $w\in W$. In this case, we also say $A$ preserves $W$.
-    \end{definitionenv}
+    % \begin{definitionenv}
+    %     Let $V$ be as in Theorem~\ref{thm: eigenvalue of hermitian operator is real} and $A$ be a hermitian operator on $V$. We say a subspace $W$ of $V$ is \textbf{invariant} under $A$ if $A w \in W$ for all $w\in W$. In this case, we also say $A$ preserves $W$.
+    % \end{definitionenv}
     \begin{lemmaenv}
-        Let $V$ and $A$ be defined in the above definition. If $W$ is a subspace of $V$ invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
+        Let $V$ and $A$ be defined in Theorem~\ref{thm: eigenvalue of hermitian operator is real}. If $W$ is a subspace of $V$ invariant under $A$, then the orthogonal complement $W^\perp$ of $W$ is also invariant under $A$.
     \end{lemmaenv}
     \begin{theoremenv}
         Let $V$ be a finite-dimensional vector space over $\C$ with $\dim V\ge 1$ and a positive definite hermitian product $\langle \cdot, \cdot \rangle$. If $A$ is a hermitian operator on $V$, then $A$ has an orthonormal eigenbasis.
