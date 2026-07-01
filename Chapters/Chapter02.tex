@@ -33,7 +33,7 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 \end{definitionenv}
 
 \begin{definitionenv}
-	Let $A = (a_{ij})$ and $B = (b_{ij})$ be two matrices in $\mathbf{M}_{m \times n}(\mathcal{K})$, and let $\alpha \in \mathcal{K}$.
+	Let $A = (a_{ij})$ and $B = (b_{ij})$ be two matrices in $\M_{m \times n}(\mathcal{K})$, and let $\alpha \in \mathcal{K}$.
 	Matrix addition and scalar multiplication are defined as:
 	\[
 	(A + B) = (a_{ij} + b_{ij}), \quad
@@ -43,18 +43,18 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 \end{definitionenv}
 
 \begin{remarkenv}
-	Let $\mathbf{M}_{m \times n}(\mathcal{K})$ (or $\mathrm{Mat}_{m \times n}(\mathcal{K})$) denote the set of all $m \times n$ matrices over $\mathcal{K}$.
+	Let $\M_{m \times n}(\mathcal{K})$ (or $\mathrm{Mat}_{m \times n}(\mathcal{K})$) denote the set of all $m \times n$ matrices over $\mathcal{K}$.
 	Equipped with the matrix addition and scalar multiplication defined above,
-	$\mathbf{M}_{m \times n}(\mathcal{K})$ forms a \textbf{vector space} over $\mathcal{K}$.
+	$\M_{m \times n}(\mathcal{K})$ forms a \textbf{vector space} over $\mathcal{K}$.
 
 	Its dimension is
 	\[
-	\dim \mathbf{M}_{m \times n}(\mathcal{K}) = m n.
+	\dim \M_{m \times n}(\mathcal{K}) = m n.
 	\]
 \end{remarkenv}
 
 \begin{definitionenv}
-	The \textbf{standard basis} of the vector space $\mathbf{M}_{m \times n}(\mathcal{K})$
+	The \textbf{standard basis} of the vector space $\M_{m \times n}(\mathcal{K})$
 	is the collection of $m n$ matrices $\{e_{ij}\}$, where each $e_{ij}$ has entry
 	\[
 	(e_{ij})_{pq} =
@@ -64,18 +64,18 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 	\end{cases}
 	\]
 	Each $e_{ij}$ has a single $1$ in the $(i,j)$-position and zeros elsewhere.
-	Every matrix $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$ can be expressed uniquely as
+	Every matrix $A = (a_{ij}) \in \M_{m \times n}(\mathcal{K})$ can be expressed uniquely as
 	\[
 	A = \sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij} e_{ij}.
 	\]
 \end{definitionenv}
 
 \begin{definitionenv}
-	Let $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$ and
-	$B = (b_{jk}) \in \mathbf{M}_{n \times p}(\mathcal{K})$.
+	Let $A = (a_{ij}) \in \M_{m \times n}(\mathcal{K})$ and
+	$B = (b_{jk}) \in \M_{n \times p}(\mathcal{K})$.
 	The \textbf{product} of $A$ and $B$, denoted by $AB$, is defined as the $m \times p$ matrix
 	\[
-	AB = (c_{ik}) \in \mathbf{M}_{m \times p}(\mathcal{K}),
+	AB = (c_{ik}) \in \M_{m \times p}(\mathcal{K}),
 	\]
 	where each entry $c_{ik}$ is given by
 	\[
@@ -86,9 +86,9 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 
 \begin{theoremenv}
 	(\textbf{Associative Law})
-	Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$,
-	$B \in \mathbf{M}_{n \times p}(\mathcal{K})$,
-	and $C \in \mathbf{M}_{p \times q}(\mathcal{K})$.
+	Let $A \in \M_{m \times n}(\mathcal{K})$,
+	$B \in \M_{n \times p}(\mathcal{K})$,
+	and $C \in \M_{p \times q}(\mathcal{K})$.
 	Then matrix multiplication is associative:
 	\[
 	(AB)C = A(BC).
@@ -97,8 +97,8 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 
 \begin{theoremenv}
 	(\textbf{Distributive Laws})
-	For matrices $A, A_1, A_2 \in \mathbf{M}_{m \times n}(\mathcal{K})$
-	and $B, B_1, B_2 \in \mathbf{M}_{n \times p}(\mathcal{K})$,
+	For matrices $A, A_1, A_2 \in \M_{m \times n}(\mathcal{K})$
+	and $B, B_1, B_2 \in \M_{n \times p}(\mathcal{K})$,
 	matrix multiplication satisfies
 	\[
 	A(B_1 + B_2) = AB_1 + AB_2,
@@ -117,16 +117,16 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 	\end{cases}
 	\]
 	The matrix $I_n$ satisfies the property that for any
-	$A \in \mathbf{M}_{m \times n}(\mathcal{K})$ and
-	$B \in \mathbf{M}_{n \times p}(\mathcal{K})$,
+	$A \in \M_{m \times n}(\mathcal{K})$ and
+	$B \in \M_{n \times p}(\mathcal{K})$,
 	\[
 	AI_n = A, \quad I_nB = B.
 	\]
 \end{definitionenv}
 
 \begin{definitionenv}
-	Let $A \in \mathbf{M}_{n \times n}(\mathcal{K})$ be a square matrix.
-	If there exists a matrix $B \in \mathbf{M}_{n \times n}(\mathcal{K})$ such that
+	Let $A \in \M_{n \times n}(\mathcal{K})$ be a square matrix.
+	If there exists a matrix $B \in \M_{n \times n}(\mathcal{K})$ such that
 	\[
 	AB = BA = I_n,
 	\]
@@ -139,25 +139,25 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 \end{remarkenv}
 
 \begin{definitionenv}
-	Let $A = (a_{ij}) \in \mathbf{M}_{m \times n}(\mathcal{K})$.
+	Let $A = (a_{ij}) \in \M_{m \times n}(\mathcal{K})$.
 	The \textbf{transpose} of $A$, denoted by $A^{T}$, is the $n \times m$ matrix obtained by interchanging the rows and columns of $A$.
 	Formally,
 	\[
-	A^{T} = (a_{ji}) \in \mathbf{M}_{n \times m}(\mathcal{K}),
+	A^{T} = (a_{ji}) \in \M_{n \times m}(\mathcal{K}),
 	\]
 	that is, the $(i,j)$-entry of $A^{T}$ equals the $(j,i)$-entry of $A$. If $A^{T} = A$, then $A$ is called a \textbf{symmetric matrix}.
 \end{definitionenv}
 
 \begin{theoremenv}
 	(\textbf{Properties of the Transpose})
-	Let $A, B \in \mathbf{M}_{m \times n}(\mathcal{K})$ and $\alpha \in \mathcal{K}$.
+	Let $A, B \in \M_{m \times n}(\mathcal{K})$ and $\alpha \in \mathcal{K}$.
 	Then the transpose operation satisfies the following properties:
 	\begin{enumerate}
 		\item $(A^{T})^{T} = A$;
 		\item $(A + B)^{T} = A^{T} + B^{T}$;
 		\item $(\alpha A)^{T} = \alpha A^{T}$;
-		\item If $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ and
-		$B \in \mathbf{M}_{n \times p}(\mathcal{K})$, then
+		\item If $A \in \M_{m \times n}(\mathcal{K})$ and
+		$B \in \M_{n \times p}(\mathcal{K})$, then
 		\[
 		(AB)^{T} = B^{T}A^{T}.
 		\]
@@ -181,7 +181,7 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 
 	It can be written compactly in matrix form as
 	\[
-	A\mathbf{x} = \mathbf{b},
+	A\bm{x} = \bm{b},
 	\]
 	where
 	\[
@@ -193,12 +193,12 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 		a_{m1} & a_{m2} & \cdots & a_{mn}
 	\end{pmatrix},
 	\quad
-	\mathbf{x} =
+	\bm{x} =
 	\begin{pmatrix}
 		x_1 \\ x_2 \\ \vdots \\ x_n
 	\end{pmatrix},
 	\quad
-	\mathbf{b} =
+	\bm{b} =
 	\begin{pmatrix}
 		b_1 \\ b_2 \\ \vdots \\ b_m
 	\end{pmatrix}.
@@ -207,20 +207,20 @@ These definitions are just for a quick review. Please refer to Artin's Algebra C
 
 
 \begin{definitionenv}
-	A linear system $A\mathbf{x} = \mathbf{b}$ is called:
+	A linear system $A\bm{x} = \bm{b}$ is called:
 	\begin{itemize}
-		\item \textbf{homogeneous} if $\mathbf{b} = \mathbf{0}$, i.e. the system is of the form $A\mathbf{x} = \mathbf{0}$;
-		\item \textbf{inhomogeneous} (or nonhomogeneous) if $\mathbf{b} \neq \mathbf{0}$.
+		\item \textbf{homogeneous} if $\bm{b} = \bm{0}$, i.e. the system is of the form $A\bm{x} = \bm{0}$;
+		\item \textbf{inhomogeneous} (or nonhomogeneous) if $\bm{b} \neq \bm{0}$.
 	\end{itemize}
 \end{definitionenv}
 
 \begin{definitionenv}
-	A vector $\mathbf{x} \in \mathcal{K}^n$ satisfying the equation $A\mathbf{x} = \mathbf{b}$ is called a \textbf{solution} of the system.
+	A vector $\bm{x} \in \mathcal{K}^n$ satisfying the equation $A\bm{x} = \bm{b}$ is called a \textbf{solution} of the system.
 
-	In the special case of a homogeneous system $A\mathbf{x} = \mathbf{0}$:
+	In the special case of a homogeneous system $A\bm{x} = \bm{0}$:
 	\begin{itemize}
-		\item the vector $\mathbf{0}$ is called the \textbf{trivial solution};
-		\item any nonzero vector $\mathbf{x} \neq \mathbf{0}$ satisfying $A\mathbf{x} = \mathbf{0}$ is called a \textbf{nontrivial solution}.
+		\item the vector $\bm{0}$ is called the \textbf{trivial solution};
+		\item any nonzero vector $\bm{x} \neq \bm{0}$ satisfying $A\bm{x} = \bm{0}$ is called a \textbf{nontrivial solution}.
 	\end{itemize}
 \end{definitionenv}
 

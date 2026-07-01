@@ -21,7 +21,7 @@
 		Let $a,b,c \in \mathcal{K}$, if $a+c=b+c$, then $a=b$.
 	\end{theoremenv}
 	\begin{corollaryenv}
-		$0_\mathcal{K}$ and $1_\mathcal{K}$ in $\mathbf{Field\ Axiom\ 2}$ is unique.
+		$0_\mathcal{K}$ and $1_\mathcal{K}$ in \textbf{Field Axiom 2} is unique.
 	\end{corollaryenv}
 	\begin{exampleenv}
 		$\mathbb{C,R,Q}$ are fields, but $\mathbb{N}$ is not a field because $2 \in \mathbb{N}$, but its reciprocal $\dfrac{1}{2} \notin \mathbb{N}$. This is the main difference between $\mathbb{Q}$ and $\mathbb{N}$.
@@ -51,65 +51,65 @@
 	vector addition and scalar multiplication, denoted by $(V, +, \cdot)$, satisfying the following axioms:
 
 	\begin{enumerate}
-		\item \textbf{Associative Laws:} for any $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$,
+		\item \textbf{Associative Laws:} for any $\bm{u}, \bm{v}, \bm{w} \in V$,
 		\[
-		\mathbf{u} + (\mathbf{v} + \mathbf{w}) = (\mathbf{u} + \mathbf{v}) + \mathbf{w}.
+		\bm{u} + (\bm{v} + \bm{w}) = (\bm{u} + \bm{v}) + \bm{w}.
 		\]
 
 		\item \textbf{Existence of Identity Elements:}
-		there exists a zero vector $\mathbf{0} \in V$ such that for any $\mathbf{v} \in V$,
+		there exists a zero vector $\bm{0} \in V$ such that for any $\bm{v} \in V$,
 		\[
-		\mathbf{v} + \mathbf{0} = \mathbf{v}.
+		\bm{v} + \bm{0} = \bm{v}.
 		\]
 
 		\item \textbf{Existence of Additive Inverses:}
-		for any $\mathbf{v} \in V$, there exists an element $-\mathbf{v} \in V$ such that
+		for any $\bm{v} \in V$, there exists an element $-\bm{v} \in V$ such that
 		\[
-		\mathbf{v} + (-\mathbf{v}) = \mathbf{0}.
+		\bm{v} + (-\bm{v}) = \bm{0}.
 		\]
 
 		\item \textbf{Commutative Law:}
-		for any $\mathbf{u}, \mathbf{v} \in V$,
+		for any $\bm{u}, \bm{v} \in V$,
 		\[
-		\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}.
+		\bm{u} + \bm{v} = \bm{v} + \bm{u}.
 		\]
 
 		\item \textbf{Distributive Laws:}
-		for all $a, b \in \mathcal{K}$ and $\mathbf{u}, \mathbf{v} \in V$,
+		for all $a, b \in \mathcal{K}$ and $\bm{u}, \bm{v} \in V$,
 		\[
-		a \cdot (\mathbf{u} + \mathbf{v}) = a \cdot \mathbf{u} + a \cdot \mathbf{v},
-		\quad (a + b) \cdot \mathbf{v} = a \cdot \mathbf{v} + b \cdot \mathbf{v}.
+		a \cdot (\bm{u} + \bm{v}) = a \cdot \bm{u} + a \cdot \bm{v},
+		\quad (a + b) \cdot \bm{v} = a \cdot \bm{v} + b \cdot \bm{v}.
 		\]
 
 		\item \textbf{Compatibility of Scalar Multiplication:}
-		for all $a, b \in \mathcal{K}$ and $\mathbf{v} \in V$,
+		for all $a, b \in \mathcal{K}$ and $\bm{v} \in V$,
 		\[
-		(a b) \cdot \mathbf{v} = a \cdot (b \cdot \mathbf{v}).
+		(a b) \cdot \bm{v} = a \cdot (b \cdot \bm{v}).
 		\]
 
 		\item \textbf{Identity of Scalar Multiplication:}
-		for all $\mathbf{v} \in V$,
+		for all $\bm{v} \in V$,
 		\[
-		1_{\mathcal{K}} \cdot \mathbf{v} = \mathbf{v}.
+		1_{\mathcal{K}} \cdot \bm{v} = \bm{v}.
 		\]
 	\end{enumerate}
 \end{definitionenv}
 \begin{theoremenv}
-	The zero vector $\mathbf{0}$ is unique.
+	The zero vector $\bm{0}$ is unique.
 \end{theoremenv}
 \begin{definitionenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$.
 	A non-empty subset $W \subseteq V$ is called a \textbf{subspace} of $V$ if $W$ is itself a vector space over $\mathcal{K}$ under the same operations of addition and scalar multiplication as $V$.
 
-	Equivalently, $W$ is a subspace of $V$ if and only if the following conditions hold for all $\mathbf{u}, \mathbf{v} \in W$ and $a \in \mathcal{K}$:
+	Equivalently, $W$ is a subspace of $V$ if and only if the following conditions hold for all $\bm{u}, \bm{v} \in W$ and $a \in \mathcal{K}$:
 	\begin{enumerate}
 		\item \textbf{Closure under Addition:}
 		\[
-		\mathbf{u} + \mathbf{v} \in W.
+		\bm{u} + \bm{v} \in W.
 		\]
 		\item \textbf{Closure under Scalar Multiplication:}
 		\[
-		a \cdot \mathbf{u} \in W.
+		a \cdot \bm{u} \in W.
 		\]
 	\end{enumerate}
 
@@ -118,7 +118,7 @@
 	If $W$ is a subspace of $V$, we write $W \leq V$.
 \end{notationenv}
 \begin{remarkenv}
-	We state $W$ to be a non-empty set at first so we needn't to say $\mathbf{0}\in W$.
+	We state $W$ to be a non-empty set at first so we needn't to say $\bm{0}\in W$.
 \end{remarkenv}
 \begin{remarkenv}
 	For any elements in a vector space, we call them \textbf{vector}s.
@@ -128,29 +128,29 @@
 \end{exampleenv}
 \begin{definitionenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$, and let vectors
-	$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n \in V$.
+	$\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n \in V$.
 	Any vector of the form
 	\[
-	\mathbf{v} = a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n,
+	\bm{v} = a_1 \bm{v}_1 + a_2 \bm{v}_2 + \cdots + a_n \bm{v}_n,
 	\]
 	where $a_1, a_2, \dots, a_n \in \mathcal{K}$, is called a \textbf{linear combination} of
-	$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$.
+	$\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n$.
 \end{definitionenv}
 \begin{definitionenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$, and let
-	$S = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\} \subseteq V$.
+	$S = \{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\} \subseteq V$.
 	The set of all linear combinations of vectors in $S$ is called the
 	\textbf{span} of $S$, denoted by
 	\[
 	\mathrm{span}(S) =
 	\left\{
-	a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n
+	a_1 \bm{v}_1 + a_2 \bm{v}_2 + \cdots + a_n \bm{v}_n
 	\ \middle| \ a_1, a_2, \dots, a_n \in \mathcal{K}
 	\right\}.
 	\]
 \end{definitionenv}
 \begin{theoremenv}
-	The span of $S$ is the smallest subspace of $V$ containing $S$. Particularly, span$(\varnothing)=\{\mathbf{0}\}=\text{span}\{\mathbf{0}\}$.
+	The span of $S$ is the smallest subspace of $V$ containing $S$. Particularly, span$(\varnothing)=\{\bm{0}\}=\text{span}\{\bm{0}\}$.
 \end{theoremenv}
 \begin{definitionenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$.
@@ -160,26 +160,26 @@
 \end{definitionenv}
 \begin{definitionenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$, and let vectors
-	$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n \in V$.
-	The set $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is said to be
+	$\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n \in V$.
+	The set $\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}$ is said to be
 	\textbf{linearly dependent} if there exist scalars
 	$a_1, a_2, \dots, a_n \in \mathcal{K}$, not all zero, such that
 	\[
-	a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \cdots + a_n \mathbf{v}_n = \mathbf{0}.
+	a_1 \bm{v}_1 + a_2 \bm{v}_2 + \cdots + a_n \bm{v}_n = \bm{0}.
 	\]
 	Otherwise, if this equation holds only when
 	$a_1 = a_2 = \cdots = a_n = 0$, the set is said to be
 	\textbf{linearly independent}.
 \end{definitionenv}
 \begin{remarkenv}
-	$\{\mathbf{0}\}$ is linearly dependent, but $\varnothing$ is linearly independent.
+	$\{\bm{0}\}$ is linearly dependent, but $\varnothing$ is linearly independent.
 \end{remarkenv}
 
 
 \section{Bases}
 \begin{definitionenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$.
-	A subset $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\} \subseteq V$ is called a \textbf{basis} of $V$ if it satisfies the following two conditions:
+	A subset $\mathcal{B} = \{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\} \subseteq V$ is called a \textbf{basis} of $V$ if it satisfies the following two conditions:
 	\begin{enumerate}
 		\item $\mathcal{B}$ is linearly independent.
 		\item $\mathcal{B}$ spans $V$, i.e. $\mathrm{span}(\mathcal{B}) = V$.
@@ -198,13 +198,13 @@
 \end{remarkenv}
 
 \begin{theoremenv}
-	Let $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ be a set of elements of a vector space $V$ over a field $\mathcal{K}$, and let $r$ be a positive integer with $r \leq n$.
-	We say that $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r\}$ is a \textbf{maximal subset of linearly independent elements} if
-	$\mathbf{v}_1, \dots, \mathbf{v}_r$ are linearly independent, and moreover, for any $\mathbf{v}_i$ with $i > r$, the set
-	$\{\mathbf{v}_1, \dots, \mathbf{v}_r, \mathbf{v}_i\}$ is linearly dependent.
+	Let $\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}$ be a set of elements of a vector space $V$ over a field $\mathcal{K}$, and let $r$ be a positive integer with $r \leq n$.
+	We say that $\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_r\}$ is a \textbf{maximal subset of linearly independent elements} if
+	$\bm{v}_1, \dots, \bm{v}_r$ are linearly independent, and moreover, for any $\bm{v}_i$ with $i > r$, the set
+	$\{\bm{v}_1, \dots, \bm{v}_r, \bm{v}_i\}$ is linearly dependent.
 
-	If, in addition, $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is a set of generators of $V$,
-	then the set $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r\}$ is a \textbf{basis} of $V$.
+	If, in addition, $\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}$ is a set of generators of $V$,
+	then the set $\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_r\}$ is a \textbf{basis} of $V$.
 \end{theoremenv}
 
 
@@ -212,9 +212,9 @@
 
 \begin{theoremenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$.
-	Let $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_m\}$ be a basis of $V$ over $\mathcal{K}$.
-	Let $\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n$ be elements of $V$, and assume that $n > m$.
-	Then $\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n$ are linearly dependent.
+	Let $\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_m\}$ be a basis of $V$ over $\mathcal{K}$.
+	Let $\bm{w}_1, \bm{w}_2, \dots, \bm{w}_n$ be elements of $V$, and assume that $n > m$.
+	Then $\bm{w}_1, \bm{w}_2, \dots, \bm{w}_n$ are linearly dependent.
 \end{theoremenv}
 
 \begin{theoremenv}\label{thm:dimension_well_defined}
@@ -266,14 +266,14 @@
 
 \begin{definitionenv}
 	Let $V$ be a finite-dimensional vector space over a field $\mathcal{K}$, and let
-	$\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\}$ be an ordered basis of $V$.
-	For any vector $\mathbf{v} \in V$, there exist unique scalars
+	$\{\bm{e}_1, \bm{e}_2, \dots, \bm{e}_n\}$ be an ordered basis of $V$.
+	For any vector $\bm{v} \in V$, there exist unique scalars
 	$a_1, a_2, \dots, a_n \in \mathcal{K}$ such that
 	\[
-	\mathbf{v} = a_1 \mathbf{e}_1 + a_2 \mathbf{e}_2 + \cdots + a_n \mathbf{e}_n.
+	\bm{v} = a_1 \bm{e}_1 + a_2 \bm{e}_2 + \cdots + a_n \bm{e}_n.
 	\]
-	The scalars $a_1, a_2, \dots, a_n$ are called the \textbf{components} or \textbf{coordinates} of $\mathbf{v}$
-	with respect to the basis $\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\}$. And the $n$-tuple $A=(a_1,\dots,a_n)$ is called the \textbf{coordinate vector} of \textbf{v}.
+	The scalars $a_1, a_2, \dots, a_n$ are called the \textbf{components} or \textbf{coordinates} of $\bm{v}$
+	with respect to the basis $\{\bm{e}_1, \bm{e}_2, \dots, \bm{e}_n\}$. And the $n$-tuple $A=(a_1,\dots,a_n)$ is called the \textbf{coordinate vector} of \textbf{v}.
 \end{definitionenv}
 
 \begin{definitionenv}
@@ -282,15 +282,15 @@
 	A subset $\mathcal{B} \subseteq S$ is called a \textbf{maximal linearly independent subset} of $S$ if
 	\begin{enumerate}
 		\item $\mathcal{B}$ is linearly independent;
-		\item for any vector $\mathbf{v} \in S \setminus \mathcal{B}$, the set
-		$\mathcal{B} \cup \{\mathbf{v}\}$ is linearly dependent.
+		\item for any vector $\bm{v} \in S \setminus \mathcal{B}$, the set
+		$\mathcal{B} \cup \{\bm{v}\}$ is linearly dependent.
 	\end{enumerate}
 \end{definitionenv}
 
 \begin{theoremenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$, and let the set
-	$\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ be a maximal set of linearly independent elements of $V$.
-	Then $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is a basis of $V$.
+	$\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}$ be a maximal set of linearly independent elements of $V$.
+	Then $\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}$ is a basis of $V$.
 \end{theoremenv}
 
 % \begin{remarkenv}
@@ -299,8 +299,8 @@
 
 \begin{theoremenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$ of dimension $n$, and let
-	$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$ be linearly independent elements of $V$.
-	Then $\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$ constitute a basis of $V$.
+	$\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n$ be linearly independent elements of $V$.
+	Then $\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n$ constitute a basis of $V$.
 \end{theoremenv}
 
 \begin{propositionenv}
@@ -315,10 +315,10 @@
 \begin{propositionenv}
 	Let $V$ be a vector space over a field $\mathcal{K}$ of dimension $n$.
 	Let $r$ be a positive integer with $r < n$, and let
-	$\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_r$ be linearly independent elements of $V$.
-	Then there exist elements $\mathbf{v}_{r+1}, \mathbf{v}_{r+2}, \dots, \mathbf{v}_n$ in $V$ such that
+	$\bm{v}_1, \bm{v}_2, \dots, \bm{v}_r$ be linearly independent elements of $V$.
+	Then there exist elements $\bm{v}_{r+1}, \bm{v}_{r+2}, \dots, \bm{v}_n$ in $V$ such that
 	\[
-	\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}
+	\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}
 	\]
 	is a basis of $V$.
 \end{propositionenv}

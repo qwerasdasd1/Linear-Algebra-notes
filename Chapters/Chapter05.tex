@@ -7,75 +7,75 @@
 		\[
 		\langle \cdot, \cdot \rangle : V \times V \to \mathcal{K}
 		\]
-		such that for all $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ and all $\alpha, \beta \in \mathcal{K}$, the following properties hold:
+		such that for all $\bm{u}, \bm{v}, \bm{w} \in V$ and all $\alpha, \beta \in \mathcal{K}$, the following properties hold:
 		\begin{enumerate}
-			% \item (Conjugate symmetry) $\langle \mathbf{u}, \mathbf{v} \rangle = \overline{\langle \mathbf{v}, \mathbf{u} \rangle}$.
-			\item (Symmetry) $\langle \mathbf{u}, \mathbf{v} \rangle = \langle \mathbf{v}, \mathbf{u} \rangle$.
-			\item (Linearity in the first argument) $\langle \alpha \mathbf{u} + \beta \mathbf{v}, \mathbf{w} \rangle = \alpha \langle \mathbf{u}, \mathbf{w} \rangle + \beta \langle \mathbf{v}, \mathbf{w} \rangle$.
-			% \item (Positive-definiteness) $\langle \mathbf{v}, \mathbf{v} \rangle \geq 0$, with equality if and only if $\mathbf{v} = \mathbf{0}$.
+			% \item (Conjugate symmetry) $\langle \bm{u}, \bm{v} \rangle = \overline{\langle \bm{v}, \bm{u} \rangle}$.
+			\item (Symmetry) $\langle \bm{u}, \bm{v} \rangle = \langle \bm{v}, \bm{u} \rangle$.
+			\item (Linearity in the first argument) $\langle \alpha \bm{u} + \beta \bm{v}, \bm{w} \rangle = \alpha \langle \bm{u}, \bm{w} \rangle + \beta \langle \bm{v}, \bm{w} \rangle$.
+			% \item (Positive-definiteness) $\langle \bm{v}, \bm{v} \rangle \geq 0$, with equality if and only if $\bm{v} = \bm{0}$.
 		\end{enumerate}
 		% Then we call the pair $(V, \langle \cdot, \cdot \rangle)$ a \textbf{scalar product space}. 
 		Additionally, we say the scalar product is \textbf{non-degenerate} if
 		\[
-		\langle \mathbf{v}, \mathbf{u} \rangle = 0, \quad \forall \mathbf{u} \in V \implies \mathbf{v} = \mathbf{0}.
+		\langle \bm{v}, \bm{u} \rangle = 0, \quad \forall \bm{u} \in V \implies \bm{v} = \bm{0}.
 		\]
 	\end{definitionenv}
 	\begin{remarkenv}
 		The linearilty in the second argument also holds due to the conjugate symmetry.
 	\end{remarkenv}
 	\begin{definitionenv}
-		Suppose $V$ is a vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. We say two vectors $\mathbf{u}, \mathbf{v} \in V$ are \textbf{orthogonal} or \textbf{perpendicular} if
+		Suppose $V$ is a vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. We say two vectors $\bm{u}, \bm{v} \in V$ are \textbf{orthogonal} or \textbf{perpendicular} if
 		\[
-		\langle \mathbf{u}, \mathbf{v} \rangle = 0.
+		\langle \bm{u}, \bm{v} \rangle = 0.
 		\]
 		Moreover, suppose $S \subseteq V$ is nonempty. We define the \textbf{orthogonal set} of $S$, as
 		\[
-		S^\perp = \{ \mathbf{v} \in V \mid \langle \mathbf{v}, \mathbf{s} \rangle = 0, \quad \forall \mathbf{s} \in S \}.
+		S^\perp = \{ \bm{v} \in V \mid \langle \bm{v}, \bm{s} \rangle = 0, \quad \forall \bm{s} \in S \}.
 		\]
-		And we say $\mathbf{v}\in S^\perp$ is \textbf{orthogonal} or \textbf{perpendicular} to $S$ and write $\mathbf{v} \perp S$.
+		And we say $\bm{v}\in S^\perp$ is \textbf{orthogonal} or \textbf{perpendicular} to $S$ and write $\bm{v} \perp S$.
 	\end{definitionenv}
 	\begin{propositionenv}
 		Suppose $V$ is a vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. If a set $S \le V$, then $S^\perp$ is a subspace of $V$. We often call $S^\perp$ the \textbf{orthogonal complement} of $S$ in $V$.
 	\end{propositionenv}
 	\begin{exampleenv}
-		Suppose $A\in \mathbf{M}_{m \times n}(\mathcal{K})$, then $\mathbf{x}$ is a solution of the homogeneous linear system
+		Suppose $A\in \M_{m \times n}(\mathcal{K})$, then $\bm{x}$ is a solution of the homogeneous linear system
 		\[
-		A\mathbf{x} = \mathbf{0}
+		A\bm{x} = \bm{0}
 		\]
-		if and only if $\mathbf{x} \in (\operatorname{Row}(A))^\perp$, where $\operatorname{Row}(A)$ is the row space of matrix $A$. That is,
+		if and only if $\bm{x} \in (\operatorname{Row}(A))^\perp$, where $\operatorname{Row}(A)$ is the row space of matrix $A$. That is,
 		\[
 		\operatorname{Row}(A) \perp \operatorname{Null}(A).
 		\]
 	\end{exampleenv}
 	\begin{definitionenv}
-		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. Then $V$ has a basis and any basis $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ of $V$ is called an \textbf{orthogonal basis} if
+		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}$ with a scalar product $\langle \cdot, \cdot \rangle$. Then $V$ has a basis and any basis $\mathcal{B} = \{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}$ of $V$ is called an \textbf{orthogonal basis} if
 		\[
-		\langle \mathbf{v}_i, \mathbf{v}_j \rangle = 0, \quad \forall i \neq j\in \{1,2,\ldots,n\}.
+		\langle \bm{v}_i, \bm{v}_j \rangle = 0, \quad \forall i \neq j\in \{1,2,\ldots,n\}.
 		\]
 
 	\end{definitionenv}
 	\begin{definitionenv}
 		Suppose $V$ is a vector space over a field $\mathcal{K\left( =\mathbb{R} \right)}$ with a scalar product $\langle \cdot, \cdot \rangle$. We call this scalar product \textbf{positive-definite} if
 		\[
-		\langle \mathbf{v}, \mathbf{v} \rangle 
+		\langle \bm{v}, \bm{v} \rangle 
 		\begin{cases}
-		> 0, & \mathbf{v} \neq \mathbf{0}, \\
-		= 0, & \mathbf{v} = \mathbf{0}.
+		> 0, & \bm{v} \neq \bm{0}, \\
+		= 0, & \bm{v} = \bm{0}.
 		\end{cases}
 		\]
-		If the scalar product is positive-definite, we define the \textbf{norm} of a vector $\mathbf{v} \in V$ as
+		If the scalar product is positive-definite, we define the \textbf{norm} of a vector $\bm{v} \in V$ as
 		\[
-		\| \mathbf{v} \| = \sqrt{\langle \mathbf{v}, \mathbf{v} \rangle}.
+		\| \bm{v} \| = \sqrt{\langle \bm{v}, \bm{v} \rangle}.
 		\]
-		Then we can define the \textbf{distance} between two vectors $\mathbf{u}, \mathbf{v} \in V$ as
+		Then we can define the \textbf{distance} between two vectors $\bm{u}, \bm{v} \in V$ as
 		\[
-		dist(\mathbf{u}, \mathbf{v}) = \| \mathbf{u} - \mathbf{v} \|.
+		dist(\bm{u}, \bm{v}) = \| \bm{u} - \bm{v} \|.
 		\]
-		Also, if $\mathbf{v} \in V$ satisfies $\| \mathbf{v} \| = 1$, we say $\mathbf{v}$ is a \textbf{unit vector}. Note that for any nonzero vector $\mathbf{v} \in V$, the vector
+		Also, if $\bm{v} \in V$ satisfies $\| \bm{v} \| = 1$, we say $\bm{v}$ is a \textbf{unit vector}. Note that for any nonzero vector $\bm{v} \in V$, the vector
 		\[
-		\frac{\mathbf{v}}{\| \mathbf{v} \|}
+		\frac{\bm{v}}{\| \bm{v} \|}
 		\]
-		is a unit vector called the \textbf{normalization} of $\mathbf{v}$.
+		is a unit vector called the \textbf{normalization} of $\bm{v}$.
 	\end{definitionenv}
 	\begin{remarkenv}
 		Here we write $\mathcal{K} \left(= \mathbb{R}\right)$ because we need ``$>0$'' to define positive-definiteness. Actually $\mathcal{K}$ can be any field homomorphic to $\mathbb{R}$. 
@@ -90,62 +90,62 @@
 	\begin{propositionenv}
 		Suppose $V$ is a vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$.
 		\begin{enumerate}
-			\item For $c\in \mathcal{K}$ and $\mathbf{v} \in V$, we have $\| c \mathbf{v} \| = |c| \, \| \mathbf{v} \|$.
-			\item For any $\mathbf{u}, \mathbf{v} \in V$,
+			\item For $c\in \mathcal{K}$ and $\bm{v} \in V$, we have $\| c \bm{v} \| = |c| \, \| \bm{v} \|$.
+			\item For any $\bm{u}, \bm{v} \in V$,
 			\[
-			\| \mathbf{u}-\mathbf{v} \| = \| \mathbf{u}+\mathbf{v} \| \quad \text{if and only if} \quad \mathbf{u} \perp \mathbf{v}.
+			\| \bm{u}-\bm{v} \| = \| \bm{u}+\bm{v} \| \quad \text{if and only if} \quad \bm{u} \perp \bm{v}.
 			\]
-			\item (Pythagorean theorem) For any $\mathbf{u}, \mathbf{v} \in V$ with $\mathbf{u} \perp \mathbf{v}$,
+			\item (Pythagorean theorem) For any $\bm{u}, \bm{v} \in V$ with $\bm{u} \perp \bm{v}$,
 			\[
-			\| \mathbf{u} + \mathbf{v} \|^2 = \| \mathbf{u} \|^2 + \| \mathbf{v} \|^2.
+			\| \bm{u} + \bm{v} \|^2 = \| \bm{u} \|^2 + \| \bm{v} \|^2.
 			\]
-			\item (Parallelogram law) For any $\mathbf{u}, \mathbf{v} \in V$,
+			\item (Parallelogram law) For any $\bm{u}, \bm{v} \in V$,
 			\[
-			\| \mathbf{u} + \mathbf{v} \|^2 + \| \mathbf{u} - \mathbf{v} \|^2 = 2 \left( \| \mathbf{u} \|^2 + \| \mathbf{v} \|^2 \right).
+			\| \bm{u} + \bm{v} \|^2 + \| \bm{u} - \bm{v} \|^2 = 2 \left( \| \bm{u} \|^2 + \| \bm{v} \|^2 \right).
 			\]
-			\item (Cauchy–Schwarz inequality) For any $\mathbf{u}, \mathbf{v} \in V$,
+			\item (Cauchy–Schwarz inequality) For any $\bm{u}, \bm{v} \in V$,
 			\[
-			|\langle \mathbf{u}, \mathbf{v} \rangle| \leq \| \mathbf{u} \| \, \| \mathbf{v} \|.
+			|\langle \bm{u}, \bm{v} \rangle| \leq \| \bm{u} \| \, \| \bm{v} \|.
 			\]
-			\item (Triangle inequality) For any $\mathbf{u}, \mathbf{v} \in V$,
+			\item (Triangle inequality) For any $\bm{u}, \bm{v} \in V$,
 			\[
-			\| \mathbf{u} + \mathbf{v} \| \leq \| \mathbf{u} \| + \| \mathbf{v} \|.
+			\| \bm{u} + \bm{v} \| \leq \| \bm{u} \| + \| \bm{v} \|.
 			\]
-			\item Suppose $\mathbf{u}, \mathbf{v} \in V$ and $\mathbf{u} \neq \mathbf{0}$. Then
+			\item Suppose $\bm{u}, \bm{v} \in V$ and $\bm{u} \neq \bm{0}$. Then
 			\[
-			c = \frac{\langle \mathbf{v}, \mathbf{u} \rangle}{\langle \mathbf{u}, \mathbf{u} \rangle}
+			c = \frac{\langle \bm{v}, \bm{u} \rangle}{\langle \bm{u}, \bm{u} \rangle}
 			\]
-			is called the \textbf{component} of $\mathbf{v}$ in the direction of $\mathbf{u}$ and we call $c \mathbf{u}$ the \textbf{projection} of $\mathbf{v}$ onto $\mathbf{u}$. Note that 
+			is called the \textbf{component} of $\bm{v}$ in the direction of $\bm{u}$ and we call $c \bm{u}$ the \textbf{projection} of $\bm{v}$ onto $\bm{u}$. Note that 
 			\[
-			\left( \mathbf{v} - c \mathbf{u} \right) \perp \mathbf{u}.
+			\left( \bm{v} - c \bm{u} \right) \perp \bm{u}.
 			\]
 			Furthermore,
 			\[
-			\| \mathbf{v} - c \mathbf{u} \| = \min_{\alpha \in \mathcal{K}} \| \mathbf{v} - \alpha \mathbf{u} \|.
+			\| \bm{v} - c \bm{u} \| = \min_{\alpha \in \mathcal{K}} \| \bm{v} - \alpha \bm{u} \|.
 			\]
-			\item More generally, suppose $\mathbf{u_1}, \mathbf{u_2}, \dots, \mathbf{u_k} \in V$ are non-zero vectors that are pairwise orthogonal. For any $\mathbf{v} \in V$, we define the \textbf{component} of $\mathbf{v}$ along $u_i$ to be 
+			\item More generally, suppose $\bm{u_1}, \bm{u_2}, \dots, \bm{u_k} \in V$ are non-zero vectors that are pairwise orthogonal. For any $\bm{v} \in V$, we define the \textbf{component} of $\bm{v}$ along $u_i$ to be 
 			\[
-			c_i = \frac{\langle \mathbf{v}, \mathbf{u_i} \rangle}{\langle \mathbf{u_i}, \mathbf{u_i} \rangle}, \quad i=1,2,\ldots,k.
+			c_i = \frac{\langle \bm{v}, \bm{u_i} \rangle}{\langle \bm{u_i}, \bm{u_i} \rangle}, \quad i=1,2,\ldots,k.
 			\]
-			We call $c_i \mathbf{u_i}$ the \textbf{projection} of $\mathbf{v}$ onto $\mathbf{u_i}$. Note
+			We call $c_i \bm{u_i}$ the \textbf{projection} of $\bm{v}$ onto $\bm{u_i}$. Note
 			\[
-			\langle \mathbf{v} - \sum_{i=1}^k c_i \mathbf{u_i}, \mathbf{u_j} \rangle = \langle \mathbf{v}, \mathbf{u_j} \rangle - \sum_{i=1}^k c_i \langle \mathbf{u_i}, \mathbf{u_j} \rangle = 0, \quad j=1,2,\ldots,k.
+			\langle \bm{v} - \sum_{i=1}^k c_i \bm{u_i}, \bm{u_j} \rangle = \langle \bm{v}, \bm{u_j} \rangle - \sum_{i=1}^k c_i \langle \bm{u_i}, \bm{u_j} \rangle = 0, \quad j=1,2,\ldots,k.
 			\]
 			and we have
 			\[
-			\left( \mathbf{v}- \sum_{i=1}^k c_i \mathbf{u_i} \right) \perp \mathbf{u}, \quad \forall \mathbf{u}\in \operatorname{span}\left\{ \mathbf{u_1}, \mathbf{u_2}, \ldots, \mathbf{u_k} \right\}.
+			\left( \bm{v}- \sum_{i=1}^k c_i \bm{u_i} \right) \perp \bm{u}, \quad \forall \bm{u}\in \operatorname{span}\left\{ \bm{u_1}, \bm{u_2}, \ldots, \bm{u_k} \right\}.
 			\]
-			We also call $\sum\limits_{i=1}^k c_i \mathbf{u_i}$ the \textbf{projection} of $\mathbf{v}$ onto $\operatorname{span}\left\{ \mathbf{u_1}, \mathbf{u_2}, \ldots, \mathbf{u_k} \right\}$.
+			We also call $\sum\limits_{i=1}^k c_i \bm{u_i}$ the \textbf{projection} of $\bm{v}$ onto $\operatorname{span}\left\{ \bm{u_1}, \bm{u_2}, \ldots, \bm{u_k} \right\}$.
 			Furthermore,
 			\[
-			\left\| \mathbf{v} - \sum_{i=1}^k c_i \mathbf{u_i} \right\| = \min_{\alpha_1, \alpha_2, \ldots, \alpha_k \in \mathcal{K}} \left\| \mathbf{v} - \sum_{i=1}^k \alpha_i \mathbf{u_i} \right\|.
+			\left\| \bm{v} - \sum_{i=1}^k c_i \bm{u_i} \right\| = \min_{\alpha_1, \alpha_2, \ldots, \alpha_k \in \mathcal{K}} \left\| \bm{v} - \sum_{i=1}^k \alpha_i \bm{u_i} \right\|.
 			\]
 		\end{enumerate}
 	\end{propositionenv}
 	\begin{definitionenv}
-		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a scalar product $\langle \cdot, \cdot \rangle$. A basis $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ of $V$ is called an \textbf{orthonormal basis} if
+		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a scalar product $\langle \cdot, \cdot \rangle$. A basis $\mathcal{B} = \{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}$ of $V$ is called an \textbf{orthonormal basis} if
 		\[
-		\langle \mathbf{v}_i, \mathbf{v}_j \rangle =
+		\langle \bm{v}_i, \bm{v}_j \rangle =
 		\begin{cases}
 		1, & i = j, \\
 		0, & i \neq j,
@@ -154,11 +154,11 @@
 		\]
 	\end{definitionenv}
 	\begin{theoremenv}
-		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$. Let $\{w_1, w_2, \ldots, w_k\}$ be an orthogonal set of vectors in $V$. Then for any $\mathbf{v} \in V$, we have
+		Suppose $V$ is a finite-dimensional vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$. Let $\{w_1, w_2, \ldots, w_k\}$ be an orthogonal set of vectors in $V$. Then for any $\bm{v} \in V$, we have
 		\[
-		\langle \mathbf{v}, \mathbf{v} \rangle \geq \sum_{i=1}^k \frac{|\langle \mathbf{v}, w_i \rangle|^2}{\langle w_i, w_i \rangle}.
+		\langle \bm{v}, \bm{v} \rangle \geq \sum_{i=1}^k \frac{|\langle \bm{v}, w_i \rangle|^2}{\langle w_i, w_i \rangle}.
 		\]
-		with equality if and only if $\mathbf{v} \in \operatorname{span}\{w_1, w_2, \ldots, w_k\}$.
+		with equality if and only if $\bm{v} \in \operatorname{span}\{w_1, w_2, \ldots, w_k\}$.
 
 		This is called \textbf{Bessel's inequality}.
 	\end{theoremenv}
@@ -178,7 +178,7 @@
 		\[
 		\langle w_{k+1}, w_j \rangle = \langle x_{k+1}, w_j \rangle - \sum_{i=1}^k \frac{\langle x_{k+1}, w_i \rangle}{\langle w_i, w_i \rangle} \langle w_i, w_j \rangle = 0, \quad j=1,2,\ldots,k,
 		\]
-		we have $w_{k+1} \perp W$. Also, $w_{k+1} \neq \mathbf{0}$ since otherwise $x_{k+1} \in W$ which contradicts the fact that $\{w_1, w_2, \ldots, w_k, x_{k+1}, x_{k+2}, \ldots, x_n\}$ is a basis of $V$. Then we normalize $w_{k+1}$.
+		we have $w_{k+1} \perp W$. Also, $w_{k+1} \neq \bm{0}$ since otherwise $x_{k+1} \in W$ which contradicts the fact that $\{w_1, w_2, \ldots, w_k, x_{k+1}, x_{k+2}, \ldots, x_n\}$ is a basis of $V$. Then we normalize $w_{k+1}$.
 
 		\textbf{Inductive Step:} We proceed by induction to construct the following vectors $w_{k+2}, w_{k+3}, \ldots, w_n$.
 
@@ -189,7 +189,7 @@
 	\begin{theoremenv}
 		Suppose $V$ is a vector space over a field $\mathcal{K}\left( = \mathbb{R} \right)$ with a positive-definite scalar product $\langle \cdot, \cdot \rangle$ and $\dim V = n$. Define $W$ be a nontrivial subspace of $V$ with $\dim W = r \left( 1\le r \le n-1 \right) $. Define the \textbf{orthogonal complement} of $W$ in $V$, which is a subspace of $V$, as
 		\[
-		W^\perp = \{ \mathbf{v} \in V \mid \langle \mathbf{v}, \mathbf{w} \rangle = 0, \quad \forall \mathbf{w} \in W \}.
+		W^\perp = \{ \bm{v} \in V \mid \langle \bm{v}, \bm{w} \rangle = 0, \quad \forall \bm{w} \in W \}.
 		\]
 		Then we have
 		\[
@@ -200,7 +200,7 @@
 	% \begin{remarkenv}
 		For vector space $V$ over $\mathbb{C}$, if we want to have a ``scalar product'' that is ``postive-definite'' so that
 		\[
-		\langle \mathbf{v}, \mathbf{v} \rangle \in \mathbb{R} \text{ and } \langle \mathbf{v}, \mathbf{v} \rangle \ge 0,
+		\langle \bm{v}, \bm{v} \rangle \in \mathbb{R} \text{ and } \langle \bm{v}, \bm{v} \rangle \ge 0,
 		\]
 		we need to modify our definition of ``scalar product''.
 	% \end{remarkenv}
@@ -211,27 +211,27 @@
 		\]
 		satisfying the following properties:
 		\begin{enumerate}
-			\item (Conjugate symmetry) $\langle \mathbf{u}, \mathbf{v} \rangle = \overline{\langle \mathbf{v}, \mathbf{u} \rangle}$.
-			\item (Linearity in the first argument) $\langle \alpha \mathbf{u} + \beta \mathbf{v}, \mathbf{w} \rangle = \alpha \langle \mathbf{u}, \mathbf{w} \rangle + \beta \langle \mathbf{v}, \mathbf{w} \rangle$.
+			\item (Conjugate symmetry) $\langle \bm{u}, \bm{v} \rangle = \overline{\langle \bm{v}, \bm{u} \rangle}$.
+			\item (Linearity in the first argument) $\langle \alpha \bm{u} + \beta \bm{v}, \bm{w} \rangle = \alpha \langle \bm{u}, \bm{w} \rangle + \beta \langle \bm{v}, \bm{w} \rangle$.
 		\end{enumerate}
 		Additionally, we say the Hermitian scalar product is \textbf{positive-definite} if
 		\[
-		\langle \mathbf{v}, \mathbf{v} \rangle 
+		\langle \bm{v}, \bm{v} \rangle 
 		\begin{cases}
-		> 0, & \mathbf{v} \neq \mathbf{0}, \\
-		= 0, & \mathbf{v} = \mathbf{0}.
+		> 0, & \bm{v} \neq \bm{0}, \\
+		= 0, & \bm{v} = \bm{0}.
 		\end{cases}
 		\]
 		Note that
 		\[
-		\langle \mathbf{v}, \mathbf{v} \rangle = \overline{\langle \mathbf{v}, \mathbf{v} \rangle} \implies \langle \mathbf{v}, \mathbf{v} \rangle \in \mathbb{R}.
+		\langle \bm{v}, \bm{v} \rangle = \overline{\langle \bm{v}, \bm{v} \rangle} \implies \langle \bm{v}, \bm{v} \rangle \in \mathbb{R}.
 		\]
 		the positive-definiteness is well-defined.
 	\end{definitionenv}
 	\begin{remarkenv}
 		Note that the linearity in the second argument does not hold. Instead, we have
 		\[
-		\langle \mathbf{w}, \alpha \mathbf{u} + \beta \mathbf{v} \rangle = \overline{\alpha} \langle \mathbf{w}, \mathbf{u} \rangle + \overline{\beta} \langle \mathbf{w}, \mathbf{v} \rangle.
+		\langle \bm{w}, \alpha \bm{u} + \beta \bm{v} \rangle = \overline{\alpha} \langle \bm{w}, \bm{u} \rangle + \overline{\beta} \langle \bm{w}, \bm{v} \rangle.
 		\]
 		This is called the \textbf{conjugate linearity} in the second argument.
 	\end{remarkenv}
@@ -239,10 +239,10 @@
 		For vector space $V$ over $\mathbb{C}$, given a Hermitian product, we say $x,y$ are orthogonal if $\langle x,y \rangle = 0\left( =\langle y,x \rangle \right)$. Concepts like orthogonal complement can be defined accordingly. If additionally the Hermitian product is positive-definite, concepts like norm, distance, orthogonal basis, orthonormal basis, etc. can be defined accordingly.
 	\end{remarkenv}
 	\begin{definitionenv}
-		Given $A\in \mathbf{M}_{m \times n}(\mathbb{R})$, we call $\operatorname{Im}(A)$ the \textbf{column space} of $A$ and $\operatorname{Im}(A^T)$ the \textbf{row space} of $A$. We also call $\dim \operatorname{Im}(A)$ the \textbf{column rank} of $A$ and $\dim \operatorname{Im}(A^T)$ the \textbf{row rank} of $A$. Since the column rank and the row rank are equal, we simply call it the \textbf{rank} of $A$ and denote it as $\operatorname{rank}(A)$.
+		Given $A\in \M_{m \times n}(\mathbb{R})$, we call $\operatorname{Im}(A)$ the \textbf{column space} of $A$ and $\operatorname{Im}(A^T)$ the \textbf{row space} of $A$. We also call $\dim \operatorname{Im}(A)$ the \textbf{column rank} of $A$ and $\dim \operatorname{Im}(A^T)$ the \textbf{row rank} of $A$. Since the column rank and the row rank are equal, we simply call it the \textbf{rank} of $A$ and denote it as $\operatorname{rank}(A)$.
 	\end{definitionenv}
 	\begin{remarkenv}
-		Let $A\in \mathbf{M}_{m \times n}(\mathbb{R})$ and $R=\operatorname{rref}(A)$. Then we know $\ker(A) = \ker(R)$ and thus $\operatorname{rank}(A) = \operatorname{rank}(R)=\text{pivots of } R$.
+		Let $A\in \M_{m \times n}(\mathbb{R})$ and $R=\operatorname{rref}(A)$. Then we know $\ker(A) = \ker(R)$ and thus $\operatorname{rank}(A) = \operatorname{rank}(R)=\text{pivots of } R$.
 	\end{remarkenv}
 
     % \newpage
@@ -251,15 +251,15 @@
         Suppose $U,V,W$ are vector spaces over a field $\mathcal{K}$ and $g: U \times V \to W$ be a map. We say $g$ is \textbf{bilinear} if for each fixed $u \in U$, the map $v \mapsto g(u,v)$ is linear from $V$ to $W$, and for each fixed $v \in V$, the map $u \mapsto g(u,v)$ is linear from $U$ to $W$.
     \end{definitionenv}
     \begin{exampleenv}
-        Let $A \in \mathbf{M}_{m \times n}(\mathcal{K})$. Define $g_A: \mathcal{K}^m \times \mathcal{K}^n \to \mathcal{K}$ as $g_A(x,y) = x^T A y$. Then $g_A$ is a bilinear map.
+        Let $A \in \M_{m \times n}(\mathcal{K})$. Define $g_A: \mathcal{K}^m \times \mathcal{K}^n \to \mathcal{K}$ as $g_A(x,y) = x^T A y$. Then $g_A$ is a bilinear map.
     \end{exampleenv}
     \begin{theoremenv}
-        Given any bilinear map $g: \mathcal{K}^m \times \mathcal{K}^n \to \mathcal{K}$, there exists a unique matrix $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ such that $g(x,y) = x^T A y \left(=g_A\right)$ for all $x\in \mathcal{K}^m$ and $y\in \mathcal{K}^n$.
+        Given any bilinear map $g: \mathcal{K}^m \times \mathcal{K}^n \to \mathcal{K}$, there exists a unique matrix $A \in \M_{m \times n}(\mathcal{K})$ such that $g(x,y) = x^T A y \left(=g_A\right)$ for all $x\in \mathcal{K}^m$ and $y\in \mathcal{K}^n$.
     \end{theoremenv}
     \begin{theoremenv}
-        The set of all bilinear maps from $\mathcal{K}^m \times \mathcal{K}^n$ to $\mathcal{K}$, denoted by $\operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K})$, is a vector space over $\mathcal{K}$. The association $A \mapsto g_A$ is a vector space isomorphism from $\mathbf{M}_{m \times n}(\mathcal{K})$ to $\operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K})$. That is, we have
+        The set of all bilinear maps from $\mathcal{K}^m \times \mathcal{K}^n$ to $\mathcal{K}$, denoted by $\operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K})$, is a vector space over $\mathcal{K}$. The association $A \mapsto g_A$ is a vector space isomorphism from $\M_{m \times n}(\mathcal{K})$ to $\operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K})$. That is, we have
         \[
-        \dim \operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K}) = \dim \mathbf{M}_{m \times n}(\mathcal{K}) = mn.
+        \dim \operatorname{Bil}(\mathcal{K}^m \times \mathcal{K}^n, \mathcal{K}) = \dim \M_{m \times n}(\mathcal{K}) = mn.
         \]
     \end{theoremenv}
     \begin{remarkenv}
@@ -271,10 +271,10 @@
         In some textbook, a scalar product is also called a symmetric bilinear form.
     \end{remarkenv}
     \begin{definitionenv}
-        Suppose $V$ is a vector space over a field $\mathcal{K}$ and $\langle \cdot, \cdot \rangle$ is a scalar product on $V$. We call the map $f: V \to \mathcal{K}$ defined by $f(\mathbf{v}) = \langle \mathbf{v}, \mathbf{v} \rangle$ a \textbf{quadratic form} on $V$.
+        Suppose $V$ is a vector space over a field $\mathcal{K}$ and $\langle \cdot, \cdot \rangle$ is a scalar product on $V$. We call the map $f: V \to \mathcal{K}$ defined by $f(\bm{v}) = \langle \bm{v}, \bm{v} \rangle$ a \textbf{quadratic form} on $V$.
     \end{definitionenv}
     \begin{exampleenv}
-        For the case $V=\mathcal{K}^n$, a quadratic form on $V$ can be uniquely associated with a symmetric matrix $A\in \mathbf{M}_{n \times n}(\mathcal{K})$ such that
+        For the case $V=\mathcal{K}^n$, a quadratic form on $V$ can be uniquely associated with a symmetric matrix $A\in \M_{n \times n}(\mathcal{K})$ such that
         \[
         f(x) = x^T A x = \sum_{i=1}^{n}\sum_{j=1}^{n} x_i a_{ij} x_j \quad \forall x \in \mathcal{K}^n.
         \]
@@ -308,7 +308,7 @@
         a_{11} & a_{12} & a_{13} \\
         a_{21} & a_{22} & a_{23} \\
         a_{31} & a_{32} & a_{33}
-        \end{bmatrix} \in \mathbf{M}_{3 \times 3}(\mathcal{K}),
+        \end{bmatrix} \in \M_{3 \times 3}(\mathcal{K}),
         \]
         then we define
         \[
@@ -327,14 +327,14 @@
         \end{enumerate}
     \end{theoremenv}
     \begin{definitionenv}
-        Suppose function $D: \mathbf{M}_{n \times n}(\mathcal{K}) \to \mathcal{K}$ or alternatively $D: \mathcal{K}^n \times \mathcal{K}^n \times \cdots \times \mathcal{K}^n \to \mathcal{K}$ (with $n$ copies of $\mathcal{K}^n$) with notation $D(A)$ or $D(A_1, A_2, \ldots, A_n)$ where $A_i$ is the $i$-th column of $A$. We say:
+        Suppose function $D: \M_{n \times n}(\mathcal{K}) \to \mathcal{K}$ or alternatively $D: \mathcal{K}^n \times \mathcal{K}^n \times \cdots \times \mathcal{K}^n \to \mathcal{K}$ (with $n$ copies of $\mathcal{K}^n$) with notation $D(A)$ or $D(A_1, A_2, \ldots, A_n)$ where $A_i$ is the $i$-th column of $A$. We say:
         \begin{enumerate}
             \item $D$ is multilinear: as a function of the columns in $A\in \M_{n \times n}(\mathcal{K})$, $D$ is linear in each column when the other $n-1$ columns are fixed.
             \item $D$ is alternating: if two adjacent columns of $A$ are equal, then $D(A) = 0$.
         \end{enumerate}
     \end{definitionenv}
     \begin{theoremenv}
-        There exists a unique multilinear and alternating function $D: \mathbf{M}_{n \times n}(\mathcal{K}) \to \mathcal{K}$ such that $D(I_n) = 1$. We call this unique $D$ the $n\times n$ \textbf{determinant} function and denote it as $\det(\cdot)$.
+        There exists a unique multilinear and alternating function $D: \M_{n \times n}(\mathcal{K}) \to \mathcal{K}$ such that $D(I_n) = 1$. We call this unique $D$ the $n\times n$ \textbf{determinant} function and denote it as $\det(\cdot)$.
     \end{theoremenv}
     \begin{proofenv}
         We prove in a constructive and inductive way.
@@ -344,7 +344,7 @@
         
         \textbf{Initial Cases}: For $n=1$, we define $\det([a]) = a$ for any $a \in \mathcal{K}$. For $n=2$ and $n=3$, we have already defined the determinant.
 
-        \textbf{Inductive assumption}: suppose such $D$ exists as a map from $\mathbf{M}_{k \times k}(\mathcal{K})$ to $\mathcal{K}$ such that the three properties hold for any $ k \le n-1$.
+        \textbf{Inductive assumption}: suppose such $D$ exists as a map from $\M_{k \times k}(\mathcal{K})$ to $\mathcal{K}$ such that the three properties hold for any $ k \le n-1$.
 
         \textbf{Inductive step}: For
         \[
@@ -354,7 +354,7 @@
             a_{i1} & \cdots & a_{ij} & \cdots & a_{in} \\
             \vdots & \ddots & \vdots & \ddots & \vdots \\
             a_{n1} & \cdots & a_{nj} & \cdots & a_{nn}
-        \end{bmatrix} \in \mathbf{M}_{n \times n}(\mathcal{K}),
+        \end{bmatrix} \in \M_{n \times n}(\mathcal{K}),
         \]
         we define
         \[
@@ -391,7 +391,7 @@
             \item If $A$ has two identical columns or rows, then $\det(A) = 0$.
             \item If one adds a scalar multiple of one column to another column, then $\det(A)$ does not change.
             \item $\det(A) = \det(A^T)$.
-            \item $\det(AB) = \det(A)\det(B)$ for any $A,B \in \mathbf{M}_{n \times n}(\mathcal{K})$.
+            \item $\det(AB) = \det(A)\det(B)$ for any $A,B \in \M_{n \times n}(\mathcal{K})$.
         \end{enumerate}
     \end{theoremenv}
     \begin{theoremenv}
@@ -409,7 +409,7 @@
         \]
     \end{proofenv}
     \begin{theoremenv}
-        Suppose $A\in \mathbf{M}_{n \times n}(\mathcal{K})$. If $\det(A) \neq 0$, then the columns of $A$ are linearly independent and thus $A$ is invertible.
+        Suppose $A\in \M_{n \times n}(\mathcal{K})$. If $\det(A) \neq 0$, then the columns of $A$ are linearly independent and thus $A$ is invertible.
     \end{theoremenv}
     \begin{proofenv}
         It's equivalent to show that if the columns of $A$ are linearly dependent, then $\det(A) = 0$. Suppose there exists $k\in \{1,2,\ldots,n\}$ such that 

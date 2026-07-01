@@ -1,21 +1,21 @@
 	\chapter{Linear Maps and Matrices}
 	\section{The Linear Map associated with a matrix}
 	\begin{theoremenv}
-		Suppose $\mathcal{L}:\mathcal{K}^n \to \mathcal{K}^m$ is a linear map. Then there exists a unique matrix $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ such that \[\mathcal{L}(\mathbf{x}) = A\mathbf{x}, \quad \forall \mathbf{x} \in \mathcal{K}^n.\]
+		Suppose $\mathcal{L}:\mathcal{K}^n \to \mathcal{K}^m$ is a linear map. Then there exists a unique matrix $A \in \bm{M}_{m \times n}(\mathcal{K})$ such that \[\mathcal{L}(\bm{x}) = A\bm{x}, \quad \forall \bm{x} \in \mathcal{K}^n.\]
 	\end{theoremenv}
 
 	\begin{remarkenv}
-		Suppose $A\in \mathbf{M}_{m \times n}(\mathcal{K})$, we call $\mathcal{L}_A:\mathcal{K}^n \to \mathcal{K}^m$ defined by \[\mathcal{L}_A(\mathbf{x}) = A\mathbf{x}, \quad \forall \mathbf{x} \in \mathcal{K}^n\] the \textbf{linear map associated with matrix A}. From the above theorem, we also know for any linear map from $\mathcal{K}^n$ to $\mathcal{K}^m$, it is uniquely associated to a matrix.
+		Suppose $A\in \bm{M}_{m \times n}(\mathcal{K})$, we call $\mathcal{L}_A:\mathcal{K}^n \to \mathcal{K}^m$ defined by \[\mathcal{L}_A(\bm{x}) = A\bm{x}, \quad \forall \bm{x} \in \mathcal{K}^n\] the \textbf{linear map associated with matrix A}. From the above theorem, we also know for any linear map from $\mathcal{K}^n$ to $\mathcal{K}^m$, it is uniquely associated to a matrix.
 	\end{remarkenv}
 	\begin{propositionenv}
-		Suppose $A\in \mathbf{M}_{m \times n}(\mathcal{K})$ and $B \in \mathbf{M}_{n \times p}(\mathcal{K})$. Let $\mathcal{L}_A: \mathcal{K}^n \to \mathcal{K}^m$ and $\mathcal{L}_B: \mathcal{K}^p \to \mathcal{K}^n$ be the linear maps associated with matrices $A$ and $B$ respectively. Then the composition map \[\mathcal{L}_A \circ \mathcal{L}_B: \mathcal{K}^p \to \mathcal{K}^m\] is the linear map associated with matrix $AB$. We often omit the symbol $\circ$ and just write 
+		Suppose $A\in \bm{M}_{m \times n}(\mathcal{K})$ and $B \in \bm{M}_{n \times p}(\mathcal{K})$. Let $\mathcal{L}_A: \mathcal{K}^n \to \mathcal{K}^m$ and $\mathcal{L}_B: \mathcal{K}^p \to \mathcal{K}^n$ be the linear maps associated with matrices $A$ and $B$ respectively. Then the composition map \[\mathcal{L}_A \circ \mathcal{L}_B: \mathcal{K}^p \to \mathcal{K}^m\] is the linear map associated with matrix $AB$. We often omit the symbol $\circ$ and just write 
 		\[\mathcal{L}_A \mathcal{L}_B = \mathcal{L}_{AB},\]
 		since matrix multiplication is associative.
 	\end{propositionenv}
 	\begin{propositionenv}
-		Suppose $A \in \mathbf{M}_{m \times n}(\mathcal{K})$ is invertible, then
+		Suppose $A \in \bm{M}_{m \times n}(\mathcal{K})$ is invertible, then
 		\[
-		\left( \mathcal{L}_A\right)^{-1}(\mathbf{x}) = \mathcal{L}_{A^{-1}}(\mathbf{x}), \quad \forall \mathbf{x} \in \mathcal{K}^n.
+		\left( \mathcal{L}_A\right)^{-1}(\bm{x}) = \mathcal{L}_{A^{-1}}(\bm{x}), \quad \forall \bm{x} \in \mathcal{K}^n.
 		\]
 	\end{propositionenv}
 
@@ -25,12 +25,12 @@
 		\[
 		\dim V = m, \quad \dim W = n.
 		\]
-		Let $\mathcal{B}_V = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_m\}$ be a basis of $V$, and $\mathcal{B}_W = \{\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n\}$ be a basis of $W$. We consider the following linear maps:
+		Let $\mathcal{B}_V = \{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_m\}$ be a basis of $V$, and $\mathcal{B}_W = \{\bm{w}_1, \bm{w}_2, \dots, \bm{w}_n\}$ be a basis of $W$. We consider the following linear maps:
 		\begin{enumerate}
 			\item A linear map $T: V \to W$.
 			\item The linear map $\phi_V:V\to \mathcal{K}^m$ defined by
 			\[
-			\phi_V(c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_m \mathbf{v}_m) =
+			\phi_V(c_1 \bm{v}_1 + c_2 \bm{v}_2 + \cdots + c_m \bm{v}_m) =
 			\begin{pmatrix}
 				c_1 \\ c_2 \\ \vdots \\ c_m
 			\end{pmatrix} \in \mathcal{K}^m,
@@ -39,7 +39,7 @@
 			Note that $\phi_V$ is an isomorphism between $V$ and $\mathcal{K}^m$.
 			\item The linear map $\phi_W:W \to \mathcal{K}^n$ defined by
 			\[
-			\phi_W(d_1 \mathbf{w}_1 + d_2 \mathbf{w}_2 + \cdots + d_n \mathbf{w}_n) =
+			\phi_W(d_1 \bm{w}_1 + d_2 \bm{w}_2 + \cdots + d_n \bm{w}_n) =
 			\begin{pmatrix}
 				d_1 \\ d_2 \\ \vdots \\ d_n
 			\end{pmatrix} \in \mathcal{K}^n,
@@ -47,7 +47,7 @@
 			\]
 			Note that $\phi_W$ is an isomorphism between $W$ and $\mathcal{K}^n$.
 		\end{enumerate}
-		Then the linear map \[ \mathcal{L} = \phi_W \circ T \circ \phi_V^{-1}: \mathcal{K}^m \to \mathcal{K}^n\] has a unique associated matrix $A \in \mathbf{M}_{n \times m}(\mathcal{K})$. This matrix $A$ is called the \textbf{matrix representation} of linear map $T$ with respect to the bases $\mathcal{B}_V$ and $\mathcal{B}_W$, denoted by \[ A=[T]^{\mathcal{B}_W}_{\mathcal{B}_V}\quad \text{or}\quad A=\mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T).\]
+		Then the linear map \[ \mathcal{L} = \phi_W \circ T \circ \phi_V^{-1}: \mathcal{K}^m \to \mathcal{K}^n\] has a unique associated matrix $A \in \bm{M}_{n \times m}(\mathcal{K})$. This matrix $A$ is called the \textbf{matrix representation} of linear map $T$ with respect to the bases $\mathcal{B}_V$ and $\mathcal{B}_W$, denoted by \[ A=[T]^{\mathcal{B}_W}_{\mathcal{B}_V}\quad \text{or}\quad A=\mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T).\]
 	\end{definitionenv}
 	\begin{remarkenv}
 		This is one of the ugliest notations in linear algebra.
@@ -75,22 +75,22 @@
 		If you're not familiar with matrix representations of linear maps, remember to draw this diagram when you get confused.
 	\end{remarkenv}
 	\begin{propositionenv}
-		Let $V=W$, $\dim V = n$ and $T = \operatorname{Id}_V$ be the identity map on $V$ with two bases $\mathcal{B}_1=\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ and $\mathcal{B}_2=\{ \mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n\}$. Then
+		Let $V=W$, $\dim V = n$ and $T = \operatorname{Id}_V$ be the identity map on $V$ with two bases $\mathcal{B}_1=\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\}$ and $\mathcal{B}_2=\{ \bm{w}_1, \bm{w}_2, \dots, \bm{w}_n\}$. Then
 		\[
 		\mathcal{M}^{\mathcal{B}_2}_{\mathcal{B}_1}(\operatorname{Id}_V) = \operatorname{I}_n\quad \text{if and only if} \quad \mathcal{B}_1 = \mathcal{B}_2.
 		\]
 		
 	\end{propositionenv}
 	\begin{exampleenv}
-		Let $\mathbf{P}_n(\mathcal{K})$ be the vector space of all polynomials with coefficients in a field $\mathcal{K}$ and of degree at most $n$. That is,
+		Let $\bm{P}_n(\mathcal{K})$ be the vector space of all polynomials with coefficients in a field $\mathcal{K}$ and of degree at most $n$. That is,
 		\[
-		\mathbf{P}_n(\mathcal{K}) = \left\{ a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n \mid a_0, a_1, \dots, a_n \in \mathcal{K} \right\}.
+		\bm{P}_n(\mathcal{K}) = \left\{ a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n \mid a_0, a_1, \dots, a_n \in \mathcal{K} \right\}.
 		\]
-		Consider a linear map $T: \mathbf{P}_n(\mathcal{K}) \to \mathbf{P}_{n+1}(\mathcal{K})$ defined by
+		Consider a linear map $T: \bm{P}_n(\mathcal{K}) \to \bm{P}_{n+1}(\mathcal{K})$ defined by
 		\[
-		T(p)=\int_0 ^x p(t) \,\mathrm{d}t\quad \forall p \in \mathbf{P}_n(\mathcal{K}).
+		T(p)=\int_0 ^x p(t) \,\mathrm{d}t\quad \forall p \in \bm{P}_n(\mathcal{K}).
 		\]
-		Then the matrix representation of $T$ with respect to the standard basis $\mathcal{B}_{n} = \{1, x, x^2, \dots, x^n\}$ of $\mathbf{P}_n(\mathcal{K})$ and the standard basis $\mathcal{B}_{n+1} = \{1, x, x^2, \dots, x^{n+1}\}$ of $\mathbf{P}_{n+1}(\mathcal{K})$ is
+		Then the matrix representation of $T$ with respect to the standard basis $\mathcal{B}_{n} = \{1, x, x^2, \dots, x^n\}$ of $\bm{P}_n(\mathcal{K})$ and the standard basis $\mathcal{B}_{n+1} = \{1, x, x^2, \dots, x^{n+1}\}$ of $\bm{P}_{n+1}(\mathcal{K})$ is
 		\[\mathcal{M}^{\mathcal{B}_{n+1}}_{\mathcal{B}_n}(T) =
 		\begin{pmatrix}
 			0 & 0 & 0 & \cdots & 0 & 0 \\
@@ -104,11 +104,11 @@
 		\]
 	\end{exampleenv}
 	\begin{definitionenv}
-		Suppose $V$ is a vector space over a field $\mathcal{K}$ with $\dim V = n$ and $T:V\to V$ is a linear map. If for a basis $\mathcal{B}$ of $V$, $\mathcal{M}_\mathcal{B}^\mathcal{B}(T)$ is a diagonal matrix, then we say the basis $\mathcal{B}$ \textbf{diagonalizes} the linear map $T$. If there exists such a basis $\mathcal{B}$, then we say the linear map $T$ is \textbf{diagonalizable}. We call a matrix $A \in \mathbf{M}_{n \times n}(\mathcal{K})$ is \textbf{diagonalizable} if the linear map $\mathcal{L}_A: \mathcal{K}^n \to \mathcal{K}^n$ is diagonalizable.
+		Suppose $V$ is a vector space over a field $\mathcal{K}$ with $\dim V = n$ and $T:V\to V$ is a linear map. If for a basis $\mathcal{B}$ of $V$, $\mathcal{M}_\mathcal{B}^\mathcal{B}(T)$ is a diagonal matrix, then we say the basis $\mathcal{B}$ \textbf{diagonalizes} the linear map $T$. If there exists such a basis $\mathcal{B}$, then we say the linear map $T$ is \textbf{diagonalizable}. We call a matrix $A \in \bm{M}_{n \times n}(\mathcal{K})$ is \textbf{diagonalizable} if the linear map $\mathcal{L}_A: \mathcal{K}^n \to \mathcal{K}^n$ is diagonalizable.
 %		wu si da is a sleep beauty
 	\end{definitionenv}
 	\begin{definitionenv}
-		Suppose $A,B\in \mathbf{M}_{n \times n}(\mathcal{K})$. We say $A$ is \textbf{similar} to $B$ if there exists an invertible matrix $P \in \mathbf{M}_{n \times n}(\mathcal{K})$ such that
+		Suppose $A,B\in \bm{M}_{n \times n}(\mathcal{K})$. We say $A$ is \textbf{similar} to $B$ if there exists an invertible matrix $P \in \bm{M}_{n \times n}(\mathcal{K})$ such that
 		\[
 		A = P B P^{-1}\quad\text{or equivalently}\quad AP=PB.
 		\]
@@ -117,7 +117,7 @@
 		Note that similarity relationship is a equivalence relationship, i.e., it is reflexive ($A \sim A$), symmetric ($A \sim B \implies B \sim A$), and transitive ($A \sim B \wedge B \sim C \implies A \sim C$). Later we will see similar matrices share lots in common.
 	\end{remarkenv}
 	\begin{propositionenv}
-		Note that $A \in \mathbf{M}_{n\times n}(\mathcal{K})$ is diagonalizable if and only if $A$ is similar to a diagonal matrix. We write $A$ in the form
+		Note that $A \in \bm{M}_{n\times n}(\mathcal{K})$ is diagonalizable if and only if $A$ is similar to a diagonal matrix. We write $A$ in the form
 		\[
 		AS = SD
 		\ \text{where}\ 
@@ -132,20 +132,20 @@
 		S =
 		\begin{pmatrix}
 		\,|      & |      &        & |\, \\
-		\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \\
+		\bm{v}_1 & \bm{v}_2 & \cdots & \bm{v}_n \\
 		\,|      & |      &        & |\,
 		\end{pmatrix}.
 		\]
 		Hence, we have
 		\[
-		A\mathbf{v}_i = \lambda_i \mathbf{v}_i, \qquad i = 1,2,\ldots,n,
+		A\bm{v}_i = \lambda_i \bm{v}_i, \qquad i = 1,2,\ldots,n,
 		\]
 		which motivates the following definition.
 	\end{propositionenv}
 	\begin{definitionenv}\label{def:eigenvalue}
-		Suppose $A \in \mathbf{M}_{n\times n}(\mathcal{K})$ and	$\lambda \in \mathcal{K}$ and $V \in \mathcal{K}^n$. We say $\lambda$ is an \textbf{eigenvalue} of $A$ with	corresponding \textbf{eigenvector} $\mathbf{v} \neq \mathbf{0}$ if
+		Suppose $A \in \bm{M}_{n\times n}(\mathcal{K})$ and	$\lambda \in \mathcal{K}$ and $V \in \mathcal{K}^n$. We say $\lambda$ is an \textbf{eigenvalue} of $A$ with	corresponding \textbf{eigenvector} $\bm{v} \neq \bm{0}$ if
 		\[
-		A\mathbf{v} = \lambda \mathbf{v}.
+		A\bm{v} = \lambda \bm{v}.
 		\]
 		If there exists a basis of $\mathcal{K}^n$ such that every basis vector is an eigenvector of $A$, we call such a basis an \textbf{eigenbasis} of $A$.
 	\end{definitionenv}
@@ -154,9 +154,9 @@
 		\[
 		\dim V = m, \quad \dim W = n.
 		\]
-		And $T: V \to W$ is a linear map. Let $\mathcal{B}_V = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_m\}$ be a basis of $V$, and $\mathcal{B}_W = \{\mathbf{w}_1, \mathbf{w}_2, \dots, \mathbf{w}_n\}$ be a basis of $W$. Let $\phi_V: V \to \mathcal{K}^m$ and $\phi_W: W \to \mathcal{K}^n$ be the isomorphisms defined as before. Then
+		And $T: V \to W$ is a linear map. Let $\mathcal{B}_V = \{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_m\}$ be a basis of $V$, and $\mathcal{B}_W = \{\bm{w}_1, \bm{w}_2, \dots, \bm{w}_n\}$ be a basis of $W$. Let $\phi_V: V \to \mathcal{K}^m$ and $\phi_W: W \to \mathcal{K}^n$ be the isomorphisms defined as before. Then
 		\[
-		\phi_W (T(\mathbf{v})) = \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T) \, \phi_V(\mathbf{v}), \quad \forall \mathbf{v} \in V.
+		\phi_W (T(\bm{v})) = \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T) \, \phi_V(\bm{v}), \quad \forall \bm{v} \in V.
 		\]
 	\end{theoremenv}
 	\begin{theoremenv}
@@ -168,10 +168,10 @@
 		\[
 		\mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(\alpha T + \beta F) = \alpha \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T) + \beta \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(F).
 		\]
-		Thus, the mapping $\mathcal{L}(V,W)\to \mathbf{M}_{n \times m}(\mathcal{K})$ where $T \mapsto \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T)$ is a linear map.
+		Thus, the mapping $\mathcal{L}(V,W)\to \bm{M}_{n \times m}(\mathcal{K})$ where $T \mapsto \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T)$ is a linear map.
 	\end{theoremenv}
 	\begin{theoremenv}
-		Still with the same set-up as above, additionally this time suppose $F:W \to U$ is a linear map where $U$ is a vector space over a field $\mathcal{K}$ with $\dim U = l$ and $\mathcal{B}_U = \{\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_l\}$ is a basis of $U$. We define $\phi_U: U \to \mathcal{K}^l$ accordingly. Then
+		Still with the same set-up as above, additionally this time suppose $F:W \to U$ is a linear map where $U$ is a vector space over a field $\mathcal{K}$ with $\dim U = l$ and $\mathcal{B}_U = \{\bm{u}_1, \bm{u}_2, \dots, \bm{u}_l\}$ is a basis of $U$. We define $\phi_U: U \to \mathcal{K}^l$ accordingly. Then
 		\[
 		\mathcal{M}^{\mathcal{B}_U}_{\mathcal{B}_V}(F \circ T) = \mathcal{M}^{\mathcal{B}_U}_{\mathcal{B}_W}(F) \, \mathcal{M}^{\mathcal{B}_W}_{\mathcal{B}_V}(T).
 		\]

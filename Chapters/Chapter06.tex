@@ -197,23 +197,23 @@
     \begin{theoremenv}\label{transpose existence}
         Suppose $V$ is a finite-dimensional vector space over $\mathcal{K}$ with a non-degenerate scalar product $\langle \cdot, \cdot \rangle$ and $T: V \to V$ is a linear operator. Then there exists a unique linear operator $T^T: V \to V$ such that
         \[
-        \langle T(\mathbf{v}), \mathbf{w} \rangle = \langle \mathbf{v}, T^T (\mathbf{w}) \rangle, \quad \forall \mathbf{v}, \mathbf{w} \in V.
+        \langle T(\bm{v}), \bm{w} \rangle = \langle \bm{v}, T^T (\bm{w}) \rangle, \quad \forall \bm{v}, \bm{w} \in V.
         \]
         We call $T^T$ the \textbf{transpose} of $T$.
     \end{theoremenv}
     \begin{proofenv}
-        Let $L: V \to \mathcal{K}$ be $L(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w} \rangle$ for any $\mathbf{v} \in V$. Note $L$ is a linear map from $V$ to $\mathcal{K}$ and thus a linear functional. Note by the above lemma, we know there exists a unique $\tilde{w} \in V$ such that $L(x)=f_{\tilde{w}}(x) = \langle x, \tilde{w} \rangle$. Let $T^T(\mathbf{w}) = \tilde{w}$.
+        Let $L: V \to \mathcal{K}$ be $L(\bm{v}) = \langle T(\bm{v}), \bm{w} \rangle$ for any $\bm{v} \in V$. Note $L$ is a linear map from $V$ to $\mathcal{K}$ and thus a linear functional. Note by the above lemma, we know there exists a unique $\tilde{w} \in V$ such that $L(x)=f_{\tilde{w}}(x) = \langle x, \tilde{w} \rangle$. Let $T^T(\bm{w}) = \tilde{w}$.
 
-        Suppose $L_1(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w}_1 \rangle$ and $\tilde{w}_1 \in V$ is the unique vector in $V$ such that $L_1 = f_{\tilde{w}_1}$. Suppose $L_2(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w}_2 \rangle$ and $\tilde{w}_2 \in V$ is the unique vector in $V$ such that $L_2 = f_{\tilde{w}_2}$.
+        Suppose $L_1(\bm{v}) = \langle T(\bm{v}), \bm{w}_1 \rangle$ and $\tilde{w}_1 \in V$ is the unique vector in $V$ such that $L_1 = f_{\tilde{w}_1}$. Suppose $L_2(\bm{v}) = \langle T(\bm{v}), \bm{w}_2 \rangle$ and $\tilde{w}_2 \in V$ is the unique vector in $V$ such that $L_2 = f_{\tilde{w}_2}$.
 
         Note $L' := \alpha L_1 + \beta L_2$ satisfies
         \[
-        L'(\mathbf{v}) = \alpha \langle T(\mathbf{v}), \mathbf{w}_1 \rangle + \beta \langle T(\mathbf{v}), \mathbf{w}_2 \rangle = \langle T(\mathbf{v}), \alpha \mathbf{w}_1 + \beta \mathbf{w}_2 \rangle.
+        L'(\bm{v}) = \alpha \langle T(\bm{v}), \bm{w}_1 \rangle + \beta \langle T(\bm{v}), \bm{w}_2 \rangle = \langle T(\bm{v}), \alpha \bm{w}_1 + \beta \bm{w}_2 \rangle.
         \]
-        Thus $T^T(\alpha \mathbf{w}_1 + \beta \mathbf{w}_2) = \alpha T^T(\mathbf{w}_1) + \beta T^T(\mathbf{w}_2)$ and thus $T^T$ is linear. We still need to verify $\langle T(\mathbf{v}), \mathbf{w} \rangle = \langle \mathbf{v}, T^T (\mathbf{w}) \rangle$ for all $\mathbf{v}, \mathbf{w} \in V$. This is straightforward since $L(\mathbf{v}) = \langle T(\mathbf{v}), \mathbf{w} \rangle = f_{\tilde{w}}(\mathbf{v}) = \langle \tilde{w}, \mathbf{v} \rangle = \langle T^T(\mathbf{w}), \mathbf{v} \rangle$.
+        Thus $T^T(\alpha \bm{w}_1 + \beta \bm{w}_2) = \alpha T^T(\bm{w}_1) + \beta T^T(\bm{w}_2)$ and thus $T^T$ is linear. We still need to verify $\langle T(\bm{v}), \bm{w} \rangle = \langle \bm{v}, T^T (\bm{w}) \rangle$ for all $\bm{v}, \bm{w} \in V$. This is straightforward since $L(\bm{v}) = \langle T(\bm{v}), \bm{w} \rangle = f_{\tilde{w}}(\bm{v}) = \langle \tilde{w}, \bm{v} \rangle = \langle T^T(\bm{w}), \bm{v} \rangle$.
     \end{proofenv}
     \begin{remarkenv}
-        We often just write $\langle T(\mathbf{v}), \mathbf{w} \rangle = \langle \mathbf{v}, T^T (\mathbf{w}) \rangle$, $\langle T\mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{v}, T^T \mathbf{w} \rangle$ or $\langle A\mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{v}, A^T \mathbf{w} \rangle$ where $A$ is a general operator (instead of a matrix) on $V$.
+        We often just write $\langle T(\bm{v}), \bm{w} \rangle = \langle \bm{v}, T^T (\bm{w}) \rangle$, $\langle T\bm{v}, \bm{w} \rangle = \langle \bm{v}, T^T \bm{w} \rangle$ or $\langle A\bm{v}, \bm{w} \rangle = \langle \bm{v}, A^T \bm{w} \rangle$ where $A$ is a general operator (instead of a matrix) on $V$.
     \end{remarkenv}
     \begin{definitionenv}
         Suppose $V$ is a finite-dimensional vector space over field $\mathcal{K}$ and $T$ is an operator on $V$. Suppose $\mathcal{B}$ is a basis for $V$ and let $\mathcal{M}$ be the matrix representation of $T$ with respect to basis $\mathcal{B}$, then we define the determinant of operator $T$ to be the determinant of matrix $\mathcal{M}$, i.e., $\det(T) = \det(\mathcal{M})$.
